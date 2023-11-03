@@ -150,4 +150,22 @@ $RECYCLE.BIN/
 
 root-context.xml
 
+# Servers 폴더
+Servers
+
+# Spring 관련 폴더, 파일
+target
+/target/
+.springBeans
+pom.properties
+MANIFEST.MF
+*.log
+.factorypath
+settings.json
+
+# SpringBoot 관련 파일
+config.properties
+
+# 작업 중 프로젝트 폴더 안에 메모해둔 비밀번호나 공유하면 안되는 내용 등
+
 # End of https://www.gitignore.io/api/git,java,maven,windows,eclipse
