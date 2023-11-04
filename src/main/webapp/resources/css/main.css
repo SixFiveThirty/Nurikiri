@@ -1,0 +1,40 @@
+@import
+	url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
+
+* {
+	font-family: 'Inter';
+}
+
+.avatar-sm {
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+}
+
+.jumbotron {
+	background-color : #FFFFFF;
+	/* background-color : #DDDDDD; */
+	background-size: 100% 100%;
+}
+
+.jumbotron>div>a>h1 {
+	color: #FEC25E;
+	font-weight : bold;
+}
+
+.header-space {
+	display: flex;
+	justify-content : space-between;
+}
+
+.user-space {
+	display: flex;
+}
+
+.user-space>a {
+	color:#000000;
+}
+
+a.page-link {
+	border-width: 0px;
+}
