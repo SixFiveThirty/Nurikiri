@@ -25,7 +25,7 @@
 <body>
 	<div class="container">
 		<header class="jumbotron mb-0 rounded-0">
-			<div class="header-space">
+			<div class="header-space mx-3">
 				<a class="navbar-brand" href="/">
 					<h1>로고</h1>
 				</a>
