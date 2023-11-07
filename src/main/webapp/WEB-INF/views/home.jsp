@@ -51,24 +51,24 @@
 		<p class="mx-5">에디터 추천</p>
 		<div class="editor-card-list">
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#"> <img src="..."
-					class="card-img-top" alt="...">
+				<a class="editor-link" href="/recommend/editor/get">
+					<img src="..." class="card-img-top" alt="..."/>
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#"> <img src="..."
-					class="card-img-top" alt="...">
+				<a class="editor-link" href="/recommend/editor">
+					<img src="..." class="card-img-top" alt="..."/>
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#"> <img src="..."
-					class="card-img-top" alt="...">
+				<a class="editor-link" href="/recommend/editor">
+					<img src="..." class="card-img-top" alt="..."/>
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
@@ -80,24 +80,24 @@
 		<p class="mx-5">즐겨찾기 순 추천</p>
 		<div class="editor-card-list">
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#"> <img src="..."
-					class="card-img-top" alt="...">
+				<a class="editor-link" href="#">
+					<img src="..." class="card-img-top" alt="..."/>
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#"> <img src="..."
-					class="card-img-top" alt="...">
+				<a class="editor-link" href="#">
+					<img src="..." class="card-img-top" alt="..."/>
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#"> <img src="..."
-					class="card-img-top" alt="...">
+				<a class="editor-link" href="#">
+					<img src="..." class="card-img-top" alt="..."/>
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
@@ -109,24 +109,24 @@
 		<p class="mx-5">별점 순 추천</p>
 		<div class="editor-card-list">
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#"> <img src="..."
-					class="card-img-top" alt="...">
+				<a class="editor-link" href="#">
+					<img src="..." class="card-img-top" alt="..."/>
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#"> <img src="..."
-					class="card-img-top" alt="...">
+				<a class="editor-link" href="#">
+					<img src="..." class="card-img-top" alt="..."/>
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#"> <img src="..."
-					class="card-img-top" alt="...">
+				<a class="editor-link" href="#">
+					<img src="..." class="card-img-top" alt="..."/>
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
