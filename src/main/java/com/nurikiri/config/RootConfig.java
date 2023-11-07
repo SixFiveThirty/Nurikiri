@@ -5,15 +5,29 @@ import javax.sql.DataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @MapperScan(basePackages = {"com.nurikiri.mapper"})
+@ComponentScan(basePackages = {
+		"com.nurikiri.controller",
+		"com.nurikiri.service"
+})
+@EnableAspectJAutoProxy
+@EnableTransactionManagement
 public class RootConfig {
+	@Autowired
+	ApplicationContext applicationContext;
+	
 	@Bean
 	public DataSource dataSource() {
 		HikariConfig config = new HikariConfig();
