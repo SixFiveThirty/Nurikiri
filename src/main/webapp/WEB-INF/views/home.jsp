@@ -59,7 +59,7 @@
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="/recommend/editor">
+				<a class="editor-link" href="/recommend/editor/get">
 					<img src="..." class="card-img-top" alt="..."/>
 				</a>
 				<div class="card-body">
@@ -67,7 +67,7 @@
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="/recommend/editor">
+				<a class="editor-link" href="/recommend/editor/get">
 					<img src="..." class="card-img-top" alt="..."/>
 				</a>
 				<div class="card-body">
