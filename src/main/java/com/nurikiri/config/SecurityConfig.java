@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //				).access("hasRole('ROLE_MANAGER')"); 
 
 		http.formLogin()
-			.loginPage("/security/login?eeror=login_required") // 로그인 안 했을 시 리다이렉트
+			.loginPage("/security/login?error=login_required") // 로그인 안 했을 시 리다이렉트
 			.loginProcessingUrl("/security/login")
 			.defaultSuccessUrl("/")
 			.failureUrl("/security/login?error=true"); // 로그인 실패시 리다이렉트
