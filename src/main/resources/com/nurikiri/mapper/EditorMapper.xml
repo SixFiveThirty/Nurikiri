@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nurikiri.mapper.EditorMapper">
+	<select id="getList" resultType="EditorVO">
+		select * from editor
+	</select>
+	<insert id="insert">
+		insert into editor(title, content, writer)
+		values
+		(#{title}, #{content}, #{writer})
+	</insert>
+	<insert id="insertSelectKey">
+		insert into editor(title, content, writer)
+		values (#{title}, #{content}, #{writer})
+		
+		<selectKey resultType="Long" keyProperty="eno" keyColumn="eno" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<select id="read" resultType="EditorVO">
+		select * from editor where eno = #{eno}
+	</select>
+	
+ 	<delete id="delete">
+		delete from editor where eno = #{eno}
+	</delete>
+	
+	<update id="update">
+		update editor set
+		title = #{title},
+		content = #{content},
+		writer = #{writer},
+		update_date = now()
+		where eno = #{eno}
+	</update>
+</mapper>
