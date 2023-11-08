@@ -9,28 +9,40 @@ import lombok.Data;
 @Data
 public class StoreVO {
 	
-	private int sno;
+	//@NotBlank(message = "í•„ìˆ˜í•­ëª©ì…ë‹ˆë‹¤.")
 	
-	@NotBlank(message = "°¡¸ÍÁ¡¸íÀº ÇÊ¼ö »çÇ×?Ç×¸ñ?ÀÔ´Ï´Ù.")
-	private String title;
+	private Long sno;
 	
-	@NotBlank(message = "°¡¸ÍÁ¡ ¼³¸íÀº ÇÊ¼ö »çÇ×?Ç×¸ñ?ÀÔ´Ï´Ù.")
+	private String title; // ê°€ë§¹ì ëª…
+		
+	private String market; // ì†Œì† ì‹œì¥
+	
+	private String address; // ì†Œì¬ì§€
+	
+	private String item; // ì·¨ê¸‰ í’ˆëª©
+	
+	private boolean useRechargeCard; // ì¶©ì „ì‹ì¹´ë“œ
+	
+	private boolean useBill; // ì§€ë¥˜ ì·¨ê¸‰ì—¬ë¶€
+		
+	private boolean useMobile; // ëª¨ë°”ì¼ ì·¨ê¸‰ì—¬ë¶€
+	
+	private Date regDate; // ë“±ë¡ì¼ì	
+	
+	
+	
 	private String content; //Description?
 	
-	@NotBlank(message = "°¡¸ÍÁ¡ÁÖ ÀÌ¸§Àº ÇÊ¼ö »çÇ×?Ç×¸ñ?ÀÔ´Ï´Ù.")
 	private String owner;
 	
-	@NotBlank(message = "°¡¸ÍÁ¡ ÁÖ¼Ò´Â »çÇ×?Ç×¸ñ?ÀÔ´Ï´Ù.")
-	private String address;
 	
-	// ÀüÅë½ÃÀå ÀüÈ­ ÇÊ¼öÀÎ°¡?
-	//@NotBlank(message = "°¡¸ÍÁ¡ ÀüÈ­¹øÈ£´Â »çÇ×?Ç×¸ñ?ÀÔ´Ï´Ù.")
-	private String phone; // Tel?
 	
-	@NotBlank(message = "°¡¸ÍÁ¡ µî·ÏÀÏÀº »çÇ×?Ç×¸ñ?ÀÔ´Ï´Ù.")
-	private Date regDate; 
 	
-	private Date updataDate; // ¼öÁ¤ ³¯Â¥
+	
+	
+	
+	 
+	private Date updataDate; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥
 	
 	
 
