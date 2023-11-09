@@ -24,11 +24,6 @@ h1 {
 	height: 50px;
 }
 
-/* .btn-group button { */
-/* 	width: 215px; */
-/* 	height: 50px; */
-/* } */
-
 .btn-group {
 	display: flex;
 	justify-content: space-between;
@@ -68,7 +63,7 @@ h1 {
 		<div class="btn-group">
 			<button type="submit" class="btn btn-block">로그인</button>
 
-			<button type="#" class="btn btn-block">회원가입</button>
+			<button type="button" onclick="location.href='signup'" class="btn btn-block">회원가입</button>
 		</div>
 	</div>
 
