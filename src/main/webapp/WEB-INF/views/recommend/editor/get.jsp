@@ -5,6 +5,10 @@
 
 <%@ include file="../../layouts/header.jsp"%>
 
+<script>
+	let eno = ${param.eno};
+</script>
+
 <style>
 .top-div {
 	display: flex;
