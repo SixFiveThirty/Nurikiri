@@ -1,8 +1,5 @@
 package com.nurikiri.config;
-
-
 import java.io.IOException;
-
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,9 +13,13 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
-@MapperScan(basePackages = {"com.nurikiri.mapper"})
-@ComponentScan(basePackages = {"com.nurikiri.controller", "com.nurikiri.service"})
+@ComponentScan(basePackages = {"com.nurikiri.controller", "com.nurikiri.exception"})
 public class ServletConfig implements WebMvcConfigurer {
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
+	
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		InternalResourceViewResolver bean = new InternalResourceViewResolver();
@@ -36,9 +37,6 @@ public class ServletConfig implements WebMvcConfigurer {
 	@Bean(name = "multipartResolver")
 	public CommonsMultipartResolver getResolver() throws IOException {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-		
-//		resolver.setMaxUploadSize(1024 * 1024 * 40); // 40MB, -1 : 무제한, 크기제한 두지 않겠다는 뜻
-//		resolver.setMaxUploadSizePerFile(1024 * 1024 * 20); // 20MB, -1 : 무제한, 크기제한 두지 않겠다는 뜻
 		
 		resolver.setMaxUploadSize(-1); // 40MB, -1 : 무제한, 크기제한 두지 않겠다는 뜻
 		resolver.setMaxUploadSizePerFile(-1); // 20MB, -1 : 무제한, 크기제한 두지 않겠다는 뜻

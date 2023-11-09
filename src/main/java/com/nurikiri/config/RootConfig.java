@@ -19,8 +19,8 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 @MapperScan(basePackages = {"com.nurikiri.mapper"})
 @ComponentScan(basePackages = {
-		"com.nurikiri.controller",
-		"com.nurikiri.service"
+		"com.nurikiri.service",
+		"com.nurikiri.controller"
 })
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
@@ -44,6 +44,7 @@ public class RootConfig {
 	@Bean
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
 		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
+		sqlSessionFactory.setConfigLocation(applicationContext.getResource("classpath:/mybatis-config.xml"));
 		sqlSessionFactory.setDataSource(dataSource());
 		return (SqlSessionFactory) sqlSessionFactory.getObject();
 	}

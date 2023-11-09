@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.nurikiri.domain.MemberVO;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
 

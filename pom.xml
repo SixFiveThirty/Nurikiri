@@ -178,6 +178,8 @@
 			<version>2.9.4</version>
 		</dependency>
 
+
+
 		<!-- 파일 업로드 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -219,6 +221,26 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
+<dependency>
+	    <groupId>com.squareup.retrofit2</groupId>
+	    <artifactId>retrofit</artifactId>
+	    <version>2.9.0</version>
+	</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson -->
+	<dependency>
+	    <groupId>com.squareup.retrofit2</groupId>
+	    <artifactId>converter-gson</artifactId>
+	    <version>2.9.0</version>
+	</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+	<dependency>
+	    <groupId>com.google.code.gson</groupId>
+	    <artifactId>gson</artifactId>
+	    <version>2.9.0</version>
+	</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>

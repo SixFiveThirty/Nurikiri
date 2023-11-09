@@ -50,11 +50,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/security/profile", 
 						"/security/mypage", 
 						"/security/review", 
-						"/security/favorites").authenticated() // 프로필 화면 로그인시에만 입장 가능
+						"/security/favorites")
+        .authenticated() // 프로필 화면 로그인시에만 입장 가능
 				.antMatchers(
-						"/manager/get",
-						"/manager/list",
-						"/manager/modify").access("hasRole('ROLE_MANAGER')");
+						"/managers/get",
+						"/managers/list",
+						"/managers/modify",
+            "/recommend/editor/list",
+  					"/recommend/editor/modify").access("hasRole('ROLE_MANAGER')");
 
 		http.formLogin()
 			.loginPage("/security/login?error=login_required") // 로그인 안 했을 시 리다이렉트
