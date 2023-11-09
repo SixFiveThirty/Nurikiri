@@ -29,7 +29,7 @@ public class ServletConfig implements WebMvcConfigurer {
 		bean.setSuffix(".jsp");
 		registry.viewResolver(bean);
 	}
-	
+
 	@Bean(name = "multipartResolver")
 	public CommonsMultipartResolver getResolver() throws IOException {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();

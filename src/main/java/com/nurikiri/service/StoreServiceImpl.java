@@ -1,5 +1,6 @@
 package com.nurikiri.service;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class StoreServiceImpl implements StoreService {
 	private StoreMapper mapper;
 
 	@Override
-	public List<StoreVO> getList(Criteria cri) {
+	public List<StoreVO> getList(Criteria cri,Principal principal) {
 
 		log.info("getList");
 
@@ -46,7 +47,7 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public StoreVO get(Long sno) {
+	public StoreVO get(Long sno, Principal principal) {
 		log.info("get");
 
 		return mapper.read(sno);
