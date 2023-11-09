@@ -1,6 +1,7 @@
 package com.nurikiri.config;
+
 import java.io.IOException;
-import org.mybatis.spring.annotation.MapperScan;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.FileSystemResource;
@@ -15,12 +16,6 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.nurikiri.controller", "com.nurikiri.exception"})
 public class ServletConfig implements WebMvcConfigurer {
-	
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-	}
-	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
@@ -33,11 +28,6 @@ public class ServletConfig implements WebMvcConfigurer {
 		bean.setPrefix("/WEB-INF/views/");
 		bean.setSuffix(".jsp");
 		registry.viewResolver(bean);
-	}
-	
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 	
 	@Bean(name = "multipartResolver")

@@ -82,7 +82,8 @@ public class StoreController {
 			rttr.addFlashAttribute("result", "success");
 
 		}
-		return "redirect:" + cri.getLinkWithSno("/store/get", store.getSno());
+//		return "redirect:" + cri.getLinkWithSno("/store/get", store.getSno());
+		return "redirect:/store/get";
 
 	}
 	
@@ -96,7 +97,8 @@ public class StoreController {
 		if (service.remove(sno)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		return "redirect:/board/list" + cri.getLink();
+//		return "redirect:/board/list" + cri.getLink();
+		return "redirect:/board/list";
 
 	}
 
