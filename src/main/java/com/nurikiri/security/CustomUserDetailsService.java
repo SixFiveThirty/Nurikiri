@@ -18,12 +18,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private MemberMapper mapper;
 	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
+	public UserDetails loadUserByUsername(String username) 
+			throws UsernameNotFoundException {
+		
 		log.warn("Load User by Username: " + username);
 		
 		MemberVO vo = mapper.read(username);
 		if(vo == null) {
+			log.warn(username + "은 없는 id입니다.");
 			throw new UsernameNotFoundException(username + "은 없는 id입니다."); // () < 이 예외의 오류 메세지
 		}
 		
