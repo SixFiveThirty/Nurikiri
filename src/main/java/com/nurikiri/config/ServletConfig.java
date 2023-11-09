@@ -20,7 +20,11 @@ public class ServletConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
+<<<<<<< Updated upstream
 			
+=======
+	
+>>>>>>> Stashed changes
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		InternalResourceViewResolver bean = new InternalResourceViewResolver();
@@ -29,7 +33,11 @@ public class ServletConfig implements WebMvcConfigurer {
 		bean.setSuffix(".jsp");
 		registry.viewResolver(bean);
 	}
+<<<<<<< Updated upstream
 	
+=======
+		
+>>>>>>> Stashed changes
 	@Bean(name = "multipartResolver")
 	public CommonsMultipartResolver getResolver() throws IOException {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
