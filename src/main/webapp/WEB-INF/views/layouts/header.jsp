@@ -21,6 +21,16 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/resources/js/main.js"></script>
+
+<script>
+$(document).ready(function(){
+	$('.logout-link').click(function(e) {
+		e.preventDefault();
+		$('#logoutForm').submit();
+	});
+});
+</script>
+
 </head>
 <body>
 	<div class="container">
@@ -30,12 +40,16 @@
 					<h1>로고</h1>
 				</a>
 				<div class="user-space">
-					<a class="nav-link my-3" href="#">
-						<img src="#" class="avatar-sm" />
-						User
+					<a class="nav-link my-3" href="#"> <img src="#"
+						class="avatar-sm" /> User
 					</a>
 					<button type="button" class="btn btn-light my-3">로그아웃</button>
 				</div>
 			</div>
 			<%@ include file="menu.jsp"%>
 		</header>
+
+		<form id="logoutForm" action="/security/logout" method="post">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
