@@ -39,10 +39,9 @@ public class SecurityController {
 	@PostMapping("/signup") //오버로딩
 	public String signup(
 			@Valid @ModelAttribute("member") MemberVO member, Errors errors, MultipartFile avatar) throws IOException {
-		
 		log.info(member);
 		
-		 //1. 비밀번호, 비밀번호 확인 일치 여부
+		//1. 비밀번호, 비밀번호 확인 일치 여부
 		if(!member.getPassword().equals(member.getPassword2())) {
 			// 에러 추가
 			errors.rejectValue("password2", "비밀번호 불일치", "비밀번호가 일치하지 않습니다."); // reject와 rejectValue의 차이? reject는 전역에러 설정, 특정 필드에 대해서 에러 추가는 rejectValue

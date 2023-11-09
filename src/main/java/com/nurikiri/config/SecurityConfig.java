@@ -16,9 +16,7 @@ import org.springframework.security.web.authentication.rememberme.JdbcTokenRepos
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
-
 import com.nurikiri.security.CustomUserDetailsService;
-
 import lombok.extern.log4j.Log4j;
 
 @Configuration
@@ -69,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.logoutUrl("/security/logout")
 			.invalidateHttpSession(true)
 			.deleteCookies("remember-me", "JSESSION-ID")
-			.logoutSuccessUrl("/");
+			.logoutSuccessUrl("/");																						// 리다이렉트
 
 		http.rememberMe()
 				.key("Nurikiri")
@@ -93,11 +91,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
-//		auth.inMemoryAuthentication() 
-//				.withUser("admin")
-//				.password(passwordEncoder().encode("admin1234")) // 비밀번호 인코딩
-//				.roles("user")
+		auth.inMemoryAuthentication() 
+				.withUser("admin")
+				.password("$2a$10$tAIRnt9PK088WQ.ouPVsWuEVsTYJ9WRjg6/HtJ./Ylp71uYYVjyje")
+				.roles("user");
 		
 		auth
 		.userDetailsService(customUserService())

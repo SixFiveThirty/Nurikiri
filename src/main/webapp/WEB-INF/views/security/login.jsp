@@ -40,7 +40,6 @@ h1 {
 </c:if>
 
 <form action="/security/login" method="post">
-
 	<input type="hidden" name="${_csrf.parameterName}"
 		value="${_csrf.token}" />
 	<div class="loginbox">

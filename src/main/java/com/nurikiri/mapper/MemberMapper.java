@@ -9,5 +9,4 @@ public MemberVO read(String username);
 	public void insert(MemberVO member);
 	
 	public void insertAuth(AuthVO auth);
-
 }
