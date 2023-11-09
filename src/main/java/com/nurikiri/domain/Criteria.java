@@ -1,10 +1,7 @@
 package com.nurikiri.domain;
 
-<<<<<<< HEAD
 import org.springframework.web.util.UriComponentsBuilder;
 
-=======
->>>>>>> 24c8a7c263c4976a50d26d2237a62439fb231ffb
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +12,7 @@ import lombok.ToString;
 public class Criteria {
 	private int pageNum;
 	private int amount;
-<<<<<<< HEAD
+
 	private String type; // 검색 대상
 	private String keyword; // 검색어
 
@@ -23,13 +20,6 @@ public class Criteria {
 		this(1, 10);
 	}
 
-=======
-	
-	public Criteria() {
-		this(1,10);
-	}
-	
->>>>>>> 24c8a7c263c4976a50d26d2237a62439fb231ffb
 	public Criteria(int pageNum) {
 		this(pageNum, 10);
 	}
@@ -38,7 +28,6 @@ public class Criteria {
 		this.pageNum = pageNum;
 		this.amount = amount;
 	}
-<<<<<<< HEAD
 
 	public int getOffset() {
 		return (pageNum - 1) * amount;
@@ -70,10 +59,4 @@ public class Criteria {
 	public String getLinkWithSno(String base, Long sno) {
 		return getLink(base, pageNum) + "&sno=" + sno;
 	}
-=======
-	
-	public int getOffset() {
-		return (pageNum - 1) * amount;
-	}
->>>>>>> 24c8a7c263c4976a50d26d2237a62439fb231ffb
 }
