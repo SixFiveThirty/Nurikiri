@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.nurikiri.mapper.StoreMapper">
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from store
+		<where>
+			<include refid="criteria"></include>
+		</where>
+	</select>
+
+
+	<select id="getList" resultType="StoreVO">
+		select * from store
+		<where>
+			<include refid="criteria"></include>
+		</where>
+		order by sno
+		limit #{offset} , #{amount}
+	</select>
+
+	<select id="getListWithPaging" resultType="StoreVO">
+		select * from store
+		<where>
+			<include refid="criteria"></include>
+		</where>
+		order by sno
+		limit #{offset} , #{amount}
+	</select>
+
+
+	<insert id="insert">
+		insert into store (title, content, owner,address)
+		values (#{title},
+		#{content},#{owner},#{address})
+
+		<selectKey resultType="Long" keyProperty="sno"
+			keyColumn="sno" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+
+	<select id="read" resultType="StoreVO">
+		select * from store where sno =
+		#{sno}
+	</select>
+
+
+	<delete id="delete">
+		delete from store where sno = #{sno}
+	</delete>
+
+	<update id="update">
+		update store set
+		title = #{title},
+		content = #{content},
+		owner = #{owner},
+		address = #{address}
+		where sno = #{sno}
+	</update>
+
+	<sql id="criteria">
+		<trim prefixOverrides="OR">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like CONCAT('%', #{keyword}, '%')
+						</when>
+						<when test="type == 'C'.toString()">
+							content like CONCAT('%', #{keyword}, '%')
+						</when>
+						<when test="type == 'O'.toString()">
+							owner like CONCAT('%', #{keyword}, '%')
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nurikiri.mapper.ReviewMapper">
+	<select id="getList" resultType="ReviewVO">
+		select * from store_review
+	</select>
+	<insert id="insert">
+		insert into store_review(sno, content, writer)
+		values
+		(#{sno}, #{content}, #{writer})
+	</insert>
+	<insert id="insertSelectKey">
+		insert into store_review(sno, content, writer)
+		values ((#{sno}, #{content}, #{writer})
+		
+		<selectKey resultType="Long" keyProperty="rno" keyColumn="rno" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<select id="read" resultType="ReviewVO">
+		select * from store_review where rno = #{rno}
+	</select>
+	
+ 	<delete id="delete">
+		delete from store_review where rno = #{rno}
+	</delete>
+	
+	<update id="update">
+		update store_review set
+		sno = #{sno},
+		content = #{content},
+		writer = #{writer},
+		update_date = now()
+		where rno = #{rno}
+	</update>
+</mapper>
