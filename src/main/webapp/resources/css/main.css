@@ -31,6 +31,16 @@
 	display: flex;
 }
 
+.user-space li {
+	list-style:none;
+	background-color: #FEC25E;
+	border-radius: 3px;
+}
+
+.user-space a {
+	color:#ffffff;
+}
+
 .user-space>a {
 	color:#000000;
 }
