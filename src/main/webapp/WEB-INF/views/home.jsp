@@ -5,6 +5,14 @@
 
 <%@ include file="layouts/header.jsp"%>
 
+<script>
+$(document).ready(function() {
+	$('.editor').click(function() {
+		document.forms.editorForm.submit();
+	});
+})
+</script>
+
 <style>
 .editor-card-list {
 	display: flex;
@@ -51,7 +59,7 @@
 		<p class="mx-5">에디터 추천</p>
 		<div class="editor-card-list">
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="/recommend/editor/get">
+				<a class="editor-link editor" href="/recommend/editor/get">
 					<img src="..." class="card-img-top" alt="..."/>
 				</a>
 				<div class="card-body">
@@ -59,7 +67,7 @@
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="/recommend/editor/get">
+				<a class="editor-link editor" href="/recommend/editor/get">
 					<img src="..." class="card-img-top" alt="..."/>
 				</a>
 				<div class="card-body">
@@ -67,7 +75,7 @@
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="/recommend/editor/get">
+				<a class="editor-link editor" href="/recommend/editor/get">
 					<img src="..." class="card-img-top" alt="..."/>
 				</a>
 				<div class="card-body">
@@ -135,5 +143,9 @@
 		</div>
 	</div>
 </div>
+
+<form id="editorForm" action="/recommend/editor/get" method="get">
+	<input type="hidden" id="eno" name="eno" value="${editor.eno}" />
+</form>
 
 <%@ include file="layouts/footer.jsp"%>

@@ -20,12 +20,7 @@ public class ServletConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
-	
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-	}
-	
+			
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		InternalResourceViewResolver bean = new InternalResourceViewResolver();
@@ -33,11 +28,6 @@ public class ServletConfig implements WebMvcConfigurer {
 		bean.setPrefix("/WEB-INF/views/");
 		bean.setSuffix(".jsp");
 		registry.viewResolver(bean);
-	}
-	
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 	
 	@Bean(name = "multipartResolver")
