@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class PageDTO {
-
 	private int startPage; // 페이지 블럭의 첫 페이지 번호
 	private int endPage; // 페이지 블럭의 끝 페이지 번호
 	private boolean prev; // 이전 페이지 존재 여부
