@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.EditorVO;
 import com.nurikiri.mapper.EditorMapper;
 
@@ -54,9 +55,10 @@ public class EditorServiceImpl implements EditorService {
 	}
 
 	@Override
-	public List<EditorVO> getList() {
-		log.info("getList......");
-		return mapper.getList();
+	public List<EditorVO> getList(Criteria cri) {
+		log.info("get List with citeria: " + cri);
+		
+		return mapper.getListWithPaging(cri);
 	}
 
 }

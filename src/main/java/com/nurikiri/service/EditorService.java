@@ -2,6 +2,7 @@ package com.nurikiri.service;
 
 import java.util.List;
 
+import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.EditorVO;
 
 public interface EditorService {
@@ -13,5 +14,5 @@ public interface EditorService {
 	
 	public boolean remove(Long eno);
 	
-	public List<EditorVO> getList();
+	public List<EditorVO> getList(Criteria cri);
 }
