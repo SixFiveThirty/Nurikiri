@@ -18,16 +18,16 @@ public class OpenApiService implements IOpenApiService {
 	
 	private Logger log = Logger.getLogger(this.getClass());
 	
-	//¿ÀÇÂapi Á¤º¸ °¡Á®¿À±â
+	//ì˜¤í”ˆapi ì •ë³´ ê°€ì ¸ì˜¤ê¸°
 	@Override
 	public List<OpenApiDTO> getOpenApiInfo(OpenApiDTO pDTO) throws Exception {
 
 		log.info(this.getClass().getName() + ".getOpenApiInfo start!");
 		
-		//¿ÀÇÂ api Á¤º¸ Á¶È¸
+		//ì°¸ì¡°í˜• ë³€ìˆ˜ëŠ” ì˜¤ë¥˜ë°©ì§€ë¥¼ ìœ„í•´ ë„ì²˜ë¦¬
 		List<OpenApiDTO> rList = openApiMapper.getOpenApiInfo(pDTO);
 		
-		//ÂüÁ¶Çü º¯¼ö´Â ¿À·ù¹æÁö¸¦ À§ÇØ ³ÎÃ³¸®
+		//ì°¸ì¡°í˜• ë³€ìˆ˜ëŠ” ì˜¤ë¥˜ë°©ì§€ë¥¼ ìœ„í•´ ë„ì²˜ë¦¬
 		if(rList == null) {
 			rList = new ArrayList<OpenApiDTO>();
 		}
