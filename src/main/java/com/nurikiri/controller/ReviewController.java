@@ -46,7 +46,7 @@ public class ReviewController {
 		log.info("register: " + review);
 		service.register(review);
 		rttr.addFlashAttribute("result", review.getRno());
-		return "redirect:/manager/review/list";
+		return "redirect:/managers/review/list";
 	}
 
 	@GetMapping({ "/get", "/modify" })
@@ -63,7 +63,7 @@ public class ReviewController {
 			rttr.addFlashAttribute("result", "success");
 		}
 
-		return "redirect:/manager/review/get";
+		return "redirect:/managers/review/get";
 	}
 	
 	@PostMapping("/remove")
@@ -74,6 +74,6 @@ public class ReviewController {
 			rttr.addFlashAttribute("result", "success");
 		}
 		
-		return "redirect:/manager/review/list";
+		return "redirect:/managers/review/list";
 	}
 }
