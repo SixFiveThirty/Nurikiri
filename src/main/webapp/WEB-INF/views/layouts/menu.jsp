@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <style>
 #menulink {
@@ -29,8 +29,6 @@
 			<li class="nav-item nav-link" id="menulink">|</li>
 			<li class="nav-item"><a class="nav-link mx-2" id="menulink" href="/recommend/editor/list">에디터</a></li>
 			<li class="nav-item nav-link" id="menulink">|</li>
-			<li class="nav-item"><a class="nav-link mx-2" id="menulink" href="/recommend/editor/list">에디터</a></li>
-			<li class="nav-item nav-link" id="menulink">|</li>
 			<li class="nav-item"><a class="nav-link mx-2" id="menulink" href="/managers/review/list">관리자</a></li>
 		</ul>
 		<!-- 우측 메뉴 -->
@@ -39,16 +37,3 @@
 		</ul>
 	</div>
 </nav>
-
-<form id="logoutForm" action="/security/logout" method="post">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-</form>
-
-<script>
-$(document).ready(function(){
-	$('.logout-link').click(function(e) {
-		e.preventDefault();
-		$('#logoutForm').submit();
-	});
-});
-</script>

@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-
 <%@ include file="../layouts/header.jsp"%>
 
 <style>
@@ -16,17 +15,6 @@
 }
 
 .editor-link {
-	width: 100%;
-	height: 200px;
-	background-color: #dddddd;
-	text-align: center;
-}
-
-.store-card-list {
-	display: flex;
-}
-
-.store-link {
 	width: 100%;
 	height: 200px;
 	background-color: #dddddd;
@@ -58,25 +46,38 @@
 }
 </style>
 
-<h1>가맹점 찾기</h1>
-
-<div class="row">
-	<c:forEach var="store" items="${list}">
-		<div class="col-sm-6 col-md-4 mb-3">
-
+<div class="container">
+	<div class="recommend-part pb-5">
+		<p class="mx-5">에디터 추천</p>
+		<div class="editor-card-list">
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="store-link" href="${cri.getLink('get')}&sno=${store.sno}">
-					<img src="..." class="card-img-top" alt="..." />
+				<a class="editor-link" href="/recommend/editor/get"> <img
+					src="..." class="card-img-top" alt="..." />
 				</a>
 				<div class="card-body">
-					<p class="card-text">${store.title}</p>
+					<p class="card-text">000 전통 시장</p>
 				</div>
 			</div>
-
+			<div class="card mx-5" style="width: 18rem;">
+				<a class="editor-link" href="/recommend/editor"> <img src="..."
+					class="card-img-top" alt="..." />
+				</a>
+				<div class="card-body">
+					<p class="card-text">000 전통 시장</p>
+				</div>
+			</div>
+			<div class="card mx-5" style="width: 18rem;">
+				<a class="editor-link" href="/recommend/editor"> <img src="..."
+					class="card-img-top" alt="..." />
+				</a>
+				<div class="card-body">
+					<p class="card-text">000 전통 시장</p>
+				</div>
+			</div>
 		</div>
-	</c:forEach>
+	</div>
+
 </div>
 
-<%@ include file="../common/pagenation.jsp"%>
 
 <%@ include file="../layouts/footer.jsp"%>
