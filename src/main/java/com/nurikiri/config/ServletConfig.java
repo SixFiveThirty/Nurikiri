@@ -29,16 +29,14 @@ public class ServletConfig implements WebMvcConfigurer {
 		bean.setSuffix(".jsp");
 		registry.viewResolver(bean);
 	}
-	
-	
+
 	@Bean(name = "multipartResolver")
 	public CommonsMultipartResolver getResolver() throws IOException {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
 		
-		resolver.setMaxUploadSize(-1); // 40MB, -1 : 무제한, 크기제한 두지 않겠다는 뜻
-		resolver.setMaxUploadSizePerFile(-1); // 20MB, -1 : 무제한, 크기제한 두지 않겠다는 뜻
-		 // 1MB
-		resolver.setMaxInMemorySize(1024 * 1024);
+		resolver.setMaxUploadSize(-1); // -1 : 무제한
+		resolver.setMaxUploadSizePerFile(-1); // -1 : 무제한
+		resolver.setMaxInMemorySize(1024 * 1024);	// 1MB
 		resolver.setUploadTempDir(new FileSystemResource("c:\\upload\\tmp"));
 		resolver.setDefaultEncoding("UTF-8");
 		

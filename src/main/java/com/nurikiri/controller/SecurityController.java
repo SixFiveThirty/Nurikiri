@@ -1,22 +1,30 @@
 package com.nurikiri.controller;
 
+import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.nurikiri.domain.MemberVO;
+
+import com.nurikiri.service.MemberServiceImpl;
+import com.nurikiri.domain.UpdateInfVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.nurikiri.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
+import net.coobird.thumbnailator.Thumbnails;
 
 @Log4j
 @RequestMapping("/security")
@@ -62,15 +70,42 @@ public class SecurityController {
 		// 유효성 검사 후 DB에 저장
 		service.register(member, avatar);
 		
-		
-		
+
 		return "redirect:/"; // 
 	}
 	
-	
+	@GetMapping("/avatar/{size}/{username}")
+	@ResponseBody
+	public void avata(@PathVariable("size") String size,
+					@PathVariable("username") String username,
+					HttpServletResponse response) throws IOException {
+		
+		File src = new File(MemberServiceImpl.AVATAR_UPLOAD_DIR, username + ".png");
+		if(!src.exists()) {
+			src = new File(MemberServiceImpl.AVATAR_UPLOAD_DIR, "unknown.png");
+		}		
+		log.warn(src);
+		response.setHeader("Content-Type", "image/png");
+        
+		if(size.equals("sm")) {
+			Thumbnails.of(src)
+					.size(70, 70)
+					.toOutputStream(response.getOutputStream());
+
+		} else {
+			Thumbnails.of(src)
+					.size(250, 250)
+					.toOutputStream(response.getOutputStream());
+		}
+	}	
 	
 	@GetMapping("/profile")
 	public void profile() {
 		
+	}
+	
+	@GetMapping("/update")
+	public void update(UpdateInfVO vo) {
+
 	}
 }

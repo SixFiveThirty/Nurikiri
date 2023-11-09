@@ -26,10 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private DataSource datasource; // RootConfig 히카리
-	
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-	    return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder();
 	}
 
 	@Override
@@ -58,23 +58,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/recommend/editor/modify").access("hasRole('ROLE_MANAGER')");
 
 		http.formLogin()
-			.loginPage("/security/login?error=login_required") // 로그인 안 했을 시 리다이렉트
-			.loginProcessingUrl("/security/login")
-			.defaultSuccessUrl("/")
-			.failureUrl("/security/login?error=true"); // 로그인 실패시 리다이렉트
-		
+				.loginPage("/security/login?error=login_required") // 로그인 안 했을 시 리다이렉트
+				.loginProcessingUrl("/security/login")
+				.defaultSuccessUrl("/")
+				.failureUrl("/security/login?error=true"); // 로그인 실패시 리다이렉트
+
 		http.logout()
-			.logoutUrl("/security/logout")
-			.invalidateHttpSession(true)
-			.deleteCookies("remember-me", "JSESSION-ID")
-			.logoutSuccessUrl("/");																						// 리다이렉트
+				.logoutUrl("/security/logout")
+				.invalidateHttpSession(true)
+				.deleteCookies("remember-me", "JSESSION-ID")
+				.logoutSuccessUrl("/"); // 리다이렉트
 
 		http.rememberMe()
 				.key("Nurikiri")
 				.tokenRepository(persistentTokenRepository())
 				.tokenValiditySeconds(7 * 24 * 60 * 60);
 	}
-	
+
 	@Bean
 	public UserDetailsService customUserService() {
 		return new CustomUserDetailsService();
@@ -84,9 +84,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public PersistentTokenRepository persistentTokenRepository() {
 		JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
 		repo.setDataSource(datasource);
-		
+
 		return repo;
-		
+
 	}
 
 	@Override
@@ -95,4 +95,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.userDetailsService(customUserService())
 		.passwordEncoder(passwordEncoder());
 	}
+
 }
