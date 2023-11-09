@@ -39,10 +39,10 @@ public class MemberServiceImpl implements MemberService {
 		String encPassword = pwEncoder.encode(member.getPassword());
 		member.setPassword(encPassword);
 	
-		//2. tbl_member에 저장
+		//2. member에 저장
 		mapper.insert(member);
 	
-		//3. tbl_member_auth에 저장
+		//3. member_auth에 저장
 		AuthVO auth = new AuthVO(member.getUsername(),
 												"ROLE_USER");
 		mapper.insertAuth(auth); //권한부여한거 등록
