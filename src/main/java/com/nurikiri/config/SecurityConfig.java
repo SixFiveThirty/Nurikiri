@@ -9,11 +9,14 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
-
+import com.nurikiri.security.CustomUserDetailsService;
 import lombok.extern.log4j.Log4j;
 
 @Configuration
@@ -23,6 +26,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private DataSource datasource; // RootConfig 히카리
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+	    return new BCryptPasswordEncoder();
+	}
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
@@ -41,14 +49,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/security/mypage", 
 						"/security/review", 
 						"/security/favorites")
-				.authenticated(); // 프로필 화면 로그인시에만 입장 가능
-//				.antMatchers(
-//						"/recommend/editor/list",
-//						"/recommend/editor/modify"
-//				).access("hasRole('ROLE_MANAGER')"); 
+        .authenticated() // 프로필 화면 로그인시에만 입장 가능
+				.antMatchers(
+						"/managers/get",
+						"/managers/list",
+						"/managers/modify",
+            "/recommend/editor/list",
+  					"/recommend/editor/modify").access("hasRole('ROLE_MANAGER')");
 
 		http.formLogin()
-			.loginPage("/security/login?eeror=login_required") // 로그인 안 했을 시 리다이렉트
+			.loginPage("/security/login?error=login_required") // 로그인 안 했을 시 리다이렉트
 			.loginProcessingUrl("/security/login")
 			.defaultSuccessUrl("/")
 			.failureUrl("/security/login?error=true"); // 로그인 실패시 리다이렉트
@@ -64,6 +74,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.tokenRepository(persistentTokenRepository())
 				.tokenValiditySeconds(7 * 24 * 60 * 60);
 	}
+	
+	@Bean
+	public UserDetailsService customUserService() {
+		return new CustomUserDetailsService();
+	}
 
 	@Bean
 	public PersistentTokenRepository persistentTokenRepository() {
@@ -76,11 +91,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
 		auth.inMemoryAuthentication() 
 				.withUser("admin")
 				.password("$2a$10$tAIRnt9PK088WQ.ouPVsWuEVsTYJ9WRjg6/HtJ./Ylp71uYYVjyje")
 				.roles("user");
+		
+		auth
+		.userDetailsService(customUserService())
+		.passwordEncoder(passwordEncoder());
 		
 	}
 }

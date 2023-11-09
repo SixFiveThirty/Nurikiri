@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -40,10 +42,24 @@ $(document).ready(function(){
 					<h1>로고</h1>
 				</a>
 				<div class="user-space">
-					<a class="nav-link my-3" href="#"> <img src="#"
-						class="avatar-sm" /> User
-					</a>
-					<button type="button" class="btn btn-light my-3">로그아웃</button>
+					<sec:authorize access="isAuthenticated()">
+						<sec:authentication property="principal.username" var="username" />
+						<%-- 로그인 된 상태 --%>
+						<li class="nav-item"><a class="nav-link"
+							href="/security/profile"> <img
+								src="/security/avatar/sm/${username}" class="avatar-sm" />
+								${username}
+						</a></li>
+						<li class="nav-item"><a class="nav-link logout-link" href="#">로그아웃
+						</a></li>
+					</sec:authorize>
+					<sec:authorize access="isAnonymous()">
+						<%-- 로그아웃 된 상태 --%>
+						<li class="nav-item my-3 mr-3"><a class="nav-link"
+							href="/security/login">로그인 </a></li>
+						<li class="nav-item my-3"><a class="nav-link"
+							href="/security/signup">회원가입 </a></li>
+					</sec:authorize>
 				</div>
 			</div>
 			<%@ include file="menu.jsp"%>
