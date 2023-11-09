@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nurikiri.mapper.MemberMapper">
+	<resultMap id="authMap" type="com.nurikiri.domain.AuthVO">
+		<result property="username" column="username" />
+		<result property="auth" column="auth" />
+	</resultMap>
+
+	<resultMap id="memberMap"  type="com.nurikiri.domain.MemberVO">
+		<id property="username" column="username" />
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+		<result property="name" column="name" />
+		<result property="jumin" column="jumin" />
+		<result property="email" column="email" />
+		<result property="phone1" column="phone1" />
+		<result property="phone2" column="phone2" />
+		<result property="phone3" column="phone3" />
+		<result property="regDate" column="reg_date" />
+		<result property="updateDate" column="update_date" />
+		<collection property="authList" resultMap="authMap" />
+	</resultMap>	
+	
+	<select id="read" resultMap="memberMap">
+		select m.username, password, name, jumin, email, phone1, phone2, phone3, reg_date, update_date, auth
+		from member m left outer join member_auth a
+			on m.username = a.username
+		where m.username = #{username}	
+	</select>
+
+
+	<insert id="insert">
+		insert into member(username, password, name, jumin, email, phone1, phone2, phone3)
+		values(#{username}, #{password}, #{name}, #{jumin}, #{email}, #{phone1}, #{phone2}, #{phone3})
+	</insert>
+	
+
+	<insert id="insertAuth">
+		insert into member_auth(username, auth)
+		values(#{username}, #{auth})
+	</insert>	
+</mapper>
