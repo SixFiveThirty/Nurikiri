@@ -67,7 +67,7 @@
 		<where>
 			<include refid="criteria"></include>
 		</where>
-		order by bno desc
+		order by eno desc
 		limit #{offset}, #{amount}
 		<!-- 여기서 #{offset}은 #({pageNum} -1) * #{amount} 이며, 수식은 oracle은 되지만, mysql은 
 			불가해서 그런 것이다. -->
