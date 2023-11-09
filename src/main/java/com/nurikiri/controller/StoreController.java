@@ -1,5 +1,6 @@
 package com.nurikiri.controller;
 
+import java.security.Principal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -34,12 +35,12 @@ public class StoreController {
 	}
 
 	@GetMapping("/list")
-	public void list(@ModelAttribute("cri") Criteria cri, Model model) {
+	public void list(@ModelAttribute("cri") Criteria cri,Principal principal, Model model) {
 
 		log.info("list");
 		int total = service.getTotal(cri);
 
-		model.addAttribute("list", service.getList(cri));
+		model.addAttribute("list", service.getList(cri,principal));
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 		
 	}
@@ -64,10 +65,11 @@ public class StoreController {
 	public void get(
 			@RequestParam("sno") Long sno,
 			@ModelAttribute("cri") Criteria cri,
+			Principal principal,
 			Model model) {
 
 		log.info("/get or modify");
-		model.addAttribute("store", service.get(sno));
+		model.addAttribute("store", service.get(sno,principal));
 	}
 
 	@PostMapping("/modify")
