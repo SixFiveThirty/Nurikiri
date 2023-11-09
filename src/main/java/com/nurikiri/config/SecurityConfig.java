@@ -45,14 +45,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests()
 				.antMatchers(
-						"/security/profile",
-						"/security/mypage",
-						"/security/review",
-						"/security/favorites")
-				.authenticated() // 프로필 화면 로그인시에만 입장 가능
-				/*
-				 * .antMatchers( "/store/modify") .authenticated()
-				 */
+						"/security/profile", 
+						"/security/mypage", 
+						"/security/review", 
+						"/security/favorites").authenticated() // 프로필 화면 로그인시에만 입장 가능
 				.antMatchers(
 						"/managers/get",
 						"/managers/list",
@@ -95,11 +91,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		/*
-		 * auth.inMemoryAuthentication() .withUser("admin")
-		 * .password("$2a$10$tAIRnt9PK088WQ.ouPVsWuEVsTYJ9WRjg6/HtJ./Ylp71uYYVjyje")
-		 * .roles("user");
-		 */
 		auth
 				.userDetailsService(customUserService())
 				.passwordEncoder(passwordEncoder());
