@@ -77,6 +77,6 @@
 	</c:forEach>
 </div>
 
-<%@ include file="../common/pagenation.jsp"%>
+<%@ include file="../common/pagination.jsp"%>
 
 <%@ include file="../layouts/footer.jsp"%>

@@ -48,14 +48,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/security/profile", 
 						"/security/mypage", 
 						"/security/review", 
-						"/security/favorites").authenticated() // 프로필 화면 로그인시에만 입장 가능
+						"/security/favorites")
+						.authenticated() // 프로필 화면 로그인시에만 입장 가능
 				.antMatchers(
-						"/managers/get",
-						"/managers/list",
-						"/managers/modify",
+						"/managers/review/get",
+						"/managers/review/list",
+						"/managers/review/modify",
 						"/recommend/editor/list",
-						"/recommend/editor/modify")
-				.access("hasRole('ROLE_MANAGER')");
+						"/recommend/editor/modify").access("hasRole('ROLE_MANAGER')");
 
 		http.formLogin()
 				.loginPage("/security/login?error=login_required") // 로그인 안 했을 시 리다이렉트
@@ -90,11 +90,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {		
 		auth
-				.userDetailsService(customUserService())
-				.passwordEncoder(passwordEncoder());
-
+		.userDetailsService(customUserService())
+		.passwordEncoder(passwordEncoder());
 	}
 
 }

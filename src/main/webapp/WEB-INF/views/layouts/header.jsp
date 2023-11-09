@@ -45,9 +45,9 @@ $(document).ready(function(){
 					<sec:authorize access="isAuthenticated()">
 						<sec:authentication property="principal.username" var="username" />
 						<%-- 로그인 된 상태 --%>
-						<li class="nav-item my-3 mr-3"><a class="nav-link"
-							href="/security/profile"> <img
-								src="/security/avatar/sm/${username}" class="avatar-sm" />
+						<li class="nav-item"><a class="nav-link"
+							href="/security/profile">
+								<img src="/security/avatar/sm/${username}" class="avatar-sm" />
 								${username}
 						</a></li>
 						<li class="nav-item my-3"><a class="nav-link logout-link" href="#">로그아웃

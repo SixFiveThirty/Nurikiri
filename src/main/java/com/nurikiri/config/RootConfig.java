@@ -51,8 +51,8 @@ public class RootConfig {
 	}
 	
 	@Bean
-	public DataSourceTransactionManager transactionManager(){
-	    DataSourceTransactionManager manager = new DataSourceTransactionManager(dataSource());
-	    return manager;
+	public DataSourceTransactionManager transactionManager() {
+		DataSourceTransactionManager manager = new DataSourceTransactionManager(dataSource());
+		return manager;
 	}
 }
