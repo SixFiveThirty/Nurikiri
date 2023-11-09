@@ -10,7 +10,6 @@ import lombok.ToString;
 @Setter
 @Getter
 public class Criteria {
-
     private int pageNum;
     private int amount;
     private String type;
