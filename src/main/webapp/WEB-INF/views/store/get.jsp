@@ -67,7 +67,7 @@
 		<button type="button" class="btn btn-light mr-5" style="width: 200px"
 			onclick="location.href='${cri.getLink('modify')}&sno=${store.sno}'">수정</button>
 		<button type="button" class="btn btn-light" style="width: 200px"
-			onclick="location.href='/store/list'">목록</button>
+			onclick="location.href='${cri.getLink('list')}'">목록</button>
 	</div>
 </div>
 

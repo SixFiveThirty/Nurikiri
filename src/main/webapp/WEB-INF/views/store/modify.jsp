@@ -105,7 +105,7 @@
 		<button type="button" class="btn btn-light mr-5" style="width: 200px"
 			onclick="location.href='get'">확인</button>
 		<button type="button" class="btn btn-light" style="width: 200px"
-			onclick="location.href='get'">취소</button>
+			onclick="location.href='${cri.getLink('get')}&sno=${store.sno}'">취소</button>
 	</div>
 </div>
 
