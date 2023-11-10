@@ -6,25 +6,27 @@ import lombok.Data;
 public class OpenApiDTO {
 	private int sno;
 	private String title;
-	private String content;
-	private String owner;
+	private String market;
 	private String address;
+	private String item;
+	private Boolean use_recharge_card;
+	private Boolean use_bill;
+	private Boolean use_mobile;
 	private int registerDate;
-	private int updateDate;
 	
 	public OpenApiDTO() {
-		super();
 	}
 	
-	public OpenApiDTO(int sno, String title, String content, String owner, String address, int registerDate, int updateDate) {
+	public OpenApiDTO(String title, String market, String address, String item, Boolean use_recharge_card, Boolean use_bill, Boolean use_mobile, int registerDate) {
 		super();
-		this.sno = sno;
 		this.title = title;
-		this.content = content;
-		this.owner = owner;
+		this.market = market;
 		this.address = address;
+		this.item = item;
+		this.use_recharge_card = use_recharge_card;
+		this.use_bill = use_bill;
+		this.use_mobile = use_mobile;
 		this.registerDate =  registerDate;
-		this.updateDate = updateDate; 
 	}
 	
 	
