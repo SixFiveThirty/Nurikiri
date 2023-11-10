@@ -66,7 +66,7 @@
 
 			<div class="card mx-5" style="width: 18rem;">
 				<a class="store-link" href="${cri.getLink('get')}&sno=${store.sno}">
-					<img src="..." class="card-img-top" alt="..." />
+					<img src="..." class="card-img-top" alt="사진 서비스 조금만 기다려주세요..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">${store.title}</p>
