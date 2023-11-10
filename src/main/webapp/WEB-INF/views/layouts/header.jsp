@@ -46,11 +46,11 @@ $(document).ready(function(){
 						<sec:authentication property="principal.username" var="username" />
 						<%-- 로그인 된 상태 --%>
 						<li class="nav-item"><a class="nav-link"
-							href="/security/profile"> <img
-								src="/security/avatar/sm/${username}" class="avatar-sm" />
+							href="/security/profile">
+								<img src="/security/avatar/sm/${username}" class="avatar-sm" />
 								${username}
 						</a></li>
-						<li class="nav-item"><a class="nav-link logout-link" href="#">로그아웃
+						<li class="nav-item my-3"><a class="nav-link logout-link" href="#">로그아웃
 						</a></li>
 					</sec:authorize>
 					<sec:authorize access="isAnonymous()">

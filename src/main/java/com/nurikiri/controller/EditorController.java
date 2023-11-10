@@ -1,5 +1,7 @@
 package com.nurikiri.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nurikiri.domain.Criteria;
@@ -31,16 +34,19 @@ public class EditorController {
 	
 	@GetMapping({"/get", "/modify"})
 	public void get(
-//		@RequestParam("eno") Long eno,
+		@RequestParam("eno") Long eno,
+		@ModelAttribute("cri") Criteria cri,
 		Model model
 	)
 	{
 		log.info("/get or /modify");
-//		model.addAttribute("editor", service.get(eno));
+		model.addAttribute("editor", service.get(eno));
 	}
 	
 	@GetMapping("/list")
-	public void list (Criteria cri, Model model) {
+	public void list (
+			@ModelAttribute("cri") Criteria cri,
+			Model model) {
 		log.info("list: " + cri);
 		model.addAttribute("list", service.getList(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, 123));//임의로 123 요청
@@ -55,10 +61,14 @@ public class EditorController {
 	public String register(
 			@Valid @ModelAttribute("editor") EditorVO editor,
 			Errors errors,
-			RedirectAttributes rttr
-	) throws Exception{
+			List<MultipartFile> files,
+			RedirectAttributes rttr) throws Exception{
 		log.info("register: " + editor);
-		service.register(editor);
+		if(errors.hasErrors()) {
+			return "recommend/editor/register";
+		}
+		
+		service.register(editor, files);
 		rttr.addFlashAttribute("result", editor.getEno());
 		return "redirect:/recommend/editor/list";
 	}
@@ -67,15 +77,20 @@ public class EditorController {
 	public String modify(
 		@Valid @ModelAttribute("editor") EditorVO editor,
 		Errors errors,
-		RedirectAttributes rttr
-	) throws Exception {
+		List<MultipartFile> files,
+		@ModelAttribute("cri") Criteria cri,
+		RedirectAttributes rttr) throws Exception {
 		log.info("modify: " + editor);
 		
-		if(service.modify(editor)) {
+		if(errors.hasErrors()) {
+			return "recommend/editor/modify";
+		}
+		
+		if(service.modify(editor, files)) {
 			rttr.addFlashAttribute("result", "success");
 		}
 		
-		return "redirect:/recommend/editor/get";
+		return "redirect:" + cri.getLinkWithEno("/recommend/editor/get", editor.getEno());
 	}
 	
 	@PostMapping("/remove")
@@ -86,6 +101,6 @@ public class EditorController {
 			rttr.addFlashAttribute("result", "success");
 		}
 		
-		return "redirect:/recomment/editor/list";
+		return "redirect:/recommed/editor/list";
 	}
 }

@@ -5,8 +5,76 @@
 
 <%@ include file="../../layouts/header.jsp"%>
 
+<script src="/resources/js/rest.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"> </script>
+<script src="/resources/js/comment.js"></script>
+<script src="/resources/js/reply.js"></script>
+
 <script>
-	let eno = ${param.eno};
+	const COMMENT_URL = '/api/recommend/editor/${param.eno}/comment/'; //전역상수(댓글 기본 URL 상수임.)
+	const REPLY_URL = '/api/recommend/editor/${param.eno}/reply/';
+	
+	$(document).ready(async function() {
+		$('.remove').click(function() {
+			if (!confirm('정말 삭제할까요?'))
+				return;
+			document.forms.removeForm.submit();
+		});
+		
+		let eno = ${param.bno}; //글 번호
+		let writer = '${username}'; //작성자(로그인 유저)
+		
+		loadComments(eno, writer); // 댓글 목록 불러오기
+		
+		// 댓글 추가 버튼 처리
+		$('.comment-add-btn').click(function(e) {
+	      createComment(eno, writer);
+	   });
+		
+		
+		$('.comment-list').on('click', '.comment-update-show-btn', showUpdateComment);
+		
+		//수정 확인 버튼 클릭
+		$('.comment-list').on('click', '.comment-update-btn', function(e) {
+			const el = $(this).closest('.comment');
+			updateComment(el, writer);
+			/* console.log('수정확인', el); */
+		});
+		
+		//수정 취소 버튼 클릭
+		$('.comment-list').on('click', '.comment-update-cancel-btn', cancelCommentUpdate);
+		
+		//삭제 버튼 클릭
+		$('.comment-list').on('click', '.comment-delete-btn', deleteComment);
+		
+		$('.comment-list').on('click', '.reply-add-show-btn', function(e) {
+			showReplyAdd($(this), writer);
+		});
+		
+		$('.comment-list').on('click', '.reply-add-btn', function(e) {
+			addReply($(this), writer);
+		});
+		
+		// 답급 취소
+		$('.comment-list').on('click', '.reply-add-cancel-btn', cancelReply);
+		
+		//답글 수정 화면 보이기
+		$('.comment-list').on('click', '.reply-update-show-btn', function(e) {
+			showUpdateReply($(this));
+		});
+		
+		//답글 수정 등록
+		$('.comment-list').on('click', '.reply-update', function(e) {
+			updateReply($(this));
+		});
+		
+		//답글 수정 취소
+		$('.comment-list').on('click', '.reply-update-cancel', cancelReplyUpdate);
+		
+		//답글 삭제
+		$('.comment-list').on('click', '.reply-delete-btn', deleteReply);
+	});
 </script>
 
 <style>
@@ -14,11 +82,20 @@
 	display: flex;
 	width: 100%;
 }
+
 .card {
 	border-color: #c3cad1;
 }
-.card:nth-child(1) {flex-grow:1; height: 300px;}
-.card:nth-child(2) {flex-grow:1.5; height: 300px;}
+
+.card:nth-child(1) {
+	flex-grow: 1;
+	height: 300px;
+}
+
+.card:nth-child(2) {
+	flex-grow: 1.5;
+	height: 300px;
+}
 /* .btn-details {width: 300px;} */
 .foot-div {
 	display: flex;
@@ -29,7 +106,7 @@
 </style>
 
 <div class="container">
-	<h3>에디터 추천</h3>
+	<h3>${editor.title}</h3>
 	<div class="top-div mt-5">
 		<div class="card">
 			<img src="..." class="card-img-top" alt="..." />
@@ -39,12 +116,13 @@
 			<p>운영시간 :</p>
 			<p>주소 :</p>
 			<p>연락처 :</p>
-			<button type="button" class="btn btn-light btn-details">가맹점 상세보기</button>
+			<button type="button" class="btn btn-light btn-details">가맹점
+				상세보기</button>
 		</div>
 	</div>
 	<div class="mid-div mt-5">
 		<div class="card">
-			<p>설명</p>
+			<p>${editor.content}</p>
 		</div>
 	</div>
 	<div class="bottom-div mt-5">
@@ -53,10 +131,23 @@
 		</div>
 	</div>
 	<div class="foot-div mt-5">
-		<button type="button" class="btn btn-light mr-5" style="width:200px" onclick="location.href='modify'">수정</button>
-		<button type="button" class="btn btn-light mr-5" style="width:200px" onclick="location.href='/'">홈</button>
-		<button type="button" class="btn btn-light" style="width:200px" onclick="location.href='list'">목록</button>
+		<a href="${cri.getLinkWithEno('modify', editor.eno)}"><button
+				type="button" class="btn btn-light mr-5" style="width: 200px">수정</button></a>
+		<button type="button" class="btn btn-light mr-5" style="width: 200px"
+			onclick="location.href='/'">홈</button>
+		<button type="button" class="btn btn-light" style="width: 200px"
+			onclick="location.href='list'">목록</button>
 	</div>
 </div>
+
+<form action="remove" method="post" name="removeForm">
+	<input type="hidden" name="${_csrf.parameterName}"
+		value="${_csrf.token}" /> <input type="hidden" name="eno"
+		value="${editor.eno}" /> <input type="hidden" name="pageNum"
+		value="${cri.pageNum}" /> <input type="hidden" name="amount"
+		value="${cri.amount}" /> <input type="hidden" name="type"
+		value="${cri.type}" /> <input type="hidden" name="keyword"
+		value="${cri.keyword}" />
+</form>
 
 <%@ include file="../../layouts/footer.jsp"%>
