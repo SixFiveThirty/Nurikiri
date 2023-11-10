@@ -58,26 +58,34 @@
 	<update id="update">
 		update store set
 		title = #{title},
+		market = #{market},
+		address = #{address},
+		item = #{item},
+		use_recharge_card =	#{useRechargeCard},
+		use_bill = #{useBill},
+		use_mobile = #{useMobile},
 		content = #{content},
 		owner = #{owner},
-		address = #{address}
+		phone = #{phone}
 		where sno = #{sno}
 	</update>
 
+
+
+
+
+	
 	<sql id="criteria">
 		<trim prefixOverrides="OR">
 			<foreach item="type" collection="typeArr">
 				<trim prefix="OR">
 					<choose>
 						<when test="type == 'T'.toString()">
-							title like CONCAT('%', #{keyword}, '%')
-						</when>
+							title like CONCAT('%', #{keyword}, '%') </when>
 						<when test="type == 'C'.toString()">
-							content like CONCAT('%', #{keyword}, '%')
-						</when>
+							content like CONCAT('%', #{keyword}, '%') </when>
 						<when test="type == 'O'.toString()">
-							owner like CONCAT('%', #{keyword}, '%')
-						</when>
+							owner like CONCAT('%', #{keyword}, '%') </when>
 					</choose>
 				</trim>
 			</foreach>
