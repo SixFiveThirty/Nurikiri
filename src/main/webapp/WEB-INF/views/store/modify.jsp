@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 
 <%@ include file="../layouts/header.jsp"%>
@@ -31,73 +32,63 @@
 <h1 class="page-header">가맹점 정보 수정하기</h1>
 
 <div class="container">
-	<form role="form" method="post">
+	<form:form role="form" modelAttribute="store">
 		<input type="hidden" name="sno" value="${store.sno}">
 
 		<div class="form-group">
-			<label>가맹점명</label> <input name="title" class="form-control"
-				value="${store.title}">
+			<form:label path="title">가맹점명</form:label>
+			<form:input path="title" cssclass="form-control"/>
 		</div>
-
+		
 		<div class="form-group">
-			<label>소속 시장명</label> <input name="market" class="form-control"
-				value="${store.market}">
+			<form:label path="market">소속 시장명</form:label>
+			<form:input path="market" cssclass="form-control"/>
 		</div>
-
+		
 		<div class="form-group">
-			<label>소재지</label> <input name="address" class="form-control"
-				value="${store.address}">
+			<form:label path="address">소재지</form:label>
+			<form:input path="address" cssclass="form-control"/>
 		</div>
-
+		
 		<div class="form-group">
-			<label>취급 품목</label> <input name="item" class="form-control"
-				value="${store.item}">
+			<form:label path="item">취급 품목</form:label>
+			<form:input path="item" cssclass="form-control"/>
 		</div>
-
+		
 		<div class="form-group">
-			<label>충전식 카드 취급 여부</label> <input name="useRechargeCard"
-				class="form-control" value="${store.useRechargeCard}">
+			<form:label path="useRechargeCard">충전식 카드 취급 여부</form:label>
+			<form:input path="useRechargeCard" cssclass="form-control"/>
 		</div>
-
+		
 		<div class="form-group">
-			<label>지류 취급여부</label> <input name="useBill" class="form-control"
-				value="${store.useBill}">
+			<form:label path="useBill">지류 취급여부</form:label>
+			<form:input path="useBill" cssclass="form-control"/>
 		</div>
-
+		
 		<div class="form-group">
-			<label>모바일 취급여부</label> <input name="useMobile" class="form-control"
-				value="${store.useMobile}">
+			<form:label path="useMobile">모바일 취급여부</form:label>
+			<form:input path="useMobile" cssclass="form-control"/>
 		</div>
-
+		
 		<div class="form-group">
-			<label>사장님 이름</label> <input name="owner" class="form-control"
-				value="${store.owner}">
+			<form:label path="owner">사장님 이름</form:label>
+			<form:input path="owner" cssclass="form-control"/>
 		</div>
-
+		
 		<div class="form-group">
-			<label>전화 번호</label> <input name="phone" class="form-control"
-				value="${store.phone}">
+			<form:label path="phone">전화 번호</form:label>
+			<form:input path="phone" cssclass="form-control"/>
 		</div>
-
-		<%-- <div class="form-group">
-			<label>등록년도</label> <input name="regDate" class="form-control"
-				value="${store.regDate}">
-		</div>
-
+		
 		<div class="form-group">
-			<label>수정년도</label> <input name="updateDate" class="form-control"
-				value="${store.updateDate}">
-		</div> --%>
-
+			<form:label path="content">가맹점 설명</form:label>
+			<form:input path="content" cssclass="form-control rounded-1 mt-4"/>
+		</div>
+			
 		<div class="photo-upload mt-4">
 			<h3>사진 추가</h3>
 			<button type="button" class="btn btn-secondary ml-4"
 				style="width: 150px">파일 첨부</button>
-		</div>
-
-		<div class="form-group">
-			<label>가맹점 설명</label> <input name="content"
-				class="content form-control rounded-1 mt-4" value="${store.content}" />
 		</div>
 
 		<button type="button" class="btn btn-secondary mt-4"
@@ -115,8 +106,10 @@
 				onclick="location.href='${cri.getLink('get')}&sno=${store.sno}'">취소</button>
 		</div>
 
+	</form:form>
 
-	</form>
+
+
 </div>
 
 <%@ include file="../layouts/footer.jsp"%>

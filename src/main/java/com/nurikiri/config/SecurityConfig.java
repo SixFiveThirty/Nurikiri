@@ -1,4 +1,4 @@
-package com.nurikiri.config;
+	package com.nurikiri.config;
 
 import javax.sql.DataSource;
 
@@ -26,10 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private DataSource datasource; // RootConfig 히카리
-
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+	    return new BCryptPasswordEncoder();
 	}
 
 	@Override
@@ -49,32 +49,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/security/mypage", 
 						"/security/review", 
 						"/security/favorites")
-						.authenticated() // 프로필 화면 로그인시에만 입장 가능
+        .authenticated() // 프로필 화면 로그인시에만 입장 가능
 				.antMatchers(
 						"/managers/review/get",
 						"/managers/review/list",
 						"/managers/review/modify",
-						"/recommend/editor/list",
-						"/recommend/editor/modify").access("hasRole('ROLE_MANAGER')");
+            "/recommend/editor/list",
+            "/store/modify",
+  					"/recommend/editor/modify").access("hasRole('ROLE_MANAGER')");
 
 		http.formLogin()
-				.loginPage("/security/login?error=login_required") // 로그인 안 했을 시 리다이렉트
-				.loginProcessingUrl("/security/login")
-				.defaultSuccessUrl("/")
-				.failureUrl("/security/login?error=true"); // 로그인 실패시 리다이렉트
-
+			.loginPage("/security/login?error=login_required") // 로그인 안 했을 시 리다이렉트
+			.loginProcessingUrl("/security/login")
+			.defaultSuccessUrl("/")
+			.failureUrl("/security/login?error=true"); // 로그인 실패시 리다이렉트
+		
 		http.logout()
-				.logoutUrl("/security/logout")
-				.invalidateHttpSession(true)
-				.deleteCookies("remember-me", "JSESSION-ID")
-				.logoutSuccessUrl("/"); // 리다이렉트
+			.logoutUrl("/security/logout")
+			.invalidateHttpSession(true)
+			.deleteCookies("remember-me", "JSESSION-ID")
+			.logoutSuccessUrl("/");																						// 리다이렉트
 
 		http.rememberMe()
 				.key("Nurikiri")
 				.tokenRepository(persistentTokenRepository())
 				.tokenValiditySeconds(7 * 24 * 60 * 60);
 	}
-
+	
 	@Bean
 	public UserDetailsService customUserService() {
 		return new CustomUserDetailsService();
@@ -84,16 +85,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public PersistentTokenRepository persistentTokenRepository() {
 		JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
 		repo.setDataSource(datasource);
-
+		
 		return repo;
-
+		
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {		
 		auth
-		.userDetailsService(customUserService())
-		.passwordEncoder(passwordEncoder());
+      .userDetailsService(customUserService())
+      .passwordEncoder(passwordEncoder());
 	}
-
 }
