@@ -34,9 +34,8 @@
 
 
 	<insert id="insert">
-		insert into store (title, content, owner,address)
-		values (#{title},
-		#{content},#{owner},#{address})
+		insert into store (title, market, address, item, use_recharge_card, use_bill, use_mobile, content, owner, phone)
+		values (#{title}, #{market}, #{address}, #{item}, #{useRechargeCard}, #{useBill}, #{useMobile}, #{content}, #{owner}, #{phone})
 
 		<selectKey resultType="Long" keyProperty="sno"
 			keyColumn="sno" order="AFTER">
@@ -61,20 +60,22 @@
 		market = #{market},
 		address = #{address},
 		item = #{item},
-		use_recharge_card =	#{useRechargeCard},
+		use_recharge_card =
+		#{useRechargeCard},
 		use_bill = #{useBill},
 		use_mobile = #{useMobile},
 		content = #{content},
 		owner = #{owner},
 		phone = #{phone}
-		where sno = #{sno}
+		where sno =
+		#{sno}
 	</update>
 
 
 
 
 
-	
+
 	<sql id="criteria">
 		<trim prefixOverrides="OR">
 			<foreach item="type" collection="typeArr">
