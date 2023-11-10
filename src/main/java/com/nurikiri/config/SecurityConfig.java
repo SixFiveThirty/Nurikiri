@@ -21,7 +21,6 @@ import lombok.extern.log4j.Log4j;
 
 @Configuration
 @EnableWebSecurity
-@Log4j
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -55,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/managers/list",
 						"/managers/modify",
             "/recommend/editor/list",
+            "/store/modify",
   					"/recommend/editor/modify").access("hasRole('ROLE_MANAGER')");
 
 		http.formLogin()
@@ -91,10 +91,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication() 
+		/*auth.inMemoryAuthentication() 
 				.withUser("admin")
 				.password("$2a$10$tAIRnt9PK088WQ.ouPVsWuEVsTYJ9WRjg6/HtJ./Ylp71uYYVjyje")
-				.roles("user");
+				.roles("MEMBER"); */
 		
 		auth
 		.userDetailsService(customUserService())
