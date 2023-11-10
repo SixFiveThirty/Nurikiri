@@ -6,11 +6,11 @@
 <%@ include file="layouts/header.jsp"%>
 
 <script>
-$(document).ready(function() {
-	$('.editor').click(function() {
-		document.forms.editorForm.submit();
-	});
-})
+	$(document).ready(function() {
+		$('.editor').click(function() {
+			document.forms.editorForm.submit();
+		});
+	})
 </script>
 
 <style>
@@ -58,7 +58,17 @@ $(document).ready(function() {
 	<div class="recommend-part pb-5">
 		<p class="mx-5">에디터 추천</p>
 		<div class="editor-card-list">
-			<div class="card mx-5" style="width: 18rem;">
+			<c:forEach var="editor" items="${getEditorListThree}">
+				<div class="card mx-5" style="width: 18rem;">
+					<a class="editor-link editor" href="/recommend/editor/get?eno=${editor.eno}"> <img
+						src="..." class="card-img-top" alt="..." />
+					</a>
+					<div class="card-body">
+						<p class="card-text">${editor.title}</p>
+					</div>
+				</div>
+			</c:forEach>
+			<!-- <div class="card mx-5" style="width: 18rem;">
 				<a class="editor-link editor" href="/recommend/editor/get">
 					<img src="..." class="card-img-top" alt="..."/>
 				</a>
@@ -73,39 +83,31 @@ $(document).ready(function() {
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
 				</div>
-			</div>
-			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link editor" href="/recommend/editor/get">
-					<img src="..." class="card-img-top" alt="..."/>
-				</a>
-				<div class="card-body">
-					<p class="card-text">000 전통 시장</p>
-				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	<div class="recommend-part py-5">
 		<p class="mx-5">즐겨찾기 순 추천</p>
 		<div class="editor-card-list">
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#">
-					<img src="..." class="card-img-top" alt="..."/>
+				<a class="editor-link" href="#"> <img src="..."
+					class="card-img-top" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#">
-					<img src="..." class="card-img-top" alt="..."/>
+				<a class="editor-link" href="#"> <img src="..."
+					class="card-img-top" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#">
-					<img src="..." class="card-img-top" alt="..."/>
+				<a class="editor-link" href="#"> <img src="..."
+					class="card-img-top" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
@@ -117,24 +119,24 @@ $(document).ready(function() {
 		<p class="mx-5">별점 순 추천</p>
 		<div class="editor-card-list">
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#">
-					<img src="..." class="card-img-top" alt="..."/>
+				<a class="editor-link" href="#"> <img src="..."
+					class="card-img-top" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#">
-					<img src="..." class="card-img-top" alt="..."/>
+				<a class="editor-link" href="#"> <img src="..."
+					class="card-img-top" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#">
-					<img src="..." class="card-img-top" alt="..."/>
+				<a class="editor-link" href="#"> <img src="..."
+					class="card-img-top" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>

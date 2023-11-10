@@ -1,6 +1,7 @@
 package com.nurikiri.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 
@@ -18,6 +19,8 @@ public class EditorVO {
 	
 	@NotBlank(message="작성자는 필수 항목입니다.")
 	private String writer;
+	
+	List<EditorAttachmentVO> attaches;
 	
 	private Date regDate;
 	
