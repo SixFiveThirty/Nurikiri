@@ -29,8 +29,6 @@
 			<li class="nav-item nav-link" id="menulink">|</li>
 			<li class="nav-item"><a class="nav-link mx-2" id="menulink" href="/recommend/editor/list">에디터</a></li>
 			<li class="nav-item nav-link" id="menulink">|</li>
-			<li class="nav-item"><a class="nav-link mx-2" id="menulink" href="/recommend/editor/list">에디터</a></li>
-			<li class="nav-item nav-link" id="menulink">|</li>
 			<li class="nav-item"><a class="nav-link mx-2" id="menulink" href="/managers/review/list">관리자</a></li>
 		</ul>
 		<!-- 우측 메뉴 -->
