@@ -9,7 +9,7 @@
 		<result property="auth" column="auth" />
 	</resultMap>
 
-	<resultMap id="memberMap"  type="com.nurikiri.domain.MemberVO">
+	<resultMap id="memberMap" type="com.nurikiri.domain.MemberVO">
 		<id property="username" column="username" />
 		<result property="username" column="username" />
 		<result property="password" column="password" />
@@ -22,24 +22,36 @@
 		<result property="regDate" column="reg_date" />
 		<result property="updateDate" column="update_date" />
 		<collection property="authList" resultMap="authMap" />
-	</resultMap>	
-	
+	</resultMap>
+
 	<select id="read" resultMap="memberMap">
-		select m.username, password, name, jumin, email, phone1, phone2, phone3, reg_date, update_date, auth
-		from member m left outer join member_auth a
-			on m.username = a.username
-		where m.username = #{username}	
+		select m.username, password, name,
+		jumin, email, phone1, phone2, phone3, reg_date, update_date, auth
+		from
+		member m left outer join member_auth a
+		on m.username = a.username
+		where m.username = #{username}
 	</select>
 
 
 	<insert id="insert">
-		insert into member(username, password, name, jumin, email, phone1, phone2, phone3)
-		values(#{username}, #{password}, #{name}, #{jumin}, #{email}, #{phone1}, #{phone2}, #{phone3})
+		insert into member(username, password, name, jumin,
+		email, phone1, phone2, phone3)
+		values(#{username}, #{password},
+		#{name}, #{jumin}, #{email}, #{phone1}, #{phone2}, #{phone3})
 	</insert>
-	
+
 
 	<insert id="insertAuth">
 		insert into member_auth(username, auth)
 		values(#{username}, #{auth})
-	</insert>	
+	</insert>
+
+	<update id="updateInf">
+		update member_auth
+		set password = #{encPassword}
+		set name = #{name}
+		set email = #{email}
+		where username = #{username}
+	</update>
 </mapper>

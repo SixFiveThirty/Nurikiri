@@ -31,10 +31,27 @@
 	display: flex;
 }
 
-.user-space li {
+.user-space .nav-item{
 	list-style:none;
-	background-color: #FEC25E;
 	border-radius: 3px;
+}
+
+.user-space .logout{
+		background-color : #FEC25E;
+}
+
+.user-space .login{
+		background-color : #D9D9D9;
+}
+
+.user-space .login a{
+		color: #000000;
+		font-weight: 700;
+}
+
+.user-space .photo a{
+	color: #000000;
+	font-weight: 700;
 }
 
 .user-space a {

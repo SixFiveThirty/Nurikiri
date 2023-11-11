@@ -17,7 +17,7 @@ public class Criteria {
 
 
 	public Criteria() {
-		this(1, 9);
+		this(1, 10);
 	}
 
     public Criteria(int pageNum) {
@@ -70,4 +70,8 @@ public class Criteria {
     public String getLinkWithSno(String base, Long sno) {
         return getLink(base, pageNum) + "&sno=" + sno;
     }
+    
+    public String getLinkWithEno(String base, Long eno) {
+		return getLink(base, pageNum) + "&eno=" + eno;
+	}
 }

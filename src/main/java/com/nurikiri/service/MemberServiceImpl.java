@@ -1,10 +1,13 @@
 package com.nurikiri.service;
+
 import java.io.File;
 import java.io.IOException;
 
 import com.nurikiri.mapper.MemberMapper;
 
 import com.nurikiri.domain.AuthVO;
+
+import com.nurikiri.domain.UpdateInfVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,9 +22,9 @@ import net.coobird.thumbnailator.Thumbnails;
 @Service
 @Log4j
 public class MemberServiceImpl implements MemberService {
-	
+
 	public static final String AVATAR_UPLOAD_DIR = "c:/upload/avatar";
-	
+
 	@Autowired
 	MemberMapper mapper;
 
@@ -35,29 +38,56 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void register(MemberVO member, MultipartFile avatar) throws IOException {
-		//1. 비밀번호 암호화
+		// 1. 비밀번호 암호화
 		String encPassword = pwEncoder.encode(member.getPassword());
 		member.setPassword(encPassword);
-	
-		//2. tbl_member에 저장
+
+		// 2. member에 저장
 		mapper.insert(member);
-	
-		//3. tbl_member_auth에 저장
-		AuthVO auth = new AuthVO(member.getUsername(),
-												"ROLE_USER");
-		mapper.insertAuth(auth); //권한부여한거 등록
-		
-		//4. avatar 이미지 저장
-		if(!avatar.isEmpty()) {
+
+		// 3. member_auth에 저장
+		AuthVO auth = new AuthVO(member.getUsername(), "ROLE_USER");
+		mapper.insertAuth(auth); // 권한부여한거 등록
+
+		// 4. avatar 이미지 저장
+		if (!avatar.isEmpty()) {
 			File dest = new File(AVATAR_UPLOAD_DIR, member.getUsername() + ".png");
-			
-			Thumbnails.of(avatar.getInputStream())
-			.size(50, 50)
-			.toFile(dest);
-			
+
+			Thumbnails.of(avatar.getInputStream()).size(50, 50).toFile(dest);
+
 		}
-		
+
 	}
-	
-	
+
+	@Override
+	public boolean updateInf(UpdateInfVO vo) {
+		MemberVO member = mapper.read(vo.getUsername());
+
+		if (!pwEncoder.matches(vo.getOrgPassword(), member.getPassword())) {
+			return false;
+		}
+
+		String encPassword = pwEncoder.encode(vo.getNewPassword());
+		vo.setEncPassword(encPassword);
+		vo.setNewName(vo.getNewName());
+		vo.setNewEmail(vo.getNewEmail());
+		mapper.updateInf(vo);
+
+		return true;
+	}
+
+	   @Override
+	    public UpdateInfVO getUpdateInf(String username) {
+	        MemberVO member = get(username); // 기존의 get 메서드 활용
+	        UpdateInfVO updateInfVO = convertMemberToUpdateInf(member);
+	        log.warn(updateInfVO);
+	        return updateInfVO;
+	    }
+
+	   private UpdateInfVO convertMemberToUpdateInf(MemberVO member) {
+	        UpdateInfVO updateInfVO = new UpdateInfVO();
+	        updateInfVO.setUsername(member.getUsername());
+	        log.warn(updateInfVO);
+	        return updateInfVO;
+	    }
 }

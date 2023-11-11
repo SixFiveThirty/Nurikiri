@@ -45,12 +45,12 @@
 		</div>
 		<div class="card ml-5 p-5">
 			<p>상호명 : ${store.title }</p>
-			<p>소속 시장 :</p>
+			<p>소속 시장 : ${store.market}</p>
 			<p>주소 : ${store.address }</p>
-			<p>취급품목 :</p>
-			<p>충전식 카드 여부 :</p>
-			<p>지류 취급여부 :</p>
-			<p>모바일 취급여부 :</p>
+			<p>취급품목 : ${store.item }</p>
+			<p>충전식 카드 여부 : ${store.useRechargeCard }</p>
+			<p>지류 취급여부 : ${store.useBill }</p>
+			<p>모바일 취급여부 : ${store.useMobile }</p>
 			<p>등록년도 : ${store.regDate}</p>
 		</div>
 	</div>
@@ -67,7 +67,7 @@
 		<button type="button" class="btn btn-light mr-5" style="width: 200px"
 			onclick="location.href='${cri.getLink('modify')}&sno=${store.sno}'">수정</button>
 		<button type="button" class="btn btn-light" style="width: 200px"
-			onclick="location.href='/store/list'">목록</button>
+			onclick="location.href='${cri.getLink('list')}'">목록</button>
 	</div>
 </div>
 
