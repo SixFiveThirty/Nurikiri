@@ -69,8 +69,25 @@ public class MemberServiceImpl implements MemberService {
 
 		String encPassword = pwEncoder.encode(vo.getNewPassword());
 		vo.setEncPassword(encPassword);
+		vo.setNewName(vo.getNewName());
+		vo.setNewEmail(vo.getNewEmail());
 		mapper.updateInf(vo);
 
 		return true;
 	}
+
+	   @Override
+	    public UpdateInfVO getUpdateInf(String username) {
+	        MemberVO member = get(username); // 기존의 get 메서드 활용
+	        UpdateInfVO updateInfVO = convertMemberToUpdateInf(member);
+	        log.warn(updateInfVO);
+	        return updateInfVO;
+	    }
+
+	   private UpdateInfVO convertMemberToUpdateInf(MemberVO member) {
+	        UpdateInfVO updateInfVO = new UpdateInfVO();
+	        updateInfVO.setUsername(member.getUsername());
+	        log.warn(updateInfVO);
+	        return updateInfVO;
+	    }
 }

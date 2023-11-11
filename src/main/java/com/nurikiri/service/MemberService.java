@@ -15,4 +15,6 @@ public interface MemberService {
 	public void register(MemberVO member, MultipartFile avatar) throws IOException;
 	
 	public boolean updateInf(UpdateInfVO vo);
+	
+	public UpdateInfVO getUpdateInf(String username);
 }
