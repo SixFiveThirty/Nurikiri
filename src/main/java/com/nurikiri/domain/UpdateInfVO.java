@@ -21,5 +21,11 @@ public class UpdateInfVO {
 	@NotBlank(message= "필수 항목 입니다.")
 	private String newPassword2;
 	
+	@NotBlank(message= "필수 항목 입니다.")
+	private String newName;
+	
+	@NotBlank(message= "필수 항목 입니다.")
+	private String newEmail;
+	
 	private String encPassword;
 }
