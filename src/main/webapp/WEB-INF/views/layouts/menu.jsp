@@ -25,7 +25,7 @@
 				가맹점 찾기
 			</a></li>
 			<li class="nav-item nav-link" id="menulink">|</li>
-			<li class="nav-item"><a class="nav-link mx-2" id="menulink" href="/store/test">서비스 소개</a></li>
+			<li class="nav-item"><a class="nav-link mx-2" id="menulink" href="#">서비스 소개</a></li>
 			<li class="nav-item nav-link" id="menulink">|</li>
 			<li class="nav-item"><a class="nav-link mx-2" id="menulink" href="/recommend/editor/list">에디터</a></li>
 			<li class="nav-item nav-link" id="menulink">|</li>

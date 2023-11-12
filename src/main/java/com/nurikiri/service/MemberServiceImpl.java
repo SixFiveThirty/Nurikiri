@@ -76,6 +76,7 @@ public class MemberServiceImpl implements MemberService {
 		return true;
 	}
 
+		//약간 수정이 필요함. 일단 알고있는대로 코드 짤 것.
 	   @Override
 	    public UpdateInfVO getUpdateInf(String username) {
 	        MemberVO member = get(username); // 기존의 get 메서드 활용

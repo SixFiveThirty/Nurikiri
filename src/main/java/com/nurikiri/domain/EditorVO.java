@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 
+import com.nurikiri.domain.kakaomap.Local;
+
 import lombok.Data;
 
 @Data
@@ -20,9 +22,22 @@ public class EditorVO {
 	@NotBlank(message="작성자는 필수 항목입니다.")
 	private String writer;
 	
+	//가맹점명
+	@NotBlank(message="가맹점명은 필수 항목입니다.")
+	private String storeName;
+	
+	//소재지
+	@NotBlank(message="소재지는 필수 항목입니다.")
+	private String address;
+	
+	//전화번호
+	private String phone;
+	
 	List<EditorAttachmentVO> attaches;
 	
 	private Date regDate;
 	
 	private Date updateDate;
+	
+	List<Local> locals;
 }
