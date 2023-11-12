@@ -71,6 +71,20 @@
 				<form:textarea path="content" cssClass="form-control"></form:textarea>
 				<form:errors path="content" cssClass="error"/>
 			</div>
+			<div class="form-group">
+				<form:label path="storeName">가맹점 이름</form:label>
+				<form:input path="storeName" cssClass="form-control"/>
+				<form:errors path="storeName" cssClass="error"/>
+			</div>
+			<div class="form-group">
+				<form:label path="address">소재지</form:label>
+				<form:input path="address" cssClass="form-control"/>
+				<form:errors path="address" cssClass="error"/>
+			</div>
+			<div class="form-group">
+				<form:label path="phone">연락처</form:label>
+				<form:input path="phone" cssClass="form-control"/>
+			</div>
 			<button type="submit" class="btn btn-primary">
 				<i class="fas fa-check"></i> 확인
 			</button>
