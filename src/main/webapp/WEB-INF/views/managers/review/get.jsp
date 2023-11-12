@@ -38,28 +38,15 @@
 		<div class="card">
 			<img src="..." class="card-img-top" alt="..." />
 		</div>
-		<div class="card ml-5 p-5">
-			<p>상호명 :</p>
-			<p>운영시간 :</p>
-			<p>휴무일 :</p>
-			<p>주소 :</p>
-			<p>연락처 :</p>
-			<button type="button" class="btn btn-light btn-details">가맹점 상세보기</button>
-		</div>
 	</div>
 	<div class="mid-div mt-5">
 		<div class="card">
-			<p>설명</p>
+			<p>내용</p>
 		</div>
-	</div>
-	<div class="bottom-div mt-5">
-		<div class="card">
-			<p>지도</p>
-		</div>
-	</div>
+	
 	<div class="foot-div mt-5">
-		<button type="button" class="btn btn-light mr-5" style="width: 200px" onclick="location.href='modify'">수정</button>
-		<button type="button" class="btn btn-light" style="width: 200px" onclick="location.href='/'">목록</button>
+		<button type="button" class="btn btn-light mr-5" style="width: 200px" onclick="location.href='modify'">삭제</button>
+		<button type="button" class="btn btn-light" style="width: 200px" onclick="location.href='lsit'">목록</button>
 	</div>
 </div>
 
