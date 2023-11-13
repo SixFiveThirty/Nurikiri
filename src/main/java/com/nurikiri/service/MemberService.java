@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import com.nurikiri.domain.MemberVO;
 
-import com.nurikiri.domain.UpdateInfVO;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -14,7 +13,6 @@ public interface MemberService {
 	
 	public void register(MemberVO member, MultipartFile avatar) throws IOException;
 	
-	public boolean updateInf(UpdateInfVO vo);
+	public void modify(MemberVO member) throws IOException;
 	
-	public UpdateInfVO getUpdateInf(String username);
 }
