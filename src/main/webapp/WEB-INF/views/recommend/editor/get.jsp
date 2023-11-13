@@ -121,14 +121,12 @@
 		</div>
 	</div>
 	<div class="mid-div mt-5">
-		<div class="card">
+		<div class="card p-5">
 			<p>${editor.content}</p>
 		</div>
 	</div>
 	<div class="bottom-div mt-5">
-		<div class="card">
-			<p>지도</p>
-		</div>
+		<div class="card" id="map"></div>
 	</div>
 	<div class="foot-div mt-5">
 		<a href="${cri.getLinkWithEno('modify', editor.eno)}"><button
@@ -141,13 +139,35 @@
 </div>
 
 <form action="remove" method="post" name="removeForm">
-	<input type="hidden" name="${_csrf.parameterName}"
-		value="${_csrf.token}" /> <input type="hidden" name="eno"
-		value="${editor.eno}" /> <input type="hidden" name="pageNum"
-		value="${cri.pageNum}" /> <input type="hidden" name="amount"
-		value="${cri.amount}" /> <input type="hidden" name="type"
-		value="${cri.type}" /> <input type="hidden" name="keyword"
-		value="${cri.keyword}" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="eno" value="${editor.eno}" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
 </form>
 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47527c077dd44e34b71ffb876f21b3cc&libraries=services"></script>
+<script>
+let getcoder = new kakao.maps.services.Geocoder();
+
+let locals =[
+	<c:forEach var="local" items="${editor.locals}">
+		{
+			name: '${local.storeName}',
+			coords: new kakao.maps.LatLng(${local.y}, ${local.x})
+		}
+	</c:forEach>
+];
+
+let address = '${editor.address}';
+
+let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+let options = { //지도를 생성할 때 필요한 기본 옵션
+	center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+	level: 3 //지도의 레벨(확대, 축소 정도)
+};
+
+let map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+</script>
 <%@ include file="../../layouts/footer.jsp"%>
