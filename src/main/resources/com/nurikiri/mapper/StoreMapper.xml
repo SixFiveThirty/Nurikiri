@@ -71,4 +71,21 @@
 		#{sno}
 	</update>
 
+	<sql id="criteria">
+		<trim prefixOverrides="OR">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like CONCAT('%', #{keyword}, '%') </when>
+						<when test="type == 'C'.toString()">
+							content like CONCAT('%', #{keyword}, '%') </when>
+						<when test="type == 'O'.toString()">
+							owner like CONCAT('%', #{keyword}, '%') </when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
 </mapper>
