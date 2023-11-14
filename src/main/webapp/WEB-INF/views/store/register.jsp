@@ -50,7 +50,6 @@
 	<div class="panel-body">
 
 		<form:form role="form" modelAttribute="store">
-			<input type="hidden" name="sno" value="${store.sno}">
 
 			<div class="form-group">
 				<form:label path="title">가맹점명</form:label>

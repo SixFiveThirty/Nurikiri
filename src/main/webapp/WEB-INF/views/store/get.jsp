@@ -72,9 +72,12 @@
 </div>
 
 <h1>리뷰 목록</h1>
+<button type= "button" class="btn btn-light mr-5" style="width: 200px">리뷰 등록</button>
 
-	<div class="review">리뷰 서비스 조금만 기다려주세요...</div>
-</div>
+
+
+<div class="review">리뷰 서비스 조금만 기다려주세요...</div>
+
 
 
 
