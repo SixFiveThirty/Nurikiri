@@ -5,6 +5,8 @@
 
 <%@ include file="../../layouts/header.jsp"%>
 
+<h1>리뷰 관리</h1>
+
 <div class="container">
 	<table class="table table-striped table-hover">
 	<thead>
@@ -21,7 +23,7 @@
 				<td style="text-align:center; width: 60px;">${review.rno}</td>
 				<td style="text-align:center;">
 					<a href="get?rno=${review.rno}">
-						${review.title}
+						${review.content}
 					</a>
 				</td>
 				<td style="text-align:center; width: 100px;">
