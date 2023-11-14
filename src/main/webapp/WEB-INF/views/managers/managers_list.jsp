@@ -4,36 +4,43 @@
 
 <%@ include file="../layouts/header.jsp"%>
 <script src="/resources/js/rest.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js">
+	
+</script>
 <script src="/resources/js/comment.js"></script>
 <script src="/resources/js/reply.js"></script>
 <style>
-	.card {
+.card {
 	border-color: #c3cad1;
-	text-align: center;
-	width: 100px;
+	width: 600px;
+	height: 400%;
+	margin:0 auto;
+	
 }
 </style>
 <h1>관리자</h1>
 <div class="container">
-	<table class="table table-striped table-hover">
-	
-		<tbody>
-			<div class="top-div mt-5">
-			<div class="card">
-				<a href="user/list" class="btn btn-primary"> <i class="fa-solid fa-user"></i> 회원 관리
-				</a>			
-				<a href="store/list" class="btn btn-primary"> <i class="fa-solid fa-store"></i> 가맹점 관리
-				</a>	
-				<a href="review/list" class="btn btn-primary"> <i class="fa-solid fa-feather-pointed"></i> 추천페이지 관리
-				</a>		
-				<a href="review/list" class="btn btn-primary"> <i class="fa-solid fa-feather-pointed"></i> 리뷰 관리
-				</a>
-			</div>
-			</div>
-		</tbody>
-	</table>
+
+	<div class="top-div mt-5">
+		<div class="card">
+			<a href="user/list" class="btn btn-primary"> <i class="fa-solid fa-user"></i> 회원 관리
+			</a>
+		</div>
+
+		<div class="card">
+			<a href="store/list" class="btn btn-primary"> <i class="fa-solid fa-store"></i> 가맹점 관리
+			</a>
+		</div>
+		<div class="card">
+			<a href="review/list" class="btn btn-primary"> <i class="fa-solid fa-feather-pointed"></i> 추천페이지 관리
+			</a>
+		</div>
+		<div class="card">
+			<a href="review/list" class="btn btn-primary"> <i class="fa-solid fa-comment"></i></i> 리뷰 관리
+			</a>
+		</div>
+	</div>
+
 </div>
 
 <%@ include file="../layouts/footer.jsp"%>
