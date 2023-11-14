@@ -2,7 +2,6 @@ package com.nurikiri.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.Principal;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -10,10 +9,9 @@ import javax.validation.Valid;
 import com.nurikiri.domain.MemberVO;
 
 import com.nurikiri.service.MemberServiceImpl;
-import com.nurikiri.domain.UpdateInfVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nurikiri.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
 
 @Log4j
@@ -35,6 +34,9 @@ public class SecurityController {
 
 	@Autowired
 	private MemberService service;
+	
+	@Autowired
+    private BCryptPasswordEncoder pwEncoder;
 
 	@GetMapping("/login")
 	public void login() {
@@ -52,9 +54,9 @@ public class SecurityController {
 		log.info(member);
 
 		// 1. 비밀번호, 비밀번호 확인 일치 여부
-		if (!member.getPassword().equals(member.getPassword2())) {
+		if (!member.getPassword().equals(member.getConfirmedPassword())) {
 			// 에러 추가
-			errors.rejectValue("password2", "비밀번호 불일치", "비밀번호가 일치하지 않습니다."); // reject와 rejectValue의 차이? reject는 전역에러
+			errors.rejectValue("confirmedPassword", "비밀번호 불일치", "비밀번호가 일치하지 않습니다."); // reject와 rejectValue의 차이? reject는 전역에러
 																				// 설정, 특정 필드에 대해서 에러 추가는 rejectValue
 		}
 
@@ -98,34 +100,33 @@ public class SecurityController {
 
 	@GetMapping("/profile")
 	public void profile() {
-
-	}
-
-	@GetMapping("/update")
-	public String update(Model model, Principal principal) {
-		String username = principal.getName();
-	    UpdateInfVO vo = service.getUpdateInf(username); // username을 이용해 UpdateInfVO 가져오기
-	    model.addAttribute("updateInfVO", vo);
-	    
-	    return "security/update"; // 해당 JSP 페이지로 이동
-	}
-
-	@PostMapping("/update")
-	public String postUpdate(@Valid @ModelAttribute("updateInfVO") UpdateInfVO vo, Errors errors) {
-		log.warn(vo);
-				if (!vo.getNewPassword().equals(vo.getNewPassword2())) {
-					errors.rejectValue("newPassword2", "비밀번호 불일치", "비밀번호 확인이 일치하지 않습니다.");
-					return "security/update";
-				}
-
-				if (!service.updateInf(vo)) {
-					errors.rejectValue("orgPassword", "이전 비밀번호 불일치", "이전 비밀번호가 일치하지 않습니다.");
-				}
-
-				if (errors.hasErrors()) {
-					return "security/update";
-				}
-				return "redirect:/security/profile";
 		
+	}
+	
+	@GetMapping("/modify")
+	public void modify(@ModelAttribute("member") MemberVO member) {
+		
+	}
+	
+	
+	@PostMapping("/modify")
+	public String modify(@Valid @ModelAttribute("member") MemberVO member, Errors errors) throws IOException {
+				
+				if (!member.getPassword().equals(member.getConfirmedPassword())) {
+					log.warn("비밀번호 불일치 에러");
+					errors.rejectValue("confirmedPassword", "비밀번호 불일치", "비밀번호 확인이 일치하지 않습니다.");
+				}
+
+//				if (errors.hasErrors()) {
+//					log.warn("에러문구");
+//					return "security/modify";
+//				}				
+				
+				
+				
+			    service.modify(member);
+			    log.warn("service.modify 작동 확인");
+				
+				return "redirect:/security/profile";
 	}
 }
