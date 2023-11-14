@@ -43,7 +43,7 @@
 		<div class="card">
 			<p>내용</p>
 		</div>
-	
+	</div>
 	<div class="foot-div mt-5">
 		<button type="button" class="btn btn-light mr-5" style="width: 200px" onclick="location.href='modify'">삭제</button>
 		<button type="button" class="btn btn-light" style="width: 200px" onclick="location.href='lsit'">목록</button>

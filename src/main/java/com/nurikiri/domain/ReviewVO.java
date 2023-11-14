@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class ReviewVO {
 	private Long rno;
-	private Long sno;	// Q.가맹점VO 생기면 지워야하나?
+	private Long sno;
 		
 	@NotBlank(message="내용은 필수 항목입니다.")
 	private String content;

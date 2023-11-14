@@ -12,7 +12,7 @@
 	<thead>
 		<tr>
 			<th style="text-align:center; width: 60px;">No</th>
-			<th style="text-align:center;">제목</th>
+			<th style="text-align:center;">내용</th>
 			<th style="text-align:center; width: 100px;">작성자</th>
 			<th style="text-align:center; width: 100px;">작성일자</th>
 		</tr>
