@@ -16,9 +16,9 @@ h1 {
 }
 
 .btn-group .btn {
+	flex: none;
 	background-color: #FEC25E;
 	border-radius: 3px;
-	margin: 0 auto;
 	padding: 0;
 	width: 215px;
 	height: 50px;
@@ -28,6 +28,11 @@ h1 {
 	display: flex;
 	justify-content: space-between;
 }
+
+  .btn-container {
+    display: flex;
+    align-items: center;
+  }
 </style>
 
 <h1>로그인</h1>
@@ -60,12 +65,16 @@ h1 {
 		</div>
 
 		<div class="btn-group">
-			<button type="submit" class="btn btn-block">로그인</button>
+			<div class="btn-container">
+				<button type="submit" class="btn btn-block">로그인</button>
+			</div>
 
-			<button type="button" onclick="location.href='signup'" class="btn btn-block">회원가입</button>
+			<div class="btn-container">
+				<button type="button" onclick="location.href='signup'"
+					class="btn btn-block">회원가입</button>
+			</div>
 		</div>
 	</div>
-
 </form>
 
 <%@ include file="../layouts/footer.jsp"%>

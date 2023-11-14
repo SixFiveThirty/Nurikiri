@@ -66,7 +66,7 @@
 
 			<div class="card mx-5" style="width: 18rem;">
 				<a class="store-link" href="${cri.getLink('get')}&sno=${store.sno}">
-					<img src="..." class="card-img-top" alt="사진 서비스 조금만 기다려주세요..." />
+					<img src="..." class="card-img-top" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">${store.title}</p>
@@ -77,11 +77,6 @@
 	</c:forEach>
 </div>
 
-<div class="foot-div mt-5">
-	<button type="submit" class="btn btn-light mr-5" style="width: 200px"
-		onclick="location.href='${cri.getLink('register')}&sno=${store.sno}'">가맹점 등록</button>
-</div>
-
-<%@ include file="../common/pagenation.jsp"%>
+<%@ include file="../common/pagination.jsp"%>
 
 <%@ include file="../layouts/footer.jsp"%>

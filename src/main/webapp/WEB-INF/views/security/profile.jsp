@@ -9,31 +9,73 @@
 
 <%-- 개별 페이지 --%>
 <style>
-.profile .set {
+.profile {
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
+	align-items: center;
+}
+
+.profile_title {
+	margin-top: 20px;
 }
 
 .inf {
-	width: 1046px;
+	width: 800px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 20px;
+	
 }
 
 .profile_inf {
-	justify-content: space-between
+	width: 90%;
+	display : flex;
+	margin: 0 auto;
+	flex-direction: row; 
+	display: flex;
+	margin-bottom: 20px;
 }
 
-.photo img{
-	width:24px;
-	height:24px;
+.box1 {
+	display: flex;
 }
 
-.menu{
-	width:490px;
-	height:101px;
-	}
+.profile_inf .photo img {
+	margin-left: 40px;
+	width: 250px;
+	height: 250px;
+}
 
-tr {
-	display: table-row;
+.profile_inf .sebu_inf{
+	margin-left: 160px;
+	display:flex;
+	align-items: center;
+}
+
+.menubox {
+	width: 800px;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+	margin: 0 auto;
+}
+
+.menu {
+	display: flex;
+	margin: 0 auto;
+	width: 250px;
+	height: 80px;
+	background-color:#D9D9D9;
+	text-align: center;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.menu a {
+	color : #000000;
+	margin: 0 auto;
+	width: 100%;
 }
 </style>
 
@@ -46,14 +88,13 @@ tr {
 		<div class="profile_title">
 			<h1>프로필</h1>
 		</div>
-
-		<div class="profile_inf">
-			<div class="box1 set">
+		<div class="container">
+			<div class="profile_inf">
 				<div class="photo">
 					<img src="/security/avatar/lg/${member.username}" />
 				</div>
 
-				<div class="inf">
+				<div class="sebu_inf">
 					<table>
 						<tr>
 							<th>아이디</th>
@@ -65,7 +106,7 @@ tr {
 						</tr>
 						<tr>
 							<th>휴대폰 번호</th>
-							<td>${member.phone1} - ${member.phone2} - ${member.phone3}</td>
+							<td>${member.phone1}- ${member.phone2} - ${member.phone3}</td>
 						</tr>
 						<tr>
 							<th>이메일</th>
@@ -76,14 +117,14 @@ tr {
 				</div>
 
 			</div>
-		</div>
 
-		<div class="menubox set">
-			<div class="menu update">
-				<a href="/security/update">회원 정보 수정</a>
-			</div>
-			<div class="menu mypage">
-				<a href="/security/mypage">마이 페이지</a>
+			<div class="menubox set">
+				<div class="menu update">
+					<a href="/security/modify?username=${member.username}" >회원 정보 수정</a>
+				</div>
+				<div class="menu mypage">
+					<a href="/security/mypage">마이 페이지</a>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -47,11 +47,15 @@
 		values(#{username}, #{auth})
 	</insert>
 
-	<update id="updateInf">
-		update member_auth
-		set password = #{encPassword}
-		set name = #{name}
-		set email = #{email}
+	<update id="modify">
+		update member set 
+		password = #{password},
+		name = #{name},
+		email = #{email},
+		phone1 = #{phone1},
+		phone2 = #{phone2},
+		phone3 = #{phone3},
+		update_date = now()
 		where username = #{username}
 	</update>
 </mapper>
