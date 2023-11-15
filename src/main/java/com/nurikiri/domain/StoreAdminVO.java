@@ -11,6 +11,7 @@ public class StoreAdminVO {
 	// @NotBlank(message = "필수항목입니다.")
 		
 		private Long sno;
+		//test
 		
 		@NotBlank(message = "필수항목입니다.")
 		private String title; // 가맹점명
