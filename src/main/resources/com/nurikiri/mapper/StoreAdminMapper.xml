@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.nurikiri.mapper.StoreAdminMapper">
+        <select id="storeAdminList" resultType="StoreAdminVO">
+            SELECT
+                 sno,title,market,address,item,useRechargeCard,useBill,useMobile,content,owner,phone,regDate,updateDate
+             FROM
+                  store
+        </select>
+        
+      
+</mapper>

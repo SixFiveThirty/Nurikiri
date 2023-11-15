@@ -93,9 +93,15 @@ public class MemberServiceImpl implements MemberService {
 		member.setPassword(encPassword);
 		
 		
+		
 		mapper.modify(member);
+		
+//		if (!avatar.isEmpty()) {
+//			File dest = new File(AVATAR_UPLOAD_DIR, member.getUsername() + ".png");
+//			
+//			Thumbnails.of(avatar.getInputStream()).size(250, 250).toFile(dest);
+		}
 	}
-}
 		
 		
 

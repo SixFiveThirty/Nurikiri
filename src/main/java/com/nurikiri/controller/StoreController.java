@@ -45,9 +45,9 @@ public class StoreController {
 		
 	}
 
+	
 	@GetMapping("/register")
-	public void register() {
-		log.info("get register");
+	public void register(@ModelAttribute("store") StoreVO store) {
 	}
 
 	@PostMapping("/register")

@@ -8,11 +8,6 @@
 <%-- 개별 페이지 --%>
 <style>
 
-	.form-group label {
-	 margin-bottom: 5px;
-	 display: block; 
-	}
-
 	.con{
 	width: 500px
 	}
@@ -28,15 +23,21 @@
 	.num_group{
 	display: flex;
     justify-content: space-between;
+    position: relative;
+    align-items: center;
 	}
 	
 	.num_group .form-group{
 	width: 30%; 
     margin-bottom: 20px;
+    display: inline-block;
+    box-sizing: border-box;
+    top: 50%;
 	}
 	
 	.num_group .form-group input {
     display: block;
+    margin: 0 auto;
     width: 100%;
     }
 	
@@ -48,69 +49,72 @@
 	width: 180px;
 	height: 50px;
 }
+
+	  .profile_title{
+	  margin-bottom:16px;
+	  }
+	  
+	   .avatar{
+	   margin-bottom:32px;
+	   }
 </style>
 
 <div style="width: 500px" class="mx-auto">
-
-	
 	<div class="container">
 	<br />
 			<div class="con mx-auto">
 				<h1>회원가입</h1>
-				<form:form modelAttribute="member"
+				<form:form modelAttribute="member" cssClass="form"
 					action="/security/signup?_csrf=${_csrf.token}"
 					enctype="multipart/form-data">
 				<div class="form-group">
-					<form:label path="username">아이디</form:label>
-					<form:input path="username" cssclass="form-control" />
-					<form:errors path="username" cssclass="errors" />
+					<form:label path="username" >아이디</form:label>
+					<form:input path="username" cssClass="form-control" />
+					<form:errors path="username" cssClass="errors" />
 				</div>
 				<div class="form-group">
 					<form:label path="password">비밀번호</form:label>
-					<form:input path="password" cssclass="form-control" type="password"/>
-					<form:errors path="password" cssclass="errors" />
+					<form:input path="password" cssClass="form-control" type="password"/>
+					<form:errors path="password" cssClass="errors" />
 				</div>
 				<div class="form-group">
 					<form:label path="confirmedPassword">비밀번호 재확인</form:label>
-					<form:input path="confirmedPassword" cssclass="form-control" type="password"/>
-					<form:errors path="confirmedPassword" cssclass="errors" />
+					<form:input path="confirmedPassword" cssClass="form-control" type="password"/>
+					<form:errors path="confirmedPassword" cssClass="errors" />
 				</div>
 				<div class="form-group">
 					<form:label path="name">이름</form:label>
-					<form:input path="name" cssclass="form-control" />
-					<form:errors path="name" cssclass="errors" />
+					<form:input path="name" cssClass="form-control" />
+					<form:errors path="name" cssClass="errors" />
 				</div>
 				<div class="form-group">
 					<form:label path="jumin">주민번호</form:label>
-					<form:input path="jumin" cssclass="form-control" />
-					<form:errors path="jumin" cssclass="errors" />
+					<form:input path="jumin" cssClass="form-control" />
+					<form:errors path="jumin" cssClass="errors" />
 				</div>
 				<div class="form-group">
-					<form:label path="email"> Email</form:label>
-					<form:input path="email" cssclass="form-control" />
-					<form:errors path="email" cssclass="errors" />
+					<form:label path="email">이메일</form:label>
+					<form:input path="email" cssClass="form-control" />
+					<form:errors path="email" cssClass="errors" />
 				</div>
+					<div class ="num-title">전화번호</div>
 				<div class="num_group">
 					<div class="form-group num first">
-						<form:label path="phone1">phone</form:label>
-						<form:input path="phone1" cssclass="form-control" />
-						<form:errors path="phone1" cssclass="errors" />
+						<form:input path="phone1" cssClass="form-control" />
+						<form:errors path="phone1" cssClass="errors" />
 					</div>
 					<div class="form-group num middle">
-						<form:label path="phone2"></form:label>
-						<form:input path="phone2" cssclass="form-control" />
-						<form:errors path="phone2" cssclass="errors" />
+						<form:input path="phone2" cssClass="form-control" />
+						<form:errors path="phone2" cssClass="errors" />
 					</div>
 					<div class="form-group num last">
-						<form:label path="phone3"></form:label>
-						<form:input path="phone3" cssclass="form-control" />
-						<form:errors path="phone3" cssclass="errors" />
+						<form:input path="phone3" cssClass="form-control" />
+						<form:errors path="phone3" cssClass="errors" />
 					</div>
 				</div>
 
-
-			<input type="file" name="avatar" />
-			<!-- multiple 추가하면 여러개 파일 선택 가능 -->
+			<div class="profile_title">프로필 사진 등록</div>
+			<input type="file" name="avatar" class="avatar"/>
 
 			<div class="text-center">
 				<button type="submit" class="btn">회원가입

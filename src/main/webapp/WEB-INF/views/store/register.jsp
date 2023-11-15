@@ -44,13 +44,12 @@
 }
 </style>
 
-<h1 class="page-header">가맹점 정보 수정하기</h1>
+<h1 class="page-header">가맹점 정보 등록하기</h1>
 
 <div class="panel panel-default">
 	<div class="panel-body">
 
 		<form:form role="form" modelAttribute="store">
-			<input type="hidden" name="sno" value="${store.sno}">
 
 			<div class="form-group">
 				<form:label path="title">가맹점명</form:label>
@@ -128,7 +127,7 @@
 			<div class="foot-div mt-5">
 				<button type="submit" class="btn btn-light mr-5"
 					style="width: 200px"
-					onclick="location.href='${cri.getLink('get')}&sno=${store.sno}'">확인</button>
+					onclick="location.href='${cri.getLink('list')}&sno=${store.sno}'">확인</button>
 				<button type="button" class="btn btn-light" style="width: 200px"
 					onclick="location.href='${cri.getLink('get')}&sno=${store.sno}'">취소</button>
 			</div>

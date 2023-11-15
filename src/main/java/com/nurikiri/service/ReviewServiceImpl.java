@@ -3,8 +3,8 @@ package com.nurikiri.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.ReviewVO;
 import com.nurikiri.mapper.ReviewMapper;
 
@@ -17,15 +17,6 @@ import lombok.extern.log4j.Log4j;
 public class ReviewServiceImpl implements ReviewService {
 	private ReviewMapper mapper;
 
-//	@Transactional(rollbackFor = Exception.class)
-//	@Override
-//	public void register(ReviewVO review) throws Exception {
-//		log.info("register...." + review);
-//
-//		mapper.insertSelectKey(review);
-//		Long rno = review.getRno();
-//	}
-
 	@Override
 	public ReviewVO get(Long rno) {
 		log.info("get....." + rno);
@@ -34,17 +25,6 @@ public class ReviewServiceImpl implements ReviewService {
 		return review;
 	}
 
-//	@Transactional(rollbackFor = Exception.class)
-//	@Override
-//	public boolean modify(ReviewVO review) throws Exception {
-//		log.info("modify........" + review);
-//
-//		int result = mapper.update(review);
-//		Long rno = review.getRno();
-//
-//		return result == 1;
-//	}
-
 	@Override
 	public boolean remove(Long rno) {
 		log.info("remove...." + rno);
@@ -52,9 +32,9 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<ReviewVO> getList() {
-		log.info("getList......");
-		return mapper.getList();
+	public List<ReviewVO> getList(Criteria cri) {
+		log.info("get List with citeria: " + cri);
+		return mapper.getListWithPaging(cri);
 	}
 
 }

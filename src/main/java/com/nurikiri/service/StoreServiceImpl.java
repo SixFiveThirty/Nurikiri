@@ -34,7 +34,7 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public void register(StoreVO store) {
 		log.info("register");
-		mapper.insertSelectKey(store);
+		mapper.insert(store);
 
 	}
 
