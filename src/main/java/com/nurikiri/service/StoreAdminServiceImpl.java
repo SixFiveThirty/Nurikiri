@@ -9,7 +9,6 @@ import com.nurikiri.mapper.StoreAdminMapper;
 @Service
 public class StoreAdminServiceImpl implements StoreAdminService{
 	
-	
 	@Override
 	public List<StoreAdminVO> storeAdminList() throws Exception{
 		return StoreAdminMapper.selectStoreAdminList();
