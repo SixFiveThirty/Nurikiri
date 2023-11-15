@@ -17,7 +17,7 @@ public class Criteria {
 
 
 	public Criteria() {
-		this(1, 10);
+		this(1, 9);
 	}
 
     public Criteria(int pageNum) {

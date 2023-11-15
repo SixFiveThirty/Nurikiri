@@ -41,17 +41,17 @@
 	<h3>${store.title}</h3>
 	<div class="top-div mt-5">
 		<div class="card">
-			<img src="..." class="card-img-top" alt="..." />
+			<img src="..." class="card-img-top" alt="사진 서비스 조금만 기다려주세요..." />
 		</div>
 		<div class="card ml-5 p-5">
-			<p>상호명 : ${store.title }</p>
-			<p>소속 시장 : ${store.market}</p>
-			<p>주소 : ${store.address }</p>
-			<p>취급품목 : ${store.item }</p>
-			<p>충전식 카드 여부 : ${store.useRechargeCard }</p>
-			<p>지류 취급여부 : ${store.useBill }</p>
-			<p>모바일 취급여부 : ${store.useMobile }</p>
-			<p>등록년도 : ${store.regDate}</p>
+			<p>상호명: ${store.title }</p>
+			<p>소속 시장: ${store.market}</p>
+			<p>주소: ${store.address }</p>
+			<p>취급품목: ${store.item }</p>
+			<p>충전식 카드 여부: ${store.useRechargeCard}</p>
+			<p>지류 취급여부: ${store.useBill }</p>
+			<p>모바일 취급여부: ${store.useMobile }</p>
+			<p>등록년도: <fmt:formatDate value="${store.regDate}" pattern="yyyy년"/></p>
 		</div>
 	</div>
 	<div class="mid-div mt-5">
@@ -60,7 +60,7 @@
 	</div>
 	<div class="bottom-div mt-5">
 		<div class="card">
-			<p>지도</p>
+			<p>지도 서비스 조금만 기다려주세요...</p>
 		</div>
 	</div>
 	<div class="foot-div mt-5">
@@ -72,9 +72,12 @@
 </div>
 
 <h1>리뷰 목록</h1>
+<button type= "button" class="btn btn-light mr-5" style="width: 200px">리뷰 등록</button>
 
-	<div class="review">리뷰1</div>
-</div>
+
+
+<div class="review">리뷰 서비스 조금만 기다려주세요...</div>
+
 
 
 

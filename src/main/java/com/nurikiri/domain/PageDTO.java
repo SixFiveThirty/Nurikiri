@@ -20,8 +20,8 @@ public class PageDTO {
 		int page = cri.getPageNum();
 
 		totalPage = (int) (Math.ceil((float) total / amount));
-		endPage = (int) (Math.ceil(page / (double) amount)) * amount;
-		startPage = endPage - (amount - 1);
+		endPage = (int) (Math.ceil((float)page / 10)) * 10;
+		startPage = endPage - (10 - 1);
 
 		int realEnd = (int) (Math.ceil((total * 1.0) / amount));
 		if (realEnd < this.endPage) {
