@@ -42,7 +42,7 @@
 </script>
 <br>
 <h1 class="page-header">
-	<i class="far fa-edit"></i> Editor Register
+	<i class="far fa-edit"></i> 가맹점 신규 등록 페이지
 </h1>
 
 <div class="panel panel-default">
@@ -53,11 +53,11 @@
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			
 			<!-- method가 default로 post -->
-			<form:hidden path="eno"/>
+			<form:hidden path="sno"/>
 			<form:hidden path="writer" value="${username}"/>
 			
 			<div class="form-group">
-				<form:label path="title">제목</form:label>
+				<form:label path="title">가맹점명</form:label>
 				<form:input path="title" cssClass="form-control"/>
 				<form:errors path="title" cssClass="error"/>
 			</div>
@@ -67,23 +67,37 @@
 				<input type="file" class="form-control" multiple name="files"/>
 			</div>
 			<div class="form-group">
-				<form:label path="content">내용</form:label>
-				<form:textarea path="content" cssClass="form-control"></form:textarea>
-				<form:errors path="content" cssClass="error"/>
+				<form:label path="market">소속 시장</form:label>
+				<form:input path="market" cssClass="form-control"/>
+				<form:errors path="market" cssClass="error"/>
 			</div>
 			<div class="form-group">
-				<form:label path="storeName">가맹점 이름</form:label>
-				<form:input path="storeName" cssClass="form-control"/>
-				<form:errors path="storeName" cssClass="error"/>
-			</div>
-			<div class="form-group">
-				<form:label path="address">소재지</form:label>
+				<form:label path="address">주소</form:label>
 				<form:input path="address" cssClass="form-control"/>
 				<form:errors path="address" cssClass="error"/>
 			</div>
 			<div class="form-group">
-				<form:label path="phone">연락처</form:label>
-				<form:input path="phone" cssClass="form-control"/>
+				<form:label path="item">취급 품목</form:label>
+				<form:input path="item" cssClass="form-control"/>
+				<form:errors path="item" cssClass="error"/>
+			</div>
+			<div class="form-group">
+				<label for='mb_1'><input name="mb" type="checkbox" value="useRechargeCard" id ="useRechargeCard" required> 충전식카드 가능</label>
+				<label for='mb_2'><input name="mb" type="checkbox" value="useBill" id ="useBill" required> 지류 가능</label>
+				<label for='mb_3'><input name="mb" type="checkbox" value="useMobile" id ="useMobile" required> 모바일 온누리 가능</label>
+				<input type="button" value="클릭" onclick="trueCheck()">
+				<script>
+				function trueCheck() {
+				    count = 0;
+				    for (i of document.getElementsByName("mb")) count += i.checked;
+				    if (count == 0) alert("하나이상 필수선택");
+				}
+				</script>
+			</div>
+			<div class="form-group">
+				<form:label path="content">내용</form:label>
+				<form:textarea path="content" cssClass="form-control"></form:textarea>
+				<form:errors path="content" cssClass="error"/>
 			</div>
 			<button type="submit" class="btn btn-primary">
 				<i class="fas fa-check"></i> 확인

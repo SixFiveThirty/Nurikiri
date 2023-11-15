@@ -17,15 +17,14 @@ import lombok.extern.log4j.Log4j;
 public class ReviewServiceImpl implements ReviewService {
 	private ReviewMapper mapper;
 
-	@Transactional(rollbackFor = Exception.class)
-	@Override
-	public void register(ReviewVO review) throws Exception {
-		log.info("register...." + review);
-
-		mapper.insertSelectKey(review);
-		Long rno = review.getRno();
-
-	}
+//	@Transactional(rollbackFor = Exception.class)
+//	@Override
+//	public void register(ReviewVO review) throws Exception {
+//		log.info("register...." + review);
+//
+//		mapper.insertSelectKey(review);
+//		Long rno = review.getRno();
+//	}
 
 	@Override
 	public ReviewVO get(Long rno) {
@@ -35,16 +34,16 @@ public class ReviewServiceImpl implements ReviewService {
 		return review;
 	}
 
-	@Transactional(rollbackFor = Exception.class)
-	@Override
-	public boolean modify(ReviewVO review) throws Exception {
-		log.info("modify........" + review);
-
-		int result = mapper.update(review);
-		Long rno = review.getRno();
-
-		return result == 1;
-	}
+//	@Transactional(rollbackFor = Exception.class)
+//	@Override
+//	public boolean modify(ReviewVO review) throws Exception {
+//		log.info("modify........" + review);
+//
+//		int result = mapper.update(review);
+//		Long rno = review.getRno();
+//
+//		return result == 1;
+//	}
 
 	@Override
 	public boolean remove(Long rno) {

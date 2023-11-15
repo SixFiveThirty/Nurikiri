@@ -5,12 +5,14 @@
 
 <%@ include file="../../layouts/header.jsp"%>
 
+<h1>리뷰 관리</h1>
+
 <div class="container">
 	<table class="table table-striped table-hover">
 	<thead>
 		<tr>
 			<th style="text-align:center; width: 60px;">No</th>
-			<th style="text-align:center;">제목</th>
+			<th style="text-align:center;">내용</th>
 			<th style="text-align:center; width: 100px;">작성자</th>
 			<th style="text-align:center; width: 100px;">작성일자</th>
 		</tr>
@@ -21,7 +23,7 @@
 				<td style="text-align:center; width: 60px;">${review.rno}</td>
 				<td style="text-align:center;">
 					<a href="get?rno=${review.rno}">
-						${review.title}
+						${review.content}
 					</a>
 				</td>
 				<td style="text-align:center; width: 100px;">
