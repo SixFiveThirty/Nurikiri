@@ -26,7 +26,7 @@
 				</a>			
 				<a href="store/list" class="btn btn-primary"> <i class="fa-solid fa-store"></i> 가맹점 관리
 				</a>	
-				<a href="review/list" class="btn btn-primary"> <i class="fa-solid fa-feather-pointed"></i> 추천페이지 관리
+				<a href="/recommend/editor/list" class="btn btn-primary"> <i class="fa-solid fa-feather-pointed"></i> 추천페이지 관리
 				</a>		
 				<a href="review/list" class="btn btn-primary"> <i class="fa-solid fa-feather-pointed"></i> 리뷰 관리
 				</a>

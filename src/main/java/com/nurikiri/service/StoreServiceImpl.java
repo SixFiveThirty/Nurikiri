@@ -1,5 +1,6 @@
 package com.nurikiri.service;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -7,10 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.StoreVO;
+import com.nurikiri.domain.kakaomap.LocalResult;
 import com.nurikiri.mapper.StoreMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import retrofit2.Call;
+import retrofit2.Response;
 
 @Log4j
 @Service
@@ -49,8 +53,28 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public StoreVO get(Long sno, Principal principal) {
 		log.info("get");
+		
+		StoreVO store = mapper.read(sno);
+		
+		String query = store.getTitle();
+		KakaoMapService service = KakaoMapService.getService();
+		Call<LocalResult> call = service.searchLocal(query, 10, 1);
+		Response<LocalResult> res;
+		
+		try {
+			res = call.execute();
+			if(res.isSuccessful()) {
+				LocalResult result = res.body();
+				log.info("===>" + result);
+				store.setLocals(result.getLocals());
+			} else {
+				log.info("호출 실패 ===> " + res);
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
 
-		return mapper.read(sno);
+		return store;
 	}
 
 	@Override
