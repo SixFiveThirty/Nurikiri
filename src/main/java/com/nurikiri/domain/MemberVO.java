@@ -11,8 +11,12 @@ import javax.validation.constraints.Size;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
+//@AllArgsConstructor
+//@Builder
 @Data
 public class MemberVO {
 	
@@ -24,18 +28,19 @@ public class MemberVO {
 	private String password;
 	
 	@NotBlank(message="필수 항목 입니다.")
-	private String password2;
+	private String confirmedPassword;
 	
 	@NotBlank(message="필수 항목 입니다.")
 	private String name;
 	
+	//생년월일로 변경..
 	@NotBlank(message="필수 항목 입니다.")
 	private String jumin;
 	
 	@NotBlank(message="필수 항목 입니다.")
 	@Email(message="이메일 형식에 맞지 않습니다.")
 	private String email;
-  
+
 	@NotBlank(message="필수 항목 입니다.")
 	private String phone1;
 	

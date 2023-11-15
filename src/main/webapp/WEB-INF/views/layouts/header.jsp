@@ -43,12 +43,12 @@ $(document).ready(function(){
 				</a>
 				<div class="user-space">
 					<sec:authorize access="isAuthenticated()">
-						<sec:authentication property="principal.username" var="username" />
+						<sec:authentication property="principal.member" var="member" />
 						<%-- 로그인 된 상태 --%>
 						<li class="nav-item photo my-3 mr-3"><a class="nav-link"
 							href="/security/profile">
-								<img src="/security/avatar/sm/${username}" class="avatar-sm" />
-								${username}
+								<img src="/security/avatar/sm/${member.username}" class="avatar-sm" />
+								${member.name}
 						</a></li>
 						<li class="nav-item login my-3"><a class="nav-link logout-link" href="#">로그아웃
 						</a></li>

@@ -112,23 +112,24 @@
 			<img src="..." class="card-img-top" alt="..." />
 		</div>
 		<div class="card ml-5 p-5">
-			<p>상호명 :</p>
-			<p>운영시간 :</p>
-			<p>주소 :</p>
-			<p>연락처 :</p>
+			<p>상호명 : ${editor.storeName}</p>
+			<p>주소 : ${editor.address}</p>
 			<button type="button" class="btn btn-light btn-details">가맹점
 				상세보기</button>
 		</div>
 	</div>
 	<div class="mid-div mt-5">
-		<div class="card">
+		<div class="card p-5">
 			<p>${editor.content}</p>
 		</div>
 	</div>
 	<div class="bottom-div mt-5">
-		<div class="card">
-			<p>지도</p>
-		</div>
+		<div class="card" id="map"></div>
+	</div>
+	<div>
+		<a id="load" href="https://map.kakao.com/link/to/카카오판교오피스,37.402056,127.108212">
+			<button type="button" class="btn btn-light mt-3 mb-5" style="width: 200px; float:right; background-color:#FEC25E;">길찾기</button>
+		</a>
 	</div>
 	<div class="foot-div mt-5">
 		<a href="${cri.getLinkWithEno('modify', editor.eno)}"><button
@@ -141,13 +142,62 @@
 </div>
 
 <form action="remove" method="post" name="removeForm">
-	<input type="hidden" name="${_csrf.parameterName}"
-		value="${_csrf.token}" /> <input type="hidden" name="eno"
-		value="${editor.eno}" /> <input type="hidden" name="pageNum"
-		value="${cri.pageNum}" /> <input type="hidden" name="amount"
-		value="${cri.amount}" /> <input type="hidden" name="type"
-		value="${cri.type}" /> <input type="hidden" name="keyword"
-		value="${cri.keyword}" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="eno" value="${editor.eno}" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
 </form>
 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47527c077dd44e34b71ffb876f21b3cc&libraries=services"></script>
+<script>
+let geocoder = new kakao.maps.services.Geocoder();
+
+let locals =[
+	<c:forEach var="local" items="${editor.locals}">
+		{
+			name: '${local.placeName}',
+			coords: new kakao.maps.LatLng(${local.y}, ${local.x})
+		}
+	</c:forEach>
+];
+
+let address = '${editor.address}';
+let storeName = '${editor.storeName}';
+
+geocoder.addressSearch(address, function(result, status) {
+	if(status === kakao.maps.services.Status.OK) {
+		let coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		
+		let mapContainer = document.getElementById('map');
+		let mapOption = {
+			center: coords,	//중심좌표
+			level: 2	//지도의 확대 레벨
+		};
+		
+		let x = result[0].x;
+		let y = result[0].y;
+
+		let url = `https://map.kakao.com/link/to/\${storeName},\${y},\${x}`;
+		
+		$("#load").attr("href",url);
+		
+		let map = new kakao.maps.Map(mapContainer, mapOption);
+		
+		let marker = new kakao.maps.Marker({
+			position: coords
+		});
+	
+		
+		//지도상에 마커표시
+		marker.setMap(map);
+		
+		// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다.
+		map.setCenter(coords);
+	} else {
+		alert("잘못된 주소입니다.");
+	}
+});
+</script>
 <%@ include file="../../layouts/footer.jsp"%>

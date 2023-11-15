@@ -7,7 +7,6 @@ import com.nurikiri.mapper.MemberMapper;
 
 import com.nurikiri.domain.AuthVO;
 
-import com.nurikiri.domain.UpdateInfVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO get(String username) {
-		return mapper.read(username);
+//		return mapper.read(username);
+		MemberVO member = mapper.read(username);
+		return member;
 	}
 
 	@Override
@@ -60,34 +61,41 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean updateInf(UpdateInfVO vo) {
-		MemberVO member = mapper.read(vo.getUsername());
-
-		if (!pwEncoder.matches(vo.getOrgPassword(), member.getPassword())) {
-			return false;
-		}
-
-		String encPassword = pwEncoder.encode(vo.getNewPassword());
-		vo.setEncPassword(encPassword);
-		vo.setNewName(vo.getNewName());
-		vo.setNewEmail(vo.getNewEmail());
-		mapper.updateInf(vo);
-
-		return true;
+	public void modify(MemberVO member) throws IOException {
+////		MemberVO member = mapper.read(vo.getUsername());
+//	    String rawPassword = member.getPassword();
+//	    String confirmedPassword = member.getConfirmedPassword();
+//
+////		MemberVO memverVo = MemberVO.builder()
+////				.jumin("dafkdsjflasdfjl")
+////				.name("dobal")
+////				.build(); //immutable class
+//				
+////		String encPassword = pwEncoder.encode(vo.getPassword());
+////		vo.setPassword(encPassword);
+////		vo.setName(vo.getName());
+////		vo.setEmail(vo.getEmail());
+////		mapper.modify(vo);
+//// 빌더 패턴?
+//		
+//		
+//	    MemberVO updatedMemberVo = MemberVO.builder()
+//	            .username(member.getUsername())
+//	            .password(pwEncoder.encode(member.getPassword()))
+//	            .name(member.getName())
+//	            .email(member.getEmail())
+//	            .build();
+//	    
+//	    mapper.modify(updatedMemberVo);
+		
+		
+		String encPassword = pwEncoder.encode(member.getPassword());
+		member.setPassword(encPassword);
+		
+		
+		mapper.modify(member);
 	}
-
-	   @Override
-	    public UpdateInfVO getUpdateInf(String username) {
-	        MemberVO member = get(username); // 기존의 get 메서드 활용
-	        UpdateInfVO updateInfVO = convertMemberToUpdateInf(member);
-	        log.warn(updateInfVO);
-	        return updateInfVO;
-	    }
-
-	   private UpdateInfVO convertMemberToUpdateInf(MemberVO member) {
-	        UpdateInfVO updateInfVO = new UpdateInfVO();
-	        updateInfVO.setUsername(member.getUsername());
-	        log.warn(updateInfVO);
-	        return updateInfVO;
-	    }
 }
+		
+		
+

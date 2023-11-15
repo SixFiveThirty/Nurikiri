@@ -28,14 +28,13 @@
 		select * from editor
 	</select>
 	<insert id="insert">
-		insert into editor(title, content, writer)
+		insert into editor(title, content, writer, store_name, address, phone)
 		values
-		(#{title}, #{content}, #{writer})
+		(#{title}, #{content}, #{writer}, #{storeName}, ${address}, #{phone})
 	</insert>
 	<insert id="insertSelectKey">
-		insert into editor(title, content, writer)
-		values (#{title},
-		#{content}, #{writer})
+		insert into editor(title, content, writer, store_name, address, phone)
+		values (#{title}, #{content}, #{writer},#{storeName}, #{address},#{phone})
 
 		<selectKey resultType="Long" keyProperty="eno"
 			keyColumn="eno" order="AFTER">
@@ -54,11 +53,13 @@
 
 	<update id="update">
 		update editor set
-		title = #{title},
-		content =
-		#{content},
-		writer = #{writer},
-		update_date = now()
+			title = #{title},
+			content = #{content},
+			writer = #{writer},
+			store_name = #{storeName},
+			address = #{address}, 
+			phone = #{phone}, 
+			update_date = now()
 		where eno = #{eno}
 	</update>
 
@@ -88,8 +89,7 @@
 
 	<insert id="insertAttachment">
 		insert into editor_attachment(filename, path, content_type, size, eno)
-		values(#{filename}, #{path}, #{contentType},
-		#{size}, #{eno})
+		values(#{filename}, #{path}, #{contentType}, #{size}, #{eno})
 	</insert>
 
 	<!-- select 2번 실행하겠다는 뜻. join 안하고.. -->

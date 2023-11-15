@@ -120,7 +120,7 @@
 
 			<div class="menubox set">
 				<div class="menu update">
-					<a href="/security/update">회원 정보 수정</a>
+					<a href="/security/modify?username=${member.username}" >회원 정보 수정</a>
 				</div>
 				<div class="menu mypage">
 					<a href="/security/mypage">마이 페이지</a>
