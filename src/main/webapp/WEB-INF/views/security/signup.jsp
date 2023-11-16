@@ -7,7 +7,6 @@
 <%@ include file="../layouts/header.jsp"%>
 <%-- 개별 페이지 --%>
 <style>
-
 	.con{
 	width: 500px
 	}
@@ -48,15 +47,15 @@
 	padding: 0;
 	width: 180px;
 	height: 50px;
-}
-
-	  .profile_title{
+	}
+	
+	.profile_title{
 	  margin-bottom:16px;
-	  }
+	}
 	  
-	   .avatar{
+	.avatar{
 	   margin-bottom:32px;
-	   }
+	}
 </style>
 
 <div style="width: 500px" class="mx-auto">
@@ -120,10 +119,6 @@
 				<button type="submit" class="btn">회원가입
 				</button>
 			</div>
-
-
-
-
 		</form:form>
 		</div>
 	</div>
