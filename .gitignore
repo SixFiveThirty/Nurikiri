@@ -166,6 +166,7 @@ settings.json
 # SpringBoot 관련 파일
 config.properties
 .classpath
+.project
 
 # 작업 중 프로젝트 폴더 안에 메모해둔 비밀번호나 공유하면 안되는 내용 등
 
