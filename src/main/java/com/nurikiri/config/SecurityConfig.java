@@ -41,25 +41,40 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.addFilterBefore(filter, CsrfFilter.class); // csrfFilter 앞 필터 설정
 
-		http.csrf().ignoringAntMatchers("/api/**"); // csrf 설정
+		http.csrf().ignoringAntMatchers("/api/**", "/security/modify"); // csrf 설정
 
 		http.authorizeRequests()
-				.antMatchers("/security/profile", "/security/modify", "/security/mypage", "/security/review",
-						"/security/favorites")
-				.authenticated() // 프로필 화면 로그인시에만 입장 가능
-				.antMatchers("/managers/managers_list", "/managers/review/get", "/managers/review/list",
-						"/recommend/editor/list", "/store/modify", "/recommend/editor/modify")
-				.access("hasRole('ROLE_MANAGER')");
+				.antMatchers(
+						"/security/profile",
+						"/security/modify",
+						"/security/mypage", 
+						"/security/review", 
+						"/security/favorites",
+						"/security/avatar/**"
+						).authenticated() // 프로필 화면 로그인시에만 입장 가능
+				.antMatchers(
+						"/managers/managers_list",
+						"/managers/review/get",
+						"/managers/review/list",
+						"/recommend/editor/list",
+						"/store/modify",
+						"/recommend/editor/modify").access("hasRole('ROLE_MANAGER')");
 
-		http.formLogin().loginPage("/security/login?error=login_required") // 로그인 안 했을 시 리다이렉트
-				.loginProcessingUrl("/security/login").defaultSuccessUrl("/").failureUrl("/security/login?error=true"); // 로그인
-																														// 실패시
-																														// 리다이렉트
+		http.formLogin()
+			.loginPage("/security/login?error=login_required") // 로그인 안 했을 시 리다이렉트
+			.loginProcessingUrl("/security/login")
+			.defaultSuccessUrl("/")
+			.failureUrl("/security/login?error=true"); // 로그인 실패시 리다이렉트
+		
+		http.logout()
+			.logoutUrl("/security/logout")
+			.invalidateHttpSession(true)
+			.deleteCookies("remember-me", "JSESSION-ID")
+			.logoutSuccessUrl("/");																						// 리다이렉트
 
-		http.logout().logoutUrl("/security/logout").invalidateHttpSession(true)
-				.deleteCookies("remember-me", "JSESSION-ID").logoutSuccessUrl("/"); // 리다이렉트
-
-		http.rememberMe().key("Nurikiri").tokenRepository(persistentTokenRepository())
+		http.rememberMe()
+				.key("Nurikiri")
+				.tokenRepository(persistentTokenRepository())
 				.tokenValiditySeconds(7 * 24 * 60 * 60);
 	}
 
