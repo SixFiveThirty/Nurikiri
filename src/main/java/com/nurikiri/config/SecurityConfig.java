@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.addFilterBefore(filter, CsrfFilter.class); // csrfFilter 앞 필터 설정
 
-		http.csrf().ignoringAntMatchers("/api/**"); // csrf 설정
+		http.csrf().ignoringAntMatchers("/api/**", "/security/modify"); // csrf 설정
 
 		http.authorizeRequests()
 				.antMatchers(
@@ -49,8 +49,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/security/modify",
 						"/security/mypage", 
 						"/security/review", 
-						"/security/favorites")
-        .authenticated() // 프로필 화면 로그인시에만 입장 가능
+						"/security/favorites",
+						"/security/avatar/**"
+						).authenticated() // 프로필 화면 로그인시에만 입장 가능
 				.antMatchers(
 						"/managers/managers_list",
 						"/managers/review/get",

@@ -109,33 +109,8 @@ public class SecurityController {
 		
 	}
 	
-	@PostMapping("/modify")
-	public String modify(@Valid @ModelAttribute("member") MemberVO member, Errors errors) throws IOException {
-				
-				if (!member.getPassword().equals(member.getConfirmedPassword())) {
-					log.warn("비밀번호 불일치 에러");
-					errors.rejectValue("confirmedPassword", "비밀번호 불일치", "비밀번호 확인이 일치하지 않습니다.");
-				}
-
-				if (errors.hasErrors()) {
-					log.warn("에러문구"+ errors);
-//					log.warn(errors.getFieldError());
-					log.warn(errors.getAllErrors());
-					return "security/modify";
-				}				
-				
-				
-				// 회원 정보 수정
-			    service.modify(member);
-			    log.warn("service.modify 작동 확인");
-			    
-			    
-				
-				return "redirect:/security/profile";
-	}
-	
 //	@PostMapping("/modify")
-//	public String modify(@Valid @ModelAttribute("member") MemberVO member, Errors errors, HttpSession session, MultipartFile avatar) throws IOException {
+//	public String modify(@Valid @ModelAttribute("member") MemberVO member, Errors errors) throws IOException {
 //				
 //				if (!member.getPassword().equals(member.getConfirmedPassword())) {
 //					log.warn("비밀번호 불일치 에러");
@@ -151,9 +126,34 @@ public class SecurityController {
 //				
 //				
 //				// 회원 정보 수정
-//			    service.modify(member, avatar);
+//			    service.modify(member);
 //			    log.warn("service.modify 작동 확인");
 //			    
+//			    
+//				
+//				return "redirect:/security/profile";
+//	}
+	
+	@PostMapping("/modify")
+	public String modify(@Valid @ModelAttribute("member") MemberVO member, Errors errors, MultipartFile avatar) throws IOException {
+				
+				if (!member.getPassword().equals(member.getConfirmedPassword())) {
+					log.warn("비밀번호 불일치 에러");
+					errors.rejectValue("confirmedPassword", "비밀번호 불일치", "비밀번호 확인이 일치하지 않습니다.");
+				}
+
+				if (errors.hasErrors()) {
+					log.warn("에러문구"+ errors);
+//					log.warn(errors.getFieldError());
+					log.warn(errors.getAllErrors());
+					return "security/modify";
+				}				
+				
+				
+				// 회원 정보 수정
+			    service.modify(member, avatar);
+			    log.warn("service.modify 작동 확인");
+			    
 //			 // 세션에 업데이트된 회원 정보 저장
 //			    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //			    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -163,9 +163,9 @@ public class SecurityController {
 //			        session.setAttribute("member", updatedMember);
 //			        log.warn("세션에 업데이트된 회원 정보 저장: " + updatedMember);
 //			    }
-//			    
-//			    
-//				
-//				return "redirect:/security/profile";
-//	}
+			    
+			    
+				
+				return "redirect:/security/profile";
+	}
 }

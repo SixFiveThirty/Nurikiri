@@ -88,7 +88,7 @@
 		<div class="con mx-auto">
 			<h1>회원 정보 수정</h1>
 		
-			<form:form modelAttribute="member" cssClass="form">
+			<form:form modelAttribute="member" cssClass="form" enctype="multipart/form-data">
 				<br/>
 				<div class="form-group">
 					<form:label path="password">비밀번호</form:label>
@@ -130,12 +130,11 @@
 						<form:errors path="phone3" cssClass="error" />
 					</div>
 				</div>
-<!-- 				<div class="profile_title">프로필 사진 수정</div> -->
-<!-- 				<div class="avatar"> -->
-<!-- 					<input type="file" name="avatar" /> -->
-<!-- 				</div> -->
+				<div class="profile_title">프로필 사진 수정</div>
+				<div class="avatar">
+					<input type="file" name="avatar" />
+				</div>
 				
-<%-- 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
 				
 				<div class="btn-group">
 					<div class="btn-container">
