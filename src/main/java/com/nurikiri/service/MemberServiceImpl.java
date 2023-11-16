@@ -61,7 +61,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void modify(MemberVO member) throws IOException {
+	public void modify(MemberVO member, MultipartFile avatar) throws IOException {
 ////		MemberVO member = mapper.read(vo.getUsername());
 //	    String rawPassword = member.getPassword();
 //	    String confirmedPassword = member.getConfirmedPassword();
@@ -93,9 +93,15 @@ public class MemberServiceImpl implements MemberService {
 		member.setPassword(encPassword);
 		
 		
+		
 		mapper.modify(member);
+		
+		if (!avatar.isEmpty()) {
+			File dest = new File(AVATAR_UPLOAD_DIR, member.getUsername() + ".png");
+			
+			Thumbnails.of(avatar.getInputStream()).size(250, 250).toFile(dest);
+		}
 	}
-}
 		
-		
+}		
 

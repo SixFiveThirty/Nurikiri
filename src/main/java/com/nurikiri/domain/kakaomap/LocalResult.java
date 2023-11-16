@@ -9,7 +9,7 @@ import lombok.Data;
 public class LocalResult {
 
    @SerializedName("documents")
-   List<Local> documents;
+   List<Local> locals;
 
    @SerializedName("meta")
    LocalMeta meta;

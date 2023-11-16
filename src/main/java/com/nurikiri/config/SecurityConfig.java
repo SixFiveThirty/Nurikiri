@@ -1,4 +1,4 @@
-	package com.nurikiri.config;
+package com.nurikiri.config;
 
 import javax.sql.DataSource;
 
@@ -21,15 +21,15 @@ import lombok.extern.log4j.Log4j;
 
 @Configuration
 @EnableWebSecurity
-@Log4j
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private DataSource datasource; // RootConfig 히카리
+
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-	    return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder();
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.addFilterBefore(filter, CsrfFilter.class); // csrfFilter 앞 필터 설정
 
-		http.csrf().ignoringAntMatchers("/api/**"); // csrf 설정
+		http.csrf().ignoringAntMatchers("/api/**", "/security/modify"); // csrf 설정
 
 		http.authorizeRequests()
 				.antMatchers(
@@ -49,12 +49,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/security/modify",
 						"/security/mypage", 
 						"/security/review", 
-						"/security/favorites")
-        .authenticated() // 프로필 화면 로그인시에만 입장 가능
+						"/security/favorites",
+						"/security/avatar/**"
+						).authenticated() // 프로필 화면 로그인시에만 입장 가능
 				.antMatchers(
 						"/managers/managers_list",
 						"/managers/review/get",
 						"/managers/review/list",
+						"/managers/store/get",
+						"/managers/store/list",
+						"/managers/store/modify",
+						"/managers/store/register",
 						"/recommend/editor/list",
 						"/store/modify",
 						"/recommend/editor/modify").access("hasRole('ROLE_MANAGER')");
@@ -76,7 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.tokenRepository(persistentTokenRepository())
 				.tokenValiditySeconds(7 * 24 * 60 * 60);
 	}
-	
+
 	@Bean
 	public UserDetailsService customUserService() {
 		return new CustomUserDetailsService();
@@ -86,15 +91,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public PersistentTokenRepository persistentTokenRepository() {
 		JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
 		repo.setDataSource(datasource);
-		
+
 		return repo;
-		
+
 	}
 
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {		
-		auth
-      .userDetailsService(customUserService())
-      .passwordEncoder(passwordEncoder());
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		/*
+		 * auth.inMemoryAuthentication() .withUser("admin")
+		 * .password("$2a$10$tAIRnt9PK088WQ.ouPVsWuEVsTYJ9WRjg6/HtJ./Ylp71uYYVjyje")
+		 * .roles("MEMBER");
+		 */
+
+		auth.userDetailsService(customUserService()).passwordEncoder(passwordEncoder());
+
 	}
 }

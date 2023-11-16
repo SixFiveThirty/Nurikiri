@@ -59,9 +59,12 @@
 		<div class="card">${store.content}</div>
 	</div>
 	<div class="bottom-div mt-5">
-		<div class="card">
-			<p>지도 서비스 조금만 기다려주세요...</p>
-		</div>
+		<div class="card" id="map">지도 서비스 조금만 기다려주세요...</div>
+	</div>
+	<div>
+		<a id="load" href="https://map.kakao.com/link/to/카카오판교오피스,37.402056,127.108212">
+			<button type="button" class="btn btn-light mt-3 mb-5" style="width: 200px; float:right; background-color:#FEC25E;">길찾기</button>
+		</a>
 	</div>
 	<div class="foot-div mt-5">
 		<button type="button" class="btn btn-light mr-5" style="width: 200px"
@@ -74,13 +77,57 @@
 <h1>리뷰 목록</h1>
 <button type= "button" class="btn btn-light mr-5" style="width: 200px">리뷰 등록</button>
 
-
-
 <div class="review">리뷰 서비스 조금만 기다려주세요...</div>
 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47527c077dd44e34b71ffb876f21b3cc&libraries=services"></script>
+<script>
+let geocoder = new kakao.maps.services.Geocoder();
 
+let locals =[
+	<c:forEach var="local" items="${store.locals}">
+		{
+			name: '${local.placeName}',
+			coords: new kakao.maps.LatLng(${local.y}, ${local.x})
+		},
+	</c:forEach>
+];
 
+let address = '${store.address}';
+let storeName = '${store.title}';
 
+geocoder.addressSearch(address, function(result, status) {
+	if(status === kakao.maps.services.Status.OK) {
+		let coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		
+		let mapContainer = document.getElementById('map');
+		let mapOption = {
+			center: coords,	//중심좌표
+			level: 2	//지도의 확대 레벨
+		};
+		
+		let x = result[0].x;
+		let y = result[0].y;
 
+		let url = `https://map.kakao.com/link/to/\${storeName},\${y},\${x}`;
+		
+		$("#load").attr("href",url);
+		
+		let map = new kakao.maps.Map(mapContainer, mapOption);
+		
+		let marker = new kakao.maps.Marker({
+			position: coords
+		});
+	
+		
+		//지도상에 마커표시
+		marker.setMap(map);
+		
+		// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다.
+		map.setCenter(coords);
+	} else {
+		alert("잘못된 주소입니다.");
+	}
+});
+</script>
 
 <%@ include file="../layouts/footer.jsp"%>
