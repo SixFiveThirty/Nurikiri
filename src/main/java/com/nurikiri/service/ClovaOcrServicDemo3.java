@@ -13,13 +13,19 @@ import java.util.UUID;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.context.annotation.Bean;
 
-public class OCRGeneralAPIDemo {
+import com.google.gson.JsonParser;
 
-	public static void main(String[] args) {
-		String apiURL = "https://00t4hthuv6.apigw.ntruss.com/custom/v1/26166/a971d5f8ea0af44dbc61268ac241ac41edd3db9a68d4e0ff6a828a3260a026aa/infer	";
-		String secretKey = "cVZQeXhLRnZwSVlMY3JCTWl2UExST3NzVVlCdnVzbUg=";
+public class ClovaOcrServicDemo3 {
+	
+	String apiURL = "https://00t4hthuv6.apigw.ntruss.com/custom/v1/26166/a971d5f8ea0af44dbc61268ac241ac41edd3db9a68d4e0ff6a828a3260a026aa/infer	";
+	String secretKey = "cVZQeXhLRnZwSVlMY3JCTWl2UExST3NzVVlCdnVzbUg=";
+
+	public void ocrservice() {
+		
 		String imageFile = "C:\\Users\\JU\\Pictures\\test.png";
+		
 
 		try {
 			URL url = new URL(apiURL);
@@ -49,6 +55,8 @@ public class OCRGeneralAPIDemo {
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 			long start = System.currentTimeMillis();
 			File file = new File(imageFile);
+			
+			
 			writeMultiPart(wr, postParams, file, boundary);
 			wr.close();
 
@@ -65,8 +73,11 @@ public class OCRGeneralAPIDemo {
 				response.append(inputLine);
 			}
 			br.close();
-
 			System.out.println(response);
+			
+			
+			
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
