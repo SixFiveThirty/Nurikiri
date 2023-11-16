@@ -24,7 +24,6 @@ public interface StoreMapper {
 	
 	public int getTotalCount(Criteria cri);
 
-	public void insertSelectKey(StoreVO store);
 	
 	
 }

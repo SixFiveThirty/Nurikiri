@@ -4,13 +4,18 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.nurikiri.domain.MemberVO;
 
 import com.nurikiri.service.MemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +29,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nurikiri.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
-import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
 
 @Log4j
@@ -34,9 +38,6 @@ public class SecurityController {
 
 	@Autowired
 	private MemberService service;
-	
-	@Autowired
-    private BCryptPasswordEncoder pwEncoder;
 
 	@GetMapping("/login")
 	public void login() {
@@ -108,24 +109,62 @@ public class SecurityController {
 		
 	}
 	
+//	@PostMapping("/modify")
+//	public String modify(@Valid @ModelAttribute("member") MemberVO member, Errors errors) throws IOException {
+//				
+//				if (!member.getPassword().equals(member.getConfirmedPassword())) {
+//					log.warn("비밀번호 불일치 에러");
+//					errors.rejectValue("confirmedPassword", "비밀번호 불일치", "비밀번호 확인이 일치하지 않습니다.");
+//				}
+//
+//				if (errors.hasErrors()) {
+//					log.warn("에러문구"+ errors);
+////					log.warn(errors.getFieldError());
+//					log.warn(errors.getAllErrors());
+//					return "security/modify";
+//				}				
+//				
+//				
+//				// 회원 정보 수정
+//			    service.modify(member);
+//			    log.warn("service.modify 작동 확인");
+//			    
+//			    
+//				
+//				return "redirect:/security/profile";
+//	}
 	
 	@PostMapping("/modify")
-	public String modify(@Valid @ModelAttribute("member") MemberVO member, Errors errors) throws IOException {
+	public String modify(@Valid @ModelAttribute("member") MemberVO member, Errors errors, MultipartFile avatar) throws IOException {
 				
 				if (!member.getPassword().equals(member.getConfirmedPassword())) {
 					log.warn("비밀번호 불일치 에러");
 					errors.rejectValue("confirmedPassword", "비밀번호 불일치", "비밀번호 확인이 일치하지 않습니다.");
 				}
 
-//				if (errors.hasErrors()) {
-//					log.warn("에러문구");
-//					return "security/modify";
-//				}				
+				if (errors.hasErrors()) {
+					log.warn("에러문구"+ errors);
+//					log.warn(errors.getFieldError());
+					log.warn(errors.getAllErrors());
+					return "security/modify";
+				}				
 				
 				
-				
-			    service.modify(member);
+				// 회원 정보 수정
+			    service.modify(member, avatar);
 			    log.warn("service.modify 작동 확인");
+			    
+//			 // 세션에 업데이트된 회원 정보 저장
+//			    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//			    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//			    if (principal instanceof UserDetails) {
+//			        User userDetails = (User) principal;
+//			        MemberVO updatedMember = service.get(userDetails.getUsername());
+//			        session.setAttribute("member", updatedMember);
+//			        log.warn("세션에 업데이트된 회원 정보 저장: " + updatedMember);
+//			    }
+			    
+			    
 				
 				return "redirect:/security/profile";
 	}

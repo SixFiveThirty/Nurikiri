@@ -5,6 +5,10 @@
 	font-family: 'Inter';
 }
 
+body {
+	overflow-y:scroll;  
+} 
+
 .avatar-sm {
 	width: 24px;
 	height: 24px;

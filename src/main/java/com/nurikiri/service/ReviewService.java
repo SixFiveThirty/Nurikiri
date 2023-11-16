@@ -2,6 +2,7 @@ package com.nurikiri.service;
 
 import java.util.List;
 
+import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.ReviewVO;
 
 public interface ReviewService {
@@ -13,5 +14,5 @@ public interface ReviewService {
 	
 	public boolean remove(Long rno);
 	
-	public List<ReviewVO> getList();
+	public List<ReviewVO> getList(Criteria cri);
 }

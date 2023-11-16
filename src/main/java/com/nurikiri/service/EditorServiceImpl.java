@@ -45,7 +45,6 @@ public class EditorServiceImpl implements EditorService {
 		log.info("get....." + eno);
 		EditorVO editor = mapper.read(eno);
 
-		
 		String query = editor.getTitle();
 		KakaoMapService service = KakaoMapService.getService();
 		Call<LocalResult> call = service.searchLocal(query, 10, 1);
