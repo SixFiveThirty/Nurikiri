@@ -29,14 +29,4 @@ public class StoreAdminController {
 	}
 }
 
-/*
- * @RequestMapping("/managers/store")
- *  public String storeAdminList(StoreAdminVO storeAdminVO, Model model) {
-	        
-	        List<StoreAdminVO> list = storeAdminservice.storeAdminList(storeAdminVO);
-	        model.addAttribute("list", list);
-	        
-	        return "managers/storeAdminList";
- * 
- *
- */
+
