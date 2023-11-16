@@ -36,7 +36,7 @@
 		</div>
 		<br>
 		<div class="card">
-			<a href="review/list" class="btn btn-light"> <i class="fa-solid fa-comment"></i></i> 리뷰 관리
+			<a href="review/list" class="btn btn-light"> <i class="fa-solid fa-comment"></i> 리뷰 관리
 			</a>
 		</div>
 	</div>

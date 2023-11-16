@@ -1,5 +1,5 @@
 package com.nurikiri.domain;
 
-public class IntroductionVO {
+public class AdminVO {
 
 }
