@@ -16,7 +16,13 @@
 }
 
 .profile_title {
-	margin-top: 20px;
+	margin-bottom: 40px;
+}
+
+.profile_title h1{
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 500;
 }
 
 .inf {
@@ -29,12 +35,11 @@
 }
 
 .profile_inf {
-	width: 90%;
-	display : flex;
-	margin: 0 auto;
-	flex-direction: row; 
+	width: 800px;
 	display: flex;
-	margin-bottom: 20px;
+	margin-top: 20px;
+	margin: 0 auto;
+	margin-bottom: 35px;
 }
 
 .box1 {
@@ -42,22 +47,36 @@
 }
 
 .profile_inf .photo img {
-	margin-left: 40px;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.profile_inf .photo {
+	border-radius: 70%;
+	overflow: hidden;
 	width: 250px;
 	height: 250px;
+	margin-left: 50px;
+	
 }
 
 .profile_inf .sebu_inf{
-	margin-left: 160px;
+	margin-left: 130px;
 	display:flex;
 	align-items: center;
 }
+
+
+th, td{
+	padding: 10px 20px;
+}
+
 
 .menubox {
 	width: 800px;
 	display: flex;
 	justify-content: space-between;
-	margin-top: 20px;
 	margin: 0 auto;
 }
 
@@ -66,6 +85,7 @@
 	margin: 0 auto;
 	width: 250px;
 	height: 80px;
+	border-radius: 3px;
 	background-color:#D9D9D9;
 	text-align: center;
 	align-items: center;
@@ -95,7 +115,7 @@
 				</div>
 
 				<div class="sebu_inf">
-					<table>
+					<table border="1">
 						<tr>
 							<th>아이디</th>
 							<td>${member.username}</td>
