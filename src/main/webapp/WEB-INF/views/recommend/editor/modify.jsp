@@ -91,6 +91,7 @@
 	<div class="panel-body">
 		<form:form modelAttribute="editor" role="form"
 			action="?_csrf=${_csrf.token}" enctype="multipart/form-data">
+			
 			<input type="hidden" name="pageNum" value="${cri.pageNum}" />
 			<input type="hidden" name="amount" value="${cri.amount}" />
 			<input type="hidden" name="type" value="${cri.type}" />
@@ -128,6 +129,36 @@
 				<form:textarea path="content" id="content" cssClass="form-control"
 					rows="10"></form:textarea>
 				<form:errors path="content" cssClass="error" />
+			</div>
+			
+			<div class="form-group">
+				<form:label path="storeName">가맹점 이름</form:label>
+				<form:input path="storeName" cssClass="form-control"/>
+				<form:errors path="storeName" cssClass="error"/>
+			</div>
+			<div class="form-group">
+				<form:label path="market">소속 시장</form:label>
+				<form:input path="market" cssClass="form-control"/>
+				<form:errors path="market" cssClass="error"/>
+			</div>
+			<div class="form-group">
+				<form:label path="address">주소</form:label>
+				<form:input path="address" cssClass="form-control"/>
+				<form:errors path="address" cssClass="error"/>
+			</div>
+			<div class="form-group">
+				<form:label path="item">취급품목</form:label>
+				<form:input path="item" cssClass="form-control"/>
+				<form:errors path="item" cssClass="error"/>
+			</div>
+			<div class="form-group">
+				<form:label path="link">상세페이지</form:label>
+				<form:input path="link" cssClass="form-control"/>
+				<form:errors path="link" cssClass="error"/>
+			</div>
+			<div class="form-group">
+				<form:label path="phone">연락처</form:label>
+				<form:input path="phone" cssClass="form-control"/>
 			</div>
 			<button type="submit" class="btn btn-primary">
 				<i class="fas fa-check"></i> 확인

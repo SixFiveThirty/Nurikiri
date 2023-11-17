@@ -27,15 +27,16 @@
 	<select id="getList" resultType="EditorVO">
 		select * from editor
 	</select>
+	
 	<insert id="insert">
-		insert into editor(title, content, writer, store_name, address, phone)
-		values
-		(#{title}, #{content}, #{writer}, #{storeName}, ${address}, #{phone})
+		insert into editor (title, content, writer, store_name, market, item, address, link, phone)
+		values (#{title}, #{content}, #{writer}, #{storeName}, #{market}, #{item}, #{address}, #{link}, #{phone})
 	</insert>
+	
 	<insert id="insertSelectKey">
-		insert into editor(title, content, writer, store_name, address, phone)
-		values (#{title}, #{content}, #{writer},#{storeName}, #{address},#{phone})
-
+		insert into editor (title, content, writer, store_name, market, item, address, link, phone)
+		values (#{title}, #{content}, #{writer}, #{storeName}, #{market}, #{item}, #{address}, #{link}, #{phone})
+		
 		<selectKey resultType="Long" keyProperty="eno"
 			keyColumn="eno" order="AFTER">
 			SELECT LAST_INSERT_ID()
@@ -58,7 +59,10 @@
 			writer = #{writer},
 			store_name = #{storeName},
 			address = #{address}, 
-			phone = #{phone}, 
+			phone = #{phone},
+			link = #{link},
+			item = #{item},
+			market = #{market},
 			update_date = now()
 		where eno = #{eno}
 	</update>
