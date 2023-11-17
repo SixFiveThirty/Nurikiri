@@ -57,12 +57,12 @@
 	overflow: hidden;
 	width: 250px;
 	height: 250px;
-	margin-left: 50px;
+	margin-left: 80px;
 	
 }
 
 .profile_inf .sebu_inf{
-	margin-left: 130px;
+	margin-left: 90px;
 	display:flex;
 	align-items: center;
 }

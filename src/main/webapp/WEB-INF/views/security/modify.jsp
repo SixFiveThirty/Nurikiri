@@ -11,9 +11,12 @@
 	width: 500px
 	}
 	
-	h1{
-	text-align:center;
-	}
+	.con h1{
+	text-align: center;
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 500;
+}
 
 	.btn{
 	background-color: #FEC25E;
