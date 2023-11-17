@@ -113,9 +113,11 @@
 		</div>
 		<div class="card ml-5 p-5">
 			<p>상호명 : ${editor.storeName}</p>
-			<%-- <p>소속 시장 : ${editor.market}</p> --%>
+			<p>소속 시장 : ${editor.market}</p>
 			<p>주소 : ${editor.address}</p>
-			<button type="button" class="btn btn-light btn-details">가맹점
+			<p>취급품목 : ${editor.item}</p>
+			<p>연락처 : ${editor.phone}</p>
+			<button type="button" class="btn btn-light btn-details" onclick="location.href='${editor.link}'">가맹점
 				상세보기</button>
 		</div>
 	</div>
