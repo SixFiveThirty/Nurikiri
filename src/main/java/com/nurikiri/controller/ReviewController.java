@@ -29,7 +29,8 @@ public class ReviewController {
 	public void list(@ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("list: " + cri);
 		model.addAttribute("list", service.getList(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri, 123));
+
+		model.addAttribute("pageMaker", new PageDTO(cri, 123)); //나중에 123 -> total로 수정한다고 하심.
 	}
 
 	@GetMapping({ "/get" })

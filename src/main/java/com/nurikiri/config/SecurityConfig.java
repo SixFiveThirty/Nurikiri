@@ -56,6 +56,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/managers/managers_list",
 						"/managers/review/get",
 						"/managers/review/list",
+						"/managers/store/get",
+						"/managers/store/list",
+						"/managers/store/modify",
+						"/managers/store/register",
 						"/recommend/editor/list",
 						"/store/modify",
 						"/recommend/editor/modify").access("hasRole('ROLE_MANAGER')");

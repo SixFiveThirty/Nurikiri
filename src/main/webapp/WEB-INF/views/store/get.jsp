@@ -59,7 +59,7 @@
 		<div class="card">${store.content}</div>
 	</div>
 	<div class="bottom-div mt-5">
-		<div class="card" id="map"></div>
+		<div class="card" id="map">지도 서비스 조금만 기다려주세요...</div>
 	</div>
 	<div>
 		<a id="load" href="https://map.kakao.com/link/to/카카오판교오피스,37.402056,127.108212">
@@ -88,7 +88,7 @@ let locals =[
 		{
 			name: '${local.placeName}',
 			coords: new kakao.maps.LatLng(${local.y}, ${local.x})
-		}
+		},
 	</c:forEach>
 ];
 
