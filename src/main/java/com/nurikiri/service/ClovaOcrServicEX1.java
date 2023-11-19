@@ -124,6 +124,21 @@ public class ClovaOcrServicEX1 {
 			 * System.out.println("response:" + response);
 			 */
 			
+			//if (responseCode == 200) { br = new BufferedReader(new
+			//InputStreamReader(con.getInputStream())); } else { br = new
+			//BufferedReader(new InputStreamReader(con.getErrorStream())); }
+			
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+			
+			//while ((inputLine = br.readLine()) != null) { response.append(inputLine); }
+			//br.close();
+			
+
+			System.out.println("response:" + response);
+			
+//			String result = api.getOcr(inputLine);
+
 			
 		} catch (Exception e) {
 			System.out.println(e);
