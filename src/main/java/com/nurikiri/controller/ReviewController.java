@@ -30,7 +30,7 @@ public class ReviewController {
 		log.info("list: " + cri);
 		model.addAttribute("list", service.getList(cri));
 
-		model.addAttribute("pageMaker", new PageDTO(cri, 123)); //나중에 123 -> total로 수정한다고 하심.
+		model.addAttribute("pageMaker", new PageDTO(cri, 123)); // 나중에 123 -> total로 수정한다고 하심.
 	}
 
 	@GetMapping({ "/get" })
@@ -39,13 +39,17 @@ public class ReviewController {
 	}
 
 	@PostMapping("/remove")
-	public String remove(@RequestParam("rno") Long rno, RedirectAttributes rttr) {
+	public String remove(@RequestParam("rno") Long rno, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		log.info("remove...." + rno);
 
 		if (service.remove(rno)) {
 			rttr.addFlashAttribute("result", "success");
+			rttr.addAttribute("pageNum", cri.getPageNum());
+			rttr.addAttribute("amount", cri.getAmount());
+			rttr.addAttribute("type", cri.getType());
+			rttr.addAttribute("keyword", cri.getKeyword());
 		}
 
-		return "redirect:/managers/review/list";
+		return "redirect: " + cri.getLink("/managers/review/list");
 	}
 }

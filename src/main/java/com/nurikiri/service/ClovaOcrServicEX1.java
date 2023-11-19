@@ -120,7 +120,7 @@ public class ClovaOcrServicEX1 {
 
 			System.out.println("response:" + response);
 			
-			String result = api.getOcr(inputLine);
+//			String result = api.getOcr(inputLine);
 			
 		} catch (Exception e) {
 			System.out.println(e);
