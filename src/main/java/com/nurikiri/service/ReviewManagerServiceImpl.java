@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.nurikiri.domain.Criteria;
-import com.nurikiri.domain.ReviewVO;
-import com.nurikiri.mapper.ReviewMapper;
+import com.nurikiri.domain.ReviewManagerVO;
+import com.nurikiri.mapper.ReviewManagerMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -14,13 +14,13 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Service
 @AllArgsConstructor
-public class ReviewServiceImpl implements ReviewService {
-	private ReviewMapper mapper;
+public class ReviewManagerServiceImpl implements ReviewManagerService {
+	private ReviewManagerMapper mapper;
 
 	@Override
-	public ReviewVO get(Long rno) {
+	public ReviewManagerVO get(Long rno) {
 		log.info("get....." + rno);
-		ReviewVO review = mapper.read(rno);
+		ReviewManagerVO review = mapper.read(rno);
 
 		return review;
 	}
@@ -32,7 +32,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<ReviewVO> getList(Criteria cri) {
+	public List<ReviewManagerVO> getList(Criteria cri) {
 		log.info("get List with citeria: " + cri);
 		return mapper.getListWithPaging(cri);
 	}
