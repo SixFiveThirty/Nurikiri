@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.PageDTO;
@@ -25,6 +26,7 @@ public class StoreAdminController {
 	@GetMapping("/list")
 	public void list(@ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("list: " + cri);
+//		model.addAttribute("storeAdmin", service.get(sno));
 		model.addAttribute("list", service.storeAdminList(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, 123)); //나중에 123 -> total로 수정한다고 하심.
 	

@@ -42,21 +42,21 @@ public class ClovaOcrServicEX1 {
 			MultipartBody.Part filePart = MultipartBody.Part.createFormData("test", "test.png", fileBody);
 			System.out.println();
 			// clova ocr에 파일 전송(post)
-			Call<OcrResult> call = api.sandOcr(filePart);
+			//Call<OcrResult> call = api.sandOcr(filePart);
 			System.out.println("=======================");
-			System.out.println(call.request());
-			System.out.println(call.request().headers());
-			System.out.println("=======================");
-			
-			Response<OcrResult> res = call.execute();
+//			System.out.println(call.request());
+//			System.out.println(call.request().headers());
+//			System.out.println("=======================");
+//			
+//			Response<OcrResult> res = call.execute();
 
-			if(res.isSuccessful()) {
-				OcrResult result = res.body();
-				System.out.println(result);
-			} else {
-				//System.out.println("호출 실패");
-				System.out.println(res);
-			}
+//			if(res.isSuccessful()) {
+//				OcrResult result = res.body();
+//				System.out.println(result);
+//			} else {
+//				//System.out.println("호출 실패");
+//				System.out.println(res);
+//			}
 
 			/*
 			 * URL url = new URL(apiURL); HttpURLConnection con =

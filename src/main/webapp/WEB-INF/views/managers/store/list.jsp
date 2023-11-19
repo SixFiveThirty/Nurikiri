@@ -3,8 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ include file="../../layouts/header.jsp"%>
- 
-
 
 <h1 style ="text-align: center">가맹점 관리</h1>
 
@@ -43,7 +41,16 @@
     </table>
 </div>
 
+<script>
+/* <c:forEach items="${storeAdmin}" var="store">
+</c:forEach>
+let store = ${store}
+console.log("store", store); */
 
+let store_title = ${store.title};
+console.log("title", store_title);
+
+</script>
 
      
 <%@ include file="../../common/pagination.jsp"%>

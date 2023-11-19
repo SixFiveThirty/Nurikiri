@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Data
 public class StoreAdminVO {
-	
 	private Long sno;
 	
 	private String title; // 가맹점명		
@@ -14,6 +13,4 @@ public class StoreAdminVO {
 	private Date regDate; // 등록일자
 	
 	private String isDeleted; //가맹점 운영 여부
-
-
 }
