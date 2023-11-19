@@ -29,16 +29,10 @@ public interface ClovaOcrService {
 		"X-OCR-SECRET: eGhka2R4bWRpYU9UelR1VG16dG5rYnh3S1FIekxRVVA=",
 		"Content-Type: application/json"
 	})
-	Call<OcrResult> sandOcr(@Part MultipartBody.Part image);
+	Call<OcrResult> sandOcr();
+	// 서버에 이미지 업로드 할 계획
+	// multipart/form 이냐 json 이냐
 	
-	@GET("infer")
-	@Headers({
-		"X-OCR-SECRET: eGhka2R4bWRpYU9UelR1VG16dG5rYnh3S1FIekxRVVA=",
-		"Content-Type: application/json"
-	})
-	Call<Fields> getOcr(@Query("inferText") String inferText);
-	
-	 
 	public static ClovaOcrService getService() {
 		Retrofit retrofit = new Retrofit.Builder()
 				.baseUrl(BASE_URL)
