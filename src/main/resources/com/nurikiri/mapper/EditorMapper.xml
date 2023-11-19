@@ -44,8 +44,7 @@
 	</insert>
 
 	<select id="read" resultType="EditorVO">
-		select * from editor where eno =
-		#{eno}
+		select * from editor where eno = #{eno}
 	</select>
 
 	<delete id="delete">

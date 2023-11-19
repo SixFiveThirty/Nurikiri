@@ -67,7 +67,6 @@ public class EditorController {
 		if(errors.hasErrors()) {
 			return "recommend/editor/register";
 		}
-		
 		service.register(editor, files);
 		rttr.addFlashAttribute("result", editor.getEno());
 		return "redirect:/recommend/editor/list";
