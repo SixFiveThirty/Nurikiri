@@ -30,6 +30,15 @@ public class EditorVO {
 	@NotBlank(message="소재지는 필수 항목입니다.")
 	private String address;
 	
+	@NotBlank(message="링크는 필수 항목입니다.")
+	private String link;
+	
+	@NotBlank(message="품목은 필수 항목입니다.")
+	private String item;
+	
+	@NotBlank(message="시장은 필수 항목입니다.")
+	private String market;
+	
 	//전화번호
 	private String phone;
 	
