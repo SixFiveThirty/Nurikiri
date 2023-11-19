@@ -50,10 +50,11 @@
 		<form:form modelAttribute="editor" role="form"
 			action="?_csrf=${_csrf.token}"
 			enctype="multipart/form-data">
-		
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			
 			<!-- method가 default로 post -->
 			<form:hidden path="eno"/>
-			<form:hidden path="writer" value="${member.username}"/>
+			<form:hidden path="writer" value="${username}"/>
 			
 			<div class="form-group">
 				<form:label path="title">제목</form:label>

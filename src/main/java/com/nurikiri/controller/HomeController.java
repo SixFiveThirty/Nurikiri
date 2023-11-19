@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.nurikiri.service.EditorService;
-import com.nurikiri.service.MailService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -25,8 +24,6 @@ import lombok.extern.log4j.Log4j;
 public class HomeController {
 	@Autowired
 	private EditorService editorService;
-//	@Autowired
-//	private MailService mailService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
