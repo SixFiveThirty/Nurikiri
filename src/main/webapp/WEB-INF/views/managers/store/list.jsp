@@ -33,10 +33,10 @@
        <c:forEach items="${list}" var="store">
            <tr>
                <td style="text-align: center; width: 60px;">${store.sno} </td>
-               <td style="text-align: center;"><a href="get?sno=${store.sno}">${store.title}</a></td>
-               <td style="text-align: center; width: 100px;">${store.regDate}</td>
-               <td style="text-align: center;"><button onclick="location.href='/store/modify'">수정</button></td>
-               <td style="text-align: center; width: 150px;">${store.is_deleted}</td>
+               <td style="text-align: center;"><a href="/store/get?sno=${store.sno}">${store.title}</a></td>
+               <td style="text-align: center; width: 100px;"><fmt:formatDate pattern="yyyy" value="${store.regDate}"/></td>
+               <td style="text-align: center;"><button onclick="location.href='/store/modify?sno=${store.sno}'">수정</button></td>
+               <td style="text-align: center; width: 150px;">${store.isDeleted}</td>
            </tr>
           </c:forEach>
         </tbody>
