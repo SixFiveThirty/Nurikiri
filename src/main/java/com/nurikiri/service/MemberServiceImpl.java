@@ -32,7 +32,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO get(String username) {
-//		return mapper.read(username);
 		MemberVO member = mapper.read(username);
 		return member;
 	}
@@ -54,7 +53,7 @@ public class MemberServiceImpl implements MemberService {
 		if (!avatar.isEmpty()) {
 			File dest = new File(AVATAR_UPLOAD_DIR, member.getUsername() + ".png");
 
-			Thumbnails.of(avatar.getInputStream()).size(50, 50).toFile(dest);
+			Thumbnails.of(avatar.getInputStream()).size(250, 250).toFile(dest);
 
 		}
 
@@ -62,40 +61,16 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void modify(MemberVO member, MultipartFile avatar) throws IOException {
-////		MemberVO member = mapper.read(vo.getUsername());
-//	    String rawPassword = member.getPassword();
-//	    String confirmedPassword = member.getConfirmedPassword();
-//
-////		MemberVO memverVo = MemberVO.builder()
-////				.jumin("dafkdsjflasdfjl")
-////				.name("dobal")
-////				.build(); //immutable class
-//				
-////		String encPassword = pwEncoder.encode(vo.getPassword());
-////		vo.setPassword(encPassword);
-////		vo.setName(vo.getName());
-////		vo.setEmail(vo.getEmail());
-////		mapper.modify(vo);
-//// 빌더 패턴?
-//		
-//		
-//	    MemberVO updatedMemberVo = MemberVO.builder()
-//	            .username(member.getUsername())
-//	            .password(pwEncoder.encode(member.getPassword()))
-//	            .name(member.getName())
-//	            .email(member.getEmail())
-//	            .build();
-//	    
-//	    mapper.modify(updatedMemberVo);
 		
-		
+		// 1. 비밀번호 암호화
 		String encPassword = pwEncoder.encode(member.getPassword());
 		member.setPassword(encPassword);
 		
 		
-		
+		// 2. member에 저장
 		mapper.modify(member);
 		
+		// 3. avatar 이미지 저장
 		if (!avatar.isEmpty()) {
 			File dest = new File(AVATAR_UPLOAD_DIR, member.getUsername() + ".png");
 			
