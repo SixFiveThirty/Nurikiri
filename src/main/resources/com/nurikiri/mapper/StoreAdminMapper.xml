@@ -5,11 +5,16 @@
   
 <mapper namespace="com.nurikiri.mapper.StoreAdminMapper">
         <select id="storeAdminList" resultType="StoreAdminVO">
-            SELECT
-                 sno,title,market,address,item,useRechargeCard,useBill,useMobile,content,owner,phone,regDate,updateDate
-             FROM
-                  store
+            select sno,title,regDate, is_deleted
+            from store
         </select>
+        
+        <select id="getListWithPaging" resultType="StoreAdminVO">
+		select title from store
+		
+		order by sno desc
+		limit #{offset}, #{amount}
+	</select>
         
       
 </mapper>

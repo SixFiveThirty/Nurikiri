@@ -10,6 +10,8 @@ public interface ReviewMapper {
 	
 	public List<ReviewVO> getListWithPaging(Criteria cri);
 	
+	public int getTotalCount(Criteria cri);
+	
 	public void insert(ReviewVO review);
 	
 	public void insertSelectKey(ReviewVO review);
