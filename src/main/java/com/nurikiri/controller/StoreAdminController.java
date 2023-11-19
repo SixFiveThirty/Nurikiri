@@ -27,6 +27,7 @@ public class StoreAdminController {
 		log.info("list: " + cri);
 		model.addAttribute("list", service.storeAdminList(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, 123)); //나중에 123 -> total로 수정한다고 하심.
+	
 	}
 }
 
