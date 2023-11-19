@@ -4,7 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.nurikiri.mapper.ReviewMapper">
-
 	<resultMap id="ReviewMap" type="ReviewVO">
 		<id property="rno" column="rno" />
 		<result property="sno" column="sno" />
@@ -27,14 +26,12 @@
 		where sno = #{sno}
 		order by reg_date desc
 	</select>
-
 	<select id="get" resultMap="ReviewMap">
 		select
 		rno, sno, content, writer, reg_date, update_date
 		from store_review
 		where rno = #{rno}
 	</select>
-
 	<insert id="create">
 		insert into store_review (sno, writer, content)
 		values(#{sno},
@@ -44,7 +41,6 @@
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
-
 	<update id="update">
 		update store_review
 		set
@@ -52,10 +48,8 @@
 		update_date = now()
 		where rno = #{rno}
 	</update>
-
-	<delete id="delete">
+ 	<delete id="delete">
 		delete from store_review
 		where rno = #{rno}
-	</delete>
-
+ 	</delete>
 </mapper>

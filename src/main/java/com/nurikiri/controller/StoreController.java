@@ -29,9 +29,9 @@ public class StoreController {
 	@Autowired
 	private StoreService service;
 	
-	@GetMapping("/test")
-	public void test() {
-		log.info("test");
+	@GetMapping("/reviewpopup")
+	public void reviewpopup() {
+		log.info("reviewpopup");
 	}
 
 	@GetMapping("/list")
@@ -44,8 +44,7 @@ public class StoreController {
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 		
 	}
-
-	
+		
 	@GetMapping("/register")
 	public void register(@ModelAttribute("store") StoreVO store) {
 	}
@@ -98,8 +97,8 @@ public class StoreController {
 		if (service.remove(sno)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-//		return "redirect:/board/list" + cri.getLink();
-		return "redirect:/board/list";
+//		return "redirect:/store/list" + cri.getLink();
+		return "redirect:/store/list";
 
 	}
 

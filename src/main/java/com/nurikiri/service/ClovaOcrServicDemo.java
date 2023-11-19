@@ -14,6 +14,7 @@ import java.util.UUID;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+//Request with multipart/form-data
 public class ClovaOcrServicDemo {
 
 	public static void main(String[] args) {

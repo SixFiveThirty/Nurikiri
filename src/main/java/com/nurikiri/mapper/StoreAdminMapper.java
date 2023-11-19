@@ -2,13 +2,19 @@ package com.nurikiri.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
+import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.StoreAdminVO;
 
-@Mapper
-public class StoreAdminMapper {
-	public static List<StoreAdminVO> selectStoreAdminList() throws Exception {
-		return null;
-	}
+public interface StoreAdminMapper {
+	
+	public StoreAdminVO read(Long sno);
+	
+	public List<StoreAdminVO> storeAdminList();
+	
+	public List<StoreAdminVO> getListWithPaging(Criteria cri);
+	
+	
+	
+	
 
 }

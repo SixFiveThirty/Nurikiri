@@ -33,7 +33,6 @@ public class ClovaOcrServicEX1 {
 		ClovaOcrService api = ClovaOcrService.getService();
 		
 		try {
-		
 			/*  */
 			// uri 타입을의 파일경로를 가진 RequestBody로 생성
 			File testFile = new File("C:\\Users\\JU\\test.png");
@@ -137,8 +136,7 @@ public class ClovaOcrServicEX1 {
 
 			System.out.println("response:" + response);
 			
-//			String result = api.getOcr(inputLine);
-
+//			String result = api.getOcr(inputLine)
 			
 		} catch (Exception e) {
 			System.out.println(e);
