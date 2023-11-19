@@ -24,13 +24,13 @@ public class StoreAdminServiceImpl implements StoreAdminService{
 		return mapper.getListWithPaging(cri);
 	}
 
-	@Override
-	public StoreAdminVO get(Long sno) {
-		return null;
-	}
-
+//	@Override
+//	public StoreAdminVO get(Long sno) {
+//		StoreAdminVO storeAdmin = mapper.read(sno);
+//		return storeAdmin;
+//	}
 	
-	}
+}
 
 	
 	
