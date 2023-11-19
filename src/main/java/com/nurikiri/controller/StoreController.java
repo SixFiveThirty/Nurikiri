@@ -83,8 +83,8 @@ public class StoreController {
 			rttr.addFlashAttribute("result", "success");
 
 		}
-//		return "redirect:" + cri.getLinkWithSno("/store/get", store.getSno());
-		return "redirect:/store/get";
+		return "redirect:" + cri.getLinkWithSno("/store/get", store.getSno());
+		//return "redirect:/store/get";
 
 	}
 	
