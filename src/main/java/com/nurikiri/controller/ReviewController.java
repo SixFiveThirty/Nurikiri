@@ -16,18 +16,18 @@ import com.nurikiri.domain.ReviewVO;
 import com.nurikiri.mapper.ReviewMapper;
 
 @RestController
-@RequestMapping("/api/managers/{rno}/review")
+@RequestMapping("/api/managers/{sno}/review")
 public class ReviewController {
 	@Autowired
 	ReviewMapper mapper;
 
 	@GetMapping("")
-	public List<ReviewVO> readReviews(@PathVariable Long rno) {
-		return mapper.readAll(rno);
+	public List<ReviewVO> readReviews(@PathVariable Long sno) {
+		return mapper.readAll(sno);
 	}
 
 	@GetMapping("/{rno}")
-	public ReviewVO readReview(@PathVariable Long rno, @PathVariable Long sno) {
+	public ReviewVO readReview(@PathVariable Long sno, @PathVariable Long rno) {
 		return mapper.get(rno);
 	}
 
