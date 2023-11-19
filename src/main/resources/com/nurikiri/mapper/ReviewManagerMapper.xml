@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.nurikiri.mapper.ReviewMapper">
+<mapper namespace="com.nurikiri.mapper.ReviewManagerMapper">
 
 	<sql id="criteria">
 		<trim prefixOverrides="OR">
@@ -24,7 +24,7 @@
 		</trim>
 	</sql>
 
-	<select id="getList" resultType="ReviewVO">
+	<select id="getList" resultType="ReviewManagerVO">
 		select * from store_review
 	</select>
 
@@ -45,7 +45,7 @@
 		</selectKey>
 	</insert>
 
-	<select id="read" resultType="ReviewVO">
+	<select id="read" resultType="ReviewManagerVO">
 		select * from store_review where
 		rno = #{rno}
 	</select>
@@ -54,7 +54,7 @@
 		delete from store_review where rno = #{rno}
 	</delete>
 
-	<select id="getListWithPaging" resultType="ReviewVO">
+	<select id="getListWithPaging" resultType="ReviewManagerVO">
 		select * from store_review
 		<where>
 			<include refid="criteria"></include>

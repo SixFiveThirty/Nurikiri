@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nurikiri.mapper.ReviewMapper">
+	<resultMap id="ReviewMap" type="ReviewVO">
+		<id property="rno" column="rno" />
+		<result property="sno" column="sno" />
+		<result property="content" column="content" />
+		<result property="writer" column="writer" />
+		<result property="regDate" column="reg_date" />
+		<result property="updateDate" column="update_date" />
+
+		<!-- <collection property="replyList" ofType="com.nurikiri.domain.ReplyVO"> 
+			<id property="rno" column="rno" /> <result property="cno" column="cno" /> 
+			<result property="content" column="r_content" /> <result property="writer" 
+			column="r_writer" /> <result property="regDate" column="r_reg_date" /> <result 
+			property="updateDate" column="r_update_date" /> </collection> -->
+	</resultMap>
+
+	<select id="readAll" resultMap="ReviewMap">
+		select
+		rno, sno, content, writer, reg_date, update_date
+		from store_review
+		where sno = #{sno}
+		order by reg_date desc
+	</select>
+	<select id="get" resultMap="ReviewMap">
+		select
+		rno, sno, content, writer, reg_date, update_date
+		from store_review
+		where rno = #{rno}
+	</select>
+	<insert id="create">
+		insert into store_review (sno, writer, content)
+		values(#{sno},
+		#{writer}, #{content})
+		<selectKey resultType="Long" keyProperty="rno" keyColumn="rno"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	<update id="update">
+		update store_review
+		set
+		content = #{content},
+		update_date = now()
+		where rno = #{rno}
+	</update>
+ 	<delete id="delete">
+		delete from store_review
+		where rno = #{rno}
+ 	</delete>
+</mapper>

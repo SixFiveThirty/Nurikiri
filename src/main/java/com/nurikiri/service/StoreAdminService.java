@@ -11,6 +11,6 @@ import com.nurikiri.domain.StoreAdminVO;
 public interface StoreAdminService {
  //가맹점 리스트
 	List<StoreAdminVO> storeAdminList(Criteria cri);
-
+  
 //	StoreAdminVO get(Long sno);
 }
