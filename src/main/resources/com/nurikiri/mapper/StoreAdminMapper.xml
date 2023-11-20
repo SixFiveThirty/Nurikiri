@@ -4,17 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.nurikiri.mapper.StoreAdminMapper">
-        <select id="storeAdminList" resultType="StoreAdminVO">
-            select sno,title,regDate, is_deleted
-            from store
-        </select>
-        
         <select id="getListWithPaging" resultType="StoreAdminVO">
-		select title from store
+		select sno, title, reg_date, is_deleted from store
 		
 		order by sno desc
 		limit #{offset}, #{amount}
 	</select>
-        
-      
+	<select id="read" resultType="StoreAdminVO">
+		select * from store where sno =
+		#{sno}
+	</select>
 </mapper>

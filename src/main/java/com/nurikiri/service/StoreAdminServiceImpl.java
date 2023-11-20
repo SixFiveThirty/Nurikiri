@@ -23,14 +23,8 @@ public class StoreAdminServiceImpl implements StoreAdminService{
 		log.info("get List" + cri);
 		return mapper.getListWithPaging(cri);
 	}
-
-	@Override
-	public StoreAdminVO get(Long sno) {
-		return null;
-	}
-
 	
-	}
+}
 
 	
 	
