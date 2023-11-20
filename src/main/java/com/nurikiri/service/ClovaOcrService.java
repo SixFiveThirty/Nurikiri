@@ -1,45 +1,89 @@
 package com.nurikiri.service;
 
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.UUID;
 
-import com.mysql.cj.protocol.x.ContinuousOutputStream;
-import com.nurikiri.domain.clova.Fields;
-import com.nurikiri.domain.clova.Images;
-import com.nurikiri.domain.clova.OcrResult;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import okhttp3.MultipartBody;
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.Multipart;
-import retrofit2.http.POST;
-import retrofit2.http.Part;
-import retrofit2.http.Query;
 
-public interface ClovaOcrService {
-	
-	String BASE_URL = "https://00t4hthuv6.apigw.ntruss.com/custom/v1/26194/dd29d2e86fd7030ed60487dfe050756ad233765d5f061cc27ef656bdec4371c6/";
-	
-	@Multipart
-	@POST("infer")
-	@Headers({
-		"X-OCR-SECRET: eGhka2R4bWRpYU9UelR1VG16dG5rYnh3S1FIekxRVVA=",
-		"Content-Type: application/json"
-	})
-	Call<OcrResult> sandOcr();
-	// 서버에 이미지 업로드 할 계획
-	// multipart/form 이냐 json 이냐
-	
-	public static ClovaOcrService getService() {
-		Retrofit retrofit = new Retrofit.Builder()
-				.baseUrl(BASE_URL)
-				.addConverterFactory(GsonConverterFactory.create())
-				.build();
-		
-		return retrofit.create(ClovaOcrService.class);
+// Request with application/json
+public class ClovaOcrService {
+
+	public String getocrresult() {
+		String apiURL = "https://00t4hthuv6.apigw.ntruss.com/custom/v1/26194/dd29d2e86fd7030ed60487dfe050756ad233765d5f061cc27ef656bdec4371c6/infer";
+		String secretKey = "eGhka2R4bWRpYU9UelR1VG16dG5rYnh3S1FIekxRVVA=";
+		String result="";
+
+		try {
+			
+			//이미지 받고 세팅해서
+			//클로버 response 가공해서
+			// 잘해본다
+			URL url = new URL(apiURL);
+			HttpURLConnection con = (HttpURLConnection)url.openConnection();
+			con.setUseCaches(false);
+			con.setDoInput(true);
+			con.setDoOutput(true);
+			con.setRequestMethod("POST");
+			
+			con.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+			con.setRequestProperty("X-OCR-SECRET", secretKey);
+
+			JSONObject json = new JSONObject();
+			json.put("version", "V2");
+			json.put("requestId", UUID.randomUUID().toString());
+			json.put("timestamp", System.currentTimeMillis());
+			
+			JSONObject image = new JSONObject();
+			image.put("format", "jpg");
+			FileInputStream inputStream = new FileInputStream("C:\\Users\\JU\\Pictures\\test.png");
+			// url로 바꿔줘야함 찾아봐
+			
+			byte[] buffer = new byte[inputStream.available()];
+			inputStream.read(buffer);
+			inputStream.close();
+			image.put("data", buffer);
+			image.put("name", "demo");
+			JSONArray images = new JSONArray();
+			images.put(image);
+			json.put("images", images);
+			String postParams = json.toString();
+			
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			wr.writeBytes(postParams);
+			wr.flush();
+			wr.close();
+			
+			int responseCode = con.getResponseCode();
+			BufferedReader br;
+			if (responseCode == 200) {
+				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			} else {
+				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+			}
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+			while ((inputLine = br.readLine()) != null) {
+				response.append(inputLine);
+			}
+			br.close();
+
+			System.out.println(response);
+			// 객체 받아서
+			// 원하는 부분 빼오기
+			// 리턴
+			return result;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return result;
 	}
 
 }

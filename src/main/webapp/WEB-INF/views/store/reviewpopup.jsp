@@ -44,12 +44,13 @@
 </head>
 <body>
 <h4>영수증 인증이 필요한 서비스입니다.</h4>
+<form action="uploadFormAction" method="post" enctype="multipart/form-data">
  <div class="wrapper">
 <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg" class="image-box"/>
 <label for="file">
 	<div class="btn-upload">영수증 인증</div>
 </label>
-<input type="file" id="file" accept=".png, .jpg, .jpeg">
+<input type="file" name='uploadFile' id="file" accept=".png, .jpg, .jpeg">
 </div>
 
 <div class="btn-upload" herf="">다음에 할래요</div>
