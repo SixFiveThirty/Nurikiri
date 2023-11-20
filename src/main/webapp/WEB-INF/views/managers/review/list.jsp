@@ -56,7 +56,8 @@ $(document).ready(async function() {
 					<td style="text-align: center;"><a href="get?rno=${review.rno}"> ${review.content} </a></td>
 					<td style="text-align: center; width: 150px;">${review.writer}</td>
 					<td style="text-align: center; width: 100px;"><fmt:formatDate pattern="yyyy.MM.dd" value="${review.regDate}" /></td>
-					<td><button type="button" class="btn btn-danger remove" style="width: 100px" onclick="location.href='remove&rno=${review.rno}'">삭제</button>
+					<td><button type="button" class="btn btn-danger remove" style="width: 100px" onclick="location.href='remove&sno=${review.sno}'">삭제</button>
+					<!-- <td><button type="button" class="btn btn-danger remove" style="width: 100px" onclick="delete()">삭제</button> -->
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -65,7 +66,7 @@ $(document).ready(async function() {
 
 <form action="remove" method="post" name="removeForm">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
-	<input type="hidden" name="rno" value="${review.rno}" /> 
+	<input type="hidden" name="sno" value="${review.sno}" /> 
 	<input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
 	<input type="hidden" name="amount" value="${cri.amount}" /> 
 	<input type="hidden" name="type" value="${cri.type}" /> 
