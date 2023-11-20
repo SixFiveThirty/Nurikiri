@@ -58,6 +58,12 @@ public class MemberServiceImpl implements MemberService {
 		}
 
 	}
+	
+	@Override
+	public boolean checkPassword(MemberVO member) {
+		return false;
+		
+	}
 
 	@Override
 	public void modify(MemberVO member, MultipartFile avatar) throws IOException {

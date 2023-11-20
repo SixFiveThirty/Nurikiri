@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.nurikiri.domain.MemberVO;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.nurikiri.service.MemberService;
@@ -98,13 +100,24 @@ public class SecurityController {
 		
 	}
 	
+	@GetMapping("/check_pwd")
+	public void checkPassword(@ModelAttribute("member") MemberVO member) {
+		
+	}
+	
+	@PostMapping("/check_pwd")
+	public String checkPassword(@Valid @ModelAttribute("member") MemberVO member, Errors errors) {
+		
+		return "redirect:/security/modify";
+	}
+	
 	@GetMapping("/modify")
 	public void modify(@ModelAttribute("member") MemberVO member) {
 		
 	}
 	
 	@PostMapping("/modify")
-	public String modify(@Valid @ModelAttribute("member") MemberVO member, Errors errors, MultipartFile avatar) throws IOException {
+	public String modify(@Valid @ModelAttribute("member") MemberVO member, Errors errors, MultipartFile avatar, HttpSession session) throws IOException {
 				
 				if (!member.getPassword().equals(member.getConfirmedPassword())) {
 					log.warn("비밀번호 불일치 에러");
@@ -122,6 +135,9 @@ public class SecurityController {
 				// 회원 정보 수정
 			    service.modify(member, avatar);
 			    log.warn("service.modify 작동 확인");
+			    
+			    // 세션 업데이트
+			    session.setAttribute("member", member);
 			    
 				
 				return "redirect:/security/profile";
