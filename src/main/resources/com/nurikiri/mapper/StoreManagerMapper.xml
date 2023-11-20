@@ -3,16 +3,16 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.nurikiri.mapper.StoreAdminMapper">
+<mapper namespace="com.nurikiri.mapper.StoreManagerMapper">
         
-        <select id="getListWithPaging" resultType="StoreAdminVO">
+        <select id="getListWithPaging" resultType="StoreManagerVO">
 		select title,sno,reg_date,is_deleted from store
 		
 		order by sno desc
 		limit #{offset}, #{amount}
 	</select>
 	
-	<select id="read" resultType="StoreAdminVO">
+	<select id="read" resultType="StoreManagerVO">
 		select * from store where sno =
 		#{sno}
 	</select>

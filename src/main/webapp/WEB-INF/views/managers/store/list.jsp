@@ -36,7 +36,7 @@
                <td style="text-align: center;"><a href="/store/get?sno=${store.sno}">${store.title}</a></td>
                <td style="text-align: center; width: 100px;"><fmt:formatDate pattern="yyyy" value="${store.regDate}"/></td>
                <td style="text-align: center;"><button onclick="location.href='/store/modify?sno=${store.sno}'">수정</button></td>
-               <td style="text-align: center; width: 150px;">${store.isDeleted}</td>
+               <td style="text-align: center; width: 150px;"><button id='btn' onclick='changeBtnName()'>Y</button></td>
            </tr>
           </c:forEach>
         </tbody>

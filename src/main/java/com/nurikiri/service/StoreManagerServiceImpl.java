@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.nurikiri.domain.Criteria;
-import com.nurikiri.domain.StoreAdminVO;
-import com.nurikiri.mapper.StoreAdminMapper;
+import com.nurikiri.domain.StoreManagerVO;
+import com.nurikiri.mapper.StoreManagerMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -14,12 +14,12 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Service
 @AllArgsConstructor
-public class StoreAdminServiceImpl implements StoreAdminService{
+public class StoreManagerServiceImpl implements StoreManagerService{
 	
-	private StoreAdminMapper mapper;
+	private StoreManagerMapper mapper;
 	
 	@Override
-	public List<StoreAdminVO> storeAdminList(Criteria cri) {
+	public List<StoreManagerVO> storeManagerList(Criteria cri) {
 		log.info("get List" + cri);
 		return mapper.getListWithPaging(cri);
 	}
