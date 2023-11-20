@@ -33,11 +33,6 @@ $(document).ready(async function() {
 	const REVIEW_URL = '/api/managers/{sno}/review'; //전역상수(리뷰 기본 URL 상수임.)
 	
 	loadReviews(sno, writer);
-	
-	function delete() {
-		window.location.href="remove&rno=${review.rno}";
-		deleteComment;
-	}
 });
 </script>
 
