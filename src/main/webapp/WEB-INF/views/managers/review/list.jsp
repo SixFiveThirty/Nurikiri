@@ -57,7 +57,12 @@ $(document).ready(async function() {
 </div>
 
 <form action="remove" method="post" name="removeForm">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <input type="hidden" name="rno" value="${review.rno}" /> <input type="hidden" name="pageNum" value="${cri.pageNum}" /> <input type="hidden" name="amount" value="${cri.amount}" /> <input type="hidden" name="type" value="${cri.type}" /> <input type="hidden" name="keyword" value="${cri.keyword}" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+	<input type="hidden" name="rno" value="${review.rno}" /> 
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
+	<input type="hidden" name="amount" value="${cri.amount}" /> 
+	<input type="hidden" name="type" value="${cri.type}" /> 
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
 </form>
 
 <%@ include file="../../common/pagination.jsp"%>
