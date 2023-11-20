@@ -14,7 +14,5 @@ public interface MemberService {
 	public void register(MemberVO member, MultipartFile avatar) throws IOException;
 	
 	public void modify(MemberVO member, MultipartFile avatar) throws IOException;
-
-	public boolean checkPassword(MemberVO member);
 	
 }

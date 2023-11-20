@@ -52,10 +52,13 @@
 			<div class="con mx-auto">
 				<h1>비밀번호 재확인</h1>
 				<form:form modelAttribute="member" cssClass="form" >
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
 				<div class="form-group">
-					<form:label path="password">비밀번호</form:label>
-					<form:input path="password" cssClass="form-control" type="password"/>
-					<form:errors path="password" cssClass="errors" />
+				<input type="hidden" name="password" value="${member.password}"/>
+					<form:label path="confirmedPassword">비밀번호</form:label>
+					<form:input path="confirmedPassword" cssClass="form-control" type="password"/>
+					<form:errors path="confirmedPassword" cssClass="errors" />
 				</div>
 
 			<div class="btn-group">

@@ -19,8 +19,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 
 import com.nurikiri.service.MemberService;
 
@@ -34,6 +39,9 @@ public class SecurityController {
 
 	@Autowired
 	private MemberService service;
+	
+	@Autowired
+	private AuthenticationManager authenticationManager;
 
 	@GetMapping("/login")
 	public void login() {
@@ -107,6 +115,14 @@ public class SecurityController {
 	
 	@PostMapping("/check_pwd")
 	public String checkPassword(@Valid @ModelAttribute("member") MemberVO member, Errors errors) {
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		
+			 if (!passwordEncoder.matches(member.getConfirmedPassword(), member.getPassword())) {
+			        log.warn("비밀번호 불일치 에러");
+			        errors.rejectValue("confirmedPassword", "비밀번호 불일치", "비밀번호가 일치하지 않습니다.");
+			        return "security/check_pwd";
+			    }
+		
 		
 		return "redirect:/security/modify";
 	}
@@ -126,7 +142,7 @@ public class SecurityController {
 
 				if (errors.hasErrors()) {
 					log.warn("에러문구"+ errors);
-//					log.warn(errors.getFieldError());
+					//log.warn(errors.getFieldError());
 					log.warn(errors.getAllErrors());
 					return "security/modify";
 				}				
@@ -136,8 +152,13 @@ public class SecurityController {
 			    service.modify(member, avatar);
 			    log.warn("service.modify 작동 확인");
 			    
-			    // 세션 업데이트
-			    session.setAttribute("member", member);
+			    // 수정된 정보로 다시 로그인
+			    Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(member.getUsername(),member.getPassword()));
+			    SecurityContextHolder.getContext().setAuthentication(authentication);
+			    
+			    // 세션에도 업데이트
+			    session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
+
 			    
 				
 				return "redirect:/security/profile";
