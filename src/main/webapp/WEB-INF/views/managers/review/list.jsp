@@ -30,9 +30,9 @@ $(document).ready(async function() {
 	
 	let writer = '${member.username}'; //작성자(로그인 유저)
 	
-	const REVIEW_URL = '/api/managers/{rno}/review'; //전역상수(리뷰 기본 URL 상수임.)
+	const REVIEW_URL = '/api/managers/{sno}/review'; //전역상수(리뷰 기본 URL 상수임.)
 	
-	loadReviews(rno, writer);
+	loadReviews(sno, writer);
 });
 </script>
 
