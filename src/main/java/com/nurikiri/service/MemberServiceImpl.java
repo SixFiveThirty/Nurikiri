@@ -3,10 +3,13 @@ package com.nurikiri.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.security.Principal;
+import java.util.List;
 
 import com.nurikiri.mapper.MemberMapper;
 
 import com.nurikiri.domain.AuthVO;
+import com.nurikiri.domain.Criteria;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private PasswordEncoder pwEncoder;
-
+	
 	@Override
 	public MemberVO get(String username) {
 		MemberVO member = mapper.read(username);
@@ -82,12 +85,32 @@ public class MemberServiceImpl implements MemberService {
 			Thumbnails.of(avatar.getInputStream()).size(250, 250).toFile(dest);
 		}
 	}
-	
+  
 	 public void certifiedPhoneNumber(String phoneNumber, String cerNum) {
 		 DefaultMessageService messageService = NurigoApp.INSTANCE.initialize("NCSWKFA1W2GPLEKS", "OSUYFY9C4JJWSYXXCOAUTTTMYPN8CQMH", "https://api.coolsms.co.kr");
 		 Message message = new Message();
 		 message.setFrom(phoneNumber);
 	 }
+	
+	@Override
+	public List<MemberVO> getList(Criteria cri, Principal principal) {
+		log.info("getList");
+
+		return mapper.getListWithPaging(cri);
+	}
+
+	@Override
+	public int getTotal(Criteria cri) {
+		log.info("get total count");
+
+		return mapper.getTotalCount(cri);
+	}
+
+	@Override
+	public boolean remove(String username) {
+		log.info("remove");
+		return mapper.delete(username) == 1;
+	}
 		
 }		
 

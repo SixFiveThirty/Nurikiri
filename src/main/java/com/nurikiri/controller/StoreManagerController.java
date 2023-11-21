@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.PageDTO;
-import com.nurikiri.service.StoreAdminService;
+import com.nurikiri.service.StoreManagerService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -19,15 +19,14 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/managers/store")
 @AllArgsConstructor
-public class StoreAdminController {
+public class StoreManagerController {
 	@Autowired
-	private StoreAdminService service;
+	private StoreManagerService service;
 
 	@GetMapping("/list")
 	public void list(@ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("list: " + cri);
-//		model.addAttribute("storeAdmin", service.get(sno));
-		model.addAttribute("list", service.storeAdminList(cri));
+		model.addAttribute("list", service.storeManagerList(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, 123)); //나중에 123 -> total로 수정한다고 하심.
 	
 	}

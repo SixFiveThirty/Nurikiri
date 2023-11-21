@@ -21,7 +21,7 @@
 
 	<div class="top-div mt-5">
 		<div class="card">
-			<a href="user/list" class="btn btn-light"> <i class="fa-solid fa-user"></i> 회원 관리
+			<a href="member/list" class="btn btn-light"> <i class="fa-solid fa-user"></i> 회원 관리
 			</a>
 		</div>
 		<br>

@@ -5,7 +5,8 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class StoreAdminVO {
+public class StoreManagerVO {
+	
 	private Long sno;
 	
 	private String title; // 가맹점명		
