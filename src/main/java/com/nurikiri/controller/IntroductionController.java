@@ -11,7 +11,7 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/introduction")
 @AllArgsConstructor
 public class IntroductionController {
-	@GetMapping({"/get", "/modify", "/test"})
+	@GetMapping("/get")
 	public void get() {
 		log.info("Welcome to GET OR MODIFY Page");
 	}
