@@ -16,7 +16,7 @@ import com.nurikiri.domain.ReviewVO;
 import com.nurikiri.mapper.ReviewMapper;
 
 @RestController
-@RequestMapping("/api/managers/{sno}/review")
+@RequestMapping("/api/store/{sno}/review")
 public class ReviewController {
 	@Autowired
 	ReviewMapper mapper;
