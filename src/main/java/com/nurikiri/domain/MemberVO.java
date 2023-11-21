@@ -40,6 +40,9 @@ public class MemberVO {
 	@NotBlank(message="필수 항목 입니다.")
 	@Email(message="이메일 형식에 맞지 않습니다.")
 	private String email;
+	
+	@NotBlank(message="필수 항목 입니다.")
+	private String authNum;
 
 	@NotBlank(message="필수 항목 입니다.")
 	private String phone1;

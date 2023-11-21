@@ -2,11 +2,13 @@ package com.nurikiri.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import com.nurikiri.mapper.MemberMapper;
 
 import com.nurikiri.domain.AuthVO;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ import com.nurikiri.domain.MemberVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
+import net.nurigo.sdk.NurigoApp;
+import net.nurigo.sdk.message.model.Message;
+import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @Service
 @Log4j
@@ -77,6 +82,12 @@ public class MemberServiceImpl implements MemberService {
 			Thumbnails.of(avatar.getInputStream()).size(250, 250).toFile(dest);
 		}
 	}
+	
+	 public void certifiedPhoneNumber(String phoneNumber, String cerNum) {
+		 DefaultMessageService messageService = NurigoApp.INSTANCE.initialize("NCSWKFA1W2GPLEKS", "OSUYFY9C4JJWSYXXCOAUTTTMYPN8CQMH", "https://api.coolsms.co.kr");
+		 Message message = new Message();
+		 message.setFrom(phoneNumber);
+	 }
 		
 }		
 
