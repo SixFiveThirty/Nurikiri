@@ -72,6 +72,6 @@ public class Criteria {
     }
     
     public String getLinkWithEno(String base, Long eno) {
-		return getLink(base, pageNum) + "&eno=" + eno;
-	}
+        return getLink(base, pageNum) + "&eno=" + eno;
+    }
 }

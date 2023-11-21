@@ -9,7 +9,6 @@ import com.nurikiri.domain.StoreVO;
 
 public interface StoreMapper {
 
-	//@Select("select * from store")
 	public List<StoreVO> getList();
 	
 	public void insert(StoreVO store);

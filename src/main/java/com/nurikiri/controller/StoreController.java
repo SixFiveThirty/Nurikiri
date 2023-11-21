@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.PageDTO;
 import com.nurikiri.domain.StoreVO;
+import com.nurikiri.service.ClovaOcrService;
 import com.nurikiri.service.StoreService;
 
 import lombok.extern.log4j.Log4j;
@@ -29,10 +31,19 @@ public class StoreController {
 	@Autowired
 	private StoreService service;
 	
+	private ClovaOcrService ocrservice;
+	
 	@GetMapping("/reviewpopup")
 	public void reviewpopup() {
 		log.info("reviewpopup");
 	}
+	
+	@PostMapping("/uploadFormAction")
+	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
+		
+	}
+	
+	
 
 	@GetMapping("/list")
 	public void list(@ModelAttribute("cri") Criteria cri,Principal principal, Model model) {

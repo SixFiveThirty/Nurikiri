@@ -2,10 +2,13 @@ package com.nurikiri.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
+import java.util.List;
 
 import com.nurikiri.mapper.MemberMapper;
 
 import com.nurikiri.domain.AuthVO;
+import com.nurikiri.domain.Criteria;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private PasswordEncoder pwEncoder;
-
+	
 	@Override
 	public MemberVO get(String username) {
 		MemberVO member = mapper.read(username);
@@ -77,6 +80,29 @@ public class MemberServiceImpl implements MemberService {
 			Thumbnails.of(avatar.getInputStream()).size(250, 250).toFile(dest);
 		}
 	}
+	
+	//--------------------------------------------------
+	
+	@Override
+	public List<MemberVO> getList(Criteria cri, Principal principal) {
+		log.info("getList");
+
+		return mapper.getListWithPaging(cri);
+	}
+
+	@Override
+	public int getTotal(Criteria cri) {
+		log.info("get total count");
+
+		return mapper.getTotalCount(cri);
+	}
+
+	@Override
+	public boolean remove(String username) {
+		log.info("remove");
+		return mapper.delete(username) == 1;
+	}
+
 		
 }		
 
