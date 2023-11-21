@@ -152,12 +152,7 @@ public class SecurityController {
 			    service.modify(member, avatar);
 			    log.warn("service.modify 작동 확인");
 			    
-			    // 수정된 정보로 다시 로그인
-			    Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(member.getUsername(),member.getPassword()));
-			    SecurityContextHolder.getContext().setAuthentication(authentication);
-			    
-			    // 세션에도 업데이트
-			    session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
+			    session.invalidate();
 
 			    
 				
