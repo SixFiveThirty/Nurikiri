@@ -14,6 +14,4 @@ public class StoreManagerVO {
 	private Date regDate; // 등록일자
 	
 	private String isDeleted; //가맹점 운영 여부
-
-
 }

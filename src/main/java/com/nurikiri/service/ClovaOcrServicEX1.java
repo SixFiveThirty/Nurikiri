@@ -33,7 +33,6 @@ public class ClovaOcrServicEX1 {
 		ClovaOcrService api = ClovaOcrService.getService();
 		
 		try {
-		
 			/*  */
 			// uri 타입을의 파일경로를 가진 RequestBody로 생성
 			File testFile = new File("C:\\Users\\JU\\test.png");
@@ -43,21 +42,21 @@ public class ClovaOcrServicEX1 {
 			MultipartBody.Part filePart = MultipartBody.Part.createFormData("test", "test.png", fileBody);
 			System.out.println();
 			// clova ocr에 파일 전송(post)
-			Call<OcrResult> call = api.sandOcr(filePart);
+			//Call<OcrResult> call = api.sandOcr(filePart);
 			System.out.println("=======================");
-			System.out.println(call.request());
-			System.out.println(call.request().headers());
-			System.out.println("=======================");
-			
-			Response<OcrResult> res = call.execute();
+//			System.out.println(call.request());
+//			System.out.println(call.request().headers());
+//			System.out.println("=======================");
+//			
+//			Response<OcrResult> res = call.execute();
 
-			if(res.isSuccessful()) {
-				OcrResult result = res.body();
-				System.out.println(result);
-			} else {
-				//System.out.println("호출 실패");
-				System.out.println(res);
-			}
+//			if(res.isSuccessful()) {
+//				OcrResult result = res.body();
+//				System.out.println(result);
+//			} else {
+//				//System.out.println("호출 실패");
+//				System.out.println(res);
+//			}
 
 			/*
 			 * URL url = new URL(apiURL); HttpURLConnection con =
@@ -124,6 +123,20 @@ public class ClovaOcrServicEX1 {
 			 * System.out.println("response:" + response);
 			 */
 			
+			//if (responseCode == 200) { br = new BufferedReader(new
+			//InputStreamReader(con.getInputStream())); } else { br = new
+			//BufferedReader(new InputStreamReader(con.getErrorStream())); }
+			
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+			
+			//while ((inputLine = br.readLine()) != null) { response.append(inputLine); }
+			//br.close();
+			
+
+			System.out.println("response:" + response);
+			
+//			String result = api.getOcr(inputLine)
 			
 		} catch (Exception e) {
 			System.out.println(e);

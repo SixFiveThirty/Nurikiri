@@ -44,7 +44,7 @@
 			<img src="..." class="card-img-top" alt="사진 서비스 조금만 기다려주세요..." />
 		</div>
 		<div class="card ml-5 p-5">
-			<p>상호명: ${store.title }</p>
+			<p>상호명: ${store.title}</p>
 			<p>소속 시장: ${store.market}</p>
 			<p>주소: ${store.address }</p>
 			<p>취급품목: ${store.item }</p>
@@ -75,7 +75,8 @@
 </div>
 
 <h1>리뷰 목록</h1>
-<button type= "button" class="btn btn-light mr-5" style="width: 200px">리뷰 등록</button>
+<button type= "button" class="btn btn-light mr-5" style="width: 200px"
+onclick="location.href='${cri.getLink('reviewpopup')}&sno=${store.sno}'">리뷰 등록</button>
 
 <div class="review">리뷰 서비스 조금만 기다려주세요...</div>
 

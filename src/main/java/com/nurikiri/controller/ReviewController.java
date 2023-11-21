@@ -1,50 +1,54 @@
 package com.nurikiri.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.nurikiri.domain.Criteria;
-import com.nurikiri.domain.PageDTO;
-import com.nurikiri.service.ReviewService;
+import com.nurikiri.domain.ReviewVO;
+import com.nurikiri.mapper.ReviewMapper;
 
-import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
-
-@Controller
-@Log4j
-@RequestMapping("/managers/review")
-@AllArgsConstructor
+@RestController
+@RequestMapping("/api/managers/{sno}/review")
 public class ReviewController {
 	@Autowired
-	private ReviewService service;
+	ReviewMapper mapper;
 
-	@GetMapping("/list")
-	public void list(@ModelAttribute("cri") Criteria cri, Model model) {
-		log.info("list: " + cri);
-		model.addAttribute("list", service.getList(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri, 123)); //나중에 123 -> total로 수정한다고 하심.
+	@GetMapping("")
+	public List<ReviewVO> readReviews(@PathVariable Long sno) {
+		return mapper.readAll(sno);
 	}
 
-	@GetMapping({ "/get" })
-	public void get(Model model) {
-		log.info("get");
+	@GetMapping("/{rno}")
+	public ReviewVO readReview(@PathVariable Long sno, @PathVariable Long rno) {
+		return mapper.get(rno);
 	}
 
-	@PostMapping("/remove")
-	public String remove(@RequestParam("rno") Long rno, RedirectAttributes rttr) {
-		log.info("remove...." + rno);
+	@PostMapping("")
+	public ReviewVO create(@RequestBody ReviewVO vo) {
+		mapper.create(vo);
+		return mapper.get(vo.getRno());
+	}
 
-		if (service.remove(rno)) {
-			rttr.addFlashAttribute("result", "success");
-		}
+	@PutMapping("/{rno}")
+	public ReviewVO update(@PathVariable Long rno, @RequestBody ReviewVO vo) {
+		System.out.println("==> " + vo);
+		mapper.update(vo);
+		
+		return mapper.get(vo.getRno());
+	}
 
-		return "redirect:/managers/review/list";
+	@DeleteMapping("/{rno}")
+	public String delete(@PathVariable Long rno) {
+		System.out.println("delete ==>" + rno);
+		mapper.delete(rno);
+		return "OK";
 	}
 }

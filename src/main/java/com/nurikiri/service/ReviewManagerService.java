@@ -3,16 +3,16 @@ package com.nurikiri.service;
 import java.util.List;
 
 import com.nurikiri.domain.Criteria;
-import com.nurikiri.domain.ReviewVO;
+import com.nurikiri.domain.ReviewManagerVO;
 
-public interface ReviewService {
+public interface ReviewManagerService {
 //	public void register(ReviewVO review) throws Exception;
 	
-	public ReviewVO get(Long rno);
+	public ReviewManagerVO get(Long rno);
 	
 //	public boolean modify(ReviewVO review) throws Exception;
 	
 	public boolean remove(Long rno);
 	
-	public List<ReviewVO> getList(Criteria cri);
+	public List<ReviewManagerVO> getList(Criteria cri);
 }
