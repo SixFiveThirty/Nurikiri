@@ -62,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						).authenticated() // 프로필 화면 로그인시에만 입장 가능
 				.antMatchers(
 						"/managers/managers_list",
+						".managers/member/list",
 						"/managers/review/get",
 						"/managers/review/list",
 						"/managers/store/get",

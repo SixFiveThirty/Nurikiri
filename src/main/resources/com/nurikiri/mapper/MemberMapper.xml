@@ -58,4 +58,50 @@
 		update_date = now()
 		where username = #{username}
 	</update>
+	
+	<!-- ====================================== -->
+	
+	<select id="getList" resultType="MemberVO">
+		select * from member
+		<where>
+			<include refid="criteria"></include>
+		</where>
+		order by username
+		limit #{offset} , #{amount}
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		select count(*) from store
+		<where>
+			<include refid="criteria"></include>
+		</where>
+	</select>
+
+	<select id="getListWithPaging" resultType="MemberVO">
+		select * from member
+		<where>
+			<include refid="criteria"></include>
+		</where>
+		order by username
+		limit #{offset} , #{amount}
+	</select>
+	
+		<sql id="criteria">
+		<trim prefixOverrides="OR">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like CONCAT('%', #{keyword}, '%') </when>
+						<when test="type == 'C'.toString()">
+							content like CONCAT('%', #{keyword}, '%') </when>
+						<when test="type == 'O'.toString()">
+							owner like CONCAT('%', #{keyword}, '%') </when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	
 </mapper>
