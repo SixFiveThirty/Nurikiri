@@ -199,20 +199,4 @@ public class SecurityController {
 
 		return "redirect:/"; //
 	}
-	
-	@GetMapping("/check/sendSMS")
-	@ResponseBody
-	public String sendSMS(String phone) {
-		Random rand = new Random();
-		String numStr = "";
-		for(int i = 0; i<4; i++) {
-			String ran = Integer.toString(rand.nextInt(10));
-			numStr+=ran;
-		}
-		
-		System.out.println("수신자 번호 : " + phone);
-		System.out.println("인증번호 : " + numStr);
-		certificationService.certifiedPhoneNumber(phone, numStr);
-		return numStr;
-	}
 }

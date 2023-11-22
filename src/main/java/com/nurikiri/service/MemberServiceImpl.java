@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.nurikiri.mapper.MemberMapper;
 
 import com.nurikiri.domain.AuthVO;
@@ -23,6 +25,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
 import net.nurigo.sdk.NurigoApp;
+import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
 import net.nurigo.sdk.message.model.Message;
 import net.nurigo.sdk.message.service.DefaultMessageService;
 
@@ -90,6 +93,20 @@ public class MemberServiceImpl implements MemberService {
 		 DefaultMessageService messageService = NurigoApp.INSTANCE.initialize("NCSWKFA1W2GPLEKS", "OSUYFY9C4JJWSYXXCOAUTTTMYPN8CQMH", "https://api.coolsms.co.kr");
 		 Message message = new Message();
 		 message.setFrom(phoneNumber);
+		 message.setTo("01034020187"); //phoneNumber
+		 message.setText("Nurikiri 회원가입 인증번호 : " + cerNum);
+		 
+//		 HttpSession session = httpServletRequest.getSession(true);
+		 
+		 try {
+			 //send 메소드로 ArrayList<Message> 객체를 넣어도 동작함.
+			 messageService.send(message);
+		 } catch(NurigoMessageNotReceivedException exception) {
+			 System.out.println(exception.getFailedMessageList());
+			 System.out.println(exception.getMessage());
+		 } catch (Exception exception) {
+			 System.out.println(exception.getMessage());
+		 }
 	 }
 	
 	@Override
