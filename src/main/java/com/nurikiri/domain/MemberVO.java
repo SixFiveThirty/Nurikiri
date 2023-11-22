@@ -57,6 +57,7 @@ public class MemberVO {
 	private Date updateDate;
 	
 	private List<AuthVO> authList;
+	private String auth;
 	
 	public Collection<SimpleGrantedAuthority> getAuthorites(){
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();

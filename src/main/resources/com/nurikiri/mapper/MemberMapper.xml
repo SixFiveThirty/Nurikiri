@@ -86,6 +86,10 @@
 		limit #{offset} , #{amount}
 	</select>
 	
+	<select id="getAuth" resultType="String">
+		select * from member_auth
+	</select>
+	
 		<sql id="criteria">
 		<trim prefixOverrides="OR">
 			<foreach item="type" collection="typeArr">

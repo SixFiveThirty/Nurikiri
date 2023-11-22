@@ -25,4 +25,6 @@ public interface MemberMapper {
 	
 	public int getTotalCount(Criteria cri);
 	
+	public String getAuth(String username, AuthVO auth);
+	
 }

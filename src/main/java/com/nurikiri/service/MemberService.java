@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
+import com.nurikiri.domain.AuthVO;
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.MemberVO;
 
@@ -25,5 +26,7 @@ public interface MemberService {
 	public int getTotal(Criteria cri);
 	
 	public boolean remove(String username);
+	
+	public String getAuth(String username);
 	
 }
