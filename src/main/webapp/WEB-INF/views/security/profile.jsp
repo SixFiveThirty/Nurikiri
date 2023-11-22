@@ -126,7 +126,7 @@ th, td{
 						</tr>
 						<tr>
 							<th>휴대폰 번호</th>
-							<td>${member.phone1}- ${member.phone2} - ${member.phone3}</td>
+							<td>${member.phone}</td>
 						</tr>
 						<tr>
 							<th>이메일</th>

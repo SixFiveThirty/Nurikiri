@@ -75,7 +75,7 @@ async function loadReviews(sno, writer) {
 	reviews = await rest_get(REVIEW_URL); //async ~ await이 없으면 promise 객체가 되어 루프를 못돌리게 됨.
 	
 	for(let review of reviews) {
-		const reviewEl = $(createreviewTemplate(review, writer));
+		const reviewEl = $(createReviewTemplate(review, writer));
 		$('.review-list').append(reviewEl);
 		
 		let replyListEl = reviewEl.find('.reply-list');
@@ -152,20 +152,21 @@ async function deleteReview(e) {
 	review.remove();
 }
 
-async function loadReviews(rno, writer) {
+async function loadReviews(sno, writer) {
 	let reviews = [];
+	
 	//API로 불러오기
 	reviews = await rest_get(REVIEW_URL);
 	
 	for(let review of reviews) {
-		const reviewEl = $(createreviewTemplate(review, writer))
+		const reviewEl = $(createReviewTemplate(review, writer))
 		$('.review-list').append(reviewEl);
 		
 		let replyListEl = reviewEl.find('.reply-list');
-		//답글 목록 처리
-		for(let reply of review.replyList){
-			let replyEl = $(createReplyTemplate(reply, writer));
-			replyListEl.append(replyEl);
-		}
+			//답글 목록 처리
+		//	for(let reply of review.replyList){
+		//		let replyEl = $(createReplyTemplate(reply, writer));
+		//		replyListEl.append(replyEl);
+		//	}
 	}
 }

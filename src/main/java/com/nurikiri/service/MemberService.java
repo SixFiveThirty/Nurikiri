@@ -26,6 +26,8 @@ public interface MemberService {
 	public int getTotal(Criteria cri);
 	
 	public boolean remove(String username);
+
+	public void certifiedPhoneNumber(String phone, String numStr);
 	
 	public String getAuth(String username);
 	

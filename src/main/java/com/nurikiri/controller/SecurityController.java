@@ -154,12 +154,7 @@ public class SecurityController {
 			    service.modify(member, avatar);
 			    log.warn("service.modify 작동 확인");
 			    
-			    // 수정된 정보로 다시 로그인
-			    Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(member.getUsername(),member.getPassword()));
-			    SecurityContextHolder.getContext().setAuthentication(authentication);
-			    
-			    // 세션에도 업데이트
-			    session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
+			    session.invalidate();
 
 				return "redirect:/security/profile";
 	}
@@ -198,21 +193,5 @@ public class SecurityController {
 		service.register(member, avatar);
 
 		return "redirect:/"; //
-	}
-	
-	@GetMapping("/check/sendSMS")
-	@ResponseBody
-	public String sendSMS(String phone) {
-		Random rand = new Random();
-		String numStr = "";
-		for(int i = 0; i<4; i++) {
-			String ran = Integer.toString(rand.nextInt(10));
-			numStr+=ran;
-		}
-		
-		System.out.println("수신자 번호 : " + phone);
-		System.out.println("인증번호 : " + numStr);
-		certificationService.certifiedPhoneNumber(phone, numStr);
-		return numStr;
 	}
 }
