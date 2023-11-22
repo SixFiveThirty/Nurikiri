@@ -34,8 +34,9 @@ public class ReviewManagerController {
 	}
 
 	@GetMapping({ "/get" })
-	public void get(Model model) {
+	public void get(@RequestParam("rno") Long rno, @ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("get");
+		model.addAttribute("review", service.get(rno));		
 	}
 
 	@PostMapping("/remove")
