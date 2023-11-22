@@ -5,6 +5,96 @@
 
 <%@ include file="../layouts/header.jsp"%>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="/resources/js/review.js"><</script>
+<script src="/resources/js/rest.js"><</script>
+
+<script>
+//댓글 기본 URL 상수 - 전역 상수
+const REVIEW_URL = '/api/store/${param.sno}/review/';
+/* const REPLY_URL = '/api/store/${param.sno}/reply/'; */
+
+
+	$(document).ready(async function() {
+		$('.remove').click(function() {
+			// 클릭 이벤트 핸들러 함수
+			if (!confirm("정말 삭제하겠습니까?"))
+				return;
+
+			// form을 얻어서 submit() 호출
+			// console.log(document.forms)
+			document.forms.removeForm.submit();
+		});
+		
+
+		let sno = ${param.sno}; 	// 글번호
+		let writer = '${member.username}'; // 작성자(로그인 유저)
+		
+		loadReviews(sno, writer); 	// 댓글 목록 불러오기
+		
+		// 댓글 추가 버튼 처리
+		$('.review-add-btn').click(function(e) {
+			createReview(sno, writer);
+		});
+
+		// 댓글 수정, 삭제 버튼 처리 - 이벤트 버블링(이벤트 처리 위임)
+		// 댓글 수정 보기 버튼 클릭
+		$('.review-list').on('click', '.review-update-show-btn',showUpdateReview);
+				
+		console.log($('.review-update-show-btn'));
+		
+		// 수정 확인 버튼 클릭
+		$('.review-list').on('click', '.review-update-btn', function (e){
+			const el = $(this).closest('.review');
+			updateReview(el, writer);
+			
+			console.log('수정 확인', el);
+		});
+		
+		// 수정 취소 버튼 클릭
+		$('.review-list').on('click', '.review-update-cancel-btn', 
+			cancelReviewUpdate);
+
+		// 삭제 버튼 클릭
+		$('.review-list').on('click', '.review-delete-btn',
+				deleteReview);
+		
+		/* /////// 답글 버튼 이벤트 핸들링
+		// 답글 추가 인터페이스 보이기
+		$('.review-list').on('click', '.reply-add-show-btn', function(e) {
+			showReplyAdd($(this), writer);
+		});
+
+		// 답글 등록
+		$('.comment-list').on('click', '.reply-add-btn', function(e){
+			addReply($(this), writer);
+		});
+		
+		// 답급 취소
+		$('.comment-list').on('click', '.reply-add-cancel-btn', cancelReply);
+
+		// 답글 수정 화면 보이기
+		$('.comment-list').on('click', '.reply-update-show-btn', function(e) {
+			showUpdateReply($(this));
+		});
+
+		// 답글 수정 등록
+		$('.comment-list').on('click', '.reply-update', function(e) {
+		updateReply($(this));
+		});
+
+		// 답글 수정 취소
+		$('.comment-list').on('click', '.reply-update-cancel', cancelReplyUpdate);
+
+		// 답글 삭제
+		$('.comment-list').on('click', '.reply-delete-btn', deleteReply); */
+
+		/* // 목록 추출
+		let data = await rest_get(url);
+		console.log(data); */
+			
+	});
+</script>
 <style>
 .top-div {
 	display: flex;
@@ -74,11 +164,29 @@
 	</div>
 </div>
 
-<h1>리뷰 목록</h1>
 <button type= "button" class="btn btn-light mr-5" style="width: 200px"
 onclick="location.href='${cri.getLink('reviewpopup')}&sno=${store.sno}'">리뷰 등록</button>
 
-<div class="review">리뷰 서비스 조금만 기다려주세요...</div>
+<!--  리뷰 기능 구현 -->
+<c:if test="${member.username != store.owner }">
+<div class="bg-light p-2 rounded my-5">
+		<div>${member.username == null ? '댓글을 작성하려면 먼저 로그인하세요' : '댓글 작성' }</div>
+		<div>
+			<textarea class="form-control new-review-content" rows="3" ${member.username == null ? 'disabled' : '' }></textarea>
+			<div class="text-right">
+				<button class="btn btn-primary btn-sm my-2 review-add-btn" ${member.username == null ? 'disabled' : '' }>
+					<i class="fa-regular fa-comment"></i> 리뷰 등록
+				</button>
+			</div>
+		</div>
+	</div>
+	</c:if>
+
+<div class="my-5" style="text-align: center;">
+	<h1><i class="fa-regular fa-comments"></i>리뷰 목록</h1>
+	<hr>
+	<div class="review-list"></div>
+</div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47527c077dd44e34b71ffb876f21b3cc&libraries=services"></script>
 <script>
