@@ -7,7 +7,6 @@
 <%@ include file="../layouts/header.jsp"%>
 
 <script src="/resources/js/rest.js"></script>
-<script src="/resources/js/auth.js"></script>
 <%-- 개별 페이지 --%>
 <style>
 .con {
@@ -63,56 +62,29 @@
 	margin-bottom: 32px;
 }
 
-.email-certify {
+.phone-certify {
 	width: 100%;
 	display: flex;
 }
 
-.input-email {
-	width: 385px;
-}
-
-.email-btn {
-	width: 100px;
-}
-
 .input-auth {
-	width: 370px;
-}
-
-.auth-btn {
-	width: 115px;
+	width: 395px;
 }
 </style>
 
 <script>
-let provider = new firebase.auth.GoogleAuthProvider();
-provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-provider.setCustomParameters({
-	  'login_hint': 'user@example.com'
-});
-firebase.auth()
-.signInWithPopup(provider)
-.then((result) => {
-  /** @type {firebase.auth.OAuthCredential} */
-  var credential = result.credential;
+let phone = "";
 
-  // This gives you a Google Access Token. You can use it to access the Google API.
-  var token = credential.accessToken;
-  // The signed-in user info.
-  var user = result.user;
-  // IdP data available in result.additionalUserInfo.profile.
-    // ...
-}).catch((error) => {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // The email of the user's account used.
-  var email = error.email;
-  // The firebase.auth.AuthCredential type that was used.
-  var credential = error.credential;
-  // ...
-});
+function number() {
+	phone = document.getElementById("phone").value;
+}
+
+const SMS_CHECK_URL = '/api/check/sendSMS?';
+
+async function check() {
+	console.log("phone", phone);
+	await rest_message_get(SMS_CHECK_URL, phone);
+}
 </script>
 
 <div style="width: 500px" class="mx-auto">
@@ -149,36 +121,28 @@ firebase.auth()
 					<form:input path="jumin" cssClass="form-control" />
 					<form:errors path="jumin" cssClass="errors" />
 				</div>
-				<div class="form-group emails">
+				<div class="form-group">
 					<form:label path="email">이메일</form:label>
-					<div class="email-certify">
-						<form:input path="email" cssClass="form-control input-email mr-3" />
-						<button class="btn email-btn">이메일 인증</button>
-					</div>
+					<form:input path="email" cssClass="form-control" />
 					<form:errors path="email" cssClass="errors" />
 				</div>
+				
 				<div class="form-group">
-					<form:label path="authNum">인증번호 확인</form:label>
-					<div class="email-certify">
-						<form:input path="authNum" cssClass="form-control input-auth mr-3" />
-						<button class="btn auth-btn">인증번호 확인</button>
+					<form:label path="phone">휴대폰번호</form:label>
+					<div class="phone-certify">
+						<form:input id="phone" path="phone" cssClass="form-control input-auth mr-3" onkeyup="number()" />
+						<button type="button" class="btn check-sms-btn" onclick="check()">번호 확인</button>
 					</div>
-					<form:errors path="authNum" cssClass="errors" />
+					<form:errors path="phone" cssClass="errors" />
 				</div>
-				<div class="num-title">전화번호</div>
-				<div class="num_group">
-					<div class="form-group num first">
-						<form:input path="phone1" cssClass="form-control" />
-						<form:errors path="phone1" cssClass="errors" />
+				
+				<div class="form-group">
+					<form:label path="phone">인증번호 입력</form:label>
+					<div class="phone-certify">
+						<form:input id="phone" path="phone" cssClass="form-control input-auth mr-3" onkeyup="number()" />
+						<button type="button" class="btn check-sms-btn" onclick="check()">인증 확인</button>
 					</div>
-					<div class="form-group num middle">
-						<form:input path="phone2" cssClass="form-control" />
-						<form:errors path="phone2" cssClass="errors" />
-					</div>
-					<div class="form-group num last">
-						<form:input path="phone3" cssClass="form-control" />
-						<form:errors path="phone3" cssClass="errors" />
-					</div>
+					<form:errors path="phone" cssClass="errors" />
 				</div>
 
 				<div class="profile_title">프로필 사진 등록</div>

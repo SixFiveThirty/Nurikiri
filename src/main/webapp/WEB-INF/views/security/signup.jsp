@@ -99,7 +99,7 @@
 					<form:input path="email" cssClass="form-control" />
 					<form:errors path="email" cssClass="errors" />
 				</div>
-					<div class ="num-title">전화번호</div>
+				<%-- <div class ="num-title">전화번호</div>
 				<div class="num_group">
 					<div class="form-group num first">
 						<form:input path="phone1" cssClass="form-control" />
@@ -113,6 +113,12 @@
 						<form:input path="phone3" cssClass="form-control" />
 						<form:errors path="phone3" cssClass="errors" />
 					</div>
+				</div> --%>
+				
+				<div class="form-group">
+					<form:label path="phone">휴대폰번호</form:label>
+					<form:input path="phone" cssClass="form-control" />
+					<form:errors path="phone" cssClass="errors" />
 				</div>
 
 			<div class="profile_title">프로필 사진 등록</div>
