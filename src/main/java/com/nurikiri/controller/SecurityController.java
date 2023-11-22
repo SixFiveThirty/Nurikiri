@@ -131,7 +131,7 @@ public class SecurityController {
   
 	@GetMapping("/modify")
 	public void modify(@ModelAttribute("member") MemberVO member) {
-
+		
 	}
 
 	@PostMapping("/modify")
@@ -157,41 +157,5 @@ public class SecurityController {
 			    session.invalidate();
 
 				return "redirect:/security/profile";
-	}
-
-	@GetMapping("/signup_test")
-	public void signup_test(@ModelAttribute("member") MemberVO member) {
-
-	}
-
-	@PostMapping("/signup_test") // 오버로딩
-	public String signup_test(@Valid @ModelAttribute("member") MemberVO member, Errors errors, MultipartFile avatar)
-			throws IOException {
-		log.info(member);
-
-		// 1. 비밀번호, 비밀번호 확인 일치 여부
-		if (!member.getPassword().equals(member.getConfirmedPassword())) {
-			// 에러 추가
-			errors.rejectValue("confirmedPassword", "비밀번호 불일치", "비밀번호가 일치하지 않습니다."); // reject와 rejectValue의 차이? reject는
-																						// 전역에러
-			// 설정, 특정 필드에 대해서 에러 추가는 rejectValue
-		}
-
-		// 2. 아이디 중복 시
-		if (errors.hasFieldErrors("username")) { // hasFieldErrors 특정 필드 내에서 오류 났을시 검사
-			// DB에서 username을 검사
-			if (service.get(member.getUsername()) != null) { // 중복일 경우
-				errors.rejectValue("username", "아이디 중복", "이미 사용중인 ID입니다.");
-			}
-		}
-
-		if (errors.hasFieldErrors()) {
-			return "security/signup_test"; // 오류 발생시 다시 작성하라고 signup 페이지로 다시 보내기
-		}
-
-		// 유효성 검사 후 DB에 저장
-		service.register(member, avatar);
-
-		return "redirect:/"; //
 	}
 }
