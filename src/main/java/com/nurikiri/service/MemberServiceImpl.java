@@ -128,16 +128,6 @@ public class MemberServiceImpl implements MemberService {
 		log.info("remove");
 		return mapper.delete(username) == 1;
 	}
-
-	@Override
-	public String getAuth(String username) {
-		log.info("getAuth");
-		
-		MemberVO member = mapper.read(username);
-		return "temp";
-		
-		
-	}
 		
 }		
 

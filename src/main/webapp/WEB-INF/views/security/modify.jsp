@@ -98,22 +98,13 @@
 
 				<div class="form-group">
 					<form:label path="username">ID</form:label>
-<<<<<<< HEAD
 					<form:input path="username" cssClass="form-control"
-						value="${member.username}" id="username" readonly="true" />
-=======
-					<form:input path="username" cssClass="form-control" value="${member.username}" readonly="true"/>
->>>>>>> 386fa4ca302fee1c74b7bcf1fdcfd7c55d04c986
+						value="${member.username}" readonly="true" />
 					<form:errors path="username" cssClass="error" />
 				</div>
 				<div class="form-group">
 					<form:label path="password">비밀번호</form:label>
-<<<<<<< HEAD
-					<form:input path="password" cssClass="form-control" id="password"
-						type="password" />
-=======
-					<form:input path="password" cssClass="form-control" type="password"/>
->>>>>>> 386fa4ca302fee1c74b7bcf1fdcfd7c55d04c986
+					<form:input path="password" cssClass="form-control" type="password" />
 					<form:errors path="password" cssClass="error" />
 				</div>
 				<div class="form-group">
@@ -124,64 +115,29 @@
 				</div>
 				<div class="form-group">
 					<form:label path="name">이름</form:label>
-<<<<<<< HEAD
-					<form:input path="name" value="${member.name}" id="name"
+					<form:input path="name" value="${member.name}"
 						cssClass="form-control" />
-=======
-					<form:input path="name" value="${member.name}" cssClass="form-control" />
->>>>>>> 386fa4ca302fee1c74b7bcf1fdcfd7c55d04c986
 					<form:errors path="name" cssClass="error" />
 				</div>
 				<div class="form-group">
 					<form:label path="jumin">주민</form:label>
-<<<<<<< HEAD
-					<form:input path="jumin" value="${member.jumin}" id="jumin"
+
+					<form:input path="jumin" value="${member.jumin}"
 						cssClass="form-control" />
-=======
-					<form:input path="jumin" value="${member.jumin}" cssClass="form-control" />
->>>>>>> 386fa4ca302fee1c74b7bcf1fdcfd7c55d04c986
 					<form:errors path="jumin" cssClass="error" />
 				</div>
 				<div class="form-group">
 					<form:label path="email">이메일</form:label>
-<<<<<<< HEAD
-					<form:input path="email" value="${member.email}" id="email"
+
+					<form:input path="email" value="${member.email}"
 						cssClass="form-control" />
-=======
-					<form:input path="email" value="${member.email}" cssClass="form-control" />
->>>>>>> 386fa4ca302fee1c74b7bcf1fdcfd7c55d04c986
 					<form:errors path="email" cssClass="error" />
 				</div>
 				<div class="num-title">전화번호</div>
-				<div class="num_group">
-					<div class="form-group first_num">
-<<<<<<< HEAD
-						<form:input path="phone1" value="${member.phone1}" id="phone1"
-							cssClass="form-control" />
-						<form:errors path="phone1" cssClass="error" />
-					</div>
-					<div class="form-group middle_num">
-						<form:input path="phone2" value="${member.phone2}" id="phone2"
-							cssClass="form-control" />
-						<form:errors path="phone2" cssClass="error" />
-					</div>
-					<div class="form-group last_num">
-						<form:input path="phone3" value="${member.phone3}" id="phone3"
-							cssClass="form-control" />
-=======
-						<form:input path="phone1" value="${member.phone1}" cssClass="form-control" />
-						<form:errors path="phone1" cssClass="error" />
-					</div>
-					<div class="form-group middle_num">
-						<form:input path="phone2" value="${member.phone2}" cssClass="form-control" />
-						<form:errors path="phone2" cssClass="error" />
-					</div>
-					<div class="form-group last_num">
-						<form:input path="phone3" value="${member.phone3}"  cssClass="form-control" />
->>>>>>> 386fa4ca302fee1c74b7bcf1fdcfd7c55d04c986
-						<form:errors path="phone3" cssClass="error" />
-					</div>
-				</div>
+				<form:input path="phone" value="${member.phone}"
+					cssClass="form-control" />
+				<form:errors path="phone" cssClass="error" />
+
 				<div class="profile_title">프로필 사진 수정</div>
 				<div class="avatar">
 					<input type="file" name="avatar" />
@@ -202,6 +158,7 @@
 		</div>
 	</div>
 
+</div>
 </div>
 
 
