@@ -84,9 +84,7 @@
 }
 </style>
 
-<sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal.member" var="member" />
-</sec:authorize>
+
 
 
 <div style="width: 500px" class="mx-auto">
@@ -99,6 +97,17 @@
 			<form:form modelAttribute="member" cssClass="form"
 				enctype="multipart/form-data">
 				<br />
+
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<div class="form-group">
+						<form:label path="auth">권한 설정</form:label>
+						<form:select path="auth" cssClass="form-control">
+							<form:option value="ROLE_ADMIN">ADMIN</form:option>
+							<form:option value="ROLE_MANAGER">MANAGER</form:option>
+							<form:option value="ROLE_USER">USER</form:option>
+						</form:select>
+					</div>
+				</sec:authorize>
 
 
 				<div class="form-group">

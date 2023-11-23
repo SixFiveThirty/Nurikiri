@@ -10,11 +10,11 @@
 <script>
 $(document).ready(async function() {
 
-	$('.remove').click(function(e){
-		e.preventDefault();
-		const username=$(this).data("username");
+	let username;
+	$('.remove').click(function(){
 		if(!confirm('정말 삭제할까요?')) return;
-		$(".delete_username").val(username);
+		const userName = $(this).data("username");
+		$(".delete_userName").val(userName);
 		document.forms.removeForm.submit();
 	});	
 	
@@ -53,8 +53,8 @@ $(document).ready(async function() {
 					<button type="button" class="btn btn-light mr-5"
 						style="width: 200px" onclick="location.href='/security/modify'">수정</button>
 				</td>
-				<td><button type="remove" class="btn btn-danger remove" data-username="{member.username}">
-						<i class="fas fa-trash-alt"></i> 삭제 </a></td>
+				<td><button type="button" class="btn btn-danger remove" data-username="${member.username}">
+						<i class="fas fa-trash-alt"></i> 삭제 </button></td>
 			</tr>
 		</c:forEach>
 	</tbody>
@@ -62,6 +62,7 @@ $(document).ready(async function() {
 	<form action="remove" method="post" name="removeForm">
 	<input type="hidden" name="${_csrf.parameterName}"
 		value="${_csrf.token}" />
+	<input type="hidden" name="username" class="delete_userName" />
 	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
 	<input type="hidden" name="amount" value="${cri.amount}" />
 	<input type="hidden" name="type" value="${cri.type}" />

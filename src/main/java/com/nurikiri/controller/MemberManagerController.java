@@ -49,7 +49,7 @@ public class MemberManagerController {
 		if(service.remove(username)) {
 		rttr.addFlashAttribute("result","success");
 		}
-		return "redirect:/managers/list" + cri.getLink();
+		return "redirect:/managers/member/list" + cri.getLink();
 	}
 
 }
