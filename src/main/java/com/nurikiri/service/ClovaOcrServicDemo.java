@@ -25,38 +25,38 @@ public class ClovaOcrServicDemo {
 		String secretKey = "eGhka2R4bWRpYU9UelR1VG16dG5rYnh3S1FIekxRVVA=";
 		String imageFile = "C:\\Users\\JU\\Pictures\\test.png";
 
-		/*
-		 * try { URL url = new URL(apiURL); HttpURLConnection con = (HttpURLConnection)
-		 * url.openConnection(); con.setUseCaches(false); con.setDoInput(true);
-		 * con.setDoOutput(true); con.setReadTimeout(30000);
-		 * con.setRequestMethod("POST"); String boundary = "----" +
-		 * UUID.randomUUID().toString().replaceAll("-", "");
-		 * con.setRequestProperty("Content-Type", "multipart/form-data; boundary=" +
-		 * boundary); con.setRequestProperty("X-OCR-SECRET", secretKey);
-		 * 
-		 * JSONObject json = new JSONObject(); json.put("version", "V2");
-		 * json.put("requestId", UUID.randomUUID().toString()); json.put("timestamp",
-		 * System.currentTimeMillis()); JSONObject image = new JSONObject();
-		 * image.put("format", "jpg"); image.put("name", "demo"); JSONArray images = new
-		 * JSONArray(); images.put(image); json.put("images", images); String postParams
-		 * = json.toString();
-		 * 
-		 * con.connect(); DataOutputStream wr = new
-		 * DataOutputStream(con.getOutputStream()); long start =
-		 * System.currentTimeMillis(); File file = new File(imageFile);
-		 * writeMultiPart(wr, postParams, file, boundary); wr.close();
-		 * 
-		 * int responseCode = con.getResponseCode(); BufferedReader br; if (responseCode
-		 * == 200) { br = new BufferedReader(new
-		 * InputStreamReader(con.getInputStream())); } else { br = new
-		 * BufferedReader(new InputStreamReader(con.getErrorStream())); } String
-		 * inputLine; StringBuffer response = new StringBuffer(); while ((inputLine =
-		 * br.readLine()) != null) { response.append(inputLine); } br.close();
-		 * 
-		 * System.out.println(response);
-		 * 
-		 * } catch (Exception e) { System.out.println(e); }
-		 */
+		
+		  try { URL url = new URL(apiURL); HttpURLConnection con = (HttpURLConnection)
+		  url.openConnection(); con.setUseCaches(false); con.setDoInput(true);
+		  con.setDoOutput(true); con.setReadTimeout(30000);
+		  con.setRequestMethod("POST"); String boundary = "----" +
+		  UUID.randomUUID().toString().replaceAll("-", "");
+		  con.setRequestProperty("Content-Type", "multipart/form-data; boundary=" +
+		  boundary); con.setRequestProperty("X-OCR-SECRET", secretKey);
+		  
+		  JSONObject json = new JSONObject(); json.put("version", "V2");
+		  json.put("requestId", UUID.randomUUID().toString()); json.put("timestamp",
+		  System.currentTimeMillis()); JSONObject image = new JSONObject();
+		  image.put("format", "jpg"); image.put("name", "demo"); JSONArray images = new
+		  JSONArray(); images.put(image); json.put("images", images); String postParams
+		  = json.toString();
+		  
+		  con.connect(); DataOutputStream wr = new
+		  DataOutputStream(con.getOutputStream()); long start =
+		  System.currentTimeMillis(); File file = new File(imageFile);
+		  writeMultiPart(wr, postParams, file, boundary); wr.close();
+		  
+		  int responseCode = con.getResponseCode(); BufferedReader br; if (responseCode
+		  == 200) { br = new BufferedReader(new
+		  InputStreamReader(con.getInputStream())); } else { br = new
+		  BufferedReader(new InputStreamReader(con.getErrorStream())); } String
+		  inputLine; StringBuffer response = new StringBuffer(); while ((inputLine =
+		  br.readLine()) != null) { response.append(inputLine); } br.close();
+		  
+		  System.out.println(response);
+		  
+		  } catch (Exception e) { System.out.println(e); }
+		 
 	}
 
 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
+import com.nurikiri.domain.AuthVO;
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.MemberVO;
 
