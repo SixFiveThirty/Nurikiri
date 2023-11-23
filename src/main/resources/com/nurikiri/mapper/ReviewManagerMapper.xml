@@ -36,8 +36,7 @@
 
 	<insert id="insertSelectKey">
 		insert into store_review(sno, content, writer)
-		values ((#{sno},
-		#{content}, #{writer})
+		values ((#{sno}, #{content}, #{writer})
 
 		<selectKey resultType="Long" keyProperty="rno"
 			keyColumn="rno" order="AFTER">

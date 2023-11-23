@@ -1,13 +1,10 @@
-const replyAddable = `
+/* const replyAddable = `
 	<button class="btn btn-light btn-sm reply-add-show-btn">
 		<i class="fa-solid fa-pen-to-square"></i> 답글
 	</button>
-`;
+`; */
 
 const reviewUpdatable = `
-<button class="btn btn-light btn-sm review-update-show-btn">
-	<i class="fa-solid fa-pen-to-square"></i> 수정
-</button>
 <button class="btn btn-light btn-sm review-delete-btn">
 	<i class="fa-solid fa-times"></i> 삭제
 </button> `;
@@ -31,20 +28,19 @@ function showUpdateReview(e) {
 
 function createReviewTemplate(review, writer) {
 	return `
-		<div class="review my-3" data-rno="${review.rno}" data-writer="${review.writer}">
+		<div class="review my-3" style="background: white; border-radius: 6px; border: 4px #CCCCCC solid" data-rno="${review.rno}" data-writer="${review.writer}">
 			<div class="review-title my-2 d-flex justify-content-between">
 				<div>
 					<strong class="writer">
 						<img src="/security/avatar/sm/admin" class="avatar-sm"> ${review.writer}
 					</strong>
-					<span class="text-muted ml-3 review-date"> ${moment(review.regDate).format('YYYY-MM-DD hh:mm')} </span>
 				</div>
 				<div class="btn-group">
-					${writer && (writer != review.writer) ? replyAddable : ''}
+					<span class="text-muted mr-3 review-date"> 등록일: ${moment(review.regDate).format('YYYY-MM-DD hh:mm')} </span>
 					${writer && (writer == review.writer) ? reviewUpdatable : ''}
 				</div>
 			</div>
-			<div class="review-body">
+			<div class="review-body mx-5 text-right">
 				<div class="review-content">${review.content}</div>
 			</div>
 			<div class="reply-list ml-5"></div>

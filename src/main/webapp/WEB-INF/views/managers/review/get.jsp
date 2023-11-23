@@ -4,7 +4,9 @@
 
 <%@ include file="../../layouts/header.jsp"%>
 
+<script src="/resources/js/rest.js"></script>
 <script src="/resources/js/review.js"></script>
+<script src="/resources/js/starrating.js"></script>
 
 <style>
 .top-div {
@@ -35,7 +37,7 @@
 </style>
 
 <div class="container">
-	<h3>리뷰 1</h3>
+	<h3>리뷰 ${review.rno}</h3>
 	<div class="top-div mt-5">
 		<div class="card">
 			<img src="..." class="card-img-top" alt="..." />
@@ -43,12 +45,23 @@
 	</div>
 	<div class="mid-div mt-5">
 		<div class="card">
-			<p>${content}</p>
+			<p>${review.content}</p>
 		</div>
 	</div>
 	<div class="foot-div mt-5">
 		<button type="button" class="btn btn-light" style="width: 200px" onclick="location.href='list'">목록</button>
 	</div>
+	
+	<div class="d-flex justify-content-between">
+	<div>
+		<img src="/security/avatar/sm/${review.writer}" class="avatar-sm" style="width: 100%; height: 100%"> ${review.writer}
+		<div class="rateWrap"></div>
+	</div>
+	<div>
+		<i class="fas fa-clock"></i>
+		<fmt:formatDate pattern="yyyy-MM-dd" value="${review.regDate}" />
+	</div>
+</div>
 </div>
 
 

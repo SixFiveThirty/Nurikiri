@@ -133,11 +133,13 @@
 						cssClass="form-control" />
 					<form:errors path="email" cssClass="error" />
 				</div>
-				<div class="num-title">전화번호</div>
-				<form:input path="phone" value="${member.phone}"
-					cssClass="form-control" />
-				<form:errors path="phone" cssClass="error" />
 
+				<div class="form-group">
+					<form:label path="phone">전화번호</form:label>
+					<form:input path="phone" value="${member.phone}" cssClass="form-control" />
+					<form:errors path="phone" cssClass="error" />
+				</div>
+				
 				<div class="profile_title">프로필 사진 수정</div>
 				<div class="avatar">
 					<input type="file" name="avatar" />
