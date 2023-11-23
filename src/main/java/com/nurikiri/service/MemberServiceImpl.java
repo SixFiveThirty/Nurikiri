@@ -92,11 +92,9 @@ public class MemberServiceImpl implements MemberService {
 	 public void certifiedPhoneNumber(String phoneNumber, String cerNum) {
 		 DefaultMessageService messageService = NurigoApp.INSTANCE.initialize("NCSWKFA1W2GPLEKS", "OSUYFY9C4JJWSYXXCOAUTTTMYPN8CQMH", "https://api.coolsms.co.kr");
 		 Message message = new Message();
-		 message.setFrom(phoneNumber);
-		 message.setTo("01034020187"); //phoneNumber
+		 message.setFrom("01034020187");
+		 message.setTo(phoneNumber); //phoneNumber
 		 message.setText("Nurikiri 회원가입 인증번호 : " + cerNum);
-		 
-//		 HttpSession session = httpServletRequest.getSession(true);
 		 
 		 try {
 			 //send 메소드로 ArrayList<Message> 객체를 넣어도 동작함.
@@ -127,7 +125,6 @@ public class MemberServiceImpl implements MemberService {
 	public boolean remove(String username) {
 		log.info("remove");
 		return mapper.delete(username) == 1;
-	}
-		
+	}		
 }		
 

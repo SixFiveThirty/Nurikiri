@@ -16,16 +16,18 @@ import org.json.JSONObject;
 // Request with application/json
 public class ClovaOcrService {
 
-	public String getocrresult() {
+	// 이미지파일 url 을 받는다.
+	public static void main(String[] args) {
 		String apiURL = "https://00t4hthuv6.apigw.ntruss.com/custom/v1/26194/dd29d2e86fd7030ed60487dfe050756ad233765d5f061cc27ef656bdec4371c6/infer";
 		String secretKey = "eGhka2R4bWRpYU9UelR1VG16dG5rYnh3S1FIekxRVVA=";
-		String result="";
+		
+		//
+		
+		String result=""; // 필요한 텍스트 추출
 
 		try {
 			
-			//이미지 받고 세팅해서
-			//클로버 response 가공해서
-			// 잘해본다
+			
 			URL url = new URL(apiURL);
 			HttpURLConnection con = (HttpURLConnection)url.openConnection();
 			con.setUseCaches(false);
@@ -41,11 +43,13 @@ public class ClovaOcrService {
 			json.put("requestId", UUID.randomUUID().toString());
 			json.put("timestamp", System.currentTimeMillis());
 			
+		
+			
+			//동적으로 파일 받기?
+			FileInputStream inputStream = new FileInputStream("C:\\Users\\JU\\Pictures\\test.png");
+			
 			JSONObject image = new JSONObject();
 			image.put("format", "jpg");
-			FileInputStream inputStream = new FileInputStream("C:\\Users\\JU\\Pictures\\test.png");
-			// url로 바꿔줘야함 찾아봐
-			
 			byte[] buffer = new byte[inputStream.available()];
 			inputStream.read(buffer);
 			inputStream.close();
@@ -76,14 +80,12 @@ public class ClovaOcrService {
 			br.close();
 
 			System.out.println(response);
-			// 객체 받아서
-			// 원하는 부분 빼오기
-			// 리턴
-			return result;
+			//respones. images . fields . name 이랑 inferText 값을 받아서 리턴해야된다.
+			
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return result;
 	}
 
 }

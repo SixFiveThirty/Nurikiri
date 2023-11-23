@@ -21,6 +21,19 @@ async function rest_message_get(url, param) {
   }
 }
 
+async function rest_auth_num_post(url, data) {
+	try {
+		let res = await fetch(url, {
+			method: "POST",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify(data), //json 문자열로 인코딩
+		});
+		return await res.text();
+	} catch(e) {
+		console.log(e);
+	}
+}
+
 async function rest_create(url, data) {
   try {
     let res = await fetch(url, {
