@@ -182,8 +182,8 @@ onclick="location.href='${cri.getLink('reviewpopup')}&sno=${store.sno}'">리뷰 
 	</div>
 	</c:if>
 
-<div class="my-5" style="text-align: center;">
-	<h1><i class="fa-regular fa-comments"></i>리뷰 목록</h1>
+<div class="my-5">
+	<h1 style="text-align: center;"><i class="fa-regular fa-comments"></i>리뷰 목록</h1>
 	<hr>
 	<div class="review-list"></div>
 </div>
