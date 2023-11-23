@@ -5,83 +5,128 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <%@ include file="../layouts/header.jsp"%>
+
+<script src="/resources/js/rest.js"></script>
 <%-- 개별 페이지 --%>
 <style>
-	.con{
+.con {
 	width: 500px
-	}
-	
-	.con h1{
-	text-align:center;
+}
+
+.con h1 {
+	text-align: center;
 	font-size: 24px;
 	font-style: normal;
 	font-weight: 500;
-	}
+}
 
-   .btn{
+.btn {
 	background-color: #FEC25E;
-	}
-	
-	.num_group{
+}
+
+.num_group {
 	display: flex;
-    justify-content: space-between;
-    position: relative;
-    align-items: center;
-	}
-	
-	.num_group .form-group{
-	width: 30%; 
-    margin-bottom: 20px;
-    display: inline-block;
-    box-sizing: border-box;
-    top: 50%;
-	}
-	
-	.num_group .form-group input {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    }
-	
-	.text-center .btn {
+	justify-content: space-between;
+	position: relative;
+	align-items: center;
+}
+
+.num_group .form-group {
+	width: 30%;
+	margin-bottom: 20px;
+	display: inline-block;
+	box-sizing: border-box;
+	top: 50%;
+}
+
+.num_group .form-group input {
+	display: block;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.text-center .btn {
 	flex: none;
 	background-color: #FEC25E;
 	border-radius: 3px;
 	padding: 0;
 	width: 180px;
 	height: 50px;
-	}
-	
-	.profile_title{
-	  margin-bottom:16px;
-	}
-	  
-	.avatar{
-	   margin-bottom:32px;
-	}
+}
+
+.profile_title {
+	margin-bottom: 16px;
+}
+
+.avatar {
+	margin-bottom: 32px;
+}
+
+.phone-certify {
+	width: 100%;
+	display: flex;
+}
+
+.input-auth {
+	width: 395px;
+}
 </style>
+
+<script>
+let phone = "";
+let auth = "";
+
+function phone_number() {
+	phone = document.getElementById("phone").value;
+}
+
+function auth_number() {
+	auth = document.getElementById("auth").value;
+}
+
+const SMS_CHECK_URL = '/api/check/sendSMS?';
+const AUTH_NUMBER_CHECK_URL = '/api/check/authNum';
+
+async function check() {
+	console.log("phone", phone);
+	alert("인증번호를 발송했습니다.");
+	await rest_message_get(SMS_CHECK_URL, phone);
+}
+
+async function check_num() {
+	auth = document.getElementById("auth").value;
+	let result = await rest_auth_num_post(AUTH_NUMBER_CHECK_URL, auth);
+	if(result === 'OK') {
+		alert('인증성공');
+		document.getElementById("submit-btn").disabled = false;
+	} else {
+		alert('인증실패');
+	}
+}
+</script>
 
 <div style="width: 500px" class="mx-auto">
 	<div class="container">
-	<br />
-			<div class="con mx-auto">
-				<h1>회원가입</h1>
-				<form:form modelAttribute="member" cssClass="form"
-					action="/security/signup?_csrf=${_csrf.token}"
-					enctype="multipart/form-data">
+		<br />
+		<div class="con mx-auto">
+			<h1>회원가입</h1>
+			<form:form modelAttribute="member" cssClass="form"
+				action="/security/signup?_csrf=${_csrf.token}"
+				enctype="multipart/form-data">
 				<div class="form-group">
-					<form:label path="username" >아이디</form:label>
+					<form:label path="username">아이디</form:label>
 					<form:input path="username" cssClass="form-control" />
 					<form:errors path="username" cssClass="errors" />
 				</div>
 				<div class="form-group">
 					<form:label path="password">비밀번호</form:label>
-					<form:input path="password" cssClass="form-control" type="password"/>
+					<form:input path="password" cssClass="form-control" type="password" />
 					<form:errors path="password" cssClass="errors" />
 				</div>
 				<div class="form-group">
 					<form:label path="confirmedPassword">비밀번호 재확인</form:label>
-					<form:input path="confirmedPassword" cssClass="form-control" type="password"/>
+					<form:input path="confirmedPassword" cssClass="form-control"
+						type="password" />
 					<form:errors path="confirmedPassword" cssClass="errors" />
 				</div>
 				<div class="form-group">
@@ -99,36 +144,31 @@
 					<form:input path="email" cssClass="form-control" />
 					<form:errors path="email" cssClass="errors" />
 				</div>
-				<%-- <div class ="num-title">전화번호</div>
-				<div class="num_group">
-					<div class="form-group num first">
-						<form:input path="phone1" cssClass="form-control" />
-						<form:errors path="phone1" cssClass="errors" />
-					</div>
-					<div class="form-group num middle">
-						<form:input path="phone2" cssClass="form-control" />
-						<form:errors path="phone2" cssClass="errors" />
-					</div>
-					<div class="form-group num last">
-						<form:input path="phone3" cssClass="form-control" />
-						<form:errors path="phone3" cssClass="errors" />
-					</div>
-				</div> --%>
 				
 				<div class="form-group">
 					<form:label path="phone">휴대폰번호</form:label>
-					<form:input path="phone" cssClass="form-control" />
+					<div class="phone-certify">
+						<form:input id="phone" path="phone" cssClass="form-control input-auth mr-3" onkeyup="phone_number()" />
+						<button type="button" class="btn check-sms-btn" onclick="check()">번호 확인</button>
+					</div>
 					<form:errors path="phone" cssClass="errors" />
 				</div>
+				
+				<div class="form-group">
+					<label>인증번호 입력</label>
+					<div class="phone-certify">
+						<input id="auth" class="form-control input-auth mr-3" onkeyup="auth_number()" />
+						<button type="button" class="btn check-sms-btn" onclick="check_num()">인증 확인</button>
+					</div>
+				</div>
 
-			<div class="profile_title">프로필 사진 등록</div>
-			<input type="file" name="avatar" class="avatar"/>
+				<div class="profile_title">프로필 사진 등록</div>
+				<input type="file" name="avatar" class="avatar" />
 
-			<div class="text-center">
-				<button type="submit" class="btn">회원가입
-				</button>
-			</div>
-		</form:form>
+				<div class="text-center">
+					<button type="submit" class="btn" id="submit-btn" disabled>회원가입</button>
+				</div>
+			</form:form>
 		</div>
 	</div>
 </div>

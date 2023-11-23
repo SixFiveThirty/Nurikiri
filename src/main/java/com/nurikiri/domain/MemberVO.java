@@ -14,10 +14,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.extern.log4j.Log4j;
 
 //@AllArgsConstructor
 //@Builder
 @Data
+@Log4j
 public class MemberVO {
 	
 	@NotBlank(message="필수 항목 입니다.")
@@ -57,12 +59,14 @@ public class MemberVO {
 	private Date updateDate;
 	
 	private List<AuthVO> authList;
+	private String auth;
 	
 	public Collection<SimpleGrantedAuthority> getAuthorites(){
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		
+
 		for(AuthVO auth: authList) {
 			authorities.add(new SimpleGrantedAuthority(auth.getAuth()));
+			this.auth = auth.getAuth();
 		}
 		
 		return authorities;

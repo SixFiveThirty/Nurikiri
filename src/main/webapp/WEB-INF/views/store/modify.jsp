@@ -75,7 +75,7 @@
 
 			<div class="form-group">
 				<form:label path="useRechargeCard">충전식 카드 취급 여부</form:label>
-				<form:select path="useBill" cssClass="form-control">
+				<form:select path="useRechargeCard" cssClass="form-control">
 					<form:option value="1">사용 가능</form:option>
 					<form:option value="0">사용 불가</form:option>
 				</form:select>
@@ -91,7 +91,7 @@
 
 			<div class="form-group">
 				<form:label path="useMobile">모바일 취급여부</form:label>
-				<form:select path="useBill" cssClass="form-control">
+				<form:select path="useMobile" cssClass="form-control">
 					<form:option value="1">사용 가능</form:option>
 					<form:option value="0">사용 불가</form:option>
 				</form:select>
