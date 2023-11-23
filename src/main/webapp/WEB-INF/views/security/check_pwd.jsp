@@ -18,7 +18,6 @@
 	}
 	
 	.btn-group .btn {
-	flex: none;
 	background-color: #FEC25E;
 	border-radius: 3px;
 	padding: 0;
@@ -32,11 +31,15 @@
 }
 
   	.btn-container {
+    height: 50px;
     display: flex;
-    align-items: center;
-    justify-content: center;
     text-align: center;
-    
+  }
+
+  .btn-container a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
 </style>
