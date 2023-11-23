@@ -26,13 +26,13 @@
 				</button>
 			</div>
 		</form:form> --%>
-		<form id="searchForm" method="get" class="d-flex">
+		<form id="searchForm" modelAttribute="cri" method="get" actoin="/store/list" class="d-flex">
+		<input type="hidden" name="pageNum" value="1">
 			<div class="input-group">
 				<select>
-					<option value="1">별점순</option>
-					<option value="2">즐겨찾기순</option>
-					<option value="3">리뷰순</option>
-					<option value="4">지역별</option>
+					<option value="F" ${pageMaker.cri.type eq 'T' ? 'selected' : ''}>상호명</option>
+					<option value="R" ${pageMaker.cri.type eq 'M' ? 'selected' : ''}>시장명</option>
+					<option value="A" ${pageMaker.cri.type eq 'A' ? 'selected' : ''}>지역명</option>
 				</select> <input type="text" name="keyword" class="form-control rounded-0" />
 				<button type="submit" class="btn rounded-0" id="search-btn">
 					<i class="fa-solid fa-magnifying-glass"></i>
