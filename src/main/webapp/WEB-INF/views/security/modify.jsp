@@ -124,21 +124,13 @@
 					<form:input path="email" value="${member.email}" cssClass="form-control" />
 					<form:errors path="email" cssClass="error" />
 				</div>
-					<div class ="num-title">전화번호</div>
-				<div class="num_group">
-					<div class="form-group first_num">
-						<form:input path="phone1" value="${member.phone1}" cssClass="form-control" />
-						<form:errors path="phone1" cssClass="error" />
-					</div>
-					<div class="form-group middle_num">
-						<form:input path="phone2" value="${member.phone2}" cssClass="form-control" />
-						<form:errors path="phone2" cssClass="error" />
-					</div>
-					<div class="form-group last_num">
-						<form:input path="phone3" value="${member.phone3}"  cssClass="form-control" />
-						<form:errors path="phone3" cssClass="error" />
-					</div>
+				
+					<div class="form-group">
+					<form:label path="phone">전화번호</form:label>
+					<form:input path="phone" value="${member.phone}" cssClass="form-control" />
+					<form:errors path="phone" cssClass="error" />
 				</div>
+				
 				<div class="profile_title">프로필 사진 수정</div>
 				<div class="avatar">
 					<input type="file" name="avatar" />
