@@ -41,4 +41,6 @@ public class StoreVO {
 	private Date updateDate;
 	
 	List<Local> locals;
+	
+	private String imgSrc;
 }

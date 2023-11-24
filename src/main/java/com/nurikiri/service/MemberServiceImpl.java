@@ -93,8 +93,8 @@ public class MemberServiceImpl implements MemberService {
 		 DefaultMessageService messageService = NurigoApp.INSTANCE.initialize("NCSWKFA1W2GPLEKS", "OSUYFY9C4JJWSYXXCOAUTTTMYPN8CQMH", "https://api.coolsms.co.kr");
 		 Message message = new Message();
 		 message.setFrom("01034020187");
-		 message.setTo(phoneNumber); //phoneNumber
-		 message.setText("Nurikiri 회원가입 인증번호 : " + cerNum);
+		 message.setTo(phoneNumber); //회원가입 유저 폰번호
+		 message.setText("누리끼리 회원가입 인증번호 : " + cerNum);
 		 
 		 try {
 			 //send 메소드로 ArrayList<Message> 객체를 넣어도 동작함.

@@ -1,17 +1,25 @@
 package com.nurikiri.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -20,18 +28,20 @@ import com.nurikiri.domain.PageDTO;
 import com.nurikiri.domain.StoreVO;
 import com.nurikiri.service.ClovaOcrService;
 import com.nurikiri.service.StoreService;
+import com.nurikiri.service.StoreServiceImpl;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 @Log4j
 @RequestMapping("/store")
+@AllArgsConstructor
 public class StoreController {
 
 	@Autowired
 	private StoreService service;
-	
-	private ClovaOcrService ocrservice;
 	
 	@GetMapping("/reviewpopup")
 	public void reviewpopup() {
@@ -61,13 +71,15 @@ public class StoreController {
 	}
 
 	@PostMapping("/register")
-	public String register(StoreVO store, RedirectAttributes rttr) {
+	public String register(StoreVO store, MultipartFile thumbnail, Errors errors) throws Exception {
 
-		log.info("post register");
-
-		service.register(store);
-		rttr.addFlashAttribute("result", store.getSno());
-
+		log.info("register: " + store);
+		if(errors.hasErrors()) {
+			log.error("에러남" + errors);
+			return "store/register";
+		}
+		
+		service.register(store, thumbnail);
 		return "redirect:/store/list";
 	}
 
@@ -84,18 +96,19 @@ public class StoreController {
 
 	@PostMapping("/modify")
 	public String modify(
-			StoreVO store,
+			@Valid @ModelAttribute("store") StoreVO store,
 			@ModelAttribute("cri") Criteria cri,
-			RedirectAttributes rttr) {
-		log.info("modify");
-
-		if (service.modify(store)) {
-			rttr.addFlashAttribute("result", "success");
-
+			MultipartFile thumbnail,
+			Errors errors) throws Exception {
+		log.info("modify: " + store);
+			
+		if(errors.hasErrors()) {
+			return "store/modify";
 		}
+		
+		service.modify(store, thumbnail);
 		return "redirect:" + cri.getLinkWithSno("/store/get", store.getSno());
 		//return "redirect:/store/get";
-
 	}
 	
 	@PostMapping("/remove")
@@ -125,6 +138,24 @@ public class StoreController {
 		map.put("TWC", "����+�ۼ���+����");
 
 		return map;
+	}
+	
+	@GetMapping("/image/{size}/{sno}")
+	@ResponseBody
+	public void thumbnail(@PathVariable("size") String size,@PathVariable("sno") Long sno, Principal principal, HttpServletResponse response) throws IOException {
+		StoreVO store = service.get(sno,principal);
+		
+		File src = new File(store.getImgSrc());
+		if(!src.exists()) {
+			src = new File(StoreServiceImpl.THUMBNAIL_UPLOAD_DIR, "image_prepare.png");
+		}
+		log.warn(src);
+		response.setHeader("Content-Type", "image/png");
+		if(size.equals("thumbnail")) {
+			Thumbnails.of(src).size(250, 250).toOutputStream(response.getOutputStream());
+		} else {
+			Thumbnails.of(src).size(300, 300).toOutputStream(response.getOutputStream());
+		}
 	}
 
 }

@@ -37,13 +37,23 @@
 	text-align: center;
 	justify-content: center;
 }
+.top {
+	width: 300px;
+	height: 300px;
+	border-radius: 5px;
+}
+.thumbnail-card {
+	width: 300px;
+	height: 300px;
+	border-radius: 5px;
+}
 </style>
 
 <div class="container">
 	<h3>${editor.title}</h3>
 	<div class="top-div mt-5">
-		<div class="card">
-			<img src="..." class="card-img-top" alt="..." />
+		<div class="thumbnail-card">
+			<img src="/recommend/editor/image/fullsize/${editor.eno}" class="top" alt="..." />
 		</div>
 		<div class="card ml-5 p-5">
 			<p>상호명 : ${editor.storeName}</p>

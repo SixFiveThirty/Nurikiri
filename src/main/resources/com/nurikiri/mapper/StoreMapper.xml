@@ -34,8 +34,8 @@
 
 
 	<insert id="insert">
-		insert into store (title, market, address, item, use_recharge_card, use_bill, use_mobile, content, owner, phone)
-		values (#{title}, #{market}, #{address}, #{item}, #{useRechargeCard}, #{useBill}, #{useMobile}, #{content}, #{owner}, #{phone})
+		insert into store (title, market, address, item, use_recharge_card, use_bill, use_mobile, content, owner, phone, img_src)
+		values (#{title}, #{market}, #{address}, #{item}, #{useRechargeCard}, #{useBill}, #{useMobile}, #{content}, #{owner}, #{phone}, #{imgSrc})
 
 		<selectKey resultType="Long" keyProperty="sno"
 			keyColumn="sno" order="AFTER">
@@ -66,7 +66,8 @@
 		use_mobile = #{useMobile},
 		content = #{content},
 		owner = #{owner},
-		phone = #{phone}
+		phone = #{phone},
+		img_src = #{imgSrc}
 		where sno =
 		#{sno}
 	</update>
