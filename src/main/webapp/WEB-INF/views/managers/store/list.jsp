@@ -39,7 +39,7 @@
                <td style="text-align: center;"><a href="/store/get?sno=${store.sno}">${store.title}</a></td>
                <td style="text-align: center; width: 100px;"><fmt:formatDate pattern="yyyy" value="${store.regDate}"/></td>
                <td style="text-align: center;"><button onclick="location.href='/store/modify?sno=${store.sno}'">수정</button></td>
-               <td style="text-align: center; width: 150px;"><button id='btn' onclick='changeBtnName()'>Y</button></td>
+               <td style="text-align: center; width: 150px;"><button onclick="changeBtnName()">Y</button></td>
            </tr>
           </c:forEach>
         </tbody>
@@ -47,9 +47,10 @@
 </div>
 
 <script>
-function changeBtnName()  {
-	  const btnElement 
-	    = document.getElementById('btn');
+function changeBtnName(e)  {
+			console.log(e);
+	  const btnElement = $(e.target);
+//	    = document.getElementById('btn');
 	  
 	  const html 
 	    = '<div style="color:red"> N </div>';
@@ -68,8 +69,6 @@ function changeBtnName()  {
 let store = ${store}
 console.log("store", store); */
 
-let store_title = ${store.title};
-console.log("title", store_title);
 
 </script>
 
