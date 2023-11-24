@@ -91,6 +91,11 @@ public class StoreController {
 
 		if (service.modify(store)) {
 			rttr.addFlashAttribute("result", "success");
+			rttr.addAttribute("sno", store.getSno());
+			rttr.addAttribute("pageNum", cri.getPageNum());
+			rttr.addAttribute("amount", cri.getAmount());
+			rttr.addAttribute("type", cri.getType());
+			rttr.addAttribute("keyword", cri.getKeyword());
 
 		}
 		return "redirect:" + cri.getLinkWithSno("/store/get", store.getSno());
@@ -108,6 +113,11 @@ public class StoreController {
 		if (service.remove(sno)) {
 			rttr.addFlashAttribute("result", "success");
 		}
+		
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
 //		return "redirect:/store/list" + cri.getLink();
 		return "redirect:/store/list";
 
@@ -116,13 +126,9 @@ public class StoreController {
 	@ModelAttribute("searchTypes")
 	public Map<String, String> searchTypes() {
 		Map<String, String> map = new LinkedHashMap<String, String>();
-		map.put("", "-- �˻������ --");
-		map.put("T", "����");
-		map.put("W", "�ۼ���");
-		map.put("C", "����");
-		map.put("TC", "����+����");
-		map.put("TW", "����+�ۼ���");
-		map.put("TWC", "����+�ۼ���+����");
+		map.put("T", "상호명");
+		map.put("M", "시장명");
+		map.put("A", "지역명");
 
 		return map;
 	}
