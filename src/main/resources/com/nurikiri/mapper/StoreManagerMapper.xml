@@ -15,4 +15,5 @@
 		select * from store where sno =
 		#{sno}
 	</select>
+	
 </mapper>

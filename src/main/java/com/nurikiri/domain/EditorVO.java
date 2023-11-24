@@ -2,6 +2,7 @@ package com.nurikiri.domain;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.validation.constraints.NotBlank;
 
@@ -49,4 +50,6 @@ public class EditorVO {
 	private Date updateDate;
 	
 	List<Local> locals;
+	
+	private String imgSrc;
 }

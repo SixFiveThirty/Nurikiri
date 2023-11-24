@@ -1,10 +1,12 @@
 package com.nurikiri.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.StoreVO;
@@ -20,6 +22,7 @@ import retrofit2.Response;
 @Service
 @AllArgsConstructor
 public class StoreServiceImpl implements StoreService {
+	public static final String THUMBNAIL_UPLOAD_DIR = "/Users/jeonhayoon/nurikiri_image/store";
 
 	private StoreMapper mapper;
 
@@ -32,16 +35,32 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void register(StoreVO store) {
-		log.info("register");
+	public void register(StoreVO store, MultipartFile thumbnail) throws Exception {
+		log.info("register...." + store);
+		
+		File dest = new File(THUMBNAIL_UPLOAD_DIR, thumbnail.getOriginalFilename());
+		String imgSrc = dest.getPath();
+		store.setImgSrc(imgSrc);
 		mapper.insert(store);
+
+		if (!thumbnail.isEmpty()) {
+			thumbnail.transferTo(dest);
+		}
 
 	}
 
 	@Override
-	public boolean modify(StoreVO store) {
-		log.info("modify");
-		return mapper.update(store) == 1;
+	public void modify(StoreVO store, MultipartFile thumbnail) throws Exception {
+		log.info("modify...." + store);
+
+		File dest = new File(THUMBNAIL_UPLOAD_DIR, thumbnail.getOriginalFilename());
+		String imgSrc = dest.getPath();
+		store.setImgSrc(imgSrc);
+		mapper.update(store);
+
+		if (!thumbnail.isEmpty()) {
+			thumbnail.transferTo(dest);
+		}
 	}
 
 	@Override

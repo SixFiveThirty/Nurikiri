@@ -56,17 +56,20 @@
 .card-text {
 	text-align: center;
 }
+.thumbnail {
+	height: 200px;
+}
 </style>
 
-<h1>가맹점 찾기</h1>
+<h3 class="ml-5 mb-5">가맹점 찾기</h3>
 
-<div class="row">
+<div class="row mb-5">
 	<c:forEach var="store" items="${list}">
 		<div class="col-sm-6 col-md-4 mb-3">
 
 			<div class="card mx-5" style="width: 18rem;">
 				<a class="store-link" href="${cri.getLink('get')}&sno=${store.sno}">
-					<img src="..." class="card-img-top" alt="..." />
+					<img src="/store/image/thumbnail/${store.sno}" class="card-img-top thumbnail" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">${store.title}</p>

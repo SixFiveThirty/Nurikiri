@@ -106,14 +106,8 @@
 			</div>
 
 			<div class="form-group">
-				<form:label path="content">가맹점 설명</form:label>
-				<form:textarea path="content" cssClass="form-control" />
-			</div>
-
-			<div class="photo-upload mt-4">
-				<h3>사진 추가</h3>
-				<button type="button" class="btn btn-secondary ml-4"
-					style="width: 150px">파일 첨부</button>
+				<div class="thumbnail_title">가맹점 사진 등록</div>
+				<input type="file" name="thumbnail" class="thumbnail" />
 			</div>
 
 			<button type="button" class="btn btn-secondary mt-4"
