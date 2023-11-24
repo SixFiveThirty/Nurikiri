@@ -10,15 +10,31 @@
 <script>
 $(document).ready(async function() {
 
-	let username;
 	$('.remove').click(function(){
 		if(!confirm('정말 삭제할까요?')) return;
 		const userName = $(this).data("username");
 		$(".delete_userName").val(userName);
 		document.forms.removeForm.submit();
+	});
+	
+	
+	$('.changeAuth').change(function(){
+		//if(!confirm('정말 변경할까요?')) return;
+		const userName = $(this).find("option:selected").data("username");
+		const auth = $(this).val();
+		console.log(userName);
+		console.log(auth);
+		$(".change_username").val(userName);
+		$(".change_auth").val(auth);
+		document.forms.changeForm.submit();
+		
+		//$(".change_userName").val(userName);
+		//$(".change_auth").val()
+		
 	});	
 	
 });
+
 
 </script>
 
@@ -46,30 +62,47 @@ $(document).ready(async function() {
 			<tr>
 				<td>${member.username}</td>
 				<td>${member.name}</td>
-				<td>${member.auth}</td>
+				<td><select class="changeAuth">
+						<option value="" selected disable hidden>유저 권한 데이터 받아오기</option>
+						<option value="RULE_USER" data-username="${member.username}">USER</option>
+						<option value="RULE_MANAGER" data-username="${member.username}">MANAGER</option>
+						<option value="RULE_ADMIN" data-username="${member.username}">ADMIN</option>
+				</select></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
 						value="${member.regDate}" /></td>
 				<td>
 					<button type="button" class="btn btn-light mr-5"
 						style="width: 200px" onclick="location.href='/security/modify'">수정</button>
 				</td>
-				<td><button type="button" class="btn btn-danger remove" data-username="${member.username}">
-						<i class="fas fa-trash-alt"></i> 삭제 </button></td>
+				<td><button type="button" class="btn btn-danger remove"
+						data-username="${member.username}">
+						<i class="fas fa-trash-alt"></i> 삭제
+					</button></td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
-	<form action="remove" method="post" name="removeForm">
+<form action="remove" method="post" name="removeForm">
 	<input type="hidden" name="${_csrf.parameterName}"
-		value="${_csrf.token}" />
-	<input type="hidden" name="username" class="delete_userName" />
-	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
-	<input type="hidden" name="amount" value="${cri.amount}" />
-	<input type="hidden" name="type" value="${cri.type}" />
-	<input type="hidden" name="keyword" value="${cri.keyword}" />
+		value="${_csrf.token}" /> <input type="hidden" name="username"
+		class="delete_userName" /> <input type="hidden" name="pageNum"
+		value="${cri.pageNum}" /> <input type="hidden" name="amount"
+		value="${cri.amount}" /> <input type="hidden" name="type"
+		value="${cri.type}" /> <input type="hidden" name="keyword"
+		value="${cri.keyword}" />
 </form>
 
-	<%@ include file="../../common/pagination.jsp"%>
+<form action="changeAuth" method="post" name="changeForm">
+	<input type="hidden" name="${_csrf.parameterName}"
+		value="${_csrf.token}" /> <input type="hidden" name="username"
+		class="change_username" /><input type="hidden" name="auth"
+		class="change_auth" /> <input type="hidden" name="pageNum"
+		value="${cri.pageNum}" /> <input type="hidden" name="amount"
+		value="${cri.amount}" /> <input type="hidden" name="type"
+		value="${cri.type}" /> <input type="hidden" name="keyword"
+		value="${cri.keyword}" />
+</form>
+<%@ include file="../../common/pagination.jsp"%>
 
-	<%@ include file="../../layouts/footer.jsp"%>
+<%@ include file="../../layouts/footer.jsp"%>
 

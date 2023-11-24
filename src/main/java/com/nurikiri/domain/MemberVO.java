@@ -61,6 +61,8 @@ public class MemberVO {
 	private List<AuthVO> authList;
 	private String auth;
 	
+	//private boolean isDeleted;
+	
 	public Collection<SimpleGrantedAuthority> getAuthorites(){
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
