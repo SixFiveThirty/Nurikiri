@@ -2,6 +2,8 @@ package com.nurikiri.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.nurikiri.domain.AuthVO;
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.MemberVO;
@@ -24,5 +26,10 @@ public interface MemberMapper {
 	public List<MemberVO> getListWithPaging(Criteria cri);
 	
 	public int getTotalCount(Criteria cri);
+	
+	public void changeAuth(@Param("username") String username,@Param("auth") String auth);
+	
+	public void softdelete(@Param("isDelete") boolean isDelete);
+	
 	
 }
