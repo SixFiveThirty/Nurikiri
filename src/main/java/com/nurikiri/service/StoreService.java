@@ -20,4 +20,6 @@ public interface StoreService {
 	
 	public StoreVO get(Long no, Principal principal);
 	
+ 
+	
 }

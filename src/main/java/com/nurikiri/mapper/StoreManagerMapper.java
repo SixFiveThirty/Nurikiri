@@ -11,6 +11,8 @@ public interface StoreManagerMapper {
 	
 	public List<StoreManagerVO> getListWithPaging(Criteria cri);
 	
+	public StoreManagerVO update(Long sno);
+	
 	
 	
 	
