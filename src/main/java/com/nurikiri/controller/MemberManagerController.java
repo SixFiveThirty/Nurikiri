@@ -1,6 +1,5 @@
 package com.nurikiri.controller;
 
-import java.io.Writer;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +45,22 @@ public class MemberManagerController {
 	public String remove(@RequestParam("username") String username, @ModelAttribute("cri") Criteria cri,
 			RedirectAttributes rttr) {
 		log.info("remove" + username);
-		if(service.remove(username)) {
-		rttr.addFlashAttribute("result","success");
+		if (service.remove(username)) {
+			rttr.addFlashAttribute("result", "success");
 		}
-		return "redirect:/managers/list" + cri.getLink();
+		return "redirect:/managers/member/list" + cri.getLink();
+	}
+
+	@PostMapping("/changeAuth")
+	public String changeAuth(@RequestParam("username") String username, @RequestParam("auth") String auth,
+			@ModelAttribute("cri") Criteria cri,
+			RedirectAttributes rttr) {
+		log.info("changeAuth " + username + " auth: " + auth);
+		
+		service.changeAuth(username, auth);
+
+
+		return "redirect:/managers/member/list" + cri.getLink();
 	}
 
 }

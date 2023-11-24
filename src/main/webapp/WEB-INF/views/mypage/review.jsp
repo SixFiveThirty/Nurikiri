@@ -56,29 +56,9 @@
 .card-text {
 	text-align: center;
 }
-.thumbnail {
-	height: 200px;
-}
 </style>
 
-<h3 class="ml-5 mb-5">가맹점 찾기</h3>
-
-<div class="row mb-5">
-	<c:forEach var="store" items="${list}">
-		<div class="col-sm-6 col-md-4 mb-3">
-
-			<div class="card mx-5" style="width: 18rem;">
-				<a class="store-link" href="${cri.getLink('get')}&sno=${store.sno}">
-					<img src="/store/image/thumbnail/${store.sno}" class="card-img-top thumbnail" alt="..." />
-				</a>
-				<div class="card-body">
-					<p class="card-text">${store.title}</p>
-				</div>
-			</div>
-
-		</div>
-	</c:forEach>
-</div>
+<h1>리뷰 관리</h1>
 
 <%@ include file="../common/pagination.jsp"%>
 

@@ -29,13 +29,13 @@
 	</select>
 	
 	<insert id="insert">
-		insert into editor (title, content, writer, store_name, market, item, address, link, phone)
-		values (#{title}, #{content}, #{writer}, #{storeName}, #{market}, #{item}, #{address}, #{link}, #{phone})
+		insert into editor (title, content, writer, store_name, market, item, address, link, phone, img_src)
+		values (#{title}, #{content}, #{writer}, #{storeName}, #{market}, #{item}, #{address}, #{link}, #{phone}, #{imgSrc})
 	</insert>
 	
 	<insert id="insertSelectKey">
-		insert into editor (title, content, writer, store_name, market, item, address, link, phone)
-		values (#{title}, #{content}, #{writer}, #{storeName}, #{market}, #{item}, #{address}, #{link}, #{phone})
+		insert into editor (title, content, writer, store_name, market, item, address, link, phone, img_src)
+		values (#{title}, #{content}, #{writer}, #{storeName}, #{market}, #{item}, #{address}, #{link}, #{phone}, #{imgSrc})
 		
 		<selectKey resultType="Long" keyProperty="eno"
 			keyColumn="eno" order="AFTER">
@@ -63,6 +63,7 @@
 			link = #{link},
 			item = #{item},
 			market = #{market},
+			img_src = #{imgSrc},
 			update_date = now()
 		where eno = #{eno}
 	</update>
@@ -90,28 +91,4 @@
 			<include refid="criteria"></include>
 		</where>
 	</select>
-
-	<insert id="insertAttachment">
-		insert into editor_attachment(filename, path, content_type, size, eno)
-		values(#{filename}, #{path}, #{contentType}, #{size}, #{eno})
-	</insert>
-
-	<!-- select 2번 실행하겠다는 뜻. join 안하고.. -->
-	<select id="getAttachmentList" resultType="EditorAttachmentVO">
-		select * from
-		editor_attachment
-		where eno = #{eno}
-		order by filename
-	</select>
-
-	<select id="getAttachment" resultType="EditorAttachmentVO">
-		select * from
-		editor_attachment
-		where no = #{no}
-	</select>
-
-	<delete id="removeAttachment">
-		delete from tbl_board_attachment
-		where no = #{no}
-	</delete>
 </mapper>

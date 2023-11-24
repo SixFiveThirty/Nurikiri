@@ -5,7 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ include file="../layouts/header.jsp"%>
 
-<div class="container mx-3">
+<div class="container mx-5">
 	<h3>서비스 소개</h3>
 	<br/>
 	<h4>주요기능</h4>

@@ -8,11 +8,11 @@ import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.EditorVO;
 
 public interface EditorService {
-	public void register(EditorVO editor, List<MultipartFile> files) throws Exception;
+	public void register(EditorVO editor, MultipartFile thumbnail) throws Exception;
 	
 	public EditorVO get(Long eno);
 	
-	public boolean modify(EditorVO editor, List<MultipartFile> files) throws Exception;
+	public void modify(EditorVO editor, MultipartFile thumbnail) throws Exception;
 	
 	public boolean remove(Long eno);
 	

@@ -24,7 +24,6 @@ public class MessageController {
 	@Autowired
 	private MemberService service;
 	
-	
 	//RestAPI
 	@GetMapping("/check/sendSMS")
 	@ResponseBody
