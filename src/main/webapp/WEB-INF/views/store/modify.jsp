@@ -50,7 +50,8 @@
 	<div class="panel-body">
 
 		<form:form role="form" modelAttribute="store">
-			
+			<input type="hidden" name="type" value="${cri.type}" />
+			<input type="hidden" name="keyword" value="${cri.keyword}" />
 			<form:hidden path="sno" />
 
 			<div class="form-group">

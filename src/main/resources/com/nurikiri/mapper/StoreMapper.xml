@@ -79,10 +79,10 @@
 					<choose>
 						<when test="type == 'T'.toString()">
 							title like CONCAT('%', #{keyword}, '%') </when>
-						<when test="type == 'C'.toString()">
-							content like CONCAT('%', #{keyword}, '%') </when>
-						<when test="type == 'O'.toString()">
-							owner like CONCAT('%', #{keyword}, '%') </when>
+						<when test="type == 'M'.toString()">
+							market like CONCAT('%', #{keyword}, '%') </when>
+						<when test="type == 'A'.toString()">
+							address like CONCAT('%', #{keyword}, '%') </when>
 					</choose>
 				</trim>
 			</foreach>

@@ -84,9 +84,7 @@
 }
 </style>
 
-<sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal.member" var="member" />
-</sec:authorize>
+
 
 
 <div style="width: 500px" class="mx-auto">
@@ -99,6 +97,17 @@
 			<form:form modelAttribute="member" cssClass="form"
 				enctype="multipart/form-data">
 				<br />
+
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<div class="form-group">
+						<form:label path="auth">권한 설정</form:label>
+						<form:select path="auth" cssClass="form-control">
+							<form:option value="ROLE_ADMIN">ADMIN</form:option>
+							<form:option value="ROLE_MANAGER">MANAGER</form:option>
+							<form:option value="ROLE_USER">USER</form:option>
+						</form:select>
+					</div>
+				</sec:authorize>
 
 
 				<div class="form-group">
@@ -138,14 +147,12 @@
 						cssClass="form-control" />
 					<form:errors path="email" cssClass="error" />
 				</div>
-
 				<div class="form-group">
 					<form:label path="phone">전화번호</form:label>
 					<form:input path="phone" value="${member.phone}"
 						cssClass="form-control" />
 					<form:errors path="phone" cssClass="error" />
 				</div>
-
 				<div class="profile_title">프로필 사진 수정</div>
 				<div class="avatar">
 					<input type="file" name="avatar" />

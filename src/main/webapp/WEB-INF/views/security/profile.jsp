@@ -143,7 +143,7 @@ th, td{
 					<a href="/security/check_pwd" >회원 정보 수정</a>
 				</div>
 				<div class="menu mypage">
-					<a href="/security/mypage">마이 페이지</a>
+					<a href="/mypage/main">마이 페이지</a>
 				</div>
 			</div>
 		</div>
