@@ -30,4 +30,6 @@ public interface MemberService {
 
 	public void certifiedPhoneNumber(String phone, String numStr);
 	
+	public void changeAuth(String username, String auth);
+	
 }

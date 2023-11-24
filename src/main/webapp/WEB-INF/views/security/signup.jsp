@@ -66,9 +66,23 @@
 	width: 100%;
 	display: flex;
 }
-
-.input-auth {
-	width: 395px;
+.sms {
+	width: 100%;
+}
+.sms:nth-child(1) {
+	flex-grow: 5;
+}
+.sms:nth-child(2) {
+	flex-grow: 1;
+}
+.auth {
+	width: 100%;
+}
+.auth:nth-child(1) {
+	flex-grow: 5;
+}
+.auth:nth-child(2) {
+	flex-grow: 1;
 }
 </style>
 
@@ -80,15 +94,10 @@ function phone_number() {
 	phone = document.getElementById("phone").value;
 }
 
-function auth_number() {
-	auth = document.getElementById("auth").value;
-}
-
 const SMS_CHECK_URL = '/api/check/sendSMS?';
 const AUTH_NUMBER_CHECK_URL = '/api/check/authNum';
 
 async function check() {
-	console.log("phone", phone);
 	alert("인증번호를 발송했습니다.");
 	await rest_message_get(SMS_CHECK_URL, phone);
 }
@@ -136,7 +145,7 @@ async function check_num() {
 				</div>
 				<div class="form-group">
 					<form:label path="jumin">주민번호</form:label>
-					<form:input path="jumin" cssClass="form-control" />
+					<form:input path="jumin" cssClass="form-control"/>
 					<form:errors path="jumin" cssClass="errors" />
 				</div>
 				<div class="form-group">
@@ -148,8 +157,12 @@ async function check_num() {
 				<div class="form-group">
 					<form:label path="phone">휴대폰번호</form:label>
 					<div class="phone-certify">
-						<form:input id="phone" path="phone" cssClass="form-control input-auth mr-3" onkeyup="phone_number()" />
-						<button type="button" class="btn check-sms-btn" onclick="check()">번호 확인</button>
+						<div class="sms mr-3">
+							<form:input id="phone" path="phone" cssClass="form-control" onkeyup="phone_number()" />
+						</div>
+						<div class="sms">
+							<button type="button" class="btn check-sms-btn" onclick="check()">번호 확인</button>
+						</div>
 					</div>
 					<form:errors path="phone" cssClass="errors" />
 				</div>
@@ -157,8 +170,12 @@ async function check_num() {
 				<div class="form-group">
 					<label>인증번호 입력</label>
 					<div class="phone-certify">
-						<input id="auth" class="form-control input-auth mr-3" onkeyup="auth_number()" />
-						<button type="button" class="btn check-sms-btn" onclick="check_num()">인증 확인</button>
+						<div class="auth mr-3">
+							<input id="auth" class="form-control" />
+						</div>
+						<div class="auth">
+							<button type="button" class="btn check-sms-btn" onclick="check_num()">인증 확인</button>
+						</div>
 					</div>
 				</div>
 

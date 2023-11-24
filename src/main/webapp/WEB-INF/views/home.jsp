@@ -28,22 +28,6 @@
 	background-color: #dddddd;
 	text-align: center;
 }
-
-/* .editor-link > img {
-	width: 100%;
-	height: 100%;
-	border-color: #FEC25E;
-	background-color: #dddddd;
-	text-align: center;
-} */
-
-/* .card-img-top {
-	width: 100%;
-	height: 200px;
-	border-color: #FEC25E;
-	background-color: #dddddd;
-	text-align: center;
-} */
 .card-body {
 	background-color: #FEC25E;
 	border-color: #FEC25E;
@@ -51,6 +35,9 @@
 
 .card-text {
 	text-align: center;
+}
+.thumbnail {
+	height: 200px;
 }
 </style>
 
@@ -60,54 +47,38 @@
 		<div class="editor-card-list">
 			<c:forEach var="editor" items="${getEditorListThree}">
 				<div class="card mx-5" style="width: 18rem;">
-					<a class="editor-link editor" href="/recommend/editor/get?eno=${editor.eno}"> <img
-						src="..." class="card-img-top" alt="..." />
+					<a class="editor-link editor" href="/recommend/editor/get?eno=${editor.eno}">
+						<img src="/recommend/editor/image/thumbnail/${editor.eno}" class="card-img-top thumbnail" alt="..." />
 					</a>
 					<div class="card-body">
 						<p class="card-text">${editor.title}</p>
 					</div>
 				</div>
 			</c:forEach>
-			<!-- <div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link editor" href="/recommend/editor/get">
-					<img src="..." class="card-img-top" alt="..."/>
-				</a>
-				<div class="card-body">
-					<p class="card-text">000 전통 시장</p>
-				</div>
-			</div>
-			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link editor" href="/recommend/editor/get">
-					<img src="..." class="card-img-top" alt="..."/>
-				</a>
-				<div class="card-body">
-					<p class="card-text">000 전통 시장</p>
-				</div>
-			</div> -->
 		</div>
 	</div>
 	<div class="recommend-part py-5">
 		<p class="mx-5">즐겨찾기 순 추천</p>
 		<div class="editor-card-list">
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#"> <img src="..."
-					class="card-img-top" alt="..." />
+				<a class="editor-link" href="#">
+				<img src="/resources/images/image_prepare.png" class="card-img-top thumbnail" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#"> <img src="..."
-					class="card-img-top" alt="..." />
+				<a class="editor-link" href="#">
+				<img src="/resources/images/image_prepare.png" class="card-img-top thumbnail" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#"> <img src="..."
-					class="card-img-top" alt="..." />
+				<a class="editor-link" href="#">
+				<img src="/resources/images/image_prepare.png" class="card-img-top thumbnail" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
@@ -119,24 +90,24 @@
 		<p class="mx-5">별점 순 추천</p>
 		<div class="editor-card-list">
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#"> <img src="..."
-					class="card-img-top" alt="..." />
+				<a class="editor-link" href="#">
+				<img src="/resources/images/image_prepare.png" class="card-img-top thumbnail" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#"> <img src="..."
-					class="card-img-top" alt="..." />
+				<a class="editor-link" href="#">
+				<img src="/resources/images/image_prepare.png" class="card-img-top thumbnail" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
 				</div>
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#"> <img src="..."
-					class="card-img-top" alt="..." />
+				<a class="editor-link" href="#">
+				<img src="/resources/images/image_prepare.png" class="card-img-top thumbnail" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>

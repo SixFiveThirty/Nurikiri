@@ -98,32 +98,17 @@
 			<input type="hidden" name="keyword" value="${cri.keyword}" />
 
 			<form:hidden path="eno" />
-			<form:hidden path="writer" value="${username}" />
+			<form:hidden path="writer" value="${member.username}" />
 
 			<div class="form-group">
 				<form:label path="title">제목</form:label>
 				<form:input path="title" cssClass="form-control" />
 				<form:errors path="title" cssClass="error" />
 			</div>
-			<div class="my-3">
-				<label for="attaches">첨부파일</label>
-				<c:forEach var="file" items="${editor.attaches}">
-					<div>
-						<i class="fa-solid fa-floppy-disk"></i> ${file.filename}
-						(${file.formatSize})
-						<button type="button" data-no="${file.no}"
-							class="btn btn-danger btn-sm py-0 px-1 remove-attachment">
-							<i class="fa-solid fa-times"></i>
-						</button>
-					</div>
-				</c:forEach>
-			</div>
 			<div class="form-group">
-				<label for="attaches">추가 첨부파일</label>
-				<div id="attach-list" class="my-1"></div>
-				<input type="file" class="form-control" multiple name="files" />
+				<div class="thumbnail_title">가맹점 사진 등록</div>
+				<input type="file" name="thumbnail" class="thumbnail" />
 			</div>
-
 			<div class="form-group">
 				<form:label path="content">내용</form:label>
 				<form:textarea path="content" id="content" cssClass="form-control"

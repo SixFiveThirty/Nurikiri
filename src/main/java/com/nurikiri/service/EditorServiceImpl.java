@@ -1,6 +1,8 @@
 package com.nurikiri.service;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import com.nurikiri.mapper.EditorMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import net.coobird.thumbnailator.Thumbnails;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -22,22 +25,24 @@ import retrofit2.Response;
 @Service
 @AllArgsConstructor
 public class EditorServiceImpl implements EditorService {
+	public static final String THUMBNAIL_UPLOAD_DIR = "/Users/jeonhayoon/nurikiri_image/editor";
+
 	private EditorMapper mapper;
 
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public void register(EditorVO editor, List<MultipartFile> files) throws Exception {
+	public void register(EditorVO editor, MultipartFile thumbnail) throws Exception {
 		log.info("register...." + editor);
-		
+
+		File dest = new File(THUMBNAIL_UPLOAD_DIR, thumbnail.getOriginalFilename());
+		String imgSrc = dest.getPath();
+		editor.setImgSrc(imgSrc);
 		mapper.insertSelectKey(editor);
-		Long eno = editor.getEno();
-		
-		for(MultipartFile part: files) {
-			if(part.isEmpty()) continue;
-			EditorAttachmentVO attach = new EditorAttachmentVO(eno, part);
-			mapper.insertAttachment(attach);
+
+		if (!thumbnail.isEmpty()) {
+			thumbnail.transferTo(dest);
 		}
-		
+
 	}
 
 	@Override
@@ -49,38 +54,36 @@ public class EditorServiceImpl implements EditorService {
 		KakaoMapService service = KakaoMapService.getService();
 		Call<LocalResult> call = service.searchLocal(query, 10, 1);
 		Response<LocalResult> res;
-		
+
 		try {
 			res = call.execute();
-			if(res.isSuccessful()) {
+			if (res.isSuccessful()) {
 				LocalResult result = res.body();
 				log.info("===>" + result);
 				editor.setLocals(result.getLocals());
 			} else {
 				log.info("호출 실패 ===> " + res);
 			}
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return editor;
 	}
 
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public boolean modify(EditorVO editor, List<MultipartFile> files) throws Exception {
-		log.info("modify........" + editor);
+	public void modify(EditorVO editor, MultipartFile thumbnail) throws Exception {
+		log.info("register...." + editor);
 
-		int result = mapper.update(editor);
-		Long eno = editor.getEno();
-		
-		for(MultipartFile part: files) {
-			if(part.isEmpty()) continue;
-			EditorAttachmentVO attach = new EditorAttachmentVO(eno, part);
-			mapper.insertAttachment(attach);
+		File dest = new File(THUMBNAIL_UPLOAD_DIR, thumbnail.getOriginalFilename());
+		String imgSrc = dest.getPath();
+		editor.setImgSrc(imgSrc);
+		mapper.update(editor);
+
+		if (!thumbnail.isEmpty()) {
+			thumbnail.transferTo(dest);
 		}
-
-		return result == 1;
 	}
 
 	@Override
