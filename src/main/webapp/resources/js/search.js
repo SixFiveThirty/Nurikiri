@@ -14,9 +14,9 @@
 
 		$('.move').on('click', function(e) {
 			e.preventDefault();
-			actionForm.append('<input type="hidden" name="bno"/>');
-			actionForm.find('input[name="bno"]').val($(this).attr('href'));
-			actionForm.attr('action', '/board/get');
+			actionForm.append('<input type="hidden" name="sno"/>');
+			actionForm.find('input[name="sno"]').val($(this).attr('href'));
+			actionForm.attr('action', '/store/get');
 			actionForm.submit();
 		}); */
 

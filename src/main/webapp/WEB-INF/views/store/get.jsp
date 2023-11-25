@@ -125,28 +125,34 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 	text-align: center;
 	justify-content: center;
 }
+.thumbnail-card {
+	width: 400px;
+	height: 400px;
+	border-radius: 5px;
+}
+.top {
+	width: 400px;
+	height: 400px;
+	border-radius: 5px;
+}
 </style>
 
 <div class="container">
 	<h3>${store.title}</h3>
 	<div class="top-div mt-5">
-		<div class="card">
-			<img src="..." class="card-img-top" alt="사진 서비스 조금만 기다려주세요..." />
+		<div class="thumbnail-card">
+			<img src="/store/image/fullsize/${store.sno}" class="top" alt="사진 서비스 조금만 기다려주세요..." />
 		</div>
 		<div class="card ml-5 p-5">
 			<p>상호명: ${store.title}</p>
 			<p>소속 시장: ${store.market}</p>
-			<p>주소: ${store.address }</p>
-			<p>취급품목: ${store.item }</p>
+			<p>주소: ${store.address}</p>
+			<p>취급품목: ${store.item}</p>
 			<p>충전식 카드 여부: ${store.useRechargeCard}</p>
-			<p>지류 취급여부: ${store.useBill }</p>
-			<p>모바일 취급여부: ${store.useMobile }</p>
+			<p>지류 취급여부: ${store.useBill}</p>
+			<p>모바일 취급여부: ${store.useMobile}</p>
 			<p>등록년도: <fmt:formatDate value="${store.regDate}" pattern="yyyy년"/></p>
 		</div>
-	</div>
-	<div class="mid-div mt-5">
-		가계 설명
-		<div class="card">${store.content}</div>
 	</div>
 	<div class="bottom-div mt-5">
 		<div class="card" id="map">지도 서비스 조금만 기다려주세요...</div>
