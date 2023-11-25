@@ -63,7 +63,7 @@ $(document).ready(async function() {
 				<td>${member.username}</td>
 				<td>${member.name}</td>
 				<td><select class="changeAuth">
-						<option value="" selected disable hidden>유저 권한 데이터 받아오기</option>
+						<option value="" selected disable hidden>${member.auth}</option>
 						<option value="RULE_USER" data-username="${member.username}">USER</option>
 						<option value="RULE_MANAGER" data-username="${member.username}">MANAGER</option>
 						<option value="RULE_ADMIN" data-username="${member.username}">ADMIN</option>
@@ -71,7 +71,7 @@ $(document).ready(async function() {
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
 						value="${member.regDate}" /></td>
 				<td>
-					<button type="button" class="btn btn-light mr-5"
+					<button type="button" class="btn btn-light mr-5" data-username="${member.username}"
 						style="width: 200px" onclick="location.href='/security/modify'">수정</button>
 				</td>
 				<td><button type="button" class="btn btn-danger remove"

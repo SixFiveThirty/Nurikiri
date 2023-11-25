@@ -128,12 +128,19 @@ public class SecurityController {
 		
 		return "redirect:/security/modify";
 	}
-  
-	@GetMapping("/modify")
-	public void modify(@ModelAttribute("member") MemberVO member) {
-		
-	}
-
+	
+    @GetMapping("/modify")
+    public void modify(@ModelAttribute("member") MemberVO member) {
+    }
+	/*
+	 * @GetMapping({"/get","/modify"}) public void modify(@RequestParam("username")
+	 * String username ,@ModelAttribute("cri") Criteria cri, Model model) {
+	 * 
+	 * log.info("/get or modify");
+	 * model.addAttribute("member",service.get(username));
+	 * 
+	 * }
+	 */
 	@PostMapping("/modify")
 	public String modify(@Valid @ModelAttribute("member") MemberVO member, Errors errors, MultipartFile avatar, HttpSession session) throws IOException {
 				
