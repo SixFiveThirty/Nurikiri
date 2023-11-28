@@ -83,6 +83,9 @@
 }
 .auth:nth-child(2) {
 	flex-grow: 1;
+}	
+button.btn.check-sms-btn{
+	width: 105px;
 }
 </style>
 

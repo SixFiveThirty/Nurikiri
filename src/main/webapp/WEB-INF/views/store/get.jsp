@@ -57,44 +57,62 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 
 		// 삭제 버튼 클릭
 		$('.review-list').on('click', '.review-delete-btn',
-				deleteReview);
-		
-		/* /////// 답글 버튼 이벤트 핸들링
-		// 답글 추가 인터페이스 보이기
-		$('.review-list').on('click', '.reply-add-show-btn', function(e) {
-			showReplyAdd($(this), writer);
-		});
-
-		// 답글 등록
-		$('.comment-list').on('click', '.reply-add-btn', function(e){
-			addReply($(this), writer);
-		});
-		
-		// 답급 취소
-		$('.comment-list').on('click', '.reply-add-cancel-btn', cancelReply);
-
-		// 답글 수정 화면 보이기
-		$('.comment-list').on('click', '.reply-update-show-btn', function(e) {
-			showUpdateReply($(this));
-		});
-
-		// 답글 수정 등록
-		$('.comment-list').on('click', '.reply-update', function(e) {
-		updateReply($(this));
-		});
-
-		// 답글 수정 취소
-		$('.comment-list').on('click', '.reply-update-cancel', cancelReplyUpdate);
-
-		// 답글 삭제
-		$('.comment-list').on('click', '.reply-delete-btn', deleteReply); */
-
-		/* // 목록 추출
-		let data = await rest_get(url);
-		console.log(data); */
-			
+				deleteReview);		
 	});
 </script>
+
+<c:if test="${not empty member.username}">
+
+	<style>
+	.fa-heart {
+	cursor: pointer;
+	}
+	</style>
+
+	<script src="/resources/js/rest.js"></script>
+
+	<script>
+	$(document).ready(function() {
+		let username = '${member.username}';
+		const BASE_URL = '/api/store/storeBookmark';
+	
+	//좋아요 추가
+	$('span.storeBookmark').on('click', '.fa-heart.fa-regular', async function(e){
+		let sno = parseInt($(this).data("sno"));
+		let storeBookmark = { sno, username };
+		console.log(storeBookmark);
+		
+		await rest_create(BASE_URL + "/add", storeBookmark);
+		
+		let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
+		console.log(storeBookmarkCount);
+		let count = parseInt(storeBookmarkCount.text());
+		storeBookmarkCount.text(count+1);
+	
+	$(this)
+		.removeClass('fa-regular')
+		.addClass('fa-solid');
+	});
+	
+	//좋아요 제거
+	$('span.storeBookmark').on('click', '.fa-heart.fa-solid', async function(e){
+		let sno = parseInt($(this).data("sno"));
+		
+		await rest_delete(`\${BASE_URL}/delete?sno=\${sno}&username=\${username}`);
+
+		let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
+		console.log(storeBookmarkCount);
+		let count = parseInt(storeBookmarkCount.text());
+		storeBookmarkCount.text(count-1);
+	
+		$(this)
+			.removeClass('fa-solid')
+			.addClass('fa-regular');
+		});
+	});
+	</script>
+</c:if>
+
 <style>
 .top-div {
 	display: flex;
@@ -138,11 +156,19 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 </style>
 
 <div class="container">
-	<h3>${store.title}</h3>
+	<div class="d-flex justify-content-between">
+		<h3>${store.title}
+		</h3>
+		
+		<span class="storeBookmark"> <i class="${ store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart	text-danger" data-sno="${store.sno}"></i> <span class="storeBookmark-count">${store.storeBookmarks}</span>
+		</span>	
+	</div>
+	
 	<div class="top-div mt-5">
 		<div class="thumbnail-card">
 			<img src="/store/image/fullsize/${store.sno}" class="top" alt="사진 서비스 조금만 기다려주세요..." />
 		</div>
+				
 		<div class="card ml-5 p-5">
 			<p>상호명: ${store.title}</p>
 			<p>소속 시장: ${store.market}</p>

@@ -32,7 +32,7 @@ import retrofit2.Response;
 @Service
 @AllArgsConstructor
 public class StoreServiceImpl implements StoreService {
-	public static final String THUMBNAIL_UPLOAD_DIR = "/Users/jeonhayoon/nurikiri_image/store";
+	public static final String THUMBNAIL_UPLOAD_DIR = "C:/backend_workspace/Nurikiri_workspace/nurikiri/src/main/webapp/resources/images/store";
 
 	private StoreMapper mapper;
 
@@ -40,8 +40,17 @@ public class StoreServiceImpl implements StoreService {
 	public List<StoreVO> getList(Criteria cri,Principal principal) {
 
 		log.info("getList");
-
-		return mapper.getListWithPaging(cri);
+		
+		List<StoreVO> list = mapper.getListWithPaging(cri);
+		if (principal != null) {
+			List<Long> storeBookmarks = mapper.getStoreBookmarksList(principal.getName());
+			for (StoreVO store : list) {
+				store.setMyStoreBookmark(storeBookmarks.contains(store.getSno()));
+			}
+		}
+		
+		return list;
+//		return mapper.getListWithPaging(cri);
 	}
 
 	@Override
@@ -84,6 +93,11 @@ public class StoreServiceImpl implements StoreService {
 		log.info("get");
 		
 		StoreVO store = mapper.read(sno);
+		
+		if (principal != null) {
+			List<Long> storeBookmarks = mapper.getStoreBookmarksList(principal.getName());
+			store.setMyStoreBookmark(storeBookmarks.contains(store.getSno()));
+		}
 		
 		String query = store.getTitle();
 		KakaoMapService service = KakaoMapService.getService();
