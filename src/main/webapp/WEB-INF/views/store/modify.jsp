@@ -49,7 +49,7 @@
 <div class="panel panel-default">
 	<div class="panel-body">
 
-		<form:form role="form" modelAttribute="store">
+		<form:form role="form" modelAttribute="store" action="?_csrf=${_csrf.token}">
 			<input type="hidden" name="type" value="${cri.type}" />
 			<input type="hidden" name="keyword" value="${cri.keyword}" />
 			<form:hidden path="sno" />

@@ -1,6 +1,7 @@
 package com.nurikiri.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.LinkedHashMap;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.PageDTO;
 import com.nurikiri.domain.StoreVO;
+import com.nurikiri.service.OcrService;
 import com.nurikiri.service.StoreService;
 import com.nurikiri.service.StoreServiceImpl;
 
@@ -42,18 +44,60 @@ public class StoreController {
 	@Autowired
 	private StoreService service;
 	
+	@Autowired
+	private OcrService ocrService;
+	
 	@GetMapping("/reviewpopup")
 	public void reviewpopup() {
 		log.info("reviewpopup");
 	}
+	
+	@GetMapping("/popup_test")
+	public void popupTest() {
+		log.info("Popup Test");
+	}
+	
+	@PostMapping("/popup_test")
+	public String popupTest(MultipartFile receipt) throws Exception {
+		log.info("받은 파일? : " + receipt);
+		File convertedFile1 = convertMultiPartToFile(receipt);
+		log.info("일반 파일로 변환하면..? : " + convertedFile1);
+		try {
+            // Convert MultipartFile to File
+            File convertedFile = convertMultiPartToFile(receipt);
+
+            // Call OCR Service to extract text
+            String extractedText = ocrService.extractTextFromImage(convertedFile);
+
+            // Clean up the temporary file
+            convertedFile.delete();
+            
+            log.info("성공 : " + extractedText);
+            
+            return extractedText;
+			
+//			File convertedFile = convertMultiPartToFile(receipt);
+//			ocrService.extractTextFromImage(convertedFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error processing the file.";
+        }
+	}
+	
+	private File convertMultiPartToFile(MultipartFile file) throws IOException {
+        File convertedFile = new File(file.getOriginalFilename());
+        FileOutputStream fos = new FileOutputStream(convertedFile);
+        fos.write(file.getBytes());
+        fos.close();
+        return convertedFile;
+    }
+	
 	
 	@PostMapping("/uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
 		
 	}
 	
-	
-
 	@GetMapping("/list")
 	public void list(@ModelAttribute("cri") Criteria cri,Principal principal, Model model) {
 
