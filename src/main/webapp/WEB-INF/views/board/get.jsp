@@ -49,41 +49,56 @@
 }
 </style>
 
-<div class="container">
-	<h3>${board.title}</h3>
-	<div class="top-div mt-5">
-		<div class="thumbnail-card">
-			<img src="/recommend/editor/image/fullsize/${board.bno}" class="top" alt="..." />
+<h2 class="page-header"><i class="far fa-file-alt"></i> ${board.title}</h2><br>
+
+<div class="d-flex justify-content-between">
+<div><i class="fas fa-user"></i> ${board.writer}</div>
+<div>
+<i class="fas fa-clock"></i>
+<fmt:formatDate pattern="yyyy-MM-dd" value="${board.regDate}"/></div></div>
+
+
+
+<div class="text-right">
+	<c:forEach var="file" items="${board.attaches}">
+		<div class = "attach-file-item">
+			<a href = "/board/download/${file.no}" class="file-link">
+				<i class="fa-solid fa-floppy-disk"></i>
+					${file.filename}(${file.formatSize})<br>
+			</a>
 		</div>
-		<div class="card ml-5 p-5">
-			<p>제목 : ${board.title}</p>
-			<p>내용 : ${board.content}</p>
-			<p>작성자 : ${board.writer}</p>
-		</div>
-	</div>
-	<div class="mid-div mt-5">
-		<div class="card p-5">
-			<p>${board.content}</p>
-		</div>
-	</div>
-	
-	<div class="foot-div mt-5">
-		<a href="${cri.getLinkWithEno('modify', board.bno)}"><button
-				type="button" class="btn btn-light mr-5" style="width: 200px">수정</button></a>
-		<button type="button" class="btn btn-light mr-5" style="width: 200px"
-			onclick="location.href='/localhost:8080'">홈</button>
-		<button type="button" class="btn btn-light" style="width: 200px"
-			onclick="location.href='list'">목록</button>
-	</div>
+	</c:forEach>
 </div>
 
+
+<hr>
+<div>${board.content}</div>
+
+<div class="mt-4">
+<a href="${cri.getLink('list')}" class="btn btn-primary list">
+	<i class="fas fa-list"></i>목록</a>
+	<c:if test="${username == board.writer}">
+		<a href="${cri.getLinkWithBno('modify', board.bno)}" class="btn btn-primary modify">
+			<i class="far fa-edit"></i>수정</a>
+		<a href="#" class="btn btn-danger remove">    <!-- 자바스크립트에서 클릭이벤트 발생해줘야함 #--> 
+			<i class="fas fa-trash-alt"></i>삭제</a>
+	</c:if>
+</div>
+
+<form id ="modifyForm" action="/board/modify" method="get" >
+	<input type="hidden" id="bno" name="bno" value="${board.bno}"/>
+	<input type="hidden" name="pageNum" value="${cri.pageNum}"/>
+	<input type="hidden" name="amount" value="${cri.amount}"/>
+	<input type="hidden" name="type" value="${cri.type}" /> 
+	<input type="hidden" name="keyword" value="${cri.keyword}" /></form> 
+
 <form action="remove" method="post" name="removeForm">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-	<input type="hidden" name="bno" value="${board.bno}" />
-	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
-	<input type="hidden" name="amount" value="${cri.amount}" />
-	<input type="hidden" name="type" value="${cri.type}" />
-	<input type="hidden" name="keyword" value="${cri.keyword}" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }"/>	
+	<input type="hidden" name="bno" value="${board.bno}"/>
+	<input type="hidden" name="pageNum" value="${cri.pageNum}"/>
+	<input type="hidden" name="amount" value="${cri.amount}"/>
+	<input type="hidden" name="type" value="${cri.type}"/> 
+	<input type="hidden" name="keyword" value="${cri.keyword}"/>
 </form>
 
 <%@ include file="../layouts/footer.jsp"%>
