@@ -59,7 +59,7 @@
 			<p>제목 : ${board.title}</p>
 			<p>내용 : ${board.content}</p>
 			<p>작성자 : ${board.writer}</p>
-			<button type="button" class="btn btn-light btn-details" onclick="location.href='${board.link}'">공지사항 상세보기</button>
+			<button type="button" class="btn btn-light btn-details" onclick="location.href='list'">공지사항 상세보기</button>
 		</div>
 	</div>
 	<div class="mid-div mt-5">
@@ -87,4 +87,4 @@
 	<input type="hidden" name="keyword" value="${cri.keyword}" />
 </form>
 
-<%@ include file=../layouts/footer.jsp"%>
+<%@ include file="../layouts/footer.jsp"%>

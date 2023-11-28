@@ -1,12 +1,8 @@
 package com.nurikiri.controller;
-
-import java.io.File;
-import java.io.IOException;
 import java.security.Principal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -27,7 +21,6 @@ import com.nurikiri.domain.BoardVO;
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.PageDTO;
 import com.nurikiri.service.BoardService;
-import com.nurikiri.service.BoardServiceImpl;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -87,7 +80,7 @@ public class BoardController {
 			Model model) {
 
 		log.info("/get or modify");
-		model.addAttribute("store", service.get(bno,principal));
+		model.addAttribute("board", service.get(bno,principal));
 	}
 
 	@PostMapping("/modify")

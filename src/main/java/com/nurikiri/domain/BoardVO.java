@@ -19,8 +19,5 @@ public class BoardVO {
 	private Date updateDate; //수정날짜
 	
 	private String imgSrc;
-
-	
-	
 	
 }
