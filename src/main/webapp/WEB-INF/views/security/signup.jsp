@@ -24,6 +24,10 @@
 	background-color: #FEC25E;
 }
 
+button.btn.check-sms-btn{
+	width: 105px;
+}
+
 .num_group {
 	display: flex;
 	justify-content: space-between;

@@ -74,4 +74,8 @@ public class Criteria {
     public String getLinkWithEno(String base, Long eno) {
         return getLink(base, pageNum) + "&eno=" + eno;
     }
+    
+    public String getLinkWithBno(String base, Long bno) {
+        return getLink(base, pageNum) + "&bno=" + bno;
+    }
 }

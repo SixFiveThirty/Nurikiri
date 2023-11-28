@@ -44,13 +44,13 @@
 	</select>
 
 	<select id="read" resultType="BoardVO">
-		select * from store where bno =
+		select * from board where bno =
 		#{bno}
 	</select>
 
 
 	<delete id="delete">
-		delete from store where bno = #{bno}
+		delete from board where bno = #{bno}
 	</delete>
 
 	<update id="update">
