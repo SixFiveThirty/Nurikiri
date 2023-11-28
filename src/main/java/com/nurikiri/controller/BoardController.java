@@ -1,7 +1,6 @@
 package com.nurikiri.controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.LinkedHashMap;
@@ -24,80 +23,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.nurikiri.domain.BoardVO;
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.PageDTO;
-import com.nurikiri.domain.StoreVO;
-import com.nurikiri.service.OcrService;
-import com.nurikiri.service.StoreService;
-import com.nurikiri.service.StoreServiceImpl;
+import com.nurikiri.service.BoardService;
+import com.nurikiri.service.BoardServiceImpl;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
-@Log4j
-@RequestMapping("/store")
+@RequestMapping("/board")
 @AllArgsConstructor
-public class StoreController {
-
-	@Autowired
-	private StoreService service;
+@Log4j
+public class BoardController {
 	
 	@Autowired
-	private OcrService ocrService;
-	
-	@GetMapping("/reviewpopup")
-	public void reviewpopup() {
-		log.info("reviewpopup");
-	}
-	
-	@GetMapping("/popup_test")
-	public void popupTest() {
-		log.info("Popup Test");
-	}
-	
-	@PostMapping("/popup_test")
-	public String popupTest(MultipartFile receipt) throws Exception {
-		log.info("받은 파일? : " + receipt);
-		File convertedFile1 = convertMultiPartToFile(receipt);
-		log.info("일반 파일로 변환하면..? : " + convertedFile1);
-		try {
-            // Convert MultipartFile to File
-            File convertedFile = convertMultiPartToFile(receipt);
+	private BoardService service;
 
-            // Call OCR Service to extract text
-            String extractedText = ocrService.extractTextFromImage(convertedFile);
-
-            // Clean up the temporary file
-            convertedFile.delete();
-            
-            log.info("성공 : " + extractedText);
-            
-            return extractedText;
-			
-//			File convertedFile = convertMultiPartToFile(receipt);
-//			ocrService.extractTextFromImage(convertedFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "Error processing the file.";
-        }
-	}
-	
-	private File convertMultiPartToFile(MultipartFile file) throws IOException {
-        File convertedFile = new File(file.getOriginalFilename());
-        FileOutputStream fos = new FileOutputStream(convertedFile);
-        fos.write(file.getBytes());
-        fos.close();
-        return convertedFile;
-    }
-	
-	
 	@PostMapping("/uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
 		
 	}
 	
+	/*게시판 목록 페이지 접속*/
 	@GetMapping("/list")
 	public void list(@ModelAttribute("cri") Criteria cri,Principal principal, Model model) {
 
@@ -108,24 +58,28 @@ public class StoreController {
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 		
 	}
-		
+	
+	/*게시판 등록 페이지 등록*/
 	@GetMapping("/register")
-	public void register(@ModelAttribute("store") StoreVO store) {
+	public void register(@ModelAttribute("board") BoardVO board) {
 	}
-
+	
 	@PostMapping("/register")
-	public String register(StoreVO store, MultipartFile thumbnail, Errors errors) throws Exception {
-
-		log.info("register: " + store);
+	public String register(BoardVO board, MultipartFile thumbnail, Errors errors) throws Exception{
+		
+		log.info("register: " + board);
 		if(errors.hasErrors()) {
 			log.error("에러남" + errors);
-			return "store/register";
+			return "board/register";
 		}
 		
-		service.register(store, thumbnail);
-		return "redirect:/store/list";
+		service.register(board, thumbnail);
+		return "redirect:/board/list";
+		
+		
 	}
-
+	
+	/*게시판 수정 페이지 접속*/
 	@GetMapping({ "/get", "/modify" })
 	public void get(
 			@RequestParam("sno") Long sno,
@@ -139,29 +93,28 @@ public class StoreController {
 
 	@PostMapping("/modify")
 	public String modify(
-			@Valid @ModelAttribute("store") StoreVO store,
+			@Valid @ModelAttribute("board") BoardVO board,
 			@ModelAttribute("cri") Criteria cri,
 			MultipartFile thumbnail,
 			Errors errors) throws Exception {
-		log.info("modify: " + store);
+		log.info("modify: " + board);
 			
 		if(errors.hasErrors()) {
-			return "store/modify";
+			return "board/modify";
 		}
 		
-		service.modify(store, thumbnail);
-		return "redirect:" + cri.getLinkWithSno("/store/get", store.getSno());
-		//return "redirect:/store/get";
+		service.modify(board, thumbnail);
+		return "redirect:" + cri.getLinkWithSno("/board/get", board.getBno());
 	}
 	
 	@PostMapping("/remove")
 	public String remove(
-			@RequestParam("sno") Long sno, 
+			@RequestParam("bno") Long bno, 
 			@ModelAttribute("cri") Criteria cri,
 			RedirectAttributes rttr) {
 	
 		log.info("remove");
-		if (service.remove(sno)) {
+		if (service.remove(bno)) {
 			rttr.addFlashAttribute("result", "success");
 		}
 		
@@ -169,29 +122,27 @@ public class StoreController {
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
-//		return "redirect:/store/list" + cri.getLink();
-		return "redirect:/store/list";
+		return "redirect:/board/list";
 
 	}
-
+	
 	@ModelAttribute("searchTypes")
 	public Map<String, String> searchTypes() {
 		Map<String, String> map = new LinkedHashMap<String, String>();
-		map.put("T", "상호명");
-		map.put("M", "시장명");
-		map.put("A", "지역명");
+		map.put("T", "게시글 제목");
+		map.put("W", "작성자");
 
 		return map;
 	}
 	
-	@GetMapping("/image/{size}/{sno}")
+	@GetMapping("/image/{size}/{bno}")
 	@ResponseBody
-	public void thumbnail(@PathVariable("size") String size,@PathVariable("sno") Long sno, Principal principal, HttpServletResponse response) throws IOException {
-		StoreVO store = service.get(sno,principal);
+	public void thumbnail(@PathVariable("size") String size,@PathVariable("sno") Long bno, Principal principal, HttpServletResponse response) throws IOException {
+		BoardVO board = service.get(bno,principal);
 		
-		File src = new File(store.getImgSrc());
+		File src = new File(board.getImgSrc());
 		if(!src.exists()) {
-			src = new File(StoreServiceImpl.THUMBNAIL_UPLOAD_DIR, "image_prepare.png");
+			src = new File(BoardServiceImpl.THUMBNAIL_UPLOAD_DIR, "image_prepare.png");
 		}
 		log.warn(src);
 		response.setHeader("Content-Type", "image/png");
@@ -201,8 +152,5 @@ public class StoreController {
 			Thumbnails.of(src).size(300, 300).toOutputStream(response.getOutputStream());
 		}
 	}
-	
-//	@GetMapping("{catagory_name}")
-//	public String sortPost(@PathVariable)
 
 }

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.nurikiri.mapper.BoardMapper">
+
+	<!-- 게시판 등록 -->
+	<insert id = "register">
+	
+		insert into board(title, content, writer) values (#{title}, #{content}, #{writer})
+		
+		<selectKey resultType="Long" keyProperty="bno"
+			keyColumn="bno" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	
+	</insert>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from board
+		<where>
+			<include refid="criteria"></include>
+		</where>
+	</select>
+
+
+	<select id="getList" resultType="BoardVO">
+		select * from board
+		<where>
+			<include refid="criteria"></include>
+		</where>
+		order by bno
+		limit #{offset} , #{amount}
+	</select>
+
+	<select id="getListWithPaging" resultType="BoardVO">
+		select * from board
+		<where>
+			<include refid="criteria"></include>
+		</where>
+		order by bno
+		limit #{offset} , #{amount}
+	</select>
+
+	<select id="read" resultType="BoardVO">
+		select * from store where bno =
+		#{bno}
+	</select>
+
+
+	<delete id="delete">
+		delete from store where bno = #{bno}
+	</delete>
+
+	<update id="update">
+		update board set
+		title = #{title},
+		content = #{content},
+		writer = #{writer},
+		img_src = #{imgSrc}
+		where bno =
+		#{bno}
+	</update>
+
+	<sql id="criteria">
+		<trim prefixOverrides="OR">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like CONCAT('%', #{keyword}, '%') </when>
+						<when test="type == 'W'.toString()">
+							writer like CONCAT('%', #{keyword}, '%') </when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+</mapper>
