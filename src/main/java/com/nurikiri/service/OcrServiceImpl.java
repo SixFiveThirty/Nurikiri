@@ -9,25 +9,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.google.gson.Gson;
 import com.nurikiri.mapper.ReceiptOCRMapper;
 
 import lombok.AllArgsConstructor;
@@ -45,16 +34,18 @@ public class OcrServiceImpl implements OcrService {
 	private final String clovaOcrApiKey = "eGhka2R4bWRpYU9UelR1VG16dG5rYnh3S1FIekxRVVA=";
 	
 	@Override
-	public String extractTextFromImage(File imageFile) throws Exception {
-//		String imageFile = receipt.getOriginalFilename();
-//		String imageFile = "/Users/jeonhayoon/Downloads/OCR_TEST/receipt_test.jpeg";
+	public String extractTextFromImage(MultipartFile part) throws Exception {
+		
+		File imageFile = new File(THUMBNAIL_UPLOAD_DIR, part.getOriginalFilename());
+		part.transferTo(imageFile);
+		
 		try {
 			URL url = new URL(clovaOcrApiUrl);
 			HttpURLConnection con = (HttpURLConnection)url.openConnection();
 			con.setUseCaches(false);
 			con.setDoInput(true);
 			con.setDoOutput(true);
-			con.setReadTimeout(3000);
+			con.setReadTimeout(10000);
 			con.setRequestMethod("POST");
 			String boundary = "----" + UUID.randomUUID().toString().replaceAll("-", "");
 			con.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
@@ -66,28 +57,32 @@ public class OcrServiceImpl implements OcrService {
 			json.put("timestamp", System.currentTimeMillis());
 			
 			List<Integer> templateIds = new ArrayList<Integer>();
-			templateIds.add(27816);
+			templateIds.add(27186);
 			templateIds.add(27191);
-			
-//			String jsonTemplate = new Gson().toJson(templateIds); //확인해볼것
+			templateIds.add(27198);
+			templateIds.add(27199);
+			templateIds.add(27200);
+			templateIds.add(27201);
+			templateIds.add(27202);
+			templateIds.add(27203);
+			templateIds.add(27205);
 			
 			JSONObject image = new JSONObject();
 			image.put("format", "jpg");
 			image.put("name", "demo");
-//			image.put("templateIds", jsonTemplate);
 			image.put("templateIds", templateIds);
 			JSONArray images = new JSONArray();
 			images.put(image);
 			json.put("images", images);
 			String postParams = json.toString();
+			log.info("postParams: " + postParams);
 			
 			con.connect();
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 			long start = System.currentTimeMillis();
-//			File file = new File(imageFile);
-//			writeMultiPart(wr, postParams, file, boundary);
 			writeMultiPart(wr, postParams, imageFile, boundary);
 			wr.close();
+			log.info("완료");
 			
 			int responseCode = con.getResponseCode();
 			BufferedReader br;
@@ -104,7 +99,7 @@ public class OcrServiceImpl implements OcrService {
 			br.close();
 			
 			System.out.println("결과값 : " + response);
-			return "OK";
+			return "redirect:/store/popup_test";
 		} catch(Exception e) {
 			System.out.println(e);
 			return "Error processing the image file.";
@@ -121,6 +116,8 @@ public class OcrServiceImpl implements OcrService {
 		out.write(sb.toString().getBytes("UTF-8"));
 		out.flush();
 		
+		log.info("파일전송예정");
+		
 		if(file != null && file.isFile()) {
 			out.write(("--" + boundary + "\r\n").getBytes("UTF-8"));
 			StringBuilder fileString = new StringBuilder();
@@ -135,6 +132,7 @@ public class OcrServiceImpl implements OcrService {
 				int count;
 				while((count = fis.read(buffer)) != -1) {
 					out.write(buffer, 0, count);
+					log.info("카운트 값 : " + count);
 				}
 				out.write("\r\n".getBytes());
 			}
@@ -143,34 +141,5 @@ public class OcrServiceImpl implements OcrService {
 		}
 		out.flush();
 	}
-	
-//	@Override
-//	public String extractTextFromImage(File imageFile) {
-//        RestTemplate restTemplate = new RestTemplate();
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        headers.set("X-OCR-SECRET", clovaOcrApiKey);
-//
-//        try {
-//            byte[] fileContent = Files.readAllBytes(imageFile.toPath());
-//            String base64EncodedFile = Base64.getEncoder().encodeToString(fileContent);
-//
-//            String requestBody = "{ \"version\": \"V1\", \"requestId\": \"string\", \"timestamp\": 0, \"images\": [ { \"format\": \"jpg\", \"data\": \"" + base64EncodedFile + "\" } ] }";
-//
-//            HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
-//
-//            ResponseEntity<String> response = restTemplate.exchange(clovaOcrApiUrl, HttpMethod.POST, request, String.class);
-//
-//            if (response.getStatusCode() == HttpStatus.OK) {
-//                return response.getBody();
-//            } else {
-//                // Handle unsuccessful API call
-//                return "Failed to extract text. Status code: " + response.getStatusCodeValue();
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return "Error processing the image file.";
-//        }
-//    }
 }
+

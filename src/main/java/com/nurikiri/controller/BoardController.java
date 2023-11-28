@@ -82,13 +82,13 @@ public class BoardController {
 	/*게시판 수정 페이지 접속*/
 	@GetMapping({ "/get", "/modify" })
 	public void get(
-			@RequestParam("sno") Long sno,
+			@RequestParam("bno") Long bno,
 			@ModelAttribute("cri") Criteria cri,
 			Principal principal,
 			Model model) {
 
 		log.info("/get or modify");
-		model.addAttribute("store", service.get(sno,principal));
+		model.addAttribute("store", service.get(bno,principal));
 	}
 
 	@PostMapping("/modify")
@@ -135,22 +135,22 @@ public class BoardController {
 		return map;
 	}
 	
-	@GetMapping("/image/{size}/{bno}")
-	@ResponseBody
-	public void thumbnail(@PathVariable("size") String size,@PathVariable("sno") Long bno, Principal principal, HttpServletResponse response) throws IOException {
-		BoardVO board = service.get(bno,principal);
-		
-		File src = new File(board.getImgSrc());
-		if(!src.exists()) {
-			src = new File(BoardServiceImpl.THUMBNAIL_UPLOAD_DIR, "image_prepare.png");
-		}
-		log.warn(src);
-		response.setHeader("Content-Type", "image/png");
-		if(size.equals("thumbnail")) {
-			Thumbnails.of(src).size(250, 250).toOutputStream(response.getOutputStream());
-		} else {
-			Thumbnails.of(src).size(300, 300).toOutputStream(response.getOutputStream());
-		}
-	}
+//	@GetMapping("/image/{size}/{bno}")
+//	@ResponseBody
+//	public void thumbnail(@PathVariable("size") String size,@PathVariable("bno") Long bno, Principal principal, HttpServletResponse response) throws IOException {
+//		BoardVO board = service.get(bno,principal);
+//		
+//		File src = new File(board.getImgSrc());
+//		if(!src.exists()) {
+//			src = new File(BoardServiceImpl.THUMBNAIL_UPLOAD_DIR, "image_prepare.png");
+//		}
+//		log.warn(src);
+//		response.setHeader("Content-Type", "image/png");
+//		if(size.equals("thumbnail")) {
+//			Thumbnails.of(src).size(250, 250).toOutputStream(response.getOutputStream());
+//		} else {
+//			Thumbnails.of(src).size(300, 300).toOutputStream(response.getOutputStream());
+//		}
+//	}
 
 }
