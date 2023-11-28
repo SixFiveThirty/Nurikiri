@@ -31,7 +31,6 @@ import com.nurikiri.service.BoardServiceImpl;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
-import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 @RequestMapping("/board")
@@ -135,22 +134,4 @@ public class BoardController {
 		return map;
 	}
 	
-//	@GetMapping("/image/{size}/{bno}")
-//	@ResponseBody
-//	public void thumbnail(@PathVariable("size") String size,@PathVariable("bno") Long bno, Principal principal, HttpServletResponse response) throws IOException {
-//		BoardVO board = service.get(bno,principal);
-//		
-//		File src = new File(board.getImgSrc());
-//		if(!src.exists()) {
-//			src = new File(BoardServiceImpl.THUMBNAIL_UPLOAD_DIR, "image_prepare.png");
-//		}
-//		log.warn(src);
-//		response.setHeader("Content-Type", "image/png");
-//		if(size.equals("thumbnail")) {
-//			Thumbnails.of(src).size(250, 250).toOutputStream(response.getOutputStream());
-//		} else {
-//			Thumbnails.of(src).size(300, 300).toOutputStream(response.getOutputStream());
-//		}
-//	}
-
 }

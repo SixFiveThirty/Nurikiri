@@ -70,7 +70,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/managers/store/register",
 						"/recommend/editor/list",
 						"/store/modify",
-						"/board/list",
 						"/board/modify",
 						"/board/register",
 						"/recommend/editor/modify").access("hasRole('ROLE_MANAGER')")
@@ -84,8 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/managers/store/modify",
 						"/managers/store/register",
 						"/board/list",
-						"/board/modify",
-						"/board/register",
+						"/board/get",
 						"/recommend/editor/list",
 						"/store/modify",
 						"/recommend/editor/modify").access("hasRole('ROLE_ADMIN')");
