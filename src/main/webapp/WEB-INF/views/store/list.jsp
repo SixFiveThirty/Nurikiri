@@ -6,6 +6,7 @@
 
 <%@ include file="../layouts/header.jsp"%>
 
+
 <style>
 .editor-card-list {
 	display: flex;
@@ -59,6 +60,62 @@
 	height: 200px;
 }
 </style>
+ 
+<c:if test="${not empty member.username}">
+
+	<style>
+.fa-heart {
+	cursor: pointer;
+}
+</style>
+
+ <script src="/resources/js/rest.js"></script> 
+
+	<script>		
+	$(document).ready(function() {
+				
+		let username = '${member.username}';
+		const BASE_URL = '/api/store/storeBookmark';
+	
+		//즐겨찾기 추가
+		$('span.storeBookmark').on('click', '.fa-heart.fa-regular', async function(e){
+		console.log()
+		let sno = parseInt($(this).data("sno"));
+		let storeBookmark = { sno, username };
+		console.log(storeBookmark);
+		
+		await rest_create(BASE_URL + "/add", storeBookmark);
+		
+		let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
+		console.log(storeBookmarkCount);
+		let count = parseInt(storeBookmarkCount.text());
+		storeBookmarkCount.text(count+1);
+	
+		$(this)
+		.removeClass('fa-regular')
+		.addClass('fa-solid');
+		});
+	
+		//즐겨찾기 제거	
+		$('span.storeBookmark').on('click', '.fa-heart.fa-solid', async function(e){
+			
+			let sno = parseInt($(this).data("sno"));
+			
+			await rest_delete(`\${BASE_URL}/delete?sno=\${sno}&username=\${username}`);
+	
+			let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
+			console.log(storeBookmarkCount);
+			let count = parseInt(storeBookmarkCount.text());
+			storeBookmarkCount.text(count-1);
+		
+			$(this)
+				.removeClass('fa-solid')
+				.addClass('fa-regular');
+		});
+		
+	});
+	</script>
+</c:if>
 
 <h3 class="ml-5 mb-5">가맹점 찾기</h3>
 
@@ -77,10 +134,14 @@
 					<img src="/store/image/thumbnail/${store.sno}" class="card-img-top thumbnail" alt="..." />
 				</a>
 				<div class="card-body">
-					<p class="card-text">${store.title}</p>
-				</div>
+				
+				<span class="storeBookmark"> <i class="${ store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart	text-danger" data-sno="${store.sno}"></i> <span class="storeBookmark-count">${store.storeBookmarks}</span>
+					</span>
+					
+					<p class="card-text">${store.title}</p>		
+					
+				</div>			
 			</div>
-
 		</div>
 	</c:forEach>
 </div>

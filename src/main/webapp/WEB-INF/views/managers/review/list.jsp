@@ -43,6 +43,7 @@ $(document).ready(async function() {
 		<thead>
 			<tr>
 				<th style="text-align: center; width: 60px;">No</th>
+				<th style="text-align: center; width: 150px;">가맹점 번호</th>
 				<th style="text-align: center;">리뷰 내용</th>
 				<th style="text-align: center; width: 100px;">작성자</th>
 				<th style="text-align: center; width: 150px;">작성일자</th>
@@ -53,6 +54,7 @@ $(document).ready(async function() {
 			<c:forEach var="review" items="${list}">
 				<tr>
 					<td style="text-align: center; width: 60px;">${review.rno}</td>
+					<td style="text-align: center; width: 150px;">${review.sno}</td>
 					<td style="text-align: center;"><a href="get?rno=${review.rno}"> ${review.content} </a></td>
 					<td style="text-align: center; width: 150px;">${review.writer}</td>
 					<td style="text-align: center; width: 100px;"><fmt:formatDate pattern="yyyy.MM.dd" value="${review.regDate}" /></td>

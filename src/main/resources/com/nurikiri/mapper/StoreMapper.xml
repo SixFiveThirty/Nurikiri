@@ -7,7 +7,7 @@
 <mapper namespace="com.nurikiri.mapper.StoreMapper">
 
 	<select id="getTotalCount" resultType="int">
-		select count(*) from store
+		select count(*) from view_store
 		<where>
 			<include refid="criteria"></include>
 		</where>
@@ -15,7 +15,7 @@
 
 
 	<select id="getList" resultType="StoreVO">
-		select * from store
+		select * from view_store
 		<where>
 			<include refid="criteria"></include>
 		</where>
@@ -24,7 +24,7 @@
 	</select>
 
 	<select id="getListWithPaging" resultType="StoreVO">
-		select * from store
+		select * from view_store
 		<where>
 			<include refid="criteria"></include>
 		</where>
@@ -45,7 +45,7 @@
 
 
 	<select id="read" resultType="StoreVO">
-		select * from store where sno =
+		select * from view_store where sno =
 		#{sno}
 	</select>
 
@@ -71,6 +71,22 @@
 		where sno =
 		#{sno}
 	</update>
+	
+	<!-- 즐겨찾기 -->
+	<select id="getStoreBookmarksList" resultType="long">
+		select sno from store_bookmark
+		where username = #{username}
+	</select>
+	
+	<insert id="addStoreBookmark">
+		insert into store_bookmark(sno, username)
+		values (#{sno}, #{username})
+	</insert>
+	
+	<delete id="deleteStoreBookmark">
+		delete from store_bookmark
+		where sno = #{sno} and username = #{username}
+	</delete>
 
 	<sql id="criteria">
 		<trim prefixOverrides="OR">
