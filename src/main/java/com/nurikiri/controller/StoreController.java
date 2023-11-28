@@ -60,17 +60,15 @@ public class StoreController {
 	@PostMapping("/popup_test")
 	public String popupTest(MultipartFile receipt) throws Exception {
 		log.info("받은 파일? : " + receipt);
-		File convertedFile1 = convertMultiPartToFile(receipt);
-		log.info("일반 파일로 변환하면..? : " + convertedFile1);
 		try {
             // Convert MultipartFile to File
-            File convertedFile = convertMultiPartToFile(receipt);
+//            File convertedFile = convertMultiPartToFile(receipt);
 
             // Call OCR Service to extract text
-            String extractedText = ocrService.extractTextFromImage(convertedFile);
+            String extractedText = ocrService.extractTextFromImage(receipt);
 
             // Clean up the temporary file
-            convertedFile.delete();
+//            convertedFile.delete();
             
             log.info("성공 : " + extractedText);
             
