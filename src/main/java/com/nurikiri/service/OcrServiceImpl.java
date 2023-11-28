@@ -92,6 +92,9 @@ public class OcrServiceImpl implements OcrService {
 				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
 			}
 			String inputLine;
+			
+			//gson 써서 변경. /vo(추천) 혹은 map으로 처리. 내가 원하는 키값만 추출 가능.
+			//POJO 로그 찍힌 것을 카피해서 VO 객체 클래스를 자동으로 만들어내라.
 			StringBuffer response = new StringBuffer();
 			while((inputLine = br.readLine()) != null) {
 				response.append(inputLine);
@@ -99,6 +102,7 @@ public class OcrServiceImpl implements OcrService {
 			br.close();
 			
 			System.out.println("결과값 : " + response);
+			
 			return "redirect:/store/popup_test";
 		} catch(Exception e) {
 			System.out.println(e);

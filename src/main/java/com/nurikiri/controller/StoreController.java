@@ -61,35 +61,17 @@ public class StoreController {
 	public String popupTest(MultipartFile receipt) throws Exception {
 		log.info("받은 파일? : " + receipt);
 		try {
-            // Convert MultipartFile to File
-//            File convertedFile = convertMultiPartToFile(receipt);
-
             // Call OCR Service to extract text
             String extractedText = ocrService.extractTextFromImage(receipt);
-
-            // Clean up the temporary file
-//            convertedFile.delete();
             
             log.info("성공 : " + extractedText);
             
             return extractedText;
-			
-//			File convertedFile = convertMultiPartToFile(receipt);
-//			ocrService.extractTextFromImage(convertedFile);
         } catch (IOException e) {
             e.printStackTrace();
             return "Error processing the file.";
         }
 	}
-	
-	private File convertMultiPartToFile(MultipartFile file) throws IOException {
-        File convertedFile = new File(file.getOriginalFilename());
-        FileOutputStream fos = new FileOutputStream(convertedFile);
-        fos.write(file.getBytes());
-        fos.close();
-        return convertedFile;
-    }
-	
 	
 	@PostMapping("/uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {

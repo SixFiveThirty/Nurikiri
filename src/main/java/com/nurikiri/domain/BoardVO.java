@@ -26,9 +26,4 @@ public class BoardVO {
 	private Date regDate; //등록 날짜
 
 	private Date updateDate; //수정날짜
-	
-	
-	
-	
-	
 }
