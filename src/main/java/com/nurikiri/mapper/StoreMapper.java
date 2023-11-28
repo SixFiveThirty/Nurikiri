@@ -22,7 +22,5 @@ public interface StoreMapper {
 	public List<StoreVO> getListWithPaging(Criteria cri);
 	
 	public int getTotalCount(Criteria cri);
-
-	
 	
 }

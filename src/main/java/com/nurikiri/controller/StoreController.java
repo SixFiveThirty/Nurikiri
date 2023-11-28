@@ -157,5 +157,8 @@ public class StoreController {
 			Thumbnails.of(src).size(300, 300).toOutputStream(response.getOutputStream());
 		}
 	}
+	
+//	@GetMapping("{catagory_name}")
+//	public String sortPost(@PathVariable)
 
 }

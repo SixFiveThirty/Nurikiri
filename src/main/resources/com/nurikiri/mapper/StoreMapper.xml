@@ -88,5 +88,27 @@
 			</foreach>
 		</trim>
 	</sql>
+	
+	<sql id="sort">
+		<if test="sort == null">
+		ORDER BY SNO DESC
+		</if>
+		<if test="sort == 'sno'">
+		ORDER BY SNO DESC
+		</if>
+		
+		<if test="sort == 'starCount'">
+		ORDER BY title DESC
+		</if>
+		<if test="sort == 'favoriteCount'">
+		ORDER BY market DESC
+		</if>
+		<if test="sort == 'reviewCount'">
+		</if>
+	</sql>
+	
+	
+	
+	
 
 </mapper>
