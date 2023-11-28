@@ -60,21 +60,18 @@
 
 	<!-- ====================================== -->
 
-	<!-- <select id="getList" resultType="MemberVO">
+	<select id="getList" resultType="MemberVO">
 		select * from member
 		<where>
 			<include refid="criteria"></include>
 		</where>
 		order by username
 		limit #{offset} , #{amount}
-	</select> -->
+	</select>
 	
 	<delete id="delete">
-		delete from member_auth
-		where username = #{username};
-		
 		delete from member
-		where username = #{username}
+		where username = #{username};
 	</delete>
 	
 	<select id="getTotalCount" resultType="int">

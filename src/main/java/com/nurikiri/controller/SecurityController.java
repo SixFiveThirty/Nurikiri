@@ -183,7 +183,9 @@ public class SecurityController {
 		 
 		service.remove(member.getUsername());
 		rttr.addFlashAttribute("result", "success");
+		SecurityContextHolder.clearContext();
 		session.invalidate();
+		
 		
 		return "redirect:/";
 	}
