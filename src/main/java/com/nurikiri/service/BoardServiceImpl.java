@@ -18,7 +18,7 @@ import lombok.extern.log4j.Log4j;
 @Service
 @AllArgsConstructor
 public class BoardServiceImpl implements BoardService {
-	public static final String THUMBNAIL_UPLOAD_DIR = "/Users/jeonhayoon/nurikiri_image/board";
+	public static final String THUMBNAIL_UPLOAD_DIR = "";
 
 	private BoardMapper mapper;
 	
