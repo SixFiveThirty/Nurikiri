@@ -26,7 +26,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.PageDTO;
 import com.nurikiri.domain.StoreVO;
-import com.nurikiri.service.ClovaOcrService;
 import com.nurikiri.service.StoreService;
 import com.nurikiri.service.StoreServiceImpl;
 
