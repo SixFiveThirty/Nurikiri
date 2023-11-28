@@ -32,7 +32,7 @@
                <td style="text-align: center; width: 60px;">${board.bno} </td>
                <td style="text-align: center;"><a href="/board/get?sno=${board.bno}">${board.title}</a></td>
                <td style="text-align: center; width: 100px;"><fmt:formatDate pattern="yyyy" value="${board.regDate}"/></td>
-               <td style="text-align: center;"><button onclick="location.href='/board/modify?sno=${board.bno}'">수정</button></td>
+               <td style="text-align: center; width: 60px;">${board.writer} </td>
            </tr>
           </c:forEach>
         </tbody>

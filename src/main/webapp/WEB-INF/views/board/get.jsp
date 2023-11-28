@@ -59,7 +59,6 @@
 			<p>제목 : ${board.title}</p>
 			<p>내용 : ${board.content}</p>
 			<p>작성자 : ${board.writer}</p>
-			<button type="button" class="btn btn-light btn-details" onclick="location.href='${board.link}'">공지사항 상세보기</button>
 		</div>
 	</div>
 	<div class="mid-div mt-5">
@@ -72,7 +71,7 @@
 		<a href="${cri.getLinkWithEno('modify', board.bno)}"><button
 				type="button" class="btn btn-light mr-5" style="width: 200px">수정</button></a>
 		<button type="button" class="btn btn-light mr-5" style="width: 200px"
-			onclick="location.href='/'">홈</button>
+			onclick="location.href='/localhost:8080'">홈</button>
 		<button type="button" class="btn btn-light" style="width: 200px"
 			onclick="location.href='list'">목록</button>
 	</div>
@@ -87,4 +86,4 @@
 	<input type="hidden" name="keyword" value="${cri.keyword}" />
 </form>
 
-<%@ include file=../layouts/footer.jsp"%>
+<%@ include file="../layouts/footer.jsp"%>

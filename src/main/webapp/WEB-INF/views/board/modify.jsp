@@ -72,9 +72,9 @@
 			<div class="foot-div mt-5">
 				<button type="submit" class="btn btn-light mr-5"
 					style="width: 200px"
-					onclick="location.href='${cri.getLink('get')}&sno=${board.bno}'">확인</button>
+					onclick="location.href='${cri.getLink('get')}&bno=${board.bno}'">확인</button>
 				<button type="button" class="btn btn-light" style="width: 200px"
-					onclick="location.href='${cri.getLink('get')}&sno=${board.bno}'">취소</button>
+					onclick="location.href='${cri.getLink('get')}&bno=${board.bno}'">취소</button>
 			</div>
 
 		</form:form>
