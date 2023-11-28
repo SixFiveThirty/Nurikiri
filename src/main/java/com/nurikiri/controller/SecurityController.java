@@ -167,9 +167,11 @@ public class SecurityController {
 	}
 	
 	@PostMapping("/remove")
-	public String remove(@Valid @ModelAttribute("member") MemberVO member, Errors errors, RedirectAttributes rttr, HttpSession session) {
+	public String remove(@RequestParam("username") String username, @Valid @ModelAttribute("member") MemberVO member, Errors errors, RedirectAttributes rttr, HttpSession session) {
 		
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		
+		log.info(member);
 		
 		log.info("remove" + member.getUsername());
 		
@@ -181,6 +183,7 @@ public class SecurityController {
 		 
 		service.remove(member.getUsername());
 		rttr.addFlashAttribute("result", "success");
+		session.invalidate();
 		
 		return "redirect:/";
 	}
