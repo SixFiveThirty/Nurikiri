@@ -87,7 +87,7 @@ public class BoardController {
 			Model model) {
 
 		log.info("/get or modify");
-		model.addAttribute("store", service.get(bno,principal));
+		model.addAttribute("board", service.get(bno,principal));
 	}
 
 	@PostMapping("/modify")

@@ -17,7 +17,7 @@
 	<div class="collapse navbar-collapse" id="collapsibleNavbar">
 		<!-- 좌측 메뉴 구성 -->
 		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link mx-2" id="menulink" href="#">
+			<li class="nav-item"><a class="nav-link mx-2" id="menulink" href="/board/list">
 				공지사항
 			</a></li>
 			<li class="nav-item nav-link" id="menulink">|</li>
