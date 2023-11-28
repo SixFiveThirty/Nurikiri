@@ -28,5 +28,4 @@ public interface StoreMapper {
 	public int addStoreBookmark(StoreBookmarkVO storeBookmark);
 
 	public int deleteStoreBookmark(StoreBookmarkVO storeBookmark);
-
 }

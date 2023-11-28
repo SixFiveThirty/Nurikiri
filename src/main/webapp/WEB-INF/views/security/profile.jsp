@@ -144,6 +144,9 @@ th, td{
 				</div>
 				<div class="menu mypage">
 					<a href="/mypage/main">마이 페이지</a>
+				</div>	
+				<div class="menu mypage">
+					<a href="/security/remove_view">회원 탈퇴</a>
 				</div>
 			</div>
 		</div>
