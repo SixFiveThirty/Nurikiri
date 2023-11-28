@@ -1,10 +1,20 @@
 package com.nurikiri.service;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.Principal;
 import java.util.List;
+import java.util.UUID;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,7 +32,7 @@ import retrofit2.Response;
 @Service
 @AllArgsConstructor
 public class StoreServiceImpl implements StoreService {
-	public static final String THUMBNAIL_UPLOAD_DIR = "/Users/jeonhayoon/nurikiri_image/store";
+	public static final String THUMBNAIL_UPLOAD_DIR = "C:/backend_workspace/Nurikiri_workspace/nurikiri/src/main/webapp/resources/images/store";
 
 	private StoreMapper mapper;
 
@@ -30,8 +40,17 @@ public class StoreServiceImpl implements StoreService {
 	public List<StoreVO> getList(Criteria cri,Principal principal) {
 
 		log.info("getList");
-
-		return mapper.getListWithPaging(cri);
+		
+		List<StoreVO> list = mapper.getListWithPaging(cri);
+		if (principal != null) {
+			List<Long> storeBookmarks = mapper.getStoreBookmarksList(principal.getName());
+			for (StoreVO store : list) {
+				store.setMyStoreBookmark(storeBookmarks.contains(store.getSno()));
+			}
+		}
+		
+		return list;
+//		return mapper.getListWithPaging(cri);
 	}
 
 	@Override
@@ -75,6 +94,11 @@ public class StoreServiceImpl implements StoreService {
 		
 		StoreVO store = mapper.read(sno);
 		
+		if (principal != null) {
+			List<Long> storeBookmarks = mapper.getStoreBookmarksList(principal.getName());
+			store.setMyStoreBookmark(storeBookmarks.contains(store.getSno()));
+		}
+		
 		String query = store.getTitle();
 		KakaoMapService service = KakaoMapService.getService();
 		Call<LocalResult> call = service.searchLocal(query, 10, 1);
@@ -102,5 +126,4 @@ public class StoreServiceImpl implements StoreService {
 
 		return mapper.getTotalCount(cri);
 	}
-
 }

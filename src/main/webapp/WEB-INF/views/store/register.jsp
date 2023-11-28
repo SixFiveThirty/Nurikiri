@@ -7,8 +7,9 @@
 <link rel="stylesheet"
 	href="/resources/css/summernote/summernote-lite.min.css">
 
-
 <%@ include file="../layouts/header.jsp"%>
+
+<script src="/resources/js/rest.js"></script>
 
 <style>
 .photo-upload {

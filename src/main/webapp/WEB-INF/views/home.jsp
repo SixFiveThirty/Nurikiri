@@ -62,7 +62,7 @@
 		<div class="editor-card-list">
 			<div class="card mx-5" style="width: 18rem;">
 				<a class="editor-link" href="#">
-				<img src="/resources/images/image_prepare.png" class="card-img-top thumbnail" alt="..." />
+				<img src="/resources/images/editor/image_prepare.png" class="card-img-top thumbnail" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
@@ -70,7 +70,7 @@
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
 				<a class="editor-link" href="#">
-				<img src="/resources/images/image_prepare.png" class="card-img-top thumbnail" alt="..." />
+				<img src="/resources/images/editor/image_prepare.png" class="card-img-top thumbnail" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
@@ -78,7 +78,7 @@
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
 				<a class="editor-link" href="#">
-				<img src="/resources/images/image_prepare.png" class="card-img-top thumbnail" alt="..." />
+				<img src="/resources/images/editor/image_prepare.png" class="card-img-top thumbnail" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
@@ -91,7 +91,7 @@
 		<div class="editor-card-list">
 			<div class="card mx-5" style="width: 18rem;">
 				<a class="editor-link" href="#">
-				<img src="/resources/images/image_prepare.png" class="card-img-top thumbnail" alt="..." />
+				<img src="/resources/images/editor/image_prepare.png" class="card-img-top thumbnail" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
@@ -99,7 +99,7 @@
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
 				<a class="editor-link" href="#">
-				<img src="/resources/images/image_prepare.png" class="card-img-top thumbnail" alt="..." />
+				<img src="/resources/images/editor/image_prepare.png" class="card-img-top thumbnail" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
@@ -107,7 +107,7 @@
 			</div>
 			<div class="card mx-5" style="width: 18rem;">
 				<a class="editor-link" href="#">
-				<img src="/resources/images/image_prepare.png" class="card-img-top thumbnail" alt="..." />
+				<img src="/resources/images/editor/image_prepare.png" class="card-img-top thumbnail" alt="..." />
 				</a>
 				<div class="card-body">
 					<p class="card-text">000 전통 시장</p>
