@@ -5,64 +5,6 @@
   
 <mapper namespace="com.nurikiri.mapper.BoardMapper">
 
-	<!-- 게시판 등록 -->
-	<insert id = "register">
-	
-		insert into board(title, content, writer) values (#{title}, #{content}, #{writer})
-		
-		<selectKey resultType="Long" keyProperty="bno"
-			keyColumn="bno" order="AFTER">
-			SELECT LAST_INSERT_ID()
-		</selectKey>
-	
-	</insert>
-
-	<select id="getTotalCount" resultType="int">
-		select count(*) from board
-		<where>
-			<include refid="criteria"></include>
-		</where>
-	</select>
-
-
-	<select id="getList" resultType="BoardVO">
-		select * from board
-		<where>
-			<include refid="criteria"></include>
-		</where>
-		order by bno
-		limit #{offset} , #{amount}
-	</select>
-
-	<select id="getListWithPaging" resultType="BoardVO">
-		select * from board
-		<where>
-			<include refid="criteria"></include>
-		</where>
-		order by bno
-		limit #{offset} , #{amount}
-	</select>
-
-	<select id="read" resultType="BoardVO">
-		select * from board where bno =
-		#{bno}
-	</select>
-
-
-	<delete id="delete">
-		delete from board where bno = #{bno}
-	</delete>
-
-	<update id="update">
-		update board set
-		title = #{title},
-		content = #{content},
-		writer = #{writer},
-		img_src = #{imgSrc}
-		where bno =
-		#{bno}
-	</update>
-
 	<sql id="criteria">
 		<trim prefixOverrides="OR">
 			<foreach item="type" collection="typeArr">
@@ -78,4 +20,78 @@
 		</trim>
 	</sql>
 
+	
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from board
+		<where>
+			<include refid="criteria"></include>
+		</where>
+	</select>
+
+
+	<select id="getList" resultType="BoardVO">
+		select * from board
+		order by bno desc
+	</select>
+
+
+	<select id="getListWithPaging" resultType="BoardVO">
+		select * from board
+		<where>
+			<include refid="criteria"></include>
+		</where>
+		order by bno desc
+		limit #{offset} , #{amount}
+	</select>
+
+
+	<insert id="insert">
+		insert into board (title, content, writer)
+		values (#{title}, #{content}, #{writer})
+	</insert>
+
+
+	<insert id="insertSelectKey">
+		insert into board (title, content, writer)
+		values (#{title}, #{content}, #{writer})
+
+		<selectKey resultType="Long" keyProperty="bno"
+			keyColumn="bno" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+
+	<select id="read" resultType="BoardVO">
+		select * from board where bno = #{bno}
+	</select>
+
+	<delete id="delete">
+		delete from board where bno = #{bno}
+	</delete>
+
+	<update id="update">
+		update board set
+		title = #{title},
+		content = #{content},
+		writer = #{writer},
+		update_date = now()
+		where bno = #{bno}
+	</update>
+
+	<insert id = "insertAttachment">
+	insert into board_attachment(filename, path, content_type, size, bno)
+	values(#{filename}, #{path}, #{contentType}, #{size}, #{bno})
+	</insert>
+
+	<select id = "getAttachment" resultType="BoardAttachmentVO">
+		select * from board_attachment
+		where no = #{no}
+	</select>
+
+	<delete id ="removeAttachment">
+		delete from board_attachment
+		where no = #{no}
+	</delete>
 </mapper>
