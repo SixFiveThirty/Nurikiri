@@ -70,6 +70,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/managers/store/register",
 						"/recommend/editor/list",
 						"/store/modify",
+						"/board/modify",
+						"/board/register",
 						"/recommend/editor/modify").access("hasRole('ROLE_MANAGER')")
 				.antMatchers(
 						"/managers/member/list",

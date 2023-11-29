@@ -1,6 +1,7 @@
 package com.nurikiri.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.LinkedHashMap;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.PageDTO;
 import com.nurikiri.domain.StoreVO;
+import com.nurikiri.service.OcrService;
 import com.nurikiri.service.StoreService;
 import com.nurikiri.service.StoreServiceImpl;
 
@@ -42,9 +44,33 @@ public class StoreController {
 	@Autowired
 	private StoreService service;
 	
+	@Autowired
+	private OcrService ocrService;
+	
 	@GetMapping("/reviewpopup")
 	public void reviewpopup() {
 		log.info("reviewpopup");
+	}
+	
+	@GetMapping("/popup_test")
+	public void popupTest() {
+		log.info("Popup Test");
+	}
+	
+	@PostMapping("/popup_test")
+	public String popupTest(MultipartFile receipt) throws Exception {
+		log.info("받은 파일? : " + receipt);
+		try {
+            // Call OCR Service to extract text
+            String extractedText = ocrService.extractTextFromImage(receipt);
+            
+            log.info("성공 : " + extractedText);
+            
+            return extractedText;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error processing the file.";
+        }
 	}
 	
 	@PostMapping("/uploadFormAction")
@@ -52,8 +78,6 @@ public class StoreController {
 		
 	}
 	
-	
-
 	@GetMapping("/list")
 	public void list(@ModelAttribute("cri") Criteria cri,Principal principal, Model model) {
 
@@ -157,5 +181,8 @@ public class StoreController {
 			Thumbnails.of(src).size(300, 300).toOutputStream(response.getOutputStream());
 		}
 	}
+	
+//	@GetMapping("{catagory_name}")
+//	public String sortPost(@PathVariable)
 
 }

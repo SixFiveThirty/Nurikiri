@@ -15,6 +15,8 @@ import lombok.extern.log4j.Log4j;
 @Service
 @AllArgsConstructor
 public class ReviewManagerServiceImpl implements ReviewManagerService {
+
+
 	private ReviewManagerMapper mapper;
 
 	@Override
@@ -35,6 +37,13 @@ public class ReviewManagerServiceImpl implements ReviewManagerService {
 	public List<ReviewManagerVO> getList(Criteria cri) {
 		log.info("get List with citeria: " + cri);
 		return mapper.getListWithPaging(cri);
+	}
+	
+	@Override
+	public int getTotal(Criteria cri) {
+		log.info("get total count");
+
+		return mapper.getTotalCount(cri);
 	}
 
 }

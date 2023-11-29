@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.nurikiri.mapper.BoardMapper">
+
+	<sql id="criteria">
+		<trim prefixOverrides="OR">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like CONCAT('%', #{keyword}, '%') </when>
+						<when test="type == 'W'.toString()">
+							writer like CONCAT('%', #{keyword}, '%') </when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+	
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from board
+		<where>
+			<include refid="criteria"></include>
+		</where>
+	</select>
+
+
+	<select id="getList" resultType="BoardVO">
+		select * from board
+		order by bno desc
+	</select>
+
+
+	<select id="getListWithPaging" resultType="BoardVO">
+		select * from board
+		<where>
+			<include refid="criteria"></include>
+		</where>
+		order by bno desc
+		limit #{offset} , #{amount}
+	</select>
+
+
+	<insert id="insert">
+		insert into board (title, content, writer)
+		values (#{title}, #{content}, #{writer})
+	</insert>
+
+
+	<insert id="insertSelectKey">
+		insert into board (title, content, writer)
+		values (#{title}, #{content}, #{writer})
+
+		<selectKey resultType="Long" keyProperty="bno"
+			keyColumn="bno" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+
+	<select id="read" resultType="BoardVO">
+		select * from board where bno = #{bno}
+	</select>
+
+	<delete id="delete">
+		delete from board where bno = #{bno}
+	</delete>
+
+	<update id="update">
+		update board set
+		title = #{title},
+		content = #{content},
+		writer = #{writer},
+		update_date = now()
+		where bno = #{bno}
+	</update>
+
+	<insert id = "insertAttachment">
+	insert into board_attachment(filename, path, content_type, size, bno)
+	values(#{filename}, #{path}, #{contentType}, #{size}, #{bno})
+	</insert>
+
+	<select id = "getAttachment" resultType="BoardAttachmentVO">
+		select * from board_attachment
+		where no = #{no}
+	</select>
+
+	<delete id ="removeAttachment">
+		delete from board_attachment
+		where no = #{no}
+	</delete>
+</mapper>

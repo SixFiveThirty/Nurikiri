@@ -22,4 +22,6 @@ public interface ReviewManagerMapper {
 	
 	public int update(ReviewManagerVO review);
 	
+	public List<ReviewManagerVO> getListWithMypagePaging(Criteria cri);
+	
 }

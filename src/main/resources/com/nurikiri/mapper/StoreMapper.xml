@@ -7,15 +7,14 @@
 <mapper namespace="com.nurikiri.mapper.StoreMapper">
 
 	<select id="getTotalCount" resultType="int">
-		select count(*) from store
+		select count(*) from view_store
 		<where>
 			<include refid="criteria"></include>
 		</where>
 	</select>
 
-
 	<select id="getList" resultType="StoreVO">
-		select * from store
+		select * from view_store
 		<where>
 			<include refid="criteria"></include>
 		</where>
@@ -24,7 +23,7 @@
 	</select>
 
 	<select id="getListWithPaging" resultType="StoreVO">
-		select * from store
+		select * from view_store
 		<where>
 			<include refid="criteria"></include>
 		</where>
@@ -34,8 +33,11 @@
 
 
 	<insert id="insert">
-		insert into store (title, market, address, item, use_recharge_card, use_bill, use_mobile, content, owner, phone, img_src)
-		values (#{title}, #{market}, #{address}, #{item}, #{useRechargeCard}, #{useBill}, #{useMobile}, #{content}, #{owner}, #{phone}, #{imgSrc})
+		insert into store (title, market, address, item, use_recharge_card,
+		use_bill, use_mobile, content, owner, phone, img_src)
+		values (#{title},
+		#{market}, #{address}, #{item}, #{useRechargeCard}, #{useBill},
+		#{useMobile}, #{content}, #{owner}, #{phone}, #{imgSrc})
 
 		<selectKey resultType="Long" keyProperty="sno"
 			keyColumn="sno" order="AFTER">
@@ -45,7 +47,8 @@
 
 
 	<select id="read" resultType="StoreVO">
-		select * from store where sno =
+		select * from view_store where sno
+		=
 		#{sno}
 	</select>
 
@@ -67,10 +70,30 @@
 		content = #{content},
 		owner = #{owner},
 		phone = #{phone},
-		img_src = #{imgSrc}
+		img_src =
+		#{imgSrc}
 		where sno =
 		#{sno}
 	</update>
+
+	<!-- 즐겨찾기 -->
+	<select id="getStoreBookmarksList" resultType="long">
+		select sno from
+		store_bookmark
+		where username = #{username}
+	</select>
+
+	<insert id="addStoreBookmark">
+		insert into store_bookmark(sno, username)
+		values
+		(#{sno}, #{username})
+	</insert>
+
+	<delete id="deleteStoreBookmark">
+		delete from store_bookmark
+		where sno = #{sno} and
+		username = #{username}
+	</delete>
 
 	<sql id="criteria">
 		<trim prefixOverrides="OR">
@@ -89,4 +112,30 @@
 		</trim>
 	</sql>
 
+	<sql id="sort">
+		<if test="sort == null">
+			ORDER BY sno DESC
+		</if>
+		<if test="sort == 'titleCount'">
+			ORDER BY title DESC
+		</if>
+
+		<if test="sort == 'starCount'">
+			ORDER BY starAvg DESC
+		</if>
+		<if test="sort == 'bookmarkCount'">
+			ORDER BY store_bookmark DESC
+		</if>
+		<if test="sort == 'reviewCount'">
+			ORDER BY store_review DESC
+		</if>
+	</sql>
+
+	<select id="getBookMarksList" parameterType="map" resultType="StoreVO">
+		select * from view_bookmarks
+		where username = #{username}
+		order by sno DESC
+		limit #{cri.offset}, #{cri.amount}
+	</select>
+	
 </mapper>

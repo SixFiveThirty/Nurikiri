@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.MemberVO;
 
 import com.nurikiri.service.MemberServiceImpl;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -68,11 +70,11 @@ public class SecurityController {
 		}
 
 		// 2. 아이디 중복 시
-		if (errors.hasFieldErrors("username")) { // hasFieldErrors 특정 필드 내에서 오류 났을시 검사
-			// DB에서 username을 검사
-			if (service.get(member.getUsername()) != null) { // 중복일 경우
-				errors.rejectValue("username", "아이디 중복", "이미 사용중인 ID입니다.");
-			}
+		if (!errors.hasFieldErrors("username")) { // 오류가 없을 때만 아래 코드 실행
+		    // DB에서 username을 검사
+		    if (service.get(member.getUsername()) != null) { // 중복일 경우
+		        errors.rejectValue("username", "아이디 중복", "이미 사용중인 ID입니다.");
+		    }
 		}
 
 		if (errors.hasFieldErrors()) {
@@ -164,5 +166,34 @@ public class SecurityController {
 			    session.invalidate();
 
 				return "redirect:/security/profile";
+	}
+	
+	@GetMapping("/remove_view")
+	public void removeView(@ModelAttribute("member") MemberVO member) {
+		
+	}
+	
+	@PostMapping("/remove")
+	public String remove(@RequestParam("username") String username, @Valid @ModelAttribute("member") MemberVO member, Errors errors, RedirectAttributes rttr, HttpSession session) {
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		
+		log.info(member);
+		
+		log.info("remove" + member.getUsername());
+		
+		 if (!passwordEncoder.matches(member.getConfirmedPassword(), member.getPassword())) {
+		        log.warn("비밀번호 불일치 에러");
+		        errors.rejectValue("confirmedPassword", "비밀번호 불일치", "비밀번호가 일치하지 않습니다.");
+		        return "security/remove_view";
+		    }
+		 
+		service.remove(member.getUsername());
+		rttr.addFlashAttribute("result", "success");
+		SecurityContextHolder.clearContext();
+		session.invalidate();
+		
+		
+		return "redirect:/";
 	}
 }

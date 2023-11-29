@@ -4,8 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,6 +38,16 @@
   }
 </style>
 
+<script src="/resources/js/rest.js"></script>
+<script>
+	const RECEIPT_CHECK = "/api/extractText?";
+	const FILE = "/Users/jeonhayoon/Downloads/OCR_TEST/receipt_test.jpeg";
+	
+	async function receipt() {
+		await rest_receipt_post(RECEIPT_CHECK, FILE);
+	}
+</script>
+
 <title>리뷰 팝업 만드는 중입니다</title>
 </head>
 <body>
@@ -49,10 +57,13 @@
 <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg" class="image-box"/>
 <label for="file">
 	<div class="btn-upload">영수증 인증</div>
+	<!-- <button type="button" class="btn-upload" onclick="receipt()">영수증 인증</button> -->
 </label>
+<button type="button" onclick="receipt()">rest 테스트</button>
 <input type="file" name='uploadFile' id="file" accept=".png, .jpg, .jpeg">
 </div>
 
 <div class="btn-upload" herf="">다음에 할래요</div>
+</form>
 </body>
 </html>

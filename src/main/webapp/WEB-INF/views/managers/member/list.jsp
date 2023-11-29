@@ -30,7 +30,6 @@ $(document).ready(async function() {
 		
 		//$(".change_userName").val(userName);
 		//$(".change_auth").val()
-		
 	});	
 	
 });

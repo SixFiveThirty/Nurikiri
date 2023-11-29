@@ -88,8 +88,9 @@ public class MemberServiceImpl implements MemberService {
 			Thumbnails.of(avatar.getInputStream()).size(250, 250).toFile(dest);
 		}
 	}
-  
-	 public void certifiedPhoneNumber(String phoneNumber, String cerNum) {
+	
+	@Override
+	public void certifiedPhoneNumber(String phoneNumber, String cerNum) {
 		 DefaultMessageService messageService = NurigoApp.INSTANCE.initialize("NCSWKFA1W2GPLEKS", "OSUYFY9C4JJWSYXXCOAUTTTMYPN8CQMH", "https://api.coolsms.co.kr");
 		 Message message = new Message();
 		 message.setFrom("01034020187");
