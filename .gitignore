@@ -187,3 +187,4 @@ src/main/java/com/nurikiri/domain/clovaOcr/ValidationResult.java
 src/main/java/com/nurikiri/service/OcrTestService.java
 src/main/webapp/resources/js/boardSearch.js
 src/main/webapp/WEB-INF/views/board/search_bar.jsp
+src/main/java/com/nurikiri/config/RootConfig.java

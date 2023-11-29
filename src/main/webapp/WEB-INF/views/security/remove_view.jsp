@@ -54,10 +54,12 @@
 	<br />
 			<div class="con mx-auto">
 				<h1>비밀번호 재확인</h1>
-				<form:form modelAttribute="member" cssClass="form" method="post" action="/remove">
+				<form:form modelAttribute="member" cssClass="form" method="post" action="/security/remove" onsubmit="return confirmSubmit();">
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" />
 				<div class="form-group">
+				<p>${member.username}</p>
+				<input type="hidden" name="username" value="${member.username}" />
 				<input type="hidden" name="password" value="${member.password}"/>
 					<form:label path="confirmedPassword">비밀번호</form:label>
 					<form:input path="confirmedPassword" cssClass="form-control" type="password"/>
@@ -80,6 +82,15 @@
 		</form:form>
 		</div>
 	</div>
+	
+	<script>
+        function confirmSubmit() {
+            var confirmResult = confirm("정말 삭제하시겠습니까?");
+
+ 
+            return confirmResult;
+        }
+    </script>
 </div>
 
 <%@ include file="../layouts/footer.jsp" %>

@@ -107,19 +107,20 @@
 	
 	<sql id="sort">
 		<if test="sort == null">
-		ORDER BY SNO DESC
+		ORDER BY sno DESC
 		</if>
-		<if test="sort == 'sno'">
-		ORDER BY SNO DESC
+		<if test="sort == 'titleCount'">
+		ORDER BY title DESC
 		</if>
 		
 		<if test="sort == 'starCount'">
-		ORDER BY title DESC
+		ORDER BY starAvg DESC
 		</if>
-		<if test="sort == 'favoriteCount'">
-		ORDER BY market DESC
+		<if test="sort == 'bookmarkCount'">
+		ORDER BY store_bookmark  DESC
 		</if>
 		<if test="sort == 'reviewCount'">
+		ORDER BY store_review  DESC
 		</if>
 	</sql>
 	
