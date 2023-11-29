@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,16 +54,19 @@ public class StoreController {
 	}
 	
 	@GetMapping("/popup_test")
-	public void popupTest() {
+	public void popupTest(@RequestParam("sno") Long sno, HttpSession session) {
+		log.info("sno값은? : " + sno);
 		log.info("Popup Test");
+		session.setAttribute("sno", sno);
 	}
 	
 	@PostMapping("/popup_test")
-	public String popupTest(MultipartFile receipt) throws Exception {
+	public String popupTest(MultipartFile receipt, Principal principal, HttpSession session) throws Exception {
 		log.info("받은 파일? : " + receipt);
 		try {
             // Call OCR Service to extract text
-            String extractedText = ocrService.extractTextFromImage(receipt);
+			Long sno = (Long) session.getAttribute("sno");
+            String extractedText = ocrService.extractTextFromImage(receipt, principal, sno);
             
             log.info("성공 : " + extractedText);
             
@@ -166,7 +170,7 @@ public class StoreController {
 	
 	@GetMapping("/image/{size}/{sno}")
 	@ResponseBody
-	public void thumbnail(@PathVariable("size") String size,@PathVariable("sno") Long sno, Principal principal, HttpServletResponse response) throws IOException {
+	public void thumbnail(@PathVariable("size") String size, @PathVariable("sno") Long sno, Principal principal, HttpServletResponse response) throws IOException {
 		StoreVO store = service.get(sno,principal);
 		
 		File src = new File(store.getImgSrc());
@@ -181,8 +185,5 @@ public class StoreController {
 			Thumbnails.of(src).size(300, 300).toOutputStream(response.getOutputStream());
 		}
 	}
-	
-//	@GetMapping("{catagory_name}")
-//	public String sortPost(@PathVariable)
 
 }
