@@ -119,8 +119,6 @@
 
 <h3 class="ml-5 mb-5">가맹점 찾기</h3>
 
-<p>${cri.sort}</p>
-
 <div>
 <%-- 	<button type="button" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=bookmarkCount'" class="btn" >즐찾 순</button> --%>
 <%-- 	<button type="button" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=starCount'" class="btn">별점 순</button> --%>
