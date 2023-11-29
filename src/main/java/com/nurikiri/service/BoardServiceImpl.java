@@ -4,9 +4,12 @@ import java.io.File;
 import java.security.Principal;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.nurikiri.domain.BoardAttachmentVO;
 import com.nurikiri.domain.BoardVO;
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.mapper.BoardMapper;
@@ -18,62 +21,65 @@ import lombok.extern.log4j.Log4j;
 @Service
 @AllArgsConstructor
 public class BoardServiceImpl implements BoardService {
-	public static final String THUMBNAIL_UPLOAD_DIR = "";
 
+	@Autowired
 	private BoardMapper mapper;
 	
-	@Override
-	public List<BoardVO> getList(Criteria cri,Principal principal) {
-
-		log.info("getList");
-
-		return mapper.getListWithPaging(cri);
-	}
 	
+	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public void register(BoardVO board, MultipartFile thumbnail) throws Exception {
-		log.info("register...." + board);
+	public void register(BoardVO board, List<MultipartFile> files) throws Exception {
+		mapper.insertSelectKey(board);
+		Long bno = board.getBno();
 		
-		File dest = new File(THUMBNAIL_UPLOAD_DIR, thumbnail.getOriginalFilename());
-		String imgSrc = dest.getPath();
-		board.setImgSrc(imgSrc);
-		mapper.insert(board);
-
-		if (!thumbnail.isEmpty()) {
-			thumbnail.transferTo(dest);
+		for(MultipartFile part : files) {
+			if(part.isEmpty()) continue;
+				BoardAttachmentVO attach = new BoardAttachmentVO(bno, part);
+				mapper.insertAttachment(attach);
 		}
 	}
 	
 	@Override
-	public void modify(BoardVO board, MultipartFile thumbnail) throws Exception {
-		log.info("modify...." + board);
-
-		File dest = new File(THUMBNAIL_UPLOAD_DIR, thumbnail.getOriginalFilename());
-		String imgSrc = dest.getPath();
-		board.setImgSrc(imgSrc);
-		mapper.update(board);
-
-		if (!thumbnail.isEmpty()) {
-			thumbnail.transferTo(dest);
+	public BoardVO get(Long bno) {
+		BoardVO board = mapper.read(bno);
+		
+		List<BoardAttachmentVO> list = mapper.getAttachmentList(bno);
+		board.setAttaches(list);
+		return board;
+	}
+	
+	
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public boolean modify(BoardVO board, List<MultipartFile> files) throws Exception {
+		int result = mapper.update(board);
+		Long bno = board.getBno();
+		
+		for(MultipartFile part: files) {
+			if(part.isEmpty()) continue;
+			BoardAttachmentVO attach = new BoardAttachmentVO(bno,part);
+			mapper.insertAttachment(attach);
 		}
+
+		log.info("modify....." + board);
+		
+		return mapper.update(board) == 1;
 	}
 	
 	@Override
 	public boolean remove(Long bno) {
-		log.info("remove");
+		log.info("remove" + bno);
+		
 		return mapper.delete(bno) == 1;
 
 	}
 	
 	@Override
-	public BoardVO get(Long bno, Principal principal) {
-		log.info("get");
-		
-		BoardVO board = mapper.read(bno);
-		
-		String query = board.getTitle();
-		
-		return board;
+	public List<BoardVO> getList(Criteria cri) {
+
+		log.info("get List with criteria" + cri);
+
+		return mapper.getListWithPaging(cri);
 	}
 	
 	@Override
@@ -82,7 +88,16 @@ public class BoardServiceImpl implements BoardService {
 
 		return mapper.getTotalCount(cri);
 	}
+	
+	@Override
+	public BoardAttachmentVO getAttachment(Long no) {
+		return mapper.getAttachment(no);
+	}
 
+	@Override
+	public boolean removeAttachment(Long no) {
+		return mapper.removeAttachment(no) ==1;
+	}
 	
 	
 	}
