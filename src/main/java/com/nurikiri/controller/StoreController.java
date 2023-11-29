@@ -80,13 +80,12 @@ public class StoreController {
 	
 	@GetMapping("/list")
 	public void list(@ModelAttribute("cri") Criteria cri,Principal principal, Model model) {
-
+		System.out.println("vo:"+cri);
 		log.info("list");
 		int total = service.getTotal(cri);
 
 		model.addAttribute("list", service.getList(cri,principal));
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
-		
 	}
 		
 	@GetMapping("/register")
@@ -181,8 +180,5 @@ public class StoreController {
 			Thumbnails.of(src).size(300, 300).toOutputStream(response.getOutputStream());
 		}
 	}
-	
-//	@GetMapping("{catagory_name}")
-//	public String sortPost(@PathVariable)
 
 }

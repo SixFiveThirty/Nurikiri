@@ -26,11 +26,11 @@
 
 	<select id="read" resultMap="memberMap">
 		select m.username, password, name,
-		jumin, email, phone, reg_date, update_date, auth
+		jumin, email, phone, reg_date, update_date, is_deleted, auth
 		from member m left outer join member_auth a 
 		on m.username = a.username 
-		where m.username = #{username}
-	</select>
+		where m.username = #{username} and is_deleted = 0
+</select>
 
 	<insert id="insert">
 		insert into member(username, password, name, jumin,
