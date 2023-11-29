@@ -15,7 +15,7 @@ public class TextExtraction {
    String requestId;
 
    @SerializedName("timestamp")
-   int timestamp;
+   Long timestamp;
 
    @SerializedName("images")
    List<Images> images;
