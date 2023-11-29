@@ -11,6 +11,15 @@
 </script>
 <script src="/resources/js/comment.js"></script>
 <script src="/resources/js/reply.js"></script>
+<script>
+$(document).ready(async function() {
+
+	$('.getbook').click(function(){
+		document.forms.removeForm.submit();
+	});
+});
+</script>
+
 <style>
 .card {
 	border-color: #c3cad1;
@@ -18,7 +27,9 @@
 	margin: 0 auto;
 }
 </style>
-<h1 style="text-align: center">마이 페이지</h1>
+
+
+<h1 style="text-align: center">${member.username}마이 페이지</h1>
 <div class="container">
 
 	<div class="top-div mt-5">
@@ -30,13 +41,27 @@
 		</div>
 		<br> <br>
 		<div class="card">
-			<a href="/mypage/favorit" class="btn btn-light"><i
+			<a type="submit" href="/mypage/favorit" class="btn btn-light getbook"><i
 				class="fa-solid fa-star"></i> 즐겨찾기 </a>
 		</div>
 		<br>
 
 	</div>
-
 </div>
 
+<form action="main" method="post" name="mybookmarkForm">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="username" value="${member.username}" /> 
+</form>
+
 <%@ include file="../layouts/footer.jsp"%>
+
+
+<%-- <form action="remove" method="post" name="removeForm">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+	<input type="hidden" name="sno" value="${review.sno}" /> 
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
+	<input type="hidden" name="amount" value="${cri.amount}" /> 
+	<input type="hidden" name="type" value="${cri.type}" /> 
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
+</form> --%>

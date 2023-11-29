@@ -133,5 +133,12 @@ public class MemberServiceImpl implements MemberService {
 		log.info("changeAuth");
 		mapper.changeAuth(username, auth);
 	}
+
+	@Override
+	public void changeState(String username, String isDeleted) {
+		log.info("changeState");
+		mapper.changeState(username, isDeleted);
+				
+	}
 }		
 

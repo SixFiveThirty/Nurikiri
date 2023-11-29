@@ -14,7 +14,8 @@ public class Criteria {
     private int amount;
     private String type;
     private String keyword;
-
+    
+    private String username;
 
 	public Criteria() {
 		this(1, 9);
@@ -78,4 +79,6 @@ public class Criteria {
     public String getLinkWithBno(String base, Long bno) {
         return getLink(base, pageNum) + "&bno=" + bno;
     }
+    
+
 }

@@ -37,7 +37,6 @@
 	<insert id="insertSelectKey">
 		insert into store_review(sno, content, writer, rate)
 		values ((#{sno}, #{content}, #{writer}, #{rate})
-
 		<selectKey resultType="Long" keyProperty="rno"
 			keyColumn="rno" order="AFTER">
 			SELECT LAST_INSERT_ID()
@@ -63,4 +62,12 @@
 		<!-- 여기서 #{offset}은 #({pageNum} -1) * #{amount} 이며, 수식은 oracle은 되지만, mysql은 
 			불가해서 그런 것이다. -->
 	</select>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from store_review
+		<where>
+			<include refid="criteria"></include>
+		</where>
+	</select>
+
 </mapper>

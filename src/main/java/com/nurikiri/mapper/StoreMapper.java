@@ -2,6 +2,8 @@ package com.nurikiri.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.StoreBookmarkVO;
 import com.nurikiri.domain.StoreVO;
@@ -21,6 +23,8 @@ public interface StoreMapper {
 	public List<StoreVO> getListWithPaging(Criteria cri);
 
 	public int getTotalCount(Criteria cri);
+	
+	public List<StoreVO> getBookMarksList(@Param("username") String username, @Param("cri") Criteria cri);
 
 	// 즐겨찾기 처리
 	public List<Long> getStoreBookmarksList(String username);

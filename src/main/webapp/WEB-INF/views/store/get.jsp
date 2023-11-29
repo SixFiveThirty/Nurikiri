@@ -199,7 +199,8 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 </div>
 
 <button type= "button" class="btn btn-light mr-5" style="width: 200px"
-onclick="location.href='${cri.getLink('reviewpopup')}&sno=${store.sno}'">리뷰 등록</button>
+onclick="location.href='${cri.getLink('receipt_popup')}&sno=${store.sno}'">리뷰 등록</button>
+
 
 <!--  리뷰 기능 구현 -->
 <c:if test="${member.username != store.owner }">
@@ -231,7 +232,7 @@ onclick="location.href='${cri.getLink('reviewpopup')}&sno=${store.sno}'">리뷰 
 			</div>
 		</div>
 	</div>
-	</c:if>
+</c:if>
 
 <div class="my-5">
 	<h1 style="text-align: center;"><i class="fa-regular fa-comments"></i>리뷰 목록</h1>

@@ -22,6 +22,6 @@ public interface StoreService {
 	
 	public StoreVO get(Long no, Principal principal);
 	
- 
+	public List<StoreVO> getBookMarks(Criteria cri, Principal principal);
 	
 }
