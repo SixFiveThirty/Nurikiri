@@ -32,4 +32,6 @@ public interface MemberService {
 	
 	public void changeAuth(String username, String auth);
 	
+	public void changeState(String username, String isDeleted);
+	
 }

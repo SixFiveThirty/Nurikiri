@@ -62,5 +62,17 @@ public class MemberManagerController {
 
 		return "redirect:/managers/member/list" + cri.getLink();
 	}
+	
+	@PostMapping("/changeState")
+	public String changeState(@RequestParam("username") String username, @RequestParam("isDeleted") String isDeleted,
+			@ModelAttribute("cri") Criteria cri,
+			RedirectAttributes rttr) {
+		log.info("changeState " + username + " isDeleted: " + isDeleted);
+		
+		service.changeState(username, isDeleted);
+
+
+		return "redirect:/managers/member/list" + cri.getLink();
+	}
 
 }
