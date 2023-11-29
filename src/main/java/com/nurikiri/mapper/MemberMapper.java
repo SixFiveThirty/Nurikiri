@@ -29,7 +29,6 @@ public interface MemberMapper {
 	
 	public void changeAuth(@Param("username") String username,@Param("auth") String auth);
 	
-	public void softdelete(@Param("isDelete") boolean isDelete);
-	
+	public void changeState(@Param("username") String username, @Param("isDeleted") String isDeleted);
 	
 }

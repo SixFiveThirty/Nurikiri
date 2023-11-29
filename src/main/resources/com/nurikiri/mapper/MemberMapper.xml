@@ -21,12 +21,14 @@
 		<result property="phone" column="phone" />
 		<result property="regDate" column="reg_date" />
 		<result property="updateDate" column="update_date" />
+		<result property="isDeleted" column="is_deleted"/>
 		<collection property="authList" resultMap="authMap" />
+		
 	</resultMap>
 
 	<select id="read" resultMap="memberMap">
 		select m.username, password, name,
-		jumin, email, phone, reg_date, update_date, auth
+		jumin, email, phone, reg_date, update_date, is_deleted, auth
 		from member m left outer join member_auth a 
 		on m.username = a.username 
 		where m.username = #{username}
@@ -96,8 +98,14 @@
 		where username = #{username}
 	</select>
 	
+	<select id="isDeleted">
+		update member set
+		is_deleted = #{isDeleted}
+		where username = #{username}
+	</select>
+	
 
-
+<!-- 아래는 수정해야됨  -->
 	<sql id="criteria">
 		<trim prefixOverrides="OR">
 			<foreach item="type" collection="typeArr">
