@@ -34,6 +34,10 @@ function createReviewTemplate(review, writer) {
 					<strong class="writer">
 						<img src="/security/avatar/sm/admin" class="avatar-sm"> ${review.writer}
 					</strong>
+					<div class="rate">
+						<i class="fa-solid fa-star"></i> ${review.rate} 점
+					</div>
+					
 				</div>
 				<div class="btn-group">
 					<span class="text-muted mr-3 review-date"> 등록일: ${moment(review.regDate).format('YYYY-MM-DD hh:mm')} </span>
@@ -64,26 +68,9 @@ function createReviewEditTemplate(review) {
 	`;
 }
 
-async function loadReviews(sno, writer) {
-   let reviews = [];
-   
-	// API로 불러오기
-	reviews = await rest_get(REVIEW_URL); //async ~ await이 없으면 promise 객체가 되어 루프를 못돌리게 됨.
-	
-	for(let review of reviews) {
-		const reviewEl = $(createReviewTemplate(review, writer));
-		$('.review-list').append(reviewEl);
-		
-		let replyListEl = reviewEl.find('.reply-list');
-		//답글 목록 처리
-		for(let reply of review.replyList) {
-			console.log(reply);
-		};
-	}
-}
-
 async function createReview(sno, writer) {
 	const content = $('.new-review-content').val();
+	const rate =$('.new-review-rate').val();
 	
 	if(!content){
 		alert('내용을 입력하세요.');
@@ -91,8 +78,14 @@ async function createReview(sno, writer) {
 		return;
 	}
 	
+	if(!rate){
+		alert('별점을 정해주세요.');
+		$('.new-review-rate').focus();
+		return;
+	}
+	
 	if(!confirm('리뷰를 추가할까요?')) return;
-	let review = { sno, writer, content };
+	let review = { sno, writer, content, rate };
 	console.log(review);
 	
 	// REST로 등록
@@ -102,7 +95,7 @@ async function createReview(sno, writer) {
 	const reviewEl = createReviewTemplate(review, writer);
 	$('.review-list').prepend($(reviewEl));
 	$('.new-review-content').val(''); //기존에 입력된 것 clear 시켜줌.
-	
+	$('.new-review-rate').val('');
 	console.log(content);
 }
 
@@ -149,20 +142,13 @@ async function deleteReview(e) {
 }
 
 async function loadReviews(sno, writer) {
-	let reviews = [];
-	
-	//API로 불러오기
-	reviews = await rest_get(REVIEW_URL);
+   let reviews = [];
+   
+	// API로 불러오기
+	reviews = await rest_get(REVIEW_URL); //async ~ await이 없으면 promise 객체가 되어 루프를 못돌리게 됨.
 	
 	for(let review of reviews) {
-		const reviewEl = $(createReviewTemplate(review, writer))
+		const reviewEl = $(createReviewTemplate(review, writer));
 		$('.review-list').append(reviewEl);
-		
-		let replyListEl = reviewEl.find('.reply-list');
-			//답글 목록 처리
-		//	for(let reply of review.replyList){
-		//		let replyEl = $(createReplyTemplate(reply, writer));
-		//		replyListEl.append(replyEl);
-		//	}
 	}
 }

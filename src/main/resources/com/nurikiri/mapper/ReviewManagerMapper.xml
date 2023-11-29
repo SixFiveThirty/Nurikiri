@@ -29,14 +29,14 @@
 	</select>
 
 	<insert id="insert">
-		insert into store_review(sno, content, writer)
+		insert into store_review(sno, content, writer, rate)
 		values
-		(#{sno}, #{content}, #{writer})
+		(#{sno}, #{content}, #{writer}, #{rate})
 	</insert>
 
 	<insert id="insertSelectKey">
-		insert into store_review(sno, content, writer)
-		values ((#{sno}, #{content}, #{writer})
+		insert into store_review(sno, content, writer, rate)
+		values ((#{sno}, #{content}, #{writer}, #{rate})
 
 		<selectKey resultType="Long" keyProperty="rno"
 			keyColumn="rno" order="AFTER">
