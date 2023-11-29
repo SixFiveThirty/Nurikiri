@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.extern.log4j.Log4j;
 
 @Data
-@Log4j
 public class ReceiptOCRVO {
 	private String salesTime;
 	
@@ -12,13 +11,9 @@ public class ReceiptOCRVO {
 	
 	private String storeAddress;
 	
-	private Long sumPrice;
-	
-	private String imgSrc;
+	private String sumPrice;
 	
 	private Long sno;
 	
 	private String userName;
-	
-	private Long rno;
 }
