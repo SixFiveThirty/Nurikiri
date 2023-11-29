@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,11 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -28,9 +31,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
-@RequestMapping("/board")
 @AllArgsConstructor
 @Log4j
+@RequestMapping("/board")
 public class BoardController {
 	
 	@Autowired
@@ -67,6 +70,7 @@ public class BoardController {
 	
 	@PostMapping("/register")
 	public String register(@Valid @ModelAttribute("board") BoardVO board, 
+			Principal principal,
 			Errors errors, List<MultipartFile>files, 
 			RedirectAttributes rttr) throws Exception{
 		
@@ -74,7 +78,7 @@ public class BoardController {
 			return "board/register";
 		}
 		
-		service.register(board, files);
+		service.register(board, files, principal.getName());
 		rttr.addFlashAttribute("result",board.getBno());
 	
 		return"redirect:/board/list";
@@ -107,7 +111,7 @@ public class BoardController {
 		if(service.modify(board, files)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		return "redirect:" + cri.getLinkWithSno("/board/get", board.getBno());
+		return "redirect:" + cri.getLinkWithBno("/board/get", board.getBno());
 	}
 	
 	@PostMapping("/remove")
