@@ -69,6 +69,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<%@ include file="menu_test.jsp"%>
+			<%@ include file="menu2.jsp"%>
 		</header>
 
 		<form id="logoutForm" action="/security/logout" method="post">
