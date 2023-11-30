@@ -34,13 +34,10 @@ $(document).ready(function(){
 </script>
 <style>
 	.logo_img{
-
 		width :200px;
-		height : 120px;}
-
+		height : 120px;
+	}
 </style>
-
-
 </head>
 <body>
 	<div class="container">
@@ -50,9 +47,6 @@ $(document).ready(function(){
 
 			     	<img src="/resources/images/logo.png" class="logo_img"/>
 			    </a>
-
-					
-
 				<div class="user-space py-5">
 					<sec:authorize access="isAuthenticated()">
 						<sec:authentication property="principal.member" var="member" />
@@ -74,7 +68,6 @@ $(document).ready(function(){
 					</sec:authorize>
 				</div>
 			</div>
-			<%@ include file="menu.jsp"%>
 			<%@ include file="menu_test.jsp"%>
 			<%@ include file="menu2.jsp"%>
 		</header>

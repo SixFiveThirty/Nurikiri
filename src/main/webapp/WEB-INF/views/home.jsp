@@ -3,7 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<%@ include file="layouts/header.jsp"%>
+<%-- <%@ include file="layouts/header.jsp"%> --%>
+<%@ include file="layouts/header_test.jsp"%>
 
 <script>
 	$(document).ready(function() {

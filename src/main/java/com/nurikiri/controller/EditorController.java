@@ -40,7 +40,7 @@ public class EditorController {
 	@Autowired
 	private EditorService service;
 	
-	@GetMapping({"/get", "/modify"})
+	@GetMapping({"/get", "/modify", "/get_test"})
 	public void get(
 		@RequestParam("eno") Long eno,
 		@ModelAttribute("cri") Criteria cri,
