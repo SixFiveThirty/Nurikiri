@@ -32,7 +32,7 @@
 		from member m left outer join member_auth a 
 		on m.username = a.username 
 		where m.username = #{username} and is_deleted = 0
-	</select>
+  </select>
 
 	<insert id="insert">
 		insert into member(username, password, name, jumin, email, phone)

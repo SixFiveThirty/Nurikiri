@@ -18,19 +18,19 @@
 		<where>
 			<include refid="criteria"></include>
 		</where>
-		order by sno
+		<include refid="sort" />
+		
 		limit #{offset} , #{amount}
 	</select>
 
 	<select id="getListWithPaging" resultType="StoreVO">
-		select * from view_store
+		select * from view_store 
 		<where>
 			<include refid="criteria"></include>
 		</where>
-		order by sno
+		<include refid="sort" />
 		limit #{offset} , #{amount}
 	</select>
-
 
 	<insert id="insert">
 		insert into store (title, market, address, item, use_recharge_card,
@@ -38,13 +38,13 @@
 		values (#{title},
 		#{market}, #{address}, #{item}, #{useRechargeCard}, #{useBill},
 		#{useMobile}, #{content}, #{owner}, #{phone}, #{imgSrc})
-
+    
 		<selectKey resultType="Long" keyProperty="sno"
 			keyColumn="sno" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
+    
 	</insert>
-
 
 	<select id="read" resultType="StoreVO">
 		select * from view_store where sno
@@ -114,20 +114,20 @@
 
 	<sql id="sort">
 		<if test="sort == null">
-			ORDER BY sno DESC
+		order by sno desc
 		</if>
 		<if test="sort == 'titleCount'">
-			ORDER BY title DESC
+		order by title desc
 		</if>
 
 		<if test="sort == 'starCount'">
-			ORDER BY starAvg DESC
+		order by starAvg desc
 		</if>
 		<if test="sort == 'bookmarkCount'">
-			ORDER BY store_bookmark DESC
+		order by store_bookmarks desc
 		</if>
 		<if test="sort == 'reviewCount'">
-			ORDER BY store_review DESC
+		order by store_review desc
 		</if>
 	</sql>
 
