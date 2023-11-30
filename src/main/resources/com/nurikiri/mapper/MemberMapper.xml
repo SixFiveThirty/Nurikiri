@@ -21,7 +21,9 @@
 		<result property="phone" column="phone" />
 		<result property="regDate" column="reg_date" />
 		<result property="updateDate" column="update_date" />
+		<result property="isDeleted" column="is_deleted"/>
 		<collection property="authList" resultMap="authMap" />
+		
 	</resultMap>
 
 	<select id="read" resultMap="memberMap">
@@ -30,11 +32,10 @@
 		from member m left outer join member_auth a 
 		on m.username = a.username 
 		where m.username = #{username} and is_deleted = 0
-</select>
+  </select>
 
 	<insert id="insert">
-		insert into member(username, password, name, jumin,
-		email, phone)
+		insert into member(username, password, name, jumin, email, phone)
 		values(#{username}, #{password},
 		#{name}, #{jumin},
 		#{email}, #{phone})
@@ -96,8 +97,14 @@
 		where username = #{username}
 	</select>
 	
+	<select id="isDeleted">
+		update member set
+		is_deleted = #{isDeleted}
+		where username = #{username}
+	</select>
+	
 
-
+<!-- 아래는 수정해야됨  -->
 	<sql id="criteria">
 		<trim prefixOverrides="OR">
 			<foreach item="type" collection="typeArr">

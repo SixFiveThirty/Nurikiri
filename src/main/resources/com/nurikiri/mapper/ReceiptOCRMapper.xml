@@ -10,8 +10,12 @@
 	</select>
 	
 	<insert id="insert">
-		insert into receipt_ocr (sales_time, store_name, store_address, sum_price, img_src, sno, username, rno)
-		values (#{salesTime}, #{storeName}, #{storeAddress}, #{sumPrice}, #{imgSrc}, #{sno}, #{username}, #{rno})
+		insert into receipt_ocr (sales_time, store_name, store_address, sum_price, sno, username)
+		values (#{salesTime}, #{storeName}, #{storeAddress}, #{sumPrice}, #{sno}, #{userName})
 	</insert>
+	
+	<select id="getStore" resultType="long">
+		select sno from store where address = #{storeAddress}
+	</select>
 	
 </mapper>

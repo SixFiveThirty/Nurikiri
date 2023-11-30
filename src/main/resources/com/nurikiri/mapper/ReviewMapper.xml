@@ -11,6 +11,7 @@
 		<result property="writer" column="writer" />
 		<result property="regDate" column="reg_date" />
 		<result property="updateDate" column="update_date" />
+		<result property="rate" column="rate" />
 
 		<!-- <collection property="replyList" ofType="com.nurikiri.domain.ReplyVO"> 
 			<id property="rno" column="rno" /> <result property="cno" column="cno" /> 
@@ -21,33 +22,29 @@
 
 	<select id="readAll" resultMap="ReviewMap">
 		select
-		rno, sno, content, writer, reg_date, update_date
+		rno, sno, content, writer, reg_date, update_date, rate
 		from store_review
 		where sno = #{sno}
 		order by reg_date desc
 	</select>
+	
 	<select id="get" resultMap="ReviewMap">
 		select
-		rno, sno, content, writer, reg_date, update_date
+		rno, sno, content, writer, reg_date, update_date, rate
 		from store_review
 		where rno = #{rno}
 	</select>
+	
 	<insert id="create">
-		insert into store_review (sno, writer, content)
+		insert into store_review (sno, writer, content, rate)
 		values(#{sno},
-		#{writer}, #{content})
+		#{writer}, #{content}, #{rate})
 		<selectKey resultType="Long" keyProperty="rno" keyColumn="rno"
 			order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
-	<update id="update">
-		update store_review
-		set
-		content = #{content},
-		update_date = now()
-		where rno = #{rno}
-	</update>
+	
  	<delete id="delete">
 		delete from store_review
 		where rno = #{rno}

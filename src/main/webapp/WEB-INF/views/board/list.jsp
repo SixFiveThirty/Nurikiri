@@ -4,8 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../layouts/header.jsp"%>
 
-<br><br><h1 class="page-header">
-	<i class="fas fa-list"></i> 공지사항 목록
+<br><br><h1 class="ml-5 mb-5">
+	 공지사항 목록
 </h1>
 
 <%@include file="../board/search_bar.jsp"%>

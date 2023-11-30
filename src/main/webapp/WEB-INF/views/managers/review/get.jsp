@@ -6,7 +6,6 @@
 
 <script src="/resources/js/rest.js"></script>
 <script src="/resources/js/review.js"></script>
-<script src="/resources/js/starrating.js"></script>
 
 <style>
 .top-div {
@@ -54,8 +53,10 @@
 	
 	<div class="d-flex justify-content-between">
 	<div>
-		<img src="/security/avatar/sm/${review.writer}" class="avatar-sm" style="width: 100%; height: 100%"> ${review.writer}
-		<div class="rateWrap"></div>
+		<img src="/security/avatar/sm/${review.writer}" class="avatar-sm" style="width: 100%; height: 80%"> ${review.writer}
+		<div class="rate">
+			<i class="fa-solid fa-star"></i> ${review.rate}
+			</div>
 	</div>
 	<div>
 		<i class="fas fa-clock"></i>

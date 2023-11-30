@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -17,6 +18,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
+import com.nurikiri.domain.ReceiptOCRVO;
+import com.nurikiri.domain.clovaOcr.Fields;
+import com.nurikiri.domain.clovaOcr.TextExtraction;
 import com.nurikiri.mapper.ReceiptOCRMapper;
 
 import lombok.AllArgsConstructor;
@@ -34,7 +40,7 @@ public class OcrServiceImpl implements OcrService {
 	private final String clovaOcrApiKey = "eGhka2R4bWRpYU9UelR1VG16dG5rYnh3S1FIekxRVVA=";
 	
 	@Override
-	public String extractTextFromImage(MultipartFile part) throws Exception {
+	public String extractTextFromImage(MultipartFile part, Principal principal, Long sno) throws Exception {
 		
 		File imageFile = new File(THUMBNAIL_UPLOAD_DIR, part.getOriginalFilename());
 		part.transferTo(imageFile);
@@ -58,14 +64,11 @@ public class OcrServiceImpl implements OcrService {
 			
 			List<Integer> templateIds = new ArrayList<Integer>();
 			templateIds.add(27186);
-			templateIds.add(27191);
 			templateIds.add(27198);
 			templateIds.add(27199);
 			templateIds.add(27200);
 			templateIds.add(27201);
-			templateIds.add(27202);
 			templateIds.add(27203);
-			templateIds.add(27205);
 			
 			JSONObject image = new JSONObject();
 			image.put("format", "jpg");
@@ -79,7 +82,6 @@ public class OcrServiceImpl implements OcrService {
 			
 			con.connect();
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-			long start = System.currentTimeMillis();
 			writeMultiPart(wr, postParams, imageFile, boundary);
 			wr.close();
 			log.info("완료");
@@ -102,11 +104,46 @@ public class OcrServiceImpl implements OcrService {
 			br.close();
 			
 			System.out.println("결과값 : " + response);
+			Gson gson = new Gson();
+			TextExtraction text = gson.fromJson(response.toString(), TextExtraction.class);
+			text.getImages().get(0);
+			System.out.println(text);
 			
-			return "redirect:/store/popup_test";
+			ReceiptOCRVO vo = new ReceiptOCRVO();
+			
+			for(Fields f : text.getImages().get(0).getFields()) {
+				String name = f.getName();
+				String infer = f.getInferText();
+				System.out.println(name + infer);
+				if(name.equals("매장명")) {
+					vo.setStoreName(infer);
+				} else if(name.equals("주소")) {
+					vo.setStoreAddress(infer);
+				} else if(name.equals("판매시간")) {
+					vo.setSalesTime(infer);
+				} else if(name.equals("합계")){
+					vo.setSumPrice(infer);
+				}
+			}
+			
+			Long compareSno = receiptMapper.getStore(vo.getStoreAddress());
+			
+			if(compareSno.equals(sno)) {
+				vo.setSno(sno);
+			}
+			
+			vo.setUserName(principal.getName());
+			
+			System.out.println("getName : " + principal.getName());
+			
+			receiptMapper.insert(vo);
+			
+			System.out.println("vo : " + vo);
+			
+			return "redirect:/store/get?sno=" + sno;
 		} catch(Exception e) {
-			System.out.println(e);
-			return "Error processing the image file.";
+			System.out.println("에러 : " + e);
+			return "redirect:/store/list";
 		}
 	}
 	

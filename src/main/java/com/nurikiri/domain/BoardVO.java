@@ -18,7 +18,6 @@ public class BoardVO {
 	@NotBlank(message="내용은 필수 항목입니다.")
 	private String content; //게시판 내용
 	
-	@NotBlank(message="작성자는 필수 항목입니다.")
 	private String writer; //게시판 작가
 	
 	List<BoardAttachmentVO> attaches;

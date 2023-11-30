@@ -50,7 +50,17 @@ public class StoreServiceImpl implements StoreService {
 		}
 		
 		return list;
-//		return mapper.getListWithPaging(cri);
+		//return mapper.getListWithPaging(cri);
+	}
+	
+	@Override
+	public List<StoreVO> getBookMarks(Criteria cri,Principal principal) {
+
+		log.info("getBookMarks");
+		String username = principal.getName();
+		long amount = cri.getAmount();
+
+		return mapper.getBookMarksList(username, cri);
 	}
 
 	@Override

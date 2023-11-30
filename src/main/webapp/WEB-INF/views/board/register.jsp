@@ -4,20 +4,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<link rel="stylesheet"
-	href="/resources/css/summernote/summernote-lite.min.css">
-<script src="/resources/js/summernote/summernote-lite.min.js"></script>
-<script src="/resources/js/summernote/lang/summernote-ko-KR.min.js"></script>
-
 <%@ include file="../layouts/header.jsp"%>
 
 <script>
 $(document).ready(function(){
-$('#content').summernote({ //중괄호 : 객체표현
-height: 300,  //에디터 높이
-focus: true, //에디터 로딩후 포커스 맞출지 여부
-lang: "ko-KR", //언어 설정
-});
 
 
 //파일 업로드
@@ -39,8 +29,6 @@ lang: "ko-KR", //언어 설정
 	});
 });
 
-//기본글꼴 설정
-$('#summernote').summernote('fontName', 'Arial');
 </script>
 
 
@@ -54,9 +42,11 @@ $('#summernote').summernote('fontName', 'Arial');
  	<form:form modelAttribute="board" role="form"
  		action="?_csrf=${_csrf.token}"
  		enctype="multipart/form-data">
-	 	<%-- <input type ="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-	 	<form:hidden path="bno"/> --%>
-	 	<form:hidden path="writer" value="${username}"/>
+ 		<sec:authorize access="isAuthenticated()">
+ 		<sec:authentication property="principal.member" var="member" />
+ 		<form:hidden path="writer" value="${member.username}"/>
+		</sec:authorize>
+	 	
 	 	<div class="form-group">
 				<form:label path="title">제목</form:label>
 				<form:input path="title" cssClass="form-control"/>
@@ -67,14 +57,7 @@ $('#summernote').summernote('fontName', 'Arial');
 			<label for ="attaches">첨부파일</label>
 			<div id="attach-list" class="my-1"></div>
 			<input type="file" class="form-control" multiple name="files"/>
-		</div>
-		
-		<div class="form-group">
-			<form:label path="writer">작성자 : </form:label>
-			${username}
-			<form:errors path="writer" cssClass="error"/>
-		</div>
-	
+		</div>	
 		
 		<div class="form-group">
 			<form:label path="content">내용</form:label>

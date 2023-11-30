@@ -9,6 +9,8 @@
 <script src="/resources/js/review.js"><</script>
 <script src="/resources/js/rest.js"><</script>
 
+<link rel="stylesheet" href="/resources/css/starrate.css">
+
 <script>
 //댓글 기본 URL 상수 - 전역 상수
 const REVIEW_URL = '/api/store/${param.sno}/review/';
@@ -197,22 +199,40 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 </div>
 
 <button type= "button" class="btn btn-light mr-5" style="width: 200px"
-onclick="location.href='${cri.getLink('reviewpopup')}&sno=${store.sno}'">리뷰 등록</button>
+onclick="location.href='${cri.getLink('receipt_popup')}&sno=${store.sno}'">리뷰 등록</button>
+
 
 <!--  리뷰 기능 구현 -->
 <c:if test="${member.username != store.owner }">
 <div class="bg-light p-2 rounded my-5">
-		<div>${member.username == null ? '댓글을 작성하려면 먼저 로그인하세요' : '댓글 작성' }</div>
+		<div>${member.username == null ? '리뷰를 작성하려면 먼저 로그인하세요' : '리뷰 작성' }</div>
 		<div>
-			<textarea class="form-control new-review-content" rows="3" ${member.username == null ? 'disabled' : '' }></textarea>
+			<fieldset class="rate new-review-rate">
+                <input type="radio" id="rating10" name="rating" value="10"><label for="rating10" title="5점"></label>
+                <input type="radio" id="rating9" name="rating" value="9"><label class="half" for="rating9" title="4.5점"></label>
+                <input type="radio" id="rating8" name="rating" value="8"><label for="rating8" title="4점"></label>
+                <input type="radio" id="rating7" name="rating" value="7"><label class="half" for="rating7" title="3.5점"></label>
+                <input type="radio" id="rating6" name="rating" value="6"><label for="rating6" title="3점"></label>
+                <input type="radio" id="rating5" name="rating" value="5"><label class="half" for="rating5" title="2.5점"></label>
+                <input type="radio" id="rating4" name="rating" value="4"><label for="rating4" title="2점"></label>
+                <input type="radio" id="rating3" name="rating" value="3"><label class="half" for="rating3" title="1.5점"></label>
+              	<input type="radio" id="rating2" name="rating" value="2"><label for="rating2" title="1점"></label>
+            	<input type="radio" id="rating1" name="rating" value="1"><label class="half" for="rating1" title="0.5점"></label>
+            </fieldset>
+
+            <textarea class="form-control new-review-content" rows="3" ${member.username == null ? 'disabled' : '' }></textarea>
+            
 			<div class="text-right">
+				<button class="btn btn-primary btn-sm my-2">
+					<i class="fa-regular fa-image"></i> 사진 업로드
+				</button>
 				<button class="btn btn-primary btn-sm my-2 review-add-btn" ${member.username == null ? 'disabled' : '' }>
 					<i class="fa-regular fa-comment"></i> 리뷰 등록
 				</button>
 			</div>
 		</div>
 	</div>
-	</c:if>
+</c:if>
 
 <div class="my-5">
 	<h1 style="text-align: center;"><i class="fa-regular fa-comments"></i>리뷰 목록</h1>

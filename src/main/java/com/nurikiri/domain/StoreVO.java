@@ -44,4 +44,5 @@ public class StoreVO {
 	private String storeBookmarks; // 즐겨찾기 수
 
 	private Boolean myStoreBookmark; // 즐겨찾기 여부
+	
 }

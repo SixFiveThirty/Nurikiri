@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
@@ -35,7 +36,6 @@ $(document).ready(async function() {
 	loadReviews(sno, writer);
 });
 </script> -->
-
 <h1 style="text-align: center">리뷰 관리</h1>
 
 <div class="container">
@@ -56,8 +56,11 @@ $(document).ready(async function() {
 					<td style="text-align: center; width: 60px;">${review.rno}</td>
 					<td style="text-align: center; width: 150px;">${review.sno}</td>
 					<td style="text-align: center;"><a href="get?rno=${review.rno}"> ${review.content} </a></td>
+					<td style="text-align: center;"><a
+						href="get?rno=${review.rno}"> ${review.content} </a></td>
 					<td style="text-align: center; width: 150px;">${review.writer}</td>
-					<td style="text-align: center; width: 100px;"><fmt:formatDate pattern="yyyy.MM.dd" value="${review.regDate}" /></td>
+					<td style="text-align: center; width: 100px;"><fmt:formatDate
+							pattern="yyyy.MM.dd" value="${review.regDate}" /></td>
 					<%-- <td><button type="button" class="btn btn-danger remove" style="width: 100px" onclick="location.href='remove&sno=${review.sno}'">삭제</button> --%>
 					<!-- <td><button type="button" class="btn btn-danger remove" style="width: 100px" onclick="delete()">삭제</button> -->
 				</tr>
