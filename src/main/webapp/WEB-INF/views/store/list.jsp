@@ -119,12 +119,11 @@
 
 <h3 class="ml-5 mb-5">가맹점 찾기</h3>
 
-<div>
-<%-- 	<button type="button" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=bookmarkCount'" class="btn" >즐찾 순</button> --%>
-<%-- 	<button type="button" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=starCount'" class="btn">별점 순</button> --%>
-<%-- 	<button type="button" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=reviewCount'" class="btn">리뷰 순</button> --%>
-<%-- 	<button type="button" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=titleCount'" class="btn">상호명 순</button> --%>
-<a href="/store/list?sort=titleCount">제목순</a> <a href="/store/list?sort=bookmarkCount">즐찾순</a>
+<div class="">
+	<button type="button" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=bookmarkCount'" class="btn" >즐찾 순</button>
+	<button type="button" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=starCount'" class="btn">별점 순</button>
+	<button type="button" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=reviewCount'" class="btn">리뷰 순</button>
+	<button type="button" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=titleCount'" class="btn">상호명 순</button>
 </div>
 
 <div class="row mb-5">

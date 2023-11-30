@@ -10,20 +10,20 @@ import com.nurikiri.domain.Criteria;
 
 public interface BoardService {
 	
-	/*게시판 목록*/
+	/*공지사항 목록*/
 	public List<BoardVO> getList(Criteria cri);
 	
-	/*게시판 등록*/
-	public void register(BoardVO board, List<MultipartFile> files) throws Exception;
+	public BoardVO get(Long bno);
 	
-	/*게시판 수정*/
+	/*공지사항 등록*/
+	public void register(BoardVO board, List<MultipartFile> files, String username) throws Exception;
+	
+	/*공지사항 수정*/
 	public boolean modify(BoardVO board, List<MultipartFile> files) throws Exception;
 
 	public boolean remove(Long bno);
 	
 	public int getTotal(Criteria cri);
-	
-	public BoardVO get(Long bno);
 	
 	public BoardAttachmentVO getAttachment(Long no);
 	

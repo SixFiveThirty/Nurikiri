@@ -14,6 +14,8 @@ public class Criteria {
     private int amount;
     private String type;
     private String keyword;
+    private String sort;
+
 
 	public Criteria() {
 		this(1, 9);
@@ -29,7 +31,6 @@ public class Criteria {
     }
 
     public int getOffset() {
-
         return (pageNum - 1) * amount;
     }
 
@@ -61,7 +62,8 @@ public class Criteria {
                 .queryParam("pageNum", pageNum)
                 .queryParam("amount", amount)
                 .queryParam("type", type)
-                .queryParam("keyword", keyword);
+                .queryParam("keyword", keyword)
+        		.queryParam("sort", sort);
 
         return builder.toUriString();
     }

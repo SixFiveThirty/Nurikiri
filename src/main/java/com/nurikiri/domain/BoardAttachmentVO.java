@@ -34,6 +34,9 @@ public class BoardAttachmentVO {
 		filename = part.getOriginalFilename();
 		contentType = part.getContentType();
 		size = part.getSize();
+		this.bno = bno; //foreign 키
+		path = UPLOAD_PATH + "/" +System.currentTimeMillis() + "_" + filename;
+		part.transferTo(new File(path));
 	}
 	
 	public String getFormatSize() {

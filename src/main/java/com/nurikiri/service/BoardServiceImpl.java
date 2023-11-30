@@ -1,6 +1,5 @@
 package com.nurikiri.service;
 
-import java.io.File;
 import java.security.Principal;
 import java.util.List;
 
@@ -28,9 +27,10 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public void register(BoardVO board, List<MultipartFile> files) throws Exception {
+	public void register(BoardVO board, List<MultipartFile> files, String username) throws Exception {
 		mapper.insertSelectKey(board);
 		Long bno = board.getBno();
+		board.setWriter(principal.getName());
 		
 		for(MultipartFile part : files) {
 			if(part.isEmpty()) continue;

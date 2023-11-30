@@ -20,4 +20,6 @@ public class ReviewManagerVO {
 	private Date regDate;
 	
 	private Date updateDate;
+	
+	private float rate;
 }
