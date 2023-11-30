@@ -8,7 +8,7 @@ import com.nurikiri.domain.Criteria;
 
 public interface BoardMapper {
 	
-	//게시판 목록
+	//공지사항
 	public List<BoardVO> getList();
 	
 	public List<BoardVO> getListWithPaging(Criteria cri);
@@ -28,11 +28,13 @@ public interface BoardMapper {
 	
 	//파일 업로드
 	public void insertAttachment(BoardAttachmentVO attach);
+	
+	public List<BoardAttachmentVO> getAttachmentList(Long bno);
 
 	public BoardAttachmentVO getAttachment(Long no);
 
 	public int removeAttachment(Long no);
 
-	public List<BoardAttachmentVO> getAttachmentList(Long bno);
+	
 
 }

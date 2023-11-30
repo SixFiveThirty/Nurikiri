@@ -31,9 +31,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
-@RequestMapping("/board")
 @AllArgsConstructor
 @Log4j
+@RequestMapping("/board")
 public class BoardController {
 	
 	@Autowired
@@ -70,6 +70,7 @@ public class BoardController {
 	
 	@PostMapping("/register")
 	public String register(@Valid @ModelAttribute("board") BoardVO board, 
+			Principal principal,
 			Errors errors, List<MultipartFile>files, 
 			RedirectAttributes rttr) throws Exception{
 		
@@ -77,7 +78,7 @@ public class BoardController {
 			return "board/register";
 		}
 		
-		service.register(board, files);
+		service.register(board, files, principal.getName());
 		rttr.addFlashAttribute("result",board.getBno());
 	
 		return"redirect:/board/list";
@@ -110,7 +111,7 @@ public class BoardController {
 		if(service.modify(board, files)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		return "redirect:" + cri.getLinkWithSno("/board/get", board.getBno());
+		return "redirect:" + cri.getLinkWithBno("/board/get", board.getBno());
 	}
 	
 	@PostMapping("/remove")

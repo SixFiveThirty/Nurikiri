@@ -4,11 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<link rel="stylesheet"
-	href="/resources/css/summernote/summernote-lite.min.css">
-<script src="/resources/js/summernote/summernote-lite.min.js"></script>
-<script src="/resources/js/summernote/lang/summernote-ko-KR.min.js"></script>
-<script src="/resources/js/rest.js"></script>
+<script src="/resources/js/boardRest.js"></script>
 
 <%@ include file="../layouts/header.jsp"%>
 
@@ -16,10 +12,6 @@
 <script>
 $(document).ready(function(){
 	
-	$('#content').summernote({
-		height: 300,      //에디터 높이
-		lang:"ko-KR",      //한글 설정
-	});
 	
 	 $('.get').click(function(){
 	document.forms.getForm.submit();
@@ -105,7 +97,6 @@ action="?_csrf=${_csrf.token}" enctype="multipart/form-data"> <!-- submit 할 �
 			<form:errors path="content" cssClass="error"/>
 		</div>
 		
-		
 			
 			<button type="submit" class="btn btn-primary">
 		 		<i class="fas fa-check"></i>확인</button>
@@ -113,7 +104,7 @@ action="?_csrf=${_csrf.token}" enctype="multipart/form-data"> <!-- submit 할 �
 		 	<button type="reset" class="btn btn-primary">
 		 		<i class="fas fa-undo"></i>취소</button>
 		 	
-		 	<a href="${cri.getLinkWithBno('get', board.bno)}" class="btn btn-primary get">
+		 	<a href="${cri.getLinkWithBno('list', board.bno)}" class="btn btn-primary get">
 		 		<i class="fas fa-file-alt"></i>돌아가기</a>
 		 		
 
