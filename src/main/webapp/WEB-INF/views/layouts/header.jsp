@@ -38,11 +38,6 @@ $(document).ready(function(){
 		width :200px;
 		height : 120px;}
 
-	td,th{ 
-	
-	padding: 50px;
-	
-	}
 </style>
 
 
