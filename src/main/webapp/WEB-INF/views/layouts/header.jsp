@@ -38,9 +38,12 @@ $(document).ready(function(){
 		width :200px;
 		height : 120px;}
 
+	td,th{ 
+	
+	padding: 50px;
+	
+	}
 </style>
-
-
 
 
 </head>
@@ -78,6 +81,7 @@ $(document).ready(function(){
 			</div>
 			<%@ include file="menu.jsp"%>
 			<%@ include file="menu_test.jsp"%>
+			<%@ include file="menu2.jsp"%>
 		</header>
 
 		<form id="logoutForm" action="/security/logout" method="post">

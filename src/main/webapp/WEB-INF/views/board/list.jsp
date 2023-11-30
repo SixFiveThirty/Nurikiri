@@ -11,8 +11,15 @@
 </div></center>
 			
 
+
 <%@include file="../board/search_bar.jsp"%>
 
+
+
+
+
+
+<div class="mx-5">
 <table class="table table-striped table-hover">
 	<thead>
 		<tr>
@@ -36,12 +43,14 @@
 
 </table>
 
+
 <sec:authorize access="hasRole('MANAGER')">
 <div class="text-right mr-3">
 	<a href="register" class="btn btn-primary"> <i class="far fa-edit"></i>글쓰기
 	</a>
 </div>
 </sec:authorize>
+</div>
 
 
 	                                            
