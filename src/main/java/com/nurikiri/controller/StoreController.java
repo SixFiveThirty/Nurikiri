@@ -53,6 +53,11 @@ public class StoreController {
 		log.info("reviewpopup");
 	}
 	
+	@GetMapping("/modal_test")
+	public void modalTest() {
+		log.info("modal Test");
+	}
+	
 	@GetMapping("/receipt_popup")
 	public void receiptPopup(@RequestParam("sno") Long sno, HttpSession session) {
 		log.info("sno값은? : " + sno);
