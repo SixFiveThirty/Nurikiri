@@ -44,7 +44,7 @@ $(document).ready(function(){
  		enctype="multipart/form-data">
  		<sec:authorize access="isAuthenticated()">
  		<sec:authentication property="principal.member" var="member" />
- 		<form:hidden path="writer" value="${member.username}"/>
+ 		<input type = "hidden" name="writer" value="${member.name}"/>
 		</sec:authorize>
 	 	
 	 	<div class="form-group">

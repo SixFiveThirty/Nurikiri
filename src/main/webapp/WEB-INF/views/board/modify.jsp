@@ -51,7 +51,7 @@ $(document).ready(function(){
 });
 </script>
 
-<h2 class="page-header"><i class="far fa-edit"></i> 글 수정</h2>
+<h2 class="page-header"><i class="far fa-edit"></i>공지사항 수정페이지</h2><br><br>
 <div class="panel panel-default">
 <div class="pannel-body">
 	<form:form modelAttribute="board" role="form"

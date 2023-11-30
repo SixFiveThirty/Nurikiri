@@ -8,7 +8,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"> </script>
 <script src="/resources/js/boardRest.js"></script>
 
-<h2 class="page-header"><i class="far fa-file-alt"></i> ${board.title}</h2><br>
+
+<script>
+$(document).ready(async function(){ //async 비동기
+	$('.remove').click(function(){
+		if(!confirm('정말 삭제할까요?')) return;
+		document.forms.removeForm.submit();
+	});
+});
+
+</script>
+
+<h2 class="page-header"> ${board.title}</h2><br>
 
 <div class="d-flex justify-content-between">
 <div><i class="fas fa-user"></i> ${board.writer}</div>
@@ -34,16 +45,20 @@
 <div>${board.content}</div>
 
 
-	
-
-<div class="mt-4">
+<div class="btn-group center">
 		<a href="${cri.getLink('list')}" class="btn btn-primary list">
-			<i class="fas fa-list"></i>목록</a>
-		<a href="${cri.getLinkWithBno('modify', board.bno)}" class="btn btn-primary modify">
-			<i class="far fa-edit"></i>수정</a>
-		<a href="#" class="btn btn-danger remove">    <!-- 자바스크립트에서 클릭이벤트 발생해줘야함 #--> 
-			<i class="fas fa-trash-alt"></i>삭제</a>
+			목록</a>
 </div>
+
+<sec:authorize access="hasRole('MANAGER')">
+<div class="text-right mr-3">
+	<a href="${cri.getLinkWithBno('modify', board.bno)}" class="btn btn-primary modify">
+			수정</a>
+		<a href="#" class="btn btn-danger remove">    <!-- 자바스크립트에서 클릭이벤트 발생해줘야함 #--> 
+			삭제</a>
+</div>
+</sec:authorize>
+
 
 <form id ="modifyForm" action="/board/modify" method="get" >
 	<input type="hidden" id="bno" name="bno" value="${board.bno}"/>
