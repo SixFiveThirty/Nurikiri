@@ -41,10 +41,6 @@
 	height: 120px;
 }
 
-.container2 {
-	background: white;
-}
-
 #menulink {
 	color: #000000;
 	font-weight: bold;
