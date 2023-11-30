@@ -14,8 +14,6 @@ public class Criteria {
     private int amount;
     private String type;
     private String keyword;
-    
-    private String username;
 
 	public Criteria() {
 		this(1, 9);

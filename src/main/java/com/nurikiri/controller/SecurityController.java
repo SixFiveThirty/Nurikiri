@@ -196,4 +196,21 @@ public class SecurityController {
 		
 		return "redirect:/";
 	}
+	
+	
+	/*
+	 * @PostMapping("/changeAuth") public String
+	 * changeAuth(@RequestParam("username") String username, @RequestParam("auth")
+	 * String auth,
+	 * 
+	 * @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	 * log.info("changeAuth " + username + " auth: " + auth);
+	 * 
+	 * service.changeAuth(username, auth);
+	 * 
+	 * 
+	 * return "redirect:/"; }
+	 */
+	
+	
 }

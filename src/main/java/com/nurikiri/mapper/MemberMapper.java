@@ -29,6 +29,6 @@ public interface MemberMapper {
 	
 	public void changeAuth(@Param("username") String username,@Param("auth") String auth);
 	
-	public void changeState(@Param("username") String username, @Param("isDeleted") String isDeleted);
+	public void isDeleted(@Param("username") String username, @Param("isDeleted") String isDeleted);
 	
 }

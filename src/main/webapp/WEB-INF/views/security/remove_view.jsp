@@ -65,13 +65,15 @@
 					<form:input path="confirmedPassword" cssClass="form-control" type="password"/>
 					<form:errors path="confirmedPassword" cssClass="errors" />
 				</div>
-
-			<div class="btn-group">
+				</form:form>
+				
+					<button type="submit" name="remove" class="btn form-control">
+			<!-- <div class="btn-group">
 					<div class="btn-container">
-						<button type="submit" name="remove" class="btn form-control">
+						<button type="button" class="btn form-control changeState">
 							확인
 						</button>
-					</div>
+					</div> -->
 				
 					<div class="btn-container">
 							 <a href="/security/profile" class="btn form-control">
@@ -79,17 +81,38 @@
 						      </a>
 				     </div>
 			      </div>
-		</form:form>
+		
 		</div>
 	</div>
+	<%-- <form action="changeState" method="post" name="changeStateForm">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+		<input type="hidden" name="username" class="change_username" />
+		<input type="hidden" name="isDeleted" class="change_state" /> <input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
+	</form> --%>
+	
 	
 	<script>
-        function confirmSubmit() {
+	$(document).ready(async function() {
+		$('.changeState').click(function(){
+			if(!confirm('정말 삭제할까요?')) return;
+			const userName = $(this).data("username");
+			$(".change_username").val(userName);
+			$(".change_state").val('1');
+			console.log(userName);
+			document.forms.changeStateForm.submit();
+			
+		});
+	});
+	
+	
+    /*     function confirmSubmit() {
             var confirmResult = confirm("정말 삭제하시겠습니까?");
 
  
             return confirmResult;
-        }
+        } */
+        
+        
     </script>
 </div>
 
