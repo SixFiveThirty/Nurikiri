@@ -183,6 +183,7 @@ button.firstBtn:focus{
 <!-- Register Section Begin -->
 <div class="register-login-section spad">
 	<div class="container">
+
 		<div class="row">
 			<div class="col-lg-6 offset-lg-3">
 				<div class="login-form">
@@ -224,5 +225,6 @@ button.firstBtn:focus{
 		}
 	</script>
 </div>
+>>>>>>> af572b50daf568b7b2de05ec276d8d271c80a715
 
 <%@ include file="../layouts/footer.jsp"%>
