@@ -48,16 +48,6 @@ public class StoreController {
 	@Autowired
 	private OcrService ocrService;
 	
-	@GetMapping("/reviewpopup")
-	public void reviewpopup() {
-		log.info("reviewpopup");
-	}
-	
-	@GetMapping("/modal_test")
-	public void modalTest() {
-		log.info("modal Test");
-	}
-	
 	@GetMapping("/receipt_popup")
 	public void receiptPopup(@RequestParam("sno") Long sno, HttpSession session) {
 		log.info("sno값은? : " + sno);
@@ -66,11 +56,9 @@ public class StoreController {
 	}
 	
 	@PostMapping("/receipt_popup")
-	public String receiptPopup(MultipartFile receipt, Principal principal, HttpSession session) throws Exception {
+	public String receiptPopup(MultipartFile receipt, Principal principal, Long sno) throws Exception {
 		log.info("받은 파일? : " + receipt);
 		try {
-            // Call OCR Service to extract text
-			Long sno = (Long) session.getAttribute("sno");
             String extractedText = ocrService.extractTextFromImage(receipt, principal, sno);
             
             log.info("성공 : " + extractedText);

@@ -15,6 +15,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/resources/css/main.css" />
 <link rel="stylesheet" type="text/css" href="/resources/css/util.css">
+<link rel="stylesheet" type="text/css" href="/resources/vendor/css-hamburgers/hamburgers.min.css">
 
 <!--===============================================================================================-->	
 <!-- 	<script src="/resources/vendor/jquery/jquery-3.2.1.min.js"></script> -->
