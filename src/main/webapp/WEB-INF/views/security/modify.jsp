@@ -277,16 +277,16 @@ button.firstBtn:focus{
 				enctype="multipart/form-data">
 				<br />
 
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<div class="group-input">
-						<form:label path="auth">권한 설정</form:label>
-						<form:select path="auth" cssClass="form-control">
-							<form:option value="ROLE_ADMIN">ADMIN</form:option>
-							<form:option value="ROLE_MANAGER">MANAGER</form:option>
-							<form:option value="ROLE_USER">USER</form:option>
-						</form:select>
-					</div>
-				</sec:authorize>
+<%-- 				<sec:authorize access="hasRole('ROLE_ADMIN')"> --%>
+<!-- 					<div class="group-input"> -->
+<%-- 						<form:label path="auth">권한 설정</form:label> --%>
+<%-- 						<form:select path="auth" cssClass="form-control"> --%>
+<%-- 							<form:option value="ROLE_ADMIN">ADMIN</form:option> --%>
+<%-- 							<form:option value="ROLE_MANAGER">MANAGER</form:option> --%>
+<%-- 							<form:option value="ROLE_USER">USER</form:option> --%>
+<%-- 						</form:select> --%>
+<!-- 					</div> -->
+<%-- 				</sec:authorize> --%>
 
 
 				<div class="group-input">
