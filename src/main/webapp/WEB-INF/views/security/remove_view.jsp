@@ -67,13 +67,13 @@
 				</div>
 				</form:form>
 				
-					<button type="submit" name="remove" class="btn form-control">
-			<!-- <div class="btn-group">
+			<div class="btn-group">
 					<div class="btn-container">
-						<button type="button" class="btn form-control changeState">
+						<button type="button" class="btn form-control changeState"
+							data-username="${member.username}">
 							확인
 						</button>
-					</div> -->
+					</div>
 				
 					<div class="btn-container">
 							 <a href="/security/profile" class="btn form-control">
@@ -84,11 +84,11 @@
 		
 		</div>
 	</div>
-	<%-- <form action="changeState" method="post" name="changeStateForm">
+	<form action="changeState" method="post" name="changeStateForm">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 		<input type="hidden" name="username" class="change_username" />
-		<input type="hidden" name="isDeleted" class="change_state" /> <input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
-	</form> --%>
+		<input type="hidden" name="isDeleted" class="change_state" />
+	</form>
 	
 	
 	<script>
