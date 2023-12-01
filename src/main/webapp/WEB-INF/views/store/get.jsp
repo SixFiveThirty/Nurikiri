@@ -17,7 +17,6 @@
 const REVIEW_URL = '/api/store/${param.sno}/review/';
 /* const REPLY_URL = '/api/store/${param.sno}/reply/'; */
 
-
 	$(document).ready(async function() {
 		$('.remove').click(function() {
 			// 클릭 이벤트 핸들러 함수
@@ -32,7 +31,7 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 
 		let sno = ${param.sno}; 	// 글번호
 		let writer = '${member.username}'; // 작성자(로그인 유저)
-		
+				
 		loadReviews(sno, writer); 	// 댓글 목록 불러오기
 		
 		// 댓글 추가 버튼 처리
@@ -280,6 +279,8 @@ onclick="location.href='${cri.getLink('receipt_popup')}&sno=${store.sno}'">리�
 	<hr>
 	<div class="review-list"></div>
 </div>
+
+<%@ include file="get_test.jsp"%>
 
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47527c077dd44e34b71ffb876f21b3cc&libraries=services"></script>
