@@ -32,7 +32,7 @@ $(document).ready(async function() {
 		//$(".change_auth").val()
 	});	
 	
-/* 	$('.changeState').click(function(){
+		$('.changeState').click(function(){
 		if(!confirm('정말 삭제할까요?')) return;
 		const userName = $(this).data("username");
 		$(".change_username").val(userName);
@@ -40,7 +40,7 @@ $(document).ready(async function() {
 		console.log(userName);
 		document.forms.changeStateForm.submit();
 		
-	}); */
+	});
 });
 
 

@@ -42,7 +42,7 @@ public class SecurityController {
 
 	@Autowired
 	private MemberService service;
-	
+
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
@@ -71,10 +71,10 @@ public class SecurityController {
 
 		// 2. 아이디 중복 시
 		if (!errors.hasFieldErrors("username")) { // 오류가 없을 때만 아래 코드 실행
-		    // DB에서 username을 검사
-		    if (service.get(member.getUsername()) != null) { // 중복일 경우
-		        errors.rejectValue("username", "아이디 중복", "이미 사용중인 ID입니다.");
-		    }
+			// DB에서 username을 검사
+			if (service.get(member.getUsername()) != null) { // 중복일 경우
+				errors.rejectValue("username", "아이디 중복", "이미 사용중인 ID입니다.");
+			}
 		}
 
 		if (errors.hasFieldErrors()) {
@@ -111,29 +111,29 @@ public class SecurityController {
 	public void profile() {
 
 	}
-	
+
 	@GetMapping("/check_pwd")
 	public void checkPassword(@ModelAttribute("member") MemberVO member) {
-		
+
 	}
-	
+
 	@PostMapping("/check_pwd")
 	public String checkPassword(@Valid @ModelAttribute("member") MemberVO member, Errors errors) {
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		
-			 if (!passwordEncoder.matches(member.getConfirmedPassword(), member.getPassword())) {
-			        log.warn("비밀번호 불일치 에러");
-			        errors.rejectValue("confirmedPassword", "비밀번호 불일치", "비밀번호가 일치하지 않습니다.");
-			        return "security/check_pwd";
-			    }
-		
-		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+		if (!passwordEncoder.matches(member.getConfirmedPassword(), member.getPassword())) {
+			log.warn("비밀번호 불일치 에러");
+			errors.rejectValue("confirmedPassword", "비밀번호 불일치", "비밀번호가 일치하지 않습니다.");
+			return "security/check_pwd";
+		}
+
 		return "redirect:/security/modify";
 	}
-	
-    @GetMapping("/modify")
-    public void modify(@ModelAttribute("member") MemberVO member) {
-    }
+
+	@GetMapping("/modify")
+	public void modify(@ModelAttribute("member") MemberVO member) {
+	}
+
 	/*
 	 * @GetMapping({"/get","/modify"}) public void modify(@RequestParam("username")
 	 * String username ,@ModelAttribute("cri") Criteria cri, Model model) {
@@ -144,56 +144,81 @@ public class SecurityController {
 	 * }
 	 */
 	@PostMapping("/modify")
-	public String modify(@Valid @ModelAttribute("member") MemberVO member, Errors errors, MultipartFile avatar, HttpSession session) throws IOException {
-				
-				if (!member.getPassword().equals(member.getConfirmedPassword())) {
-					log.warn("비밀번호 불일치 에러");
-					errors.rejectValue("confirmedPassword", "비밀번호 불일치", "비밀번호 확인이 일치하지 않습니다.");
-				}
+	public String modify(@Valid @ModelAttribute("member") MemberVO member, Errors errors, MultipartFile avatar,
+			HttpSession session) throws IOException {
 
-				if (errors.hasErrors()) {
-					log.warn("에러문구"+ errors);
-					//log.warn(errors.getFieldError());
-					log.warn(errors.getAllErrors());
-					return "security/modify";
-				}				
-				
-				
-				// 회원 정보 수정
-			    service.modify(member, avatar);
-			    log.warn("service.modify 작동 확인");
-			    
-			    session.invalidate();
+		if (!member.getPassword().equals(member.getConfirmedPassword())) {
+			log.warn("비밀번호 불일치 에러");
+			errors.rejectValue("confirmedPassword", "비밀번호 불일치", "비밀번호 확인이 일치하지 않습니다.");
+		}
 
-				return "redirect:/security/profile";
+		if (errors.hasErrors()) {
+			log.warn("에러문구" + errors);
+			// log.warn(errors.getFieldError());
+			log.warn(errors.getAllErrors());
+			return "security/modify";
+		}
+
+		// 회원 정보 수정
+		service.modify(member, avatar);
+		log.warn("service.modify 작동 확인");
+
+		session.invalidate();
+
+		return "redirect:/security/profile";
 	}
-	
+
 	@GetMapping("/remove_view")
 	public void removeView(@ModelAttribute("member") MemberVO member) {
-		
+
 	}
-	
+
 	@PostMapping("/remove")
-	public String remove(@RequestParam("username") String username, @Valid @ModelAttribute("member") MemberVO member, Errors errors, RedirectAttributes rttr, HttpSession session) {
-		
+	public String remove(@RequestParam("username") String username, @Valid @ModelAttribute("member") MemberVO member,
+			Errors errors, RedirectAttributes rttr, HttpSession session) {
+
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		
+
 		log.info(member);
-		
+
 		log.info("remove" + member.getUsername());
-		
-		 if (!passwordEncoder.matches(member.getConfirmedPassword(), member.getPassword())) {
-		        log.warn("비밀번호 불일치 에러");
-		        errors.rejectValue("confirmedPassword", "비밀번호 불일치", "비밀번호가 일치하지 않습니다.");
-		        return "security/remove_view";
-		    }
-		 
+
+		if (!passwordEncoder.matches(member.getConfirmedPassword(), member.getPassword())) {
+			log.warn("비밀번호 불일치 에러");
+			errors.rejectValue("confirmedPassword", "비밀번호 불일치", "비밀번호가 일치하지 않습니다.");
+			return "security/remove_view";
+		}
+
 		service.remove(member.getUsername());
 		rttr.addFlashAttribute("result", "success");
 		SecurityContextHolder.clearContext();
 		session.invalidate();
-		
-		
+
 		return "redirect:/";
 	}
+
+	@PostMapping("/changeState")
+	public String changeState(@RequestParam("username") String username, @RequestParam("isDeleted") String isDeleted,
+			@Valid @ModelAttribute("member") MemberVO member, Errors errors, @ModelAttribute("cri") Criteria cri,
+			RedirectAttributes rttr, HttpSession session) {
+
+		log.info("changeState " + username + " isDeleted: " + isDeleted);
+
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+		if (!passwordEncoder.matches(member.getConfirmedPassword(),
+				member.getPassword())) {
+			log.warn("비밀번호 불일치 에러");
+			errors.rejectValue("confirmedPassword", "비밀번호 불일치", "비밀번호가 일치하지 않습니다.");
+			return "security/remove_view";
+		}
+
+		service.changeState(username, isDeleted);
+		rttr.addFlashAttribute("result", "success");
+		SecurityContextHolder.clearContext();
+		session.invalidate();
+
+		return "redirect:/";
+	}
+
 }

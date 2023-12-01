@@ -15,7 +15,7 @@ public class Criteria {
     private String type;
     private String keyword;
     private String sort;
-    private String username;
+
 
 	public Criteria() {
 		this(1, 9);
