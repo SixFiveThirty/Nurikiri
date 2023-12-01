@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.ReviewManagerVO;
+import com.nurikiri.domain.ReviewVO;
 import com.nurikiri.mapper.ReviewManagerMapper;
 
 import lombok.AllArgsConstructor;

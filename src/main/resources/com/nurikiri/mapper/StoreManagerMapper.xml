@@ -4,6 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.nurikiri.mapper.StoreManagerMapper">
+     
+     <sql id="criteria">
+		<trim prefixOverrides="OR">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like CONCAT('%', #{keyword}, '%') </when>
+						<when test="type == 'N'.toString()">
+							sno like CONCAT('%', #{keyword}, '%') </when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+     
         
     <select id="getListWithPaging" resultType="StoreManagerVO">
 		select title,sno,reg_date,is_deleted from store

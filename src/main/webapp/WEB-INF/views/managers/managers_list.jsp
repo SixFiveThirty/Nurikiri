@@ -11,12 +11,23 @@
 <script src="/resources/js/reply.js"></script>
 <style>
 .card {
-	border-color: #c3cad1;
+
 	width: 400px;
 	margin: 0 auto;
+	
+	border-radius: 20px;
+	
+.btn{
+	border-radius: 20px;
 }
+
+.btn:hover {
+  color: white;
+  background: #FDB54D;
+}
+
 </style>
-<h1 style="text-align: center">관리자 페이지</h1>
+<br><br><h1 style="text-align: center">관리자 페이지</h1>
 <div class="container">
 
 	<div class="top-div mt-5">

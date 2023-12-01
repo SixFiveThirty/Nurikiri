@@ -1,5 +1,8 @@
 package com.nurikiri.controller;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +25,18 @@ import lombok.extern.log4j.Log4j;
 public class StoreManagerController {
 	@Autowired
 	private StoreManagerService service;
+	
+	@ModelAttribute("searchTypes")
+	public Map<String, String> searchTypes() {
+		Map<String, String> map = new LinkedHashMap<String, String>();
+		map.put("", "-- 검색대상선택 --");
+		map.put("T", "제목");
+		map.put("N", "번호");
+
+		return map;
+	}
+	
+	
 
 	@GetMapping("/list")
 	public void list(@ModelAttribute("cri") Criteria cri, Model model) {

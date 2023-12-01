@@ -19,8 +19,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.nurikiri.domain.Criteria;
+import com.nurikiri.domain.ReviewVO;
 import com.nurikiri.domain.StoreVO;
 import com.nurikiri.domain.kakaomap.LocalResult;
+import com.nurikiri.mapper.ReviewMapper;
 import com.nurikiri.mapper.StoreMapper;
 
 import lombok.AllArgsConstructor;
@@ -35,6 +37,7 @@ public class StoreServiceImpl implements StoreService {
 	public static final String THUMBNAIL_UPLOAD_DIR = "C:/backend_workspace/Nurikiri_workspace/nurikiri/src/main/webapp/resources/images/store";
 
 	private StoreMapper mapper;
+	private ReviewMapper reviewmapper;
 
 	@Override
 	public List<StoreVO> getList(Criteria cri,Principal principal) {
