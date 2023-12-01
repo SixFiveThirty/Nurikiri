@@ -4,8 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../layouts/header.jsp"%>
 
-
-<center><h2 class="title">공지사항</h2></center>
+<br>
+<center><h2 class="title">공지사항</h2></center><br>
 <center><div class="desc">
 <p class="txt">누리끼리의 소식을 안내해 드립니다.</p>
 </div></center>
@@ -13,14 +13,14 @@
 
 <%@include file="../board/search_bar.jsp"%>
 
-<div class="mx-5">
+<div class = "container">
 	<table class="table table-striped table-hover">
 		<thead>
 			<tr>
-				<th style="width: 80px">No</th>
+				<th style="width: 60px">No</th>
 				<th>제목</th>
 				<th style="width: 120px">등록일</th>
-				<th style="width: 125px">작성자</th>
+				<th style="width: 110px">작성자</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -43,7 +43,6 @@
 	</div>
 	</sec:authorize>
 </div>
-
 
 	                                            
 
