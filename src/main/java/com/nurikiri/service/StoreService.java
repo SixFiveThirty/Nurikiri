@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.nurikiri.domain.Criteria;
+import com.nurikiri.domain.ReviewVO;
 import com.nurikiri.domain.StoreVO;
 
 public interface StoreService {
