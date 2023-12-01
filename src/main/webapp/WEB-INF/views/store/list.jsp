@@ -7,7 +7,7 @@
 <%@ include file="../layouts/header.jsp"%>
 
 
- <style>
+<style>
 .editor-card-list {
 	display: flex;
 }

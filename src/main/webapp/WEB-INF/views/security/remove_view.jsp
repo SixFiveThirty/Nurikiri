@@ -183,71 +183,48 @@ button.firstBtn:focus{
 <!-- Register Section Begin -->
 <div class="register-login-section spad">
 	<div class="container">
-	<br />
-			<div class="con mx-auto">
-				<h1>비밀번호 재확인</h1>
-				<form:form modelAttribute="member" cssClass="form" method="post" action="/security/changeState">
-				<input type="hidden" name="${_csrf.parameterName}"
-					value="${_csrf.token}" />
-				<div class="form-group">
-				<p>${member.username}</p>
-				
-				<input type="hidden" name="username" value="${member.username}" />
-				<input type="hidden" name="password" value="${member.password}"/>
-				<input type="hidden" name="isDeleted" value="${member.isDeleted}"/>
-					<form:label path="confirmedPassword">비밀번호</form:label>
-					<form:input path="confirmedPassword" cssClass="form-control" type="password"/>
-					<form:errors path="confirmedPassword" cssClass="errors" />
+
+		<div class="row">
+			<div class="col-lg-6 offset-lg-3">
+				<div class="login-form">
+					<h2>비밀번호 재확인</h2>
+					<form:form modelAttribute="member" cssClass="form" method="post"
+						action="/security/remove" onsubmit="return confirmSubmit();">
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
+						<div class="group-input">
+							<input type="hidden" name="username" value="${member.username}" />
+							<input type="hidden" name="password" value="${member.password}" />
+							<form:label path="confirmedPassword"></form:label>
+							<form:input path="confirmedPassword" cssClass="form-control"
+								type="password" />
+							<form:errors path="confirmedPassword" cssClass="errors" />
+						</div>
+
+						<div class="btn-group">
+							<div class="btn-container">
+								<button type="submit" name="remove" class="btn">
+									확인</button>
+							</div>
+
+							<div class="btn-container">
+								<a href="/security/profile" class="btn"> 취소 </a>
+							</div>
+						</div>
+					</form:form>
 				</div>
-			
-				
-			<div class="btn-group">
-					<div class="btn-container">
-						<button type="submit" class="btn form-control changeState"
-							data-username="${member.username}">
-							확인
-						</button>
-					</div>
-				
-					<div class="btn-container">
-							 <a href="/security/profile" class="btn form-control">
-						        취소
-						      </a>
-				     </div>
-			      </div>
-			</form:form>
+			</div>
 		</div>
 	</div>
-</div>
-	<form action="changeState" method="post" name="changeStateForm">
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
-		<input type="hidden" name="username" class="change_username" />
-		<input type="hidden" name="isDeleted" class="change_state" />
-	</form>
-	
-	
-	<script>
-	$(document).ready(async function() {
-		$('.changeState').click(function(){
-			if(!confirm('정말 삭제할까요?')) return;
-			const userName = $(this).data("username");
-			$(".change_username").val(userName);
-			$(".change_state").val('1');
-			console.log(userName);
-			document.forms.changeStateForm.submit();
-			
-		});
-	});
-	
-	
-    /*     function confirmSubmit() {
-            var confirmResult = confirm("정말 삭제하시겠습니까?");
 
- 
-            return confirmResult;
-        } */
-        
-        
-    </script>
+	<script>
+		function confirmSubmit() {
+			var confirmResult = confirm("정말 탈퇴하시겠습니까?");
+
+			return confirmResult;
+		}
+	</script>
+</div>
+>>>>>>> af572b50daf568b7b2de05ec276d8d271c80a715
 
 <%@ include file="../layouts/footer.jsp"%>
