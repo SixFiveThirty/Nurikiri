@@ -1,9 +1,3 @@
-/* const replyAddable = `
-	<button class="btn btn-light btn-sm reply-add-show-btn">
-		<i class="fa-solid fa-pen-to-square"></i> 답글
-	</button>
-`; */
-
 const reviewUpdatable = `
 <button class="btn btn-light btn-sm review-delete-btn">
 	<i class="fa-solid fa-times"></i> 삭제
@@ -24,7 +18,7 @@ function showUpdateReview(e) {
 	const template = createReviewEditTemplate(review);
 	const el = $(template);
 	reviewEl.find('.review-body').append(el);
-}
+};
 
 function createReviewTemplate(review, writer) {
 	return `
@@ -70,7 +64,7 @@ function createReviewEditTemplate(review) {
 
 async function createReview(sno, writer) {
 	const content = $('.new-review-content').val();
-	const rate =$('.new-review-rate').val();
+	const rate =$('.rating').val();
 	
 	if(!content){
 		alert('내용을 입력하세요.');
@@ -120,7 +114,7 @@ async function updateReview(reviewEl, writer) {
 	reviewEl.find('.btn-group').show();
 }
 
-// 댓글 수정 취소
+// 리뷰 수정 취소
 function cancelReviewUpdate(e) {
    const reviewEl = $(this).closest('.review');
    reviewEl.find('.review-content').show();
@@ -129,9 +123,9 @@ reviewEl.find('.review-edit-block').remove();
    reviewEl.find('.btn-group').show();
 }
 
-// 댓글 삭제
+// 리뷰 삭제
 async function deleteReview(e) {
-	if(!confirm('댓글을 삭제할까요?')) return;
+	if(!confirm('리뷰를 삭제할까요?')) return;
 	
 	const review = $(this).closest('.review')
    	const rno = review.data("rno");

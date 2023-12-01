@@ -1,5 +1,6 @@
 package com.nurikiri.service;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -17,7 +18,7 @@ public interface ReviewManagerService {
 	
 	public boolean remove(Long rno);
 	
-	public List<ReviewManagerVO> getList(Criteria cri);
+	public List<ReviewManagerVO> getList(Criteria cri, Principal principal);
 	
 	public int getTotal(Criteria cri);
 	

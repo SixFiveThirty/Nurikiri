@@ -1,5 +1,6 @@
 package com.nurikiri.service;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class ReviewManagerServiceImpl implements ReviewManagerService {
 	}
 
 	@Override
-	public List<ReviewManagerVO> getList(Criteria cri) {
+	public List<ReviewManagerVO> getList(Criteria cri, Principal principal) {
 		log.info("get List with citeria: " + cri);
 		return mapper.getListWithPaging(cri);
 	}

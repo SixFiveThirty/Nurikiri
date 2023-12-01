@@ -46,7 +46,7 @@ $(document).ready(async function() {
 
 </script>
 
-
+<div class="container">
 <h1 class="page-header">
 	<i class="fas fa-list"></i> 회원 목록
 </h1>
@@ -98,6 +98,7 @@ $(document).ready(async function() {
 		</c:forEach>
 	</tbody>
 </table>
+</div>
 <form action="remove" method="post" name="removeForm">
 	<input type="hidden" name="${_csrf.parameterName}"
 		value="${_csrf.token}" /> <input type="hidden" name="username"
