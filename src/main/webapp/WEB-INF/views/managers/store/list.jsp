@@ -41,7 +41,7 @@
                <td style="text-align: center;"><button onclick="location.href='/store/modify?sno=${store.sno}'">수정</button></td>
                <td style="text-align: center; width: 150px;"><button onclick="changeBtnName()">Y</button></td>
            </tr>
-          </c:forEach>
+        </c:forEach>
         </tbody>
     </table>
 </div>

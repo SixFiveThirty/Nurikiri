@@ -163,7 +163,6 @@
 <%@ include file="../common/pagination.jsp"%>
 
 <%@ include file="../layouts/footer.jsp"%>
- --%>
 <%-- <%@ include file="list_test.jsp"%> --%>
 
 
