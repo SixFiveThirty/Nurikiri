@@ -40,11 +40,11 @@ public class MypageController {
 	}
 	
 	@GetMapping("/review")
-	public void review(@ModelAttribute("cri") Criteria cri, Model model) {
+	public void review(@ModelAttribute("cri") Criteria cri, Principal principal, Model model) {
 		log.info("mypage_review page");
 		
 		int total = reviewservice.getTotal(cri);
-		model.addAttribute("list", reviewservice.getList(cri));
+		model.addAttribute("list", reviewservice.getList(cri, principal));
 		model.addAttribute("pageMaker", new PageDTO(cri, total)); // 나중에 123 -> total로 수정한다고 하심.
 	}
 	

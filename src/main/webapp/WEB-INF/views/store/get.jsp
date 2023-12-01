@@ -15,7 +15,6 @@
 <script>
 //댓글 기본 URL 상수 - 전역 상수
 const REVIEW_URL = '/api/store/${param.sno}/review/';
-/* const REPLY_URL = '/api/store/${param.sno}/reply/'; */
 
 	$(document).ready(async function() {
 		$('.remove').click(function() {
@@ -28,34 +27,15 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 			document.forms.removeForm.submit();
 		});
 		
-
 		let sno = ${param.sno}; 	// 글번호
 		let writer = '${member.username}'; // 작성자(로그인 유저)
 				
-		loadReviews(sno, writer); 	// 댓글 목록 불러오기
+		loadReviews(sno, writer); 	// 리뷰 목록 불러오기
 		
-		// 댓글 추가 버튼 처리
+		// 리뷰 추가 버튼 처리
 		$('.review-add-btn').click(function(e) {
 			createReview(sno, writer);
 		});
-
-		// 댓글 수정, 삭제 버튼 처리 - 이벤트 버블링(이벤트 처리 위임)
-		// 댓글 수정 보기 버튼 클릭
-		$('.review-list').on('click', '.review-update-show-btn',showUpdateReview);
-				
-		console.log($('.review-update-show-btn'));
-		
-		// 수정 확인 버튼 클릭
-		$('.review-list').on('click', '.review-update-btn', function (e){
-			const el = $(this).closest('.review');
-			updateReview(el, writer);
-			
-			console.log('수정 확인', el);
-		});
-		
-		// 수정 취소 버튼 클릭
-		$('.review-list').on('click', '.review-update-cancel-btn', 
-			cancelReviewUpdate);
 
 		// 삭제 버튼 클릭
 		$('.review-list').on('click', '.review-delete-btn',
@@ -220,7 +200,6 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 		<button type="button" class="btn btn-light" style="width: 200px"
 			onclick="location.href='${cri.getLink('list')}'">목록</button>
 	</div>
-</div>
 
 <button type="button" class="btn btn-light mr-5" style="width: 200px"
 	onclick="uploadReceipt('${store.sno}')">리뷰
@@ -241,26 +220,14 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 	<div class="bg-light p-2 rounded my-5">
 		<div>${member.username == null ? '리뷰를 작성하려면 먼저 로그인하세요' : '리뷰 작성' }</div>
 		<div>
-			<fieldset class="rate new-review-rate">
-				<input type="radio" id="rating10" name="rating" value="10"><label
-					for="rating10" title="5점"></label> <input type="radio" id="rating9"
-					name="rating" value="9"><label class="half" for="rating9"
-					title="4.5점"></label> <input type="radio" id="rating8"
-					name="rating" value="8"><label for="rating8" title="4점"></label>
-				<input type="radio" id="rating7" name="rating" value="7"><label
-					class="half" for="rating7" title="3.5점"></label> <input
-					type="radio" id="rating6" name="rating" value="6"><label
-					for="rating6" title="3점"></label> <input type="radio" id="rating5"
-					name="rating" value="5"><label class="half" for="rating5"
-					title="2.5점"></label> <input type="radio" id="rating4"
-					name="rating" value="4"><label for="rating4" title="2점"></label>
-				<input type="radio" id="rating3" name="rating" value="3"><label
-					class="half" for="rating3" title="1.5점"></label> <input
-					type="radio" id="rating2" name="rating" value="2"><label
-					for="rating2" title="1점"></label> <input type="radio" id="rating1"
-					name="rating" value="1"><label class="half" for="rating1"
-					title="0.5점"></label>
-			</fieldset>
+			<span class="wrap-rating fs-18 cl11 pointer">
+				<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+				<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+				<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+				<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+				<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+				<input class="rating" type="hidden" name="rating">
+			</span>
 
 			<textarea class="form-control new-review-content" rows="3"
 				${member.username == null ? 'disabled' : '' }></textarea>
@@ -286,7 +253,8 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 	<div class="review-list"></div>
 </div>
 
-<%@ include file="get_test.jsp"%>
+<%-- <%@ include file="get_test.jsp"%> --%>
+</div>
 
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47527c077dd44e34b71ffb876f21b3cc&libraries=services"></script>
