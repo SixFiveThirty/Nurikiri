@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.ReviewManagerVO;
+import com.nurikiri.domain.ReviewVO;
 
 public interface ReviewManagerService {
 //	public void register(ReviewVO review) throws Exception;

@@ -56,8 +56,6 @@ $(document).ready(async function() {
 					<td style="text-align: center; width: 60px;">${review.rno}</td>
 					<td style="text-align: center; width: 150px;">${review.sno}</td>
 					<td style="text-align: center;"><a href="get?rno=${review.rno}"> ${review.content} </a></td>
-					<td style="text-align: center;"><a
-						href="get?rno=${review.rno}"> ${review.content} </a></td>
 					<td style="text-align: center; width: 150px;">${review.writer}</td>
 					<td style="text-align: center; width: 100px;"><fmt:formatDate
 							pattern="yyyy.MM.dd" value="${review.regDate}" /></td>

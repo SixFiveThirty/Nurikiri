@@ -17,7 +17,6 @@
 const REVIEW_URL = '/api/store/${param.sno}/review/';
 /* const REPLY_URL = '/api/store/${param.sno}/reply/'; */
 
-
 	$(document).ready(async function() {
 		$('.remove').click(function() {
 			// 클릭 이벤트 핸들러 함수
@@ -32,7 +31,7 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 
 		let sno = ${param.sno}; 	// 글번호
 		let writer = '${member.username}'; // 작성자(로그인 유저)
-		
+				
 		loadReviews(sno, writer); 	// 댓글 목록 불러오기
 		
 		// 댓글 추가 버튼 처리
@@ -63,9 +62,9 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 				deleteReview);		
 	});
 	
-	function uploadReceipt(src) {
-		console.log("값이 잘 받아지는지?", src);
-		$('#receiptModal .modal-content').load(src);
+	function uploadReceipt(sno) {
+		console.log("값이 잘 받아지는지?", sno);
+		$('#receiptModal .modal-content').load("receipt_popup?sno="+sno);
 		$('#receiptModal').modal();
 	}
 </script>
@@ -164,6 +163,15 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 	height: 400px;
 	border-radius: 5px;
 }
+
+.modal {
+	/* padding: 50%; */
+}
+.modal-dialog {
+	position: absolute;
+	top: 50%;
+	left: 35%;
+}
 </style>
 
 <div class="container">
@@ -214,17 +222,14 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 	</div>
 </div>
 
-<%-- <button type= "button" class="btn btn-light mr-5" style="width: 200px"
-onclick="location.href='${cri.getLink('receipt_popup')}&sno=${store.sno}'">리뷰 등록</button> --%>
 <button type="button" class="btn btn-light mr-5" style="width: 200px"
-	onclick="uploadReceipt('${cri.getLink('receipt_popup')}&sno=${store.sno}')">리뷰
+	onclick="uploadReceipt('${store.sno}')">리뷰
 	등록</button>
 
 
 <!-- 영수증 Modal 팝업창 -->
-<div id="receiptModal" tabindex="-1" role="dialog"
+<div class="modal fade" id="receiptModal" tabindex="-1" role="dialog"
 	aria-labelledby="historyModalLabel" aria-hidden="true">
-	>
 	<div class="modal-dialog modal-xl" role="document">
 		<div class="modal-content"></div>
 	</div>
@@ -280,6 +285,8 @@ onclick="location.href='${cri.getLink('receipt_popup')}&sno=${store.sno}'">리�
 	<hr>
 	<div class="review-list"></div>
 </div>
+
+<%@ include file="get_test.jsp"%>
 
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47527c077dd44e34b71ffb876f21b3cc&libraries=services"></script>

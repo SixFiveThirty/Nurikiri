@@ -19,12 +19,11 @@
 			<include refid="criteria"></include>
 		</where>
 		<include refid="sort" />
-		
 		limit #{offset} , #{amount}
 	</select>
 
 	<select id="getListWithPaging" resultType="StoreVO">
-		select * from view_store 
+		select * from view_store_reviews_bookmarks
 		<where>
 			<include refid="criteria"></include>
 		</where>

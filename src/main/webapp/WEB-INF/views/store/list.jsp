@@ -3,11 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-
 <%@ include file="../layouts/header.jsp"%>
 
 
-<%-- <style>
+<style>
 .editor-card-list {
 	display: flex;
 }
@@ -16,7 +15,7 @@
 	
 }
 
-.editor-link {
+.e
 	width: 100%;
 	height: 200px;
 	background-color: #dddddd;
@@ -161,10 +160,10 @@
 
 </div>
 <%@ include file="../common/pagination.jsp"%>
-
 <%@ include file="../layouts/footer.jsp"%>
- --%>
-<%@ include file="list_test.jsp"%>
+ 
+<%-- <%@ include file="list_test.jsp"%> --%>
+
 
 
 
