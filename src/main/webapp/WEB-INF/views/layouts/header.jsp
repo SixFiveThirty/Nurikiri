@@ -18,8 +18,8 @@
 <link rel="stylesheet" type="text/css" href="/resources/vendor/css-hamburgers/hamburgers.min.css">
 
 <!--===============================================================================================-->	
-<!-- 	<script src="/resources/vendor/jquery/jquery-3.2.1.min.js"></script> -->
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js">
+<script src="/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"> -->
 <!--===============================================================================================-->
 	<script src="/resources/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
