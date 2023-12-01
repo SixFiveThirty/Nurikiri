@@ -40,7 +40,7 @@
 <!--===============================================================================================-->
 
 <!--===============================================================================================-->	
-	<!-- <script src="/resources/vendor/jquery/jquery-3.2.1.min.js"></script> -->
+<!-- <script src="/resources/vendor/jquery/jquery-3.2.1.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <!--===============================================================================================-->
 	<script src="/resources/vendor/animsition/js/animsition.min.js"></script>
@@ -140,6 +140,7 @@
 		});
 	</script>
 <script defer src="/resources/js/main.js"></script>
+<script src="/resources/js/number.js"></script>
 
 <script>
 	$(document).ready(function() {
