@@ -1,6 +1,5 @@
 package com.nurikiri.service;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ public class BoardServiceImpl implements BoardService {
 	public void register(BoardVO board, List<MultipartFile> files, String username) throws Exception {
 		mapper.insertSelectKey(board);
 		Long bno = board.getBno();
-		board.setWriter(principal.getName());
+		board.setWriter(username);
 		
 		for(MultipartFile part : files) {
 			if(part.isEmpty()) continue;
