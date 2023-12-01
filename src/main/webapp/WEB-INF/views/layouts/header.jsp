@@ -16,37 +16,6 @@
 <link rel="stylesheet" href="/resources/css/main.css" />
 
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="/resources/images/icons/favicon.png"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/resources/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/resources/fonts/iconic/css/material-design-iconic-font.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/resources/fonts/linearicons-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/resources/vendor/animate/animate.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="/resources/vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/resources/vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/resources/vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="/resources/vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/resources/vendor/slick/slick.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/resources/vendor/MagnificPopup/magnific-popup.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/resources/css/util.css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
-<!--===============================================================================================-->
-
-<!--===============================================================================================-->	
 	<script src="/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 	<script src="/resources/vendor/animsition/js/animsition.min.js"></script>
@@ -93,7 +62,7 @@
 <!--===============================================================================================-->
 	<script src="/resources/vendor/sweetalert/sweetalert.min.js"></script>
 	<script>
-		$('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
+		$('.js-addwish-b2').on('click', function(e){
 			e.preventDefault();
 		});
 
@@ -145,15 +114,7 @@
 			})
 		});
 	</script>
-
-<!-- <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script> -->
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<script defer src="/resources/js/main.js"></script>
+<script src="/resources/js/main.js"></script>
 
 <script>
 	$(document).ready(function() {
@@ -278,7 +239,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->
 			<div class="logo-mobile">
-				<a href="index.html"><img src="/resources/images/logo.png"
+				<a href="/"><img src="/resources/images/logo.png"
 					alt="IMG-LOGO"></a>
 			</div>
 
