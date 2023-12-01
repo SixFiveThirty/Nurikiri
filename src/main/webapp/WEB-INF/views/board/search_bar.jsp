@@ -9,11 +9,10 @@
 
 
 
-
+<div class = "container">
 	<div class="d-flex justify-content-between align-items-center my-4">
 		<div class="mx-5">
 		전체 ${pageMaker.total} 건 </div>
-		<div class="mx-5">
 			<form:form id="searchForm" modelAttribute="cri" method="get" class="d-flex">
 				<form:hidden path="pageNum"/>
 				<form:hidden path="amount"/>
