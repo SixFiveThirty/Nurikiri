@@ -7,7 +7,7 @@
 <%@ include file="../layouts/header.jsp"%>
 
 
-<%-- <style>
+<style>
 .editor-card-list {
 	display: flex;
 }
@@ -163,8 +163,7 @@
 <%@ include file="../common/pagination.jsp"%>
 
 <%@ include file="../layouts/footer.jsp"%>
- --%>
-<%@ include file="list_test.jsp"%>
+<%-- <%@ include file="list_test.jsp"%> --%>
 
 
 
