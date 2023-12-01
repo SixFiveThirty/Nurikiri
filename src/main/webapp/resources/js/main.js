@@ -282,4 +282,4 @@ Number.prototype.formatBytes = function (decimals) {
     
    
     
-});(jQuery);
+})(jQuery);
