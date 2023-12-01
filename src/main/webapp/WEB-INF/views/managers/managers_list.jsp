@@ -27,7 +27,7 @@
 }
 
 </style>
-<br><br><h1 style="text-align: center">관리자 페이지</h1>
+<br><br><br><h1 style="text-align: center">관리자 페이지</h1>
 <div class="container">
 
 	<div class="top-div mt-5">

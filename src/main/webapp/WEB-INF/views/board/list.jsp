@@ -4,6 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../layouts/header.jsp"%>
 
+<style>
+#top a {      
+position:fixed; bottom:5px; right:15px; z-index:5;     
+font-size:30px; color:#fff; text-shadow:rgba(0, 0, 0, 0.3) 1px 1px 2px, rgba(0, 0, 0, 0.3) 0 0 10px;"}   
+</style>
 <br>
 <center><h2 class="title">공지사항</h2></center><br>
 <center><div class="desc">
@@ -43,6 +48,15 @@
 	</div>
 	</sec:authorize>
 </div>
+
+<!-- 위로 가는 버튼 -->
+<div id="top"><a href="#"><i class="fa fa-arrow-up"></i></a></div>
+<script>   
+ $('#top').click(function(){$('html, body').animate({scrollTop:0}, 'slow');});
+</script>
+<!-- // 위로 가는 버튼 --> 
+
+
 
 	                                            
 

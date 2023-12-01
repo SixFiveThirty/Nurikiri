@@ -12,8 +12,6 @@
 					<choose>
 						<when test="type == 'T'.toString()">
 							title like CONCAT('%', #{keyword}, '%') </when>
-						<when test="type == 'N'.toString()">
-							sno like CONCAT('%', #{keyword}, '%') </when>
 					</choose>
 				</trim>
 			</foreach>
