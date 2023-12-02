@@ -1,5 +1,7 @@
 package com.nurikiri.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,11 +28,12 @@ public class ReviewManagerController {
 	private ReviewManagerService service;
 
 	@GetMapping("/list")
-	public void list(@ModelAttribute("cri") Criteria cri, Model model) {
+	public void list(@ModelAttribute("cri") Criteria cri, Principal principal, Model model) {
 		log.info("list: " + cri);
-		model.addAttribute("list", service.getList(cri));
-
-		model.addAttribute("pageMaker", new PageDTO(cri, 123)); // 나중에 123 -> total로 수정한다고 하심.
+		int total = service.getTotal(cri);
+		
+		model.addAttribute("list", service.getList(cri, principal));
+		model.addAttribute("pageMaker", new PageDTO(cri, total)); // 나중에 123 -> total로 수정한다고 하심.
 	}
 
 	@GetMapping({ "/get" })
