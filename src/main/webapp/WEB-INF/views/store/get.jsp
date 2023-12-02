@@ -238,7 +238,7 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 
 <!--  리뷰 기능 구현 -->
 <c:if test="${member.username != store.owner }">
-	<div class="bg-light p-2 rounded my-5">
+	<div class="container bg-light p-2 rounded my-5">
 		<div>${member.username == null ? '리뷰를 작성하려면 먼저 로그인하세요' : '리뷰 작성' }</div>
 		<div>
 			<fieldset class="rate new-review-rate">
@@ -278,7 +278,7 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 	</div>
 </c:if>
 
-<div class="my-5">
+<div class="container my-5">
 	<h1 style="text-align: center;">
 		<i class="fa-regular fa-comments"></i>리뷰 목록
 	</h1>
