@@ -5,115 +5,47 @@
 
 <%@ include file="layouts/header.jsp"%>
 
-<script>
-	$(document).ready(function() {
-		$('.editor').click(function() {
-			document.forms.editorForm.submit();
-		});
-	})
-</script>
-
 <style>
-.editor-card-list {
-	display: flex;
-}
-
-.card {
-	border-color: #FEC25E;
-}
-
-.editor-link {
-	width: 100%;
-	height: 200px;
-	background-color: #dddddd;
-	text-align: center;
-}
-.card-body {
-	background-color: #FEC25E;
-	border-color: #FEC25E;
-}
-
-.card-text {
-	text-align: center;
-}
-.thumbnail {
-	height: 200px;
+.d-block {
+	width: 1350px;
+	height: 800px;
+	object-fit: cover;
 }
 </style>
 
 <div class="container">
-	<div class="recommend-part pb-5">
-		<p class="mx-5">에디터 추천</p>
-		<div class="editor-card-list">
-			<c:forEach var="editor" items="${getEditorListThree}">
-				<div class="card mx-5" style="width: 18rem;">
-					<a class="editor-link editor" href="/recommend/editor/get?eno=${editor.eno}">
-						<img src="/recommend/editor/image/thumbnail/${editor.eno}" class="card-img-top thumbnail" alt="..." />
+	<div id="carouselExampleIndicators" class="carousel slide"
+		data-ride="carousel">
+		<ol class="carousel-indicators">
+			<c:forEach items="${getEditorListThree}" varStatus="status">
+				<li data-target="#carouselExampleIndicators"
+					data-slide-to="${status.index}"
+					class="<c:if test="${status.first}">active</c:if>"></li>
+			</c:forEach>
+		</ol>
+
+		<div class="carousel-inner">
+			<c:forEach var="editor" items="${getEditorListThree}"
+				varStatus="status">
+				<div
+					class="carousel-item <c:if test="${status.first}">active</c:if>">
+					<a class="editor-link editor"
+						href="/recommend/editor/get?eno=${editor.eno}"> <img
+						class="d-block w-100"
+						src="/recommend/editor/image/thumbnail/${editor.eno}">
 					</a>
-					<div class="card-body">
-						<p class="card-text">${editor.title}</p>
-					</div>
 				</div>
 			</c:forEach>
 		</div>
-	</div>
-	<div class="recommend-part py-5">
-		<p class="mx-5">즐겨찾기 순 추천</p>
-		<div class="editor-card-list">
-			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#">
-				<img src="/resources/images/editor/image_prepare.png" class="card-img-top thumbnail" alt="..." />
-				</a>
-				<div class="card-body">
-					<p class="card-text">000 전통 시장</p>
-				</div>
-			</div>
-			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#">
-				<img src="/resources/images/editor/image_prepare.png" class="card-img-top thumbnail" alt="..." />
-				</a>
-				<div class="card-body">
-					<p class="card-text">000 전통 시장</p>
-				</div>
-			</div>
-			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#">
-				<img src="/resources/images/editor/image_prepare.png" class="card-img-top thumbnail" alt="..." />
-				</a>
-				<div class="card-body">
-					<p class="card-text">000 전통 시장</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="recommend-part py-5">
-		<p class="mx-5">별점 순 추천</p>
-		<div class="editor-card-list">
-			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#">
-				<img src="/resources/images/editor/image_prepare.png" class="card-img-top thumbnail" alt="..." />
-				</a>
-				<div class="card-body">
-					<p class="card-text">000 전통 시장</p>
-				</div>
-			</div>
-			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#">
-				<img src="/resources/images/editor/image_prepare.png" class="card-img-top thumbnail" alt="..." />
-				</a>
-				<div class="card-body">
-					<p class="card-text">000 전통 시장</p>
-				</div>
-			</div>
-			<div class="card mx-5" style="width: 18rem;">
-				<a class="editor-link" href="#">
-				<img src="/resources/images/editor/image_prepare.png" class="card-img-top thumbnail" alt="..." />
-				</a>
-				<div class="card-body">
-					<p class="card-text">000 전통 시장</p>
-				</div>
-			</div>
-		</div>
+		<a class="carousel-control-prev" href="#carouselExampleIndicators"
+			role="button" data-slide="prev"> <span
+			class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+			class="sr-only">Previous</span>
+		</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+			role="button" data-slide="next"> <span
+			class="carousel-control-next-icon" aria-hidden="true"></span> <span
+			class="sr-only">Next</span>
+		</a>
 	</div>
 </div>
 
