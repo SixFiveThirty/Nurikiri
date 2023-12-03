@@ -72,9 +72,9 @@ async function createReview(sno, writer) {
 		return;
 	}
 	
-	if(!rate){
+	if(rate==0){
 		alert('별점을 정해주세요.');
-		$('.new-review-rate').focus();
+		$('.rating').focus();
 		return;
 	}
 	
@@ -89,8 +89,9 @@ async function createReview(sno, writer) {
 	const reviewEl = createReviewTemplate(review, writer);
 	$('.review-list').prepend($(reviewEl));
 	$('.new-review-content').val(''); //기존에 입력된 것 clear 시켜줌.
-	$('.new-review-rate').val('');
+	$('.rating').val(0);
 	console.log(content);
+	console.log(rate);
 }
 
 async function updateReview(reviewEl, writer) {
