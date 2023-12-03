@@ -10,11 +10,9 @@
 <script src="/resources/js/review.js"><</script>
 <script src="/resources/js/rest.js"><</script>
 
-<link rel="stylesheet" href="/resources/css/starrate.css">
-
 <script>
 //댓글 기본 URL 상수 - 전역 상수
-const REVIEW_URL = '/api/store/${param.sno}/review/';
+const REVIEW_URL = '/api/store/review/';
 
 	$(document).ready(async function() {
 		$('.remove').click(function() {
@@ -27,10 +25,11 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 			document.forms.removeForm.submit();
 		});
 		
-		let sno = ${param.sno}; 	// 글번호
+		let sno = '${store.sno}'; 	// 글번호
 		let writer = '${member.username}'; // 작성자(로그인 유저)
-				
-		loadReviews(sno, writer); 	// 리뷰 목록 불러오기
+		let url = REVIEW_URL + '?sno=' + sno;
+		
+		loadReviews(sno, writer, url); 	// 리뷰 목록 불러오기
 		
 		// 리뷰 추가 버튼 처리
 		$('.review-add-btn').click(function(e) {
@@ -50,54 +49,53 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 </script>
 
 <c:if test="${not empty member.username}">
-
 	<style>
-.fa-heart {
-	cursor: pointer;
-}
-</style>
+		.fa-heart {
+			cursor: pointer;
+		}
+	</style>
 
 	<script src="/resources/js/rest.js"></script>
 
 	<script>
-	$(document).ready(function() {
-		let username = '${member.username}';
-		const BASE_URL = '/api/store/storeBookmark';
-	
-	//좋아요 추가
-	$('span.storeBookmark').on('click', '.fa-heart.fa-regular', async function(e){
-		let sno = parseInt($(this).data("sno"));
-		let storeBookmark = { sno, username };
-		console.log(storeBookmark);
+		$(document).ready(function() {
+			let username = '${member.username}';
+			const BASE_URL = '/api/store/storeBookmark';
 		
-		await rest_create(BASE_URL + "/add", storeBookmark);
+		//좋아요 추가
+		$('span.storeBookmark').on('click', '.fa-heart.fa-regular', async function(e){
+			let sno = parseInt($(this).data("sno"));
+			let storeBookmark = { sno, username };
+			console.log(storeBookmark);
+			
+			await rest_create(BASE_URL + "/add", storeBookmark);
+			
+			let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
+			console.log(storeBookmarkCount);
+			let count = parseInt(storeBookmarkCount.text());
+			storeBookmarkCount.text(count+1);
 		
-		let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
-		console.log(storeBookmarkCount);
-		let count = parseInt(storeBookmarkCount.text());
-		storeBookmarkCount.text(count+1);
-	
-	$(this)
-		.removeClass('fa-regular')
-		.addClass('fa-solid');
-	});
-	
-	//좋아요 제거
-	$('span.storeBookmark').on('click', '.fa-heart.fa-solid', async function(e){
-		let sno = parseInt($(this).data("sno"));
-		
-		await rest_delete(`\${BASE_URL}/delete?sno=\${sno}&username=\${username}`);
-
-		let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
-		console.log(storeBookmarkCount);
-		let count = parseInt(storeBookmarkCount.text());
-		storeBookmarkCount.text(count-1);
-	
 		$(this)
-			.removeClass('fa-solid')
-			.addClass('fa-regular');
+			.removeClass('fa-regular')
+			.addClass('fa-solid');
 		});
-	});
+		
+		//좋아요 제거
+		$('span.storeBookmark').on('click', '.fa-heart.fa-solid', async function(e){
+			let sno = parseInt($(this).data("sno"));
+			
+			await rest_delete(`\${BASE_URL}/delete?sno=\${sno}&username=\${username}`);
+	
+			let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
+			console.log(storeBookmarkCount);
+			let count = parseInt(storeBookmarkCount.text());
+			storeBookmarkCount.text(count-1);
+		
+			$(this)
+				.removeClass('fa-solid')
+				.addClass('fa-regular');
+			});
+		});
 	</script>
 </c:if>
 
@@ -202,8 +200,7 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 	</div>
 
 <button type="button" class="btn btn-light mr-5" style="width: 200px"
-	onclick="uploadReceipt('${store.sno}')">리뷰
-	등록</button>
+	onclick="uploadReceipt('${store.sno}')">리뷰	등록</button>
 
 
 <!-- 영수증 Modal 팝업창 -->
