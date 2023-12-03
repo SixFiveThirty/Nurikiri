@@ -8,7 +8,7 @@ import lombok.Data;
 public class ReviewVO {
 	private Long rno;
 	private Long sno;
-
+	private String imgSrc;
 	private String writer;
 	private String content;
 	private Date regDate;
