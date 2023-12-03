@@ -103,7 +103,7 @@
 				
 				<div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay=".5s">
 					<div class="blog-item">
-						<a class="store-link" href="${cri.getLink('get')}&sno=${store.sno}"> <img src="/resources/img/blog-3.jpg" class="img-fluid w-100 rounded-top" alt="" /></a>
+						<a class="store-link" href="${cri.getLink('get')}&sno=${store.sno}"> <img src="/store/image/thumbnail/${store.sno}" class="img-fluid w-100 rounded-top" alt="" /></a>
 						<div class="rounded-bottom bg-light">
 							<div class="d-flex justify-content-between p-4 pb-2">
 								<h4>${store.title}</h4>
