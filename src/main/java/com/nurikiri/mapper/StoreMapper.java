@@ -1,5 +1,6 @@
 package com.nurikiri.mapper;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
