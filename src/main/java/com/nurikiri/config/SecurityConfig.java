@@ -73,19 +73,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/store/modify",
 						"/board/modify",
 						"/board/register",
-						"/recommend/editor/modify").access("hasRole('ROLE_MANAGER')")
+						"/recommend/editor/modify").access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
 				.antMatchers(
-						"/managers/member/list",
-						"/managers/managers_list",
-						"/managers/review/get",
-						"/managers/review/list",
-						"/managers/store/get",
-						"/managers/store/list",
-						"/managers/store/modify",
-						"/managers/store/register",
-						"/recommend/editor/list",
-						"/store/modify",
-						"/recommend/editor/modify").access("hasRole('ROLE_ADMIN')");
+						"/managers/member/list").access("hasRole('ROLE_ADMIN')");
+//						"/managers/managers_list",
+//						"/managers/review/get",
+//						"/managers/review/list",
+//						"/managers/store/get",
+//						"/managers/store/list",
+//						"/managers/store/modify",
+//						"/managers/store/register",
+//						"/recommend/editor/list",
+//						"/store/modify",
+//						"/recommend/editor/modify").access("hasRole('ROLE_ADMIN')");
 
 		http.formLogin()
 			.loginPage("/security/login?error=login_required") // 로그인 안 했을 시 리다이렉트

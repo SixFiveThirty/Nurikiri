@@ -21,21 +21,6 @@ async function rest_message_get(url, param) {
   }
 }
 
-async function rest_receipt_post(url, param) {
-  try {
-    let res = await fetch(
-      url + new URLSearchParams({
-      	file: param,
-      }), {
-      	method: 'POST',
-      }
-    );
-    return await res.json();
-  } catch (e) {
-    console.log(e);
-  }
-}
-
 async function rest_auth_num_post(url, data) {
 	try {
 		let res = await fetch(url, {

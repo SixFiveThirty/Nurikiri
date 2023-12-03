@@ -13,6 +13,13 @@
 <link rel="stylesheet" href="/resources/css/starrate.css">
 
 <script>
+function uploadReceipt(sno) {
+	console.log("값이 잘 받아지는지?", sno);
+	$('#receiptModal .modal-content').load("receipt_popup?sno="+sno);
+	$('#receiptModal').modal();
+}
+
+
 //댓글 기본 URL 상수 - 전역 상수
 const REVIEW_URL = '/api/store/${param.sno}/review/';
 
@@ -41,12 +48,6 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 		$('.review-list').on('click', '.review-delete-btn',
 				deleteReview);		
 	});
-	
-	function uploadReceipt(sno) {
-		console.log("값이 잘 받아지는지?", sno);
-		$('#receiptModal .modal-content').load("receipt_popup?sno="+sno);
-		$('#receiptModal').modal();
-	}
 </script>
 
 <c:if test="${not empty member.username}">
@@ -146,11 +147,19 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 
 .modal {
 	/* padding: 50%; */
+	
 }
+
 .modal-dialog {
 	position: absolute;
 	top: 50%;
 	left: 35%;
+}
+
+.review-btn {
+	width: 150px;
+	background-color: #FDB54D;
+	text-align: center;
 }
 </style>
 
@@ -201,59 +210,102 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 			onclick="location.href='${cri.getLink('list')}'">목록</button>
 	</div>
 
-<button type="button" class="btn btn-light mr-5" style="width: 200px"
+	<button type="button" class="btn btn-light mr-5" style="width: 200px"
 	onclick="uploadReceipt('${store.sno}')">리뷰
 	등록</button>
-
-
-<!-- 영수증 Modal 팝업창 -->
-<div class="modal fade" id="receiptModal" tabindex="-1" role="dialog"
+	<!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#receiptModal">
+	<i class="fas fa-arrow-right"></i>
+	</a> -->
+	<!-- 영수증 Modal 팝업창 -->
+	<div class="modal fade" id="receiptModal" tabindex="-1" role="dialog"
 	aria-labelledby="historyModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-xl" role="document">
 		<div class="modal-content"></div>
 	</div>
 </div>
 
-
-<!--  리뷰 기능 구현 -->
-<c:if test="${member.username != store.owner }">
-	<div class="container bg-light p-2 rounded my-5">
-		<div>${member.username == null ? '리뷰를 작성하려면 먼저 로그인하세요' : '리뷰 작성' }</div>
-		<div>
-			<span class="wrap-rating fs-18 cl11 pointer">
-				<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-				<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-				<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-				<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-				<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-				<input class="rating" type="hidden" name="rating">
-			</span>
-
-			<textarea class="form-control new-review-content" rows="3"
-				${member.username == null ? 'disabled' : '' }></textarea>
-
-			<div class="text-right">
-				<button class="btn btn-primary btn-sm my-2">
-					<i class="fa-regular fa-image"></i> 사진 업로드
-				</button>
-				<button class="btn btn-primary btn-sm my-2 review-add-btn"
-					${member.username == null ? 'disabled' : '' }>
-					<i class="fa-regular fa-comment"></i> 리뷰 등록
-				</button>
+	<%-- <a class="dropdown-item review-btn" href="#" data-toggle="modal"
+		data-target="#receiptModal">
+		<button type="button">리뷰 등록</button>
+	</a>
+	<div class="modal fade" id="receiptModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">영수증 인증 팝업</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">x</span>
+					</button>
+				</div>
+				<form:form role="form" action="receipt_popup?_csrf=${_csrf.token}"
+					enctype="multipart/form-data">
+					<div class="modal-body">
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
+						<div class="form-group">
+							<div class="thumbnail_title">영수증 등록</div>
+							<input type="file" name="receipt" class="receipt" id="receipt"/>
+						</div>
+						<!-- <div class="modal-btn">
+							<button type="submit"
+								style="background-color: #dddddd; width: 100px;">확인</button>
+							<button type="button"
+								style="background-color: #dddddd; width: 100px;"
+								onclick="history.back()">취소</button>
+						</div> -->
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary" type="submit" data-dismiss="modal"
+							onclick="check('${store.sno}', '${member.username}')">확인</button>
+						<button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
+					</div>
+				</form:form>
 			</div>
 		</div>
+	</div> --%>
+
+
+	<!--  리뷰 기능 구현 -->
+	<c:if test="${member.username != store.owner }">
+		<div class="container bg-light p-2 rounded my-5">
+			<div>${member.username == null ? '리뷰를 작성하려면 먼저 로그인하세요' : '리뷰 작성' }</div>
+			<div>
+				<span class="wrap-rating fs-18 cl11 pointer"> <i
+					class="item-rating pointer zmdi zmdi-star-outline"></i> <i
+					class="item-rating pointer zmdi zmdi-star-outline"></i> <i
+					class="item-rating pointer zmdi zmdi-star-outline"></i> <i
+					class="item-rating pointer zmdi zmdi-star-outline"></i> <i
+					class="item-rating pointer zmdi zmdi-star-outline"></i> <input
+					class="rating" type="hidden" name="rating">
+				</span>
+
+				<textarea class="form-control new-review-content" rows="3"
+					${member.username == null ? 'disabled' : '' }></textarea>
+
+				<div class="text-right">
+					<button class="btn btn-primary btn-sm my-2">
+						<i class="fa-regular fa-image"></i> 사진 업로드
+					</button>
+					<button class="btn btn-primary btn-sm my-2 review-add-btn"
+						${member.username == null ? 'disabled' : '' }>
+						<i class="fa-regular fa-comment"></i> 리뷰 등록
+					</button>
+				</div>
+			</div>
+		</div>
+	</c:if>
+
+	<div class="container my-5">
+		<h1 style="text-align: center;">
+			<i class="fa-regular fa-comments"></i>리뷰 목록
+		</h1>
+		<hr>
+		<div class="review-list"></div>
 	</div>
-</c:if>
 
-<div class="container my-5">
-	<h1 style="text-align: center;">
-		<i class="fa-regular fa-comments"></i>리뷰 목록
-	</h1>
-	<hr>
-	<div class="review-list"></div>
-</div>
-
-<%-- <%@ include file="get_test.jsp"%> --%>
+	<%-- <%@ include file="get_test.jsp"%> --%>
 </div>
 
 <script type="text/javascript"
