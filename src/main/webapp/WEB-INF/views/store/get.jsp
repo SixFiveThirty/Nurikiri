@@ -203,8 +203,10 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 		</a>
 	</div>
 	<div class="foot-div mt-5">
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<button type="button" class="btn btn-light mr-5" style="width: 200px"
 			onclick="location.href='${cri.getLink('modify')}&sno=${store.sno}'">수정</button>
+		</sec:authorize>
 		<button type="button" class="btn btn-light" style="width: 200px"
 			onclick="location.href='${cri.getLink('list')}'">목록</button>
 	</div>

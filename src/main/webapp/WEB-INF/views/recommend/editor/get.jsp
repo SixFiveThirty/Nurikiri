@@ -79,12 +79,19 @@
 		</a>
 	</div>
 	<div class="foot-div mt-5">
-		<a href="${cri.getLinkWithEno('modify', editor.eno)}"><button
+		<sec:authorize access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')">
+		<a href="${cri.getLinkWithEno('modify', editor.eno)}">
+		<button
 				type="button" class="btn btn-light mr-5" style="width: 200px">수정</button></a>
+		</sec:authorize>
+		
 		<button type="button" class="btn btn-light mr-5" style="width: 200px"
 			onclick="location.href='/'">홈</button>
+			
+		<sec:authorize access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')">
 		<button type="button" class="btn btn-light" style="width: 200px"
 			onclick="location.href='list'">목록</button>
+		</sec:authorize>
 	</div>
 </div>
 
