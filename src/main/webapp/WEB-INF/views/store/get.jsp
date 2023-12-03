@@ -147,12 +147,11 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 
 .modal {
 	/* padding: 50%; */
-	
 }
 
 .modal-dialog {
 	position: absolute;
-	top: 50%;
+	top: 25%;
 	left: 35%;
 }
 
@@ -211,11 +210,8 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 	</div>
 
 	<button type="button" class="btn btn-light mr-5" style="width: 200px"
-	onclick="uploadReceipt('${store.sno}')">리뷰
-	등록</button>
-	<!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#receiptModal">
-	<i class="fas fa-arrow-right"></i>
-	</a> -->
+	onclick="uploadReceipt('${store.sno}')">리뷰 등록</button>
+	
 	<!-- 영수증 Modal 팝업창 -->
 	<div class="modal fade" id="receiptModal" tabindex="-1" role="dialog"
 	aria-labelledby="historyModalLabel" aria-hidden="true">
@@ -223,53 +219,9 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 		<div class="modal-content"></div>
 	</div>
 </div>
-
-	<%-- <a class="dropdown-item review-btn" href="#" data-toggle="modal"
-		data-target="#receiptModal">
-		<button type="button">리뷰 등록</button>
-	</a>
-	<div class="modal fade" id="receiptModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">영수증 인증 팝업</h5>
-					<button class="close" type="button" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">x</span>
-					</button>
-				</div>
-				<form:form role="form" action="receipt_popup?_csrf=${_csrf.token}"
-					enctype="multipart/form-data">
-					<div class="modal-body">
-						<input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" />
-						<div class="form-group">
-							<div class="thumbnail_title">영수증 등록</div>
-							<input type="file" name="receipt" class="receipt" id="receipt"/>
-						</div>
-						<!-- <div class="modal-btn">
-							<button type="submit"
-								style="background-color: #dddddd; width: 100px;">확인</button>
-							<button type="button"
-								style="background-color: #dddddd; width: 100px;"
-								onclick="history.back()">취소</button>
-						</div> -->
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-primary" type="submit" data-dismiss="modal"
-							onclick="check('${store.sno}', '${member.username}')">확인</button>
-						<button class="btn btn-primary" type="button" data-dismiss="modal">취소</button>
-					</div>
-				</form:form>
-			</div>
-		</div>
-	</div> --%>
-
-
 	<!--  리뷰 기능 구현 -->
 	<c:if test="${member.username != store.owner }">
-		<div class="container bg-light p-2 rounded my-5">
+		<div class="container bg-light p-2 rounded my-5" id="review">
 			<div>${member.username == null ? '리뷰를 작성하려면 먼저 로그인하세요' : '리뷰 작성' }</div>
 			<div>
 				<span class="wrap-rating fs-18 cl11 pointer"> <i
