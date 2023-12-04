@@ -1,5 +1,3 @@
-
-
 (function ($) {
     "use strict";
 
@@ -114,7 +112,7 @@
     [ Show / hide modal search ]*/
     $('.js-show-modal-search').on('click', function(){
         $('.modal-search-header').addClass('show-modal-search');
-        $(this).css('opacity','0');
+        $(this).css('opacity','1');
     });
 
     $('.js-hide-modal-search').on('click', function(){

@@ -119,11 +119,11 @@ public class EditorController {
 			src = new File(EditorServiceImpl.THUMBNAIL_UPLOAD_DIR, "image_prepare.png");
 		}
 		log.warn(src);
-		response.setHeader("Content-Type", "image/png");
+		response.setHeader("Content-Type", "image/jpg");
 		if(size.equals("thumbnail")) {
-			Thumbnails.of(src).size(250, 250).toOutputStream(response.getOutputStream());
+			Thumbnails.of(src).size(1350, 800).toOutputStream(response.getOutputStream());
 		} else {
-			Thumbnails.of(src).size(300, 300).toOutputStream(response.getOutputStream());
+			Thumbnails.of(src).size(1350, 800).toOutputStream(response.getOutputStream());
 		}
 	}
 }

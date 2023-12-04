@@ -59,9 +59,10 @@ $(document).ready(async function() {
 		<thead>
 			<tr>
 				<th style="width: 130px">유저 ID</th>
-				<th style="width: 130px">닉네임</th>
+				<th style="width: 130px">유저 닉네임</th>
 				<th>유저권한</th>
 				<th style="width: 130px">가입날짜</th>
+				<th style="width: 130px">회원정보 수정</th>
 				<th style="width: 130px">회원정보 삭제</th>
 			</tr>
 		</thead>
@@ -73,21 +74,27 @@ $(document).ready(async function() {
 						<td>${member.name}</td>
 						<td><select class="changeAuth">
 								<option value="" selected disable hidden>${member.auth}</option>
-								<option value="RULE_USER" data-username="${member.username}">USER</option>
-								<option value="RULE_MANAGER" data-username="${member.username}">MANAGER</option>
-								<option value="RULE_ADMIN" data-username="${member.username}">ADMIN</option>
+								<option value="ROLE_USER" data-username="${member.username}">USER</option>
+								<option value="ROLE_MANAGER" data-username="${member.username}">MANAGER</option>
+								<option value="ROLE_ADMIN" data-username="${member.username}">ADMIN</option>
 						</select></td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.regDate}" /></td>
-						<td><button type="button" class="btn btn-danger remove" data-username="${member.username}">
+						<td>
+							<button type="button" class="btn btn-light mr-5" data-username="${member.username}" style="width: 200px" onclick="location.href='/security/modify'">수정</button>
+						</td>
+						<td><button type="button" class="btn btn-danger changeState" data-username="${member.username}">
 								<i class="fas fa-trash-alt"></i> 삭제
 							</button></td>
+						<%-- <td><button type="button" class="btn btn-danger remove"
+							data-username="${member.username}">
+							<i class="fas fa-trash-alt"></i> 삭제
+						</button></td> --%>
 					</tr>
 				</c:if>
 			</c:forEach>
 		</tbody>
 	</table>
 </div>
-
 <form action="remove" method="post" name="removeForm">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <input type="hidden" name="username" class="delete_userName" /> <input type="hidden" name="pageNum" value="${cri.pageNum}" /> <input type="hidden" name="amount" value="${cri.amount}" /> <input type="hidden" name="type" value="${cri.type}" /> <input type="hidden" name="keyword" value="${cri.keyword}" />
 </form>

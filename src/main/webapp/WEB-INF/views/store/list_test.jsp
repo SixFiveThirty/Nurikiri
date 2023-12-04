@@ -83,7 +83,6 @@
 </c:if>
 <!-- Blog Start -->
 <%-- <div class="container-fluid py-5 container">
-	<div class="container py-5">
 		<div class="text-center mb-5 wow fadeInUp" data-wow-delay=".3s">
 			<h5 class="mb-2 px-3 py-1 text-dark rounded-pill d-inline-block border border-2 border-primary">누리끼리한</h5>
 			<h1 class="display-5">가맹점 찾기</h1>
@@ -144,75 +143,6 @@
 		</c:forEach>
 	</div>
 </div>
-	
-
-
-
-
-
-<!-- 	<div class="blog-item">
-						<img src="/resources/img/blog-3.jpg"
-							class="img-fluid w-100 rounded-top" alt="">
-						<div class="rounded-bottom bg-light">
-							<div class="d-flex justify-content-between p-4 pb-2">
-								<span class="pe-2 text-dark"><i class="fa fa-user me-2"></i>By
-									Admin</span> <span class="text-dark"><i
-									class="fas fa-calendar-alt me-2"></i>10 Feb, 2023</span>
-							</div>
-							<div class="px-4 pb-0">
-								<h4>How To Build A Cleaning Plan</h4>
-								<p>Lorem ipsum dolor sit amet consectur adip sed eiusmod
-									tempor.</p>
-							</div>
-							<div
-								class="p-4 py-2 d-flex justify-content-between bg-primary rounded-bottom blog-btn">
-								<a href="#" type="button" class="btn btn-primary border-0">Learn
-									More</a> <a href="#" class="my-auto text-dark"><i
-									class="fa fa-comments me-2"></i>23 Comments</a>
-							</div>
-						</div>
-					</div>
-					<div class="blog-item">
-						<img src="/resources/img/blog-2.jpg"
-							class="img-fluid w-100 rounded-top" alt="">
-						<div class="rounded-bottom bg-light">
-							<div class="d-flex justify-content-between p-4 pb-2">
-								<span class="pe-2 text-dark"><i class="fa fa-user me-2"></i>By
-									Admin</span> <span class="text-dark"><i
-									class="fas fa-calendar-alt me-2"></i>10 Feb, 2023</span>
-							</div>
-							<div class="px-4 pb-0">
-								<h4>How To Build A Cleaning Plan</h4>
-								<p>Lorem ipsum dolor sit amet consectur adip sed eiusmod tempor.</p>
-							</div>
-							<div class="p-4 py-2 d-flex justify-content-between bg-primary rounded-bottom blog-btn">
-								<a href="#" type="button" class="btn btn-primary border-0">Learn
-									More</a> <a href="#" class="my-auto text-dark"><i
-									class="fa fa-comments me-2"></i>23 Comments</a>
-							</div>
-						</div>
-					</div>
-					<div class="blog-item">
-						<img src="/resources/img/blog-1.jpg" class="img-fluid w-100 rounded-top" alt="">
-							<div class="rounded-bottom bg-light">
-								<div class="d-flex justify-content-between p-4 pb-2">
-									<span class="pe-2 text-dark"><i class="fa fa-user me-2"></i>By
-										Admin</span> <span class="text-dark"><i
-										class="fas fa-calendar-alt me-2"></i>10 Feb, 2023</span>
-								</div>
-								<div class="px-4 pb-0">
-									<h4>How To Build A Cleaning Plan</h4>
-									<p>Lorem ipsum dolor sit amet consectur adip sed eiusmod tempor.</p>
-								</div>
-								<div class="p-4 py-2 d-flex justify-content-between bg-primary rounded-bottom blog-btn">
-									<a href="#" type="button" class="btn btn-primary border-0">Learn
-										More</a> <a href="#" class="my-auto text-dark"><i
-										class="fa fa-comments me-2"></i>23 Comments</a>
-								</div>
-							</div>
-						</div> -->
-
-<!-- Blog End -->
 <%@ include file="../common/pagination.jsp"%>
 
 <%@ include file="../layouts/footer.jsp"%>
@@ -223,6 +153,4 @@
 <script src="../resources/lib/pestkit/wow/wow.min.js"></script>
 <script src="../resources/lib/pestkit/easing/easing.min.js"></script>
 <script src="../resources/lib/pestkit/waypoints/waypoints.min.js"></script>
-<script src="../resources/lib/pestkit/owlcarousel/owl.carousel.min.js"></script>
-<!-- Template Javascript -->
 <script src="/resources/js/main.js"></script>

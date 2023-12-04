@@ -14,18 +14,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.PageDTO;
-import com.nurikiri.service.ReviewManagerService;
+import com.nurikiri.service.StoreReviewService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/managers/review")
+@RequestMapping("/store/review")
 @AllArgsConstructor
-public class ReviewManagerController {
+public class StoreReviewController {
 	@Autowired
-	private ReviewManagerService service;
+	private StoreReviewService service;
 
 	@GetMapping("/list")
 	public void list(@ModelAttribute("cri") Criteria cri, Principal principal, Model model) {

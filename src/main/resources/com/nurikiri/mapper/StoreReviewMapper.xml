@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nurikiri.mapper.StoreReviewMapper">
+
+	<sql id="criteria">
+		<trim prefixOverrides="OR">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'S'.toString()">
+							sno like CONCAT('%',#{keyword},'%')
+						</when>
+						<when test="type == 'C'.toString()">
+							content like CONCAT('%',#{keyword},'%')
+						</when>
+						<when test="type == 'W'.toString()">
+							writer like CONCAT('%',#{keyword},'%') </when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+	<select id="getList" resultType="StoreReviewVO">
+		select * from store_review
+	</select>
+
+	<insert id="insert">
+		insert into store_review(sno, content, writer, rate)
+		values
+		(#{sno}, #{content}, #{writer}, #{rate})
+	</insert>
+
+	<insert id="insertSelectKey">
+		insert into store_review(sno, content, writer, rate)
+		values ((#{sno}, #{content}, #{writer}, #{rate})
+		<selectKey resultType="Long" keyProperty="rno"
+			keyColumn="rno" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<select id="read" resultType="StoreReviewVO">
+		select * from store_review where
+		rno = #{rno}
+	</select>
+
+	<delete id="delete">
+		delete from store_review where rno = #{rno}
+	</delete>
+
+	<select id="getListWithPaging" resultType="StoreReviewVO">
+		select * from store_review
+		<where>
+			<include refid="criteria"></include>
+		</where>
+		order by rno desc
+		limit #{offset}, #{amount}
+		<!-- 여기서 #{offset}은 #({pageNum} -1) * #{amount} 이며, 수식은 oracle은 되지만, mysql은 
+			불가해서 그런 것이다. -->
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from store_review
+		<where>
+			<include refid="criteria"></include>
+		</where>
+	</select>
+
+</mapper>

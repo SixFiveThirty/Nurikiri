@@ -12,12 +12,6 @@
 		<result property="regDate" column="reg_date" />
 		<result property="updateDate" column="update_date" />
 		<result property="rate" column="rate" />
-
-		<!-- <collection property="replyList" ofType="com.nurikiri.domain.ReplyVO"> 
-			<id property="rno" column="rno" /> <result property="cno" column="cno" /> 
-			<result property="content" column="r_content" /> <result property="writer" 
-			column="r_writer" /> <result property="regDate" column="r_reg_date" /> <result 
-			property="updateDate" column="r_update_date" /> </collection> -->
 	</resultMap>
 
 	<select id="readAll" resultMap="ReviewMap">

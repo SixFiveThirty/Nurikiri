@@ -25,7 +25,8 @@ import retrofit2.Response;
 @Service
 @AllArgsConstructor
 public class EditorServiceImpl implements EditorService {
-	public static final String THUMBNAIL_UPLOAD_DIR = "C:\\backend_workspace\\Nurikiri_workspace\\nurikiri\\src\\main\\webapp\\resources\\images\\editor";
+//	public static final String THUMBNAIL_UPLOAD_DIR = "C:\\backend_workspace\\Nurikiri_workspace\\nurikiri\\src\\main\\webapp\\resources\\images\\editor";
+	public static final String THUMBNAIL_UPLOAD_DIR = "/Users/jeonhayoon/nurikiri_image/editor";
 
 	private EditorMapper mapper;
 

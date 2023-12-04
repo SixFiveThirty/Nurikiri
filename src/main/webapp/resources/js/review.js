@@ -1,11 +1,5 @@
-/* const replyAddable = `
-	<button class="btn btn-light btn-sm reply-add-show-btn">
-		<i class="fa-solid fa-pen-to-square"></i> 답글
-	</button>
-`; */
-
 const reviewUpdatable = `
-<button class="btn btn-light btn-sm review-delete-btn">
+<button class="btn btn-secondary btn-sm review-delete-btn" style="height: auto">
 	<i class="fa-solid fa-times"></i> 삭제
 </button> `;
 
@@ -24,28 +18,30 @@ function showUpdateReview(e) {
 	const template = createReviewEditTemplate(review);
 	const el = $(template);
 	reviewEl.find('.review-body').append(el);
-}
+};
 
 function createReviewTemplate(review, writer) {
 	return `
 		<div class="review my-3" style="background: white; border-radius: 6px; border: 4px #CCCCCC solid" data-rno="${review.rno}" data-writer="${review.writer}">
-			<div class="review-title my-2 d-flex justify-content-between">
+			<div class="review-title mx-2 my-2 d-flex justify-content-between">
 				<div>
 					<strong class="writer">
-						<img src="/security/avatar/sm/admin" class="avatar-sm"> ${review.writer}
+						<img src="/security/avatar/sm/${review.writer}" class="avatar-sm"> ${review.writer}
 					</strong>
-					<div class="rate">
+					<div class="rate" style="color: #f9ba48">
 						<i class="fa-solid fa-star"></i> ${review.rate} 점
 					</div>
 					
 				</div>
-				<div class="btn-group">
+				<div>
 					<span class="text-muted mr-3 review-date"> 등록일: ${moment(review.regDate).format('YYYY-MM-DD hh:mm')} </span>
-					${writer && (writer == review.writer) ? reviewUpdatable : ''}
+					<div class="btn-group">
+						${writer && (writer == review.writer) ? reviewUpdatable : ''}
+					</div>
 				</div>
 			</div>
 			<div class="review-body mx-5 text-right">
-				<div class="review-content">${review.content}</div>
+				<a class="move review-content" href="review/get?rno=${review.rno}">${review.content}</a>
 			</div>
 			<div class="reply-list ml-5"></div>
 		</div>
@@ -70,7 +66,7 @@ function createReviewEditTemplate(review) {
 
 async function createReview(sno, writer) {
 	const content = $('.new-review-content').val();
-	const rate =$('.new-review-rate').val();
+	const rate =$('.rating').val();
 	
 	if(!content){
 		alert('내용을 입력하세요.');
@@ -78,9 +74,9 @@ async function createReview(sno, writer) {
 		return;
 	}
 	
-	if(!rate){
+	if(rate==0){
 		alert('별점을 정해주세요.');
-		$('.new-review-rate').focus();
+		$('.rating').focus();
 		return;
 	}
 	
@@ -95,8 +91,9 @@ async function createReview(sno, writer) {
 	const reviewEl = createReviewTemplate(review, writer);
 	$('.review-list').prepend($(reviewEl));
 	$('.new-review-content').val(''); //기존에 입력된 것 clear 시켜줌.
-	$('.new-review-rate').val('');
+	$('.rating').val(0);
 	console.log(content);
+	console.log(rate);
 }
 
 async function updateReview(reviewEl, writer) {
@@ -120,7 +117,7 @@ async function updateReview(reviewEl, writer) {
 	reviewEl.find('.btn-group').show();
 }
 
-// 댓글 수정 취소
+// 리뷰 수정 취소
 function cancelReviewUpdate(e) {
    const reviewEl = $(this).closest('.review');
    reviewEl.find('.review-content').show();
@@ -129,9 +126,9 @@ reviewEl.find('.review-edit-block').remove();
    reviewEl.find('.btn-group').show();
 }
 
-// 댓글 삭제
+// 리뷰 삭제
 async function deleteReview(e) {
-	if(!confirm('댓글을 삭제할까요?')) return;
+	if(!confirm('리뷰를 삭제할까요?')) return;
 	
 	const review = $(this).closest('.review')
    	const rno = review.data("rno");
@@ -141,7 +138,7 @@ async function deleteReview(e) {
 	review.remove();
 }
 
-async function loadReviews(sno, writer) {
+async function loadReviews(sno, writer, REVIEW_URL) {
    let reviews = [];
    
 	// API로 불러오기

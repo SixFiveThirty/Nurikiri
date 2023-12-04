@@ -40,7 +40,7 @@
 <!--===============================================================================================-->
 
 <!--===============================================================================================-->	
-	<!-- <script src="/resources/vendor/jquery/jquery-3.2.1.min.js"></script> -->
+<!-- <script src="/resources/vendor/jquery/jquery-3.2.1.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <!--===============================================================================================-->
 	<script src="/resources/vendor/animsition/js/animsition.min.js"></script>
@@ -140,6 +140,7 @@
 		});
 	</script>
 <script defer src="/resources/js/main.js"></script>
+<script src="/resources/js/number.js"></script>
 
 <script>
 	$(document).ready(function() {
@@ -220,7 +221,9 @@
 							<li><a href="/board/list">공지사항</a></li>
 							<li class="label1" data-label1="hot"><a href="/store/list">가맹점찾기</a></li>
 							<li><a href="/introduction/get">서비스소개</a></li>
-							<li><a href="/managers/managers_list">관리자</a></li>
+							<sec:authorize access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')">
+								<li><a href="/managers/managers_list">관리자</a></li>
+							</sec:authorize>
 						</ul>
 					</div>
 
@@ -311,7 +314,9 @@
 				<li><a href="/board/list">공지사항</a></li>
 				<li class="label1" data-label1="hot"><a href="/store/list">가맹점찾기</a></li>
 				<li><a href="/introduction/get">서비스소개</a></li>
+				<sec:authorize access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')">
 				<li><a href="/managers/managers_list">관리자</a></li>
+				</sec:authorize>
 			</ul>
 			<ul class="main-menu-m">
 				<li><a href="/board/list">공지사항</a></li>

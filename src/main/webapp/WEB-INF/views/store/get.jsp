@@ -10,12 +10,16 @@
 <script src="/resources/js/review.js"><</script>
 <script src="/resources/js/rest.js"><</script>
 
-<link rel="stylesheet" href="/resources/css/starrate.css">
-
 <script>
+function uploadReceipt(sno) {
+	console.log("값이 잘 받아지는지?", sno);
+	$('#receiptModal .modal-content').load("receipt_popup?sno="+sno);
+	$('#receiptModal').modal();
+}
+
+
 //댓글 기본 URL 상수 - 전역 상수
-const REVIEW_URL = '/api/store/${param.sno}/review/';
-/* const REPLY_URL = '/api/store/${param.sno}/reply/'; */
+const REVIEW_URL = '/api/store/review/';
 
 	$(document).ready(async function() {
 		$('.remove').click(function() {
@@ -28,96 +32,71 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 			document.forms.removeForm.submit();
 		});
 		
-
-		let sno = ${param.sno}; 	// 글번호
+		let sno = '${store.sno}'; 	// 글번호
 		let writer = '${member.username}'; // 작성자(로그인 유저)
-				
-		loadReviews(sno, writer); 	// 댓글 목록 불러오기
+		let url = REVIEW_URL + '?sno=' + sno;
 		
-		// 댓글 추가 버튼 처리
+		loadReviews(sno, writer, url); 	// 리뷰 목록 불러오기
+		
+		// 리뷰 추가 버튼 처리
 		$('.review-add-btn').click(function(e) {
 			createReview(sno, writer);
 		});
-
-		// 댓글 수정, 삭제 버튼 처리 - 이벤트 버블링(이벤트 처리 위임)
-		// 댓글 수정 보기 버튼 클릭
-		$('.review-list').on('click', '.review-update-show-btn',showUpdateReview);
-				
-		console.log($('.review-update-show-btn'));
-		
-		// 수정 확인 버튼 클릭
-		$('.review-list').on('click', '.review-update-btn', function (e){
-			const el = $(this).closest('.review');
-			updateReview(el, writer);
-			
-			console.log('수정 확인', el);
-		});
-		
-		// 수정 취소 버튼 클릭
-		$('.review-list').on('click', '.review-update-cancel-btn', 
-			cancelReviewUpdate);
 
 		// 삭제 버튼 클릭
 		$('.review-list').on('click', '.review-delete-btn',
 				deleteReview);		
 	});
-	
-	function uploadReceipt(sno) {
-		console.log("값이 잘 받아지는지?", sno);
-		$('#receiptModal .modal-content').load("receipt_popup?sno="+sno);
-		$('#receiptModal').modal();
-	}
 </script>
 
 <c:if test="${not empty member.username}">
-
 	<style>
-.fa-heart {
-	cursor: pointer;
-}
-</style>
+		.fa-heart {
+			cursor: pointer;
+		}
+	</style>
 
 	<script src="/resources/js/rest.js"></script>
 
 	<script>
-	$(document).ready(function() {
-		let username = '${member.username}';
-		const BASE_URL = '/api/store/storeBookmark';
-	
-	//좋아요 추가
-	$('span.storeBookmark').on('click', '.fa-heart.fa-regular', async function(e){
-		let sno = parseInt($(this).data("sno"));
-		let storeBookmark = { sno, username };
-		console.log(storeBookmark);
+		$(document).ready(function() {
+			let username = '${member.username}';
+			const BASE_URL = '/api/store/storeBookmark';
 		
-		await rest_create(BASE_URL + "/add", storeBookmark);
+		//좋아요 추가
+		$('span.storeBookmark').on('click', '.fa-heart.fa-regular', async function(e){
+			let sno = parseInt($(this).data("sno"));
+			let storeBookmark = { sno, username };
+			console.log(storeBookmark);
+			
+			await rest_create(BASE_URL + "/add", storeBookmark);
+			
+			let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
+			console.log(storeBookmarkCount);
+			let count = parseInt(storeBookmarkCount.text());
+			storeBookmarkCount.text(count+1);
 		
-		let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
-		console.log(storeBookmarkCount);
-		let count = parseInt(storeBookmarkCount.text());
-		storeBookmarkCount.text(count+1);
-	
-	$(this)
-		.removeClass('fa-regular')
-		.addClass('fa-solid');
-	});
-	
-	//좋아요 제거
-	$('span.storeBookmark').on('click', '.fa-heart.fa-solid', async function(e){
-		let sno = parseInt($(this).data("sno"));
-		
-		await rest_delete(`\${BASE_URL}/delete?sno=\${sno}&username=\${username}`);
-
-		let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
-		console.log(storeBookmarkCount);
-		let count = parseInt(storeBookmarkCount.text());
-		storeBookmarkCount.text(count-1);
-	
 		$(this)
-			.removeClass('fa-solid')
-			.addClass('fa-regular');
+			.removeClass('fa-regular')
+			.addClass('fa-solid');
 		});
-	});
+		
+		//좋아요 제거
+		$('span.storeBookmark').on('click', '.fa-heart.fa-solid', async function(e){
+			let sno = parseInt($(this).data("sno"));
+			
+			await rest_delete(`\${BASE_URL}/delete?sno=\${sno}&username=\${username}`);
+	
+			let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
+			console.log(storeBookmarkCount);
+			let count = parseInt(storeBookmarkCount.text());
+			storeBookmarkCount.text(count-1);
+		
+			$(this)
+				.removeClass('fa-solid')
+				.addClass('fa-regular');
+			});
+		});
 	</script>
 </c:if>
 
@@ -167,10 +146,17 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 .modal {
 	/* padding: 50%; */
 }
+
 .modal-dialog {
 	position: absolute;
-	top: 50%;
+	top: 25%;
 	left: 35%;
+}
+
+.review-btn {
+	width: 150px;
+	background-color: #FDB54D;
+	text-align: center;
 }
 </style>
 
@@ -215,78 +201,63 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 		</a>
 	</div>
 	<div class="foot-div mt-5">
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<button type="button" class="btn btn-light mr-5" style="width: 200px"
 			onclick="location.href='${cri.getLink('modify')}&sno=${store.sno}'">수정</button>
+		</sec:authorize>
 		<button type="button" class="btn btn-light" style="width: 200px"
 			onclick="location.href='${cri.getLink('list')}'">목록</button>
 	</div>
-</div>
-
-<button type="button" class="btn btn-light mr-5" style="width: 200px"
-	onclick="uploadReceipt('${store.sno}')">리뷰
-	등록</button>
-
-
-<!-- 영수증 Modal 팝업창 -->
-<div class="modal fade" id="receiptModal" tabindex="-1" role="dialog"
+	<button type="button" class="btn btn-light mr-5" style="width: 200px"
+	onclick="uploadReceipt('${store.sno}')">리뷰 등록</button>
+	
+	<!-- 영수증 Modal 팝업창 -->
+	<div class="modal fade" id="receiptModal" tabindex="-1" role="dialog"
 	aria-labelledby="historyModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-xl" role="document">
 		<div class="modal-content"></div>
 	</div>
 </div>
+	<!--  리뷰 기능 구현 -->
+	<c:if test="${member.username != store.owner }">
+		<div class="container bg-light p-2 rounded my-5" id="review">
+			<div>${member.username == null ? '리뷰를 작성하려면 먼저 로그인하세요' : '리뷰 작성' }</div>
+			<div>
+				<span class="wrap-rating fs-18 cl11 pointer"> <i
+					class="item-rating pointer zmdi zmdi-star-outline"></i> <i
+					class="item-rating pointer zmdi zmdi-star-outline"></i> <i
+					class="item-rating pointer zmdi zmdi-star-outline"></i> <i
+					class="item-rating pointer zmdi zmdi-star-outline"></i> <i
+					class="item-rating pointer zmdi zmdi-star-outline"></i> <input
+					class="rating" type="hidden" name="rating">
+				</span>
 
+				<textarea class="form-control new-review-content" rows="3"
+					${member.username == null ? 'disabled' : '' }></textarea>
 
-<!--  리뷰 기능 구현 -->
-<c:if test="${member.username != store.owner }">
-	<div class="bg-light p-2 rounded my-5">
-		<div>${member.username == null ? '리뷰를 작성하려면 먼저 로그인하세요' : '리뷰 작성' }</div>
-		<div>
-			<fieldset class="rate new-review-rate">
-				<input type="radio" id="rating10" name="rating" value="10"><label
-					for="rating10" title="5점"></label> <input type="radio" id="rating9"
-					name="rating" value="9"><label class="half" for="rating9"
-					title="4.5점"></label> <input type="radio" id="rating8"
-					name="rating" value="8"><label for="rating8" title="4점"></label>
-				<input type="radio" id="rating7" name="rating" value="7"><label
-					class="half" for="rating7" title="3.5점"></label> <input
-					type="radio" id="rating6" name="rating" value="6"><label
-					for="rating6" title="3점"></label> <input type="radio" id="rating5"
-					name="rating" value="5"><label class="half" for="rating5"
-					title="2.5점"></label> <input type="radio" id="rating4"
-					name="rating" value="4"><label for="rating4" title="2점"></label>
-				<input type="radio" id="rating3" name="rating" value="3"><label
-					class="half" for="rating3" title="1.5점"></label> <input
-					type="radio" id="rating2" name="rating" value="2"><label
-					for="rating2" title="1점"></label> <input type="radio" id="rating1"
-					name="rating" value="1"><label class="half" for="rating1"
-					title="0.5점"></label>
-			</fieldset>
-
-			<textarea class="form-control new-review-content" rows="3"
-				${member.username == null ? 'disabled' : '' }></textarea>
-
-			<div class="text-right">
-				<button class="btn btn-primary btn-sm my-2">
-					<i class="fa-regular fa-image"></i> 사진 업로드
-				</button>
-				<button class="btn btn-primary btn-sm my-2 review-add-btn"
-					${member.username == null ? 'disabled' : '' }>
-					<i class="fa-regular fa-comment"></i> 리뷰 등록
-				</button>
+				<div class="text-right">
+					<button class="btn btn-primary btn-sm my-2">
+						<i class="fa-regular fa-image"></i> 사진 업로드
+					</button>
+					<button class="btn btn-primary btn-sm my-2 review-add-btn"
+						${member.username == null ? 'disabled' : '' }>
+						<i class="fa-regular fa-comment"></i> 리뷰 등록
+					</button>
+				</div>
 			</div>
 		</div>
+	</c:if>
+
+	<div class="container my-5">
+		<h1 style="text-align: center;">
+			<i class="fa-regular fa-comments"></i>리뷰 목록
+		</h1>
+		<hr>
+		<div class="review-list"></div>
 	</div>
-</c:if>
 
-<div class="my-5">
-	<h1 style="text-align: center;">
-		<i class="fa-regular fa-comments"></i>리뷰 목록
-	</h1>
-	<hr>
-	<div class="review-list"></div>
+	<%-- <%@ include file="get_test.jsp"%> --%>
 </div>
-
-<%@ include file="get_test.jsp"%>
 
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47527c077dd44e34b71ffb876f21b3cc&libraries=services"></script>
