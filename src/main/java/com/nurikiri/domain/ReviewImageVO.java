@@ -10,7 +10,7 @@ public class ReviewImageVO {
 	
 	private String fileName;
 	
-	private int storeId;
+	private Long rno;
 	
 	private int userId;
 }

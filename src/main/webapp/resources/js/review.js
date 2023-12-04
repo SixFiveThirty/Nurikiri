@@ -22,7 +22,7 @@ function showUpdateReview(e) {
 	
 };
 
-function createReviewTemplate(review, writer) {
+function createReviewTemplate(review, writer, sno) {
 	return `
 		<div class="review my-3" style="background: white; border-radius: 6px; border: 4px #CCCCCC solid" data-rno="${review.rno}" data-writer="${review.writer}">
 			<div class="review-title mx-2 my-2 d-flex justify-content-between">
@@ -89,8 +89,9 @@ async function createReview(sno, writer) {
 	// REST로 등록
 	review = await rest_create(REVIEW_URL, review);
 	
+	
 	//등록 성공 후DOM처리
-	const reviewEl = createReviewTemplate(review, writer);
+	const reviewEl = createReviewTemplate(review, writer, sno);
 	$('.review-list').prepend($(reviewEl));
 	$('.new-review-content').val(''); //기존에 입력된 것 clear 시켜줌.
 	$('.rating').val(0);

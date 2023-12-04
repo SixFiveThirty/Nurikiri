@@ -50,21 +50,24 @@ const REVIEW_URL = '/api/store/review/';
 		/* 이미지 업로드 */
 		$("input[type='file']").on("change", function(e){
 			
+			if($(".imgDeleteBtn").length > 0){
+				deleteFile();
+			}
+			
 			let formData = new FormData();
 			let fileInput = $('input[name="uploadFile"]');
 			let fileList = fileInput[0].files;
 			let fileObj = fileList[0];
 			
-			/* 
+			
 			if(!fileCheck(fileObj.name, fileObj.size)){
 				return false;
 			}
-			 */
 			
 			formData.append("uploadFile", fileObj);
 			
 			$.ajax({
-				url: '/api/store/' + sno + '/review/uploadAjaxAction',
+				url: '/api/store/review/uploadAjaxAction',
 		    	processData : false,
 		    	contentType : false,
 		    	data : formData,
@@ -85,7 +88,7 @@ const REVIEW_URL = '/api/store/review/';
 		let maxSize = 10000000; //10MB	
 		
 		function fileCheck(fileName, fileSize){
-
+			console.log("filecheck작동");
 			if(fileSize >= maxSize){
 				alert("파일 사이즈 초과");
 				return false;
@@ -107,21 +110,56 @@ const REVIEW_URL = '/api/store/review/';
 				console.log("showuploadimage작동");
 				console.log(uploadResultArr);
 				if(!uploadResultArr || uploadResultArr.length == 0){return}
-				console.log("showuploadimage작동 되나연??");
+				console.log("showuploadimage작동 확인?");
 				let uploadResult = $("#uploadResult");
 				
 				let obj = uploadResultArr[0];
 				
 				let str = "";
 				
-				let fileCallPath = obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName;
+				let fileCallPath = encodeURIComponent(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName);
 				
 				str += "<div id='result_card'>";
-				str += "<img src='/api/store/" + sno + "/review/display?fileName=" + fileCallPath + "'>";
-				str += "<div class='imgDeleteBtn'>x</div>";
+				str += "<img src='/api/store/review/display?fileName=" + fileCallPath + "'>";
+				str += "<div class='imgDeleteBtn' data-file='"+ fileCallPath +"'>x</div>";
+				str += "<input type='hidden' name='imageList[0].fileName' value='"+ obj.fileName +"'>";
+				str += "<input type='hidden' name='imageList[0].uuid' value='"+ obj.uuid +"'>";
+				str += "<input type='hidden' name='imageList[0].uploadPath' value='"+ obj.uploadPath +"'>";		
 				str += "</div>";
 				
 				uploadResult.append(str);
+		}
+		
+		$("#uploadResult").on("click", ".imgDeleteBtn", function(e){
+			
+			deleteFile();
+			
+		});
+		
+		function deleteFile(){
+			
+			let targetFile = $(".imgDeleteBtn").data("file");
+			
+			let targetDiv = $("#result_card");
+			
+			$.ajax({
+				url: '/api/store/review/deleteFile',
+				data : {fileName : targetFile},
+				dataType : 'text',
+				type : 'POST',
+				success : function(result){
+					console.log(result);
+					targetDiv.remove();
+					$("input[type='file']").val("");
+					
+				},
+				error : function(result){
+					console.log(result);
+					
+					alert("파일을 삭제하지 못하였습니다.")
+				}
+	       });
+			
 		}
 	});
 </script>
@@ -354,6 +392,7 @@ const REVIEW_URL = '/api/store/review/';
 					<i class="fa-regular fa-comment"></i> 리뷰 등록
 				</button>
 			</div>
+		</div>
 		</div>
 	</c:if>
 
