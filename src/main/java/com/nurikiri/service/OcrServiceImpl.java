@@ -142,19 +142,19 @@ public class OcrServiceImpl implements OcrService {
 			System.out.println("vo : " + vo);
 			
 			request.setAttribute("msg", "영수증 인증 완료되었습니다.");
-			request.setAttribute("url", "/store/get?sno=" + sno);
+			request.setAttribute("url", "/store/get?sno=" + sno + "&state=success");
             return "alert";
 		} catch(DuplicateKeyException e) {
 			request.setAttribute("msg", "이미 인증된 영수증입니다.");
-			request.setAttribute("url", "/store/get?sno=" + sno);
+			request.setAttribute("url", "/store/get?sno=" + sno + "&state=fail");
             return "alert";
 		} catch(IOException e) {
 			request.setAttribute("msg", "영수증 분석에 실패했습니다.");
-			request.setAttribute("url", "/store/get?sno=" + sno);
+			request.setAttribute("url", "/store/get?sno=" + sno + "&state=fail");
             return "alert";
 		} catch(Exception e) {
 			request.setAttribute("msg", "영수증 인증에 실패했습니다.");
-			request.setAttribute("url", "/store/get?sno=" + sno);
+			request.setAttribute("url", "/store/get?sno=" + sno + "&state=fail");
             return "alert";
 		}
 	}

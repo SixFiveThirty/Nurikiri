@@ -2,8 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <script>
-	var msg = "<c:out value='${msg}'/>";
-	var url = "<c:out value='${url}'/>";
+	let msg = "${msg}";
+	let url = "${url}";
 	alert(msg);
 	location.href = url;
 </script>
