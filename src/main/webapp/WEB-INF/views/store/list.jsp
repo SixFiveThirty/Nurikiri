@@ -4,114 +4,113 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%-- <%@ include file="../layouts/header.jsp"%>
 
-<style>
-.editor-card-list {
-	display: flex;
-}
+<!-- <!-- <style> -->
+<!-- /* .editor-card-list { */ -->
+<!-- /* 	display: flex; */ -->
+<!-- /* } */ -->
 
-.card {
+<!-- /* .card { */ -->
 	
-}
+<!-- /* } */ -->
 
-.e
-	width: 100%;
-	height: 200px;
-	background-color: #dddddd;
-	text-align: center;
-}
+<!-- /* .e */ -->
+<!-- /* 	width: 100%; */ -->
+<!-- /* 	height: 200px; */ -->
+<!-- /* 	background-color: #dddddd; */ -->
+<!-- /* 	text-align: center; */ -->
+<!-- /* } */ -->
 
-.store-card-list {
-	display: flex;
-}
+<!-- /* .store-card-list { */ -->
+<!-- /* 	display: flex; */ -->
+<!-- /* } */ -->
 
-.store-link {
-	width: 100%;
-	height: 200px;
-	background-color: #dddddd;
-	text-align: center;
-}
+<!-- /* .store-link { */ -->
+<!-- /* 	width: 100%; */ -->
+<!-- /* 	height: 200px; */ -->
+<!-- /* 	background-color: #dddddd; */ -->
+<!-- /* 	text-align: center; */ -->
+<!-- /* } */ -->
 
-/* .editor-link > img {
-	width: 100%;
-	height: 100%;
-	border-color: #FEC25E;
-	background-color: #dddddd;
-	text-align: center;
-} */
+<!-- /* /* .editor-link > img { */ -->
+<!-- /* 	width: 100%; */ -->
+<!-- /* 	height: 100%; */ -->
+<!-- /* 	border-color: #FEC25E; */ -->
+<!-- /* 	background-color: #dddddd; */ -->
+<!-- /* 	text-align: center; */ -->
+<!-- /* } */ */ -->
 
-/* .card-img-top {
-	width: 100%;
-	height: 200px;
-	border-color: #FEC25E;
-	background-color: #dddddd;
-	text-align: center;
-} */
-.card-body {
-	background-color: #FEC25E;
-	border-color: #FEC25E;
-}
+<!-- /* /* .card-img-top { */ -->
+<!-- /* 	width: 100%; */ -->
+<!-- /* 	height: 200px; */ -->
+<!-- /* 	border-color: #FEC25E; */ -->
+<!-- /* 	background-color: #dddddd; */ -->
+<!-- /* 	text-align: center; */ -->
+<!-- /* } */ */ -->
+<!-- /* .card-body { */ -->
+<!-- /* 	background-color: #FEC25E; */ -->
+<!-- /* 	border-color: #FEC25E; */ -->
+<!-- /* } */ -->
 
-.card-text {
-	text-align: center;
-}
+<!-- /* .card-text { */ -->
+<!-- /* 	text-align: center; */ -->
+<!-- /* } */ -->
 
-.thumbnail {
-	height: 200px;
-}
-</style>
+<!-- /* .thumbnail { */ -->
+<!-- /* 	height: 200px; */ -->
+<!-- /* } */ -->
+<!-- </style> -->
 
-<c:if test="${not empty member.username}">
+<%-- <c:if test="${not empty member.username}"> --%>
 
-	<style>
-.fa-heart {
-	cursor: pointer;
-}
-</style>
+<!-- 	<style> -->
+<!-- /* .fa-heart { */ -->
+<!-- /* 	cursor: pointer; */ -->
+<!-- /* } */ -->
+<!-- <!-- </style> -->
 
-	<script src="/resources/js/rest.js"></script>
+<!-- <!-- 	<script src="/resources/js/rest.js"></script> -->
 
-	<script>		
-	$(document).ready(function() {
+<!-- <!-- 	<script>		 -->
+<!-- // 	$(document).ready(function() { -->
 				
-		let username = '${member.username}';
-		const BASE_URL = '/api/store/storeBookmark';
+<%-- // 		let username = '${member.username}'; --%>
+<!-- // 		const BASE_URL = '/api/store/storeBookmark'; -->
 	
-		//즐겨찾기 추가
-		$('span.storeBookmark').on('click', '.fa-heart.fa-regular', async function(e){
-		console.log()
-		let sno = parseInt($(this).data("sno"));
-		let storeBookmark = { sno, username };
-		console.log(storeBookmark);
+<!-- // 		//즐겨찾기 추가 -->
+<!-- // 		$('span.storeBookmark').on('click', '.fa-heart.fa-regular', async function(e){ -->
+<!-- // 		console.log() -->
+<!-- // 		let sno = parseInt($(this).data("sno")); -->
+<!-- // 		let storeBookmark = { sno, username }; -->
+<!-- // 		console.log(storeBookmark); -->
 		
-		await rest_create(BASE_URL + "/add", storeBookmark);
+<!-- // 		await rest_create(BASE_URL + "/add", storeBookmark); -->
 		
-		let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
-		console.log(storeBookmarkCount);
-		let count = parseInt(storeBookmarkCount.text());
-		storeBookmarkCount.text(count+1);
+<!-- // 		let storeBookmarkCount = $(this).parent().find(".storeBookmark-count"); -->
+<!-- // 		console.log(storeBookmarkCount); -->
+<!-- // 		let count = parseInt(storeBookmarkCount.text()); -->
+<!-- // 		storeBookmarkCount.text(count+1); -->
 	
-		$(this)
-		.removeClass('fa-regular')
-		.addClass('fa-solid');
-		});
+<!-- // 		$(this) -->
+<!-- // 		.removeClass('fa-regular') -->
+<!-- // 		.addClass('fa-solid'); -->
+<!-- // 		}); -->
 	
-		//즐겨찾기 제거	
-		$('span.storeBookmark').on('click', '.fa-heart.fa-solid', async function(e){
+<!-- // 		//즐겨찾기 제거	 -->
+<!-- // 		$('span.storeBookmark').on('click', '.fa-heart.fa-solid', async function(e){ -->
 			
-			let sno = parseInt($(this).data("sno"));
+<!-- // 			let sno = parseInt($(this).data("sno")); -->
 			
-			await rest_delete(`\${BASE_URL}/delete?sno=\${sno}&username=\${username}`);
+<%-- // 			await rest_delete(`\${BASE_URL}/delete?sno=\${sno}&username=\${username}`); --%>
 	
-			let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
-			console.log(storeBookmarkCount);
-			let count = parseInt(storeBookmarkCount.text());
-			storeBookmarkCount.text(count-1);
+<!-- // 			let storeBookmarkCount = $(this).parent().find(".storeBookmark-count"); -->
+<!-- // 			console.log(storeBookmarkCount); -->
+<!-- // 			let count = parseInt(storeBookmarkCount.text()); -->
+<!-- // 			storeBookmarkCount.text(count-1); -->
 		
-			$(this)
-				.removeClass('fa-solid')
-				.addClass('fa-regular');
-		});
-		
+<!-- // 			$(this) -->
+<!-- // 				.removeClass('fa-solid') -->
+<!-- // 				.addClass('fa-regular'); -->
+<!-- // 		}); -->
 	});
 	</script>
 </c:if>

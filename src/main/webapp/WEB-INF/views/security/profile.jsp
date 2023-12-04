@@ -105,22 +105,25 @@ th, td {
 	width: 100%;
 }
 
+.profilecon{
+	padding-top: 72px;
+}
+
 .main-profile {
 	padding: 30px;
-	padding-top: 72px;l
+	padding-top: 72px;
 }
 
 .main-profile .main-info span {
-	font-size: 14px;
-	color: #fff;
-	background-color:#FEC25E;
-	padding: 8px 20px;
+	font-size: 18px;
+	color: #252525;
+	padding: 1px 0;
 	display: inline-block;
 	border-radius: 25px;
-	font-weight: 400;
+	font-weight: 700;
 	text-transform: capitalize;
 	letter-spacing: 0.5px;
-	margin-bottom: 15px;
+	margin-bottom: 5px;
 }
 
 .main-profile h2 {
@@ -131,6 +134,8 @@ th, td {
 }
 
 .main-profile .main-info h4 {
+	color: #252525;
+	font-weight: 1000;
 	margin-bottom: 20px;
 }
 
@@ -182,15 +187,29 @@ th, td {
 
 .clips .item .thumb {
 	position: relative;
+	border-radius: 23px;
 	margin-bottom: 15px;
+	border: 1px solid #D9D9D9;
+	padding: 30px 0;
+	background-color: #D9D9D9;
 }
+
+.clips .item .thumb:hover {
+	position: relative;
+	border-radius: 23px;
+	margin-bottom: 15px;
+	border: 1px solid #FEC25E;
+	padding: 30px 0;
+	background-color: #fff;
+    transition-duration: 0.3s;
+}
+
 
 .clips .item .thumb a {
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	background-color: #FEC25E;
 	border-radius: 23px;
 	display: inline-block;
 	text-align: center;
@@ -234,7 +253,7 @@ Responsive Style
 	<sec:authentication property="principal.member" var="member" />
 </sec:authorize>
 
- <div class="container">
+ <div class="container profilecon">
     <div class="row">
       <div class="col-lg-9">
         <div class="page-content">
@@ -251,11 +270,12 @@ Responsive Style
                   <div class="col-lg-4 align-self-center">
                     <div class="main-info header-text">
                       <span>안녕하세요!</span>
-                      <h4>${member.username} 님</h4>
+                      <h4>${member.name} 님</h4>
                     </div>
                   </div>
                   <div class="col-lg-4 align-self-center">
                     <ul>
+                      <li>아이디 <span>${member.username}</span></li>
                       <li>이메일 <span>${member.email}</span></li>
                       <li>전화 번호 <span>${member.phone}</span></li>
 <!--                       <li>즐겨찾기 수 <span>None</span></li> -->

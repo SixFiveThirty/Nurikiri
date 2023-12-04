@@ -46,6 +46,83 @@ const REVIEW_URL = '/api/store/review/';
 		// 삭제 버튼 클릭
 		$('.review-list').on('click', '.review-delete-btn',
 				deleteReview);		
+		
+		/* 이미지 업로드 */
+		$("input[type='file']").on("change", function(e){
+			
+			let formData = new FormData();
+			let fileInput = $('input[name="uploadFile"]');
+			let fileList = fileInput[0].files;
+			let fileObj = fileList[0];
+			
+			/* 
+			if(!fileCheck(fileObj.name, fileObj.size)){
+				return false;
+			}
+			 */
+			
+			formData.append("uploadFile", fileObj);
+			
+			$.ajax({
+				url: '/api/store/' + sno + '/review/uploadAjaxAction',
+		    	processData : false,
+		    	contentType : false,
+		    	data : formData,
+		    	type : 'POST',
+		    	dataType : 'json',
+		    	success : function(result){
+		    		console.log(result);
+		    		showUploadImage(result);
+		    	},
+		    	error : function(result){
+		    		alert("이미지 파일이 아닙니다.")
+		    	}
+			});	
+		});
+		
+		/* var, method related with attachFile */
+		let regex = new RegExp("(.*?)\\.(jpg|png)$");
+		let maxSize = 10000000; //10MB	
+		
+		function fileCheck(fileName, fileSize){
+
+			if(fileSize >= maxSize){
+				alert("파일 사이즈 초과");
+				return false;
+			}
+				  
+			if(!regex.test(fileName)){
+				alert("해당 종류의 파일은 업로드할 수 없습니다.");
+				return false;
+			}
+			
+			return true;		
+			
+		}
+		
+		/* 이미지 출력 */
+		function showUploadImage(uploadResultArr){
+			
+				/* 전달받은 데이터 검증 */
+				console.log("showuploadimage작동");
+				console.log(uploadResultArr);
+				if(!uploadResultArr || uploadResultArr.length == 0){return}
+				console.log("showuploadimage작동 되나연??");
+				let uploadResult = $("#uploadResult");
+				
+				let obj = uploadResultArr[0];
+				
+				let str = "";
+				
+				let fileCallPath = obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName;
+				
+				str += "<div id='result_card'>";
+				str += "<img src='/api/store/" + sno + "/review/display?fileName=" + fileCallPath + "'>";
+				str += "<div class='imgDeleteBtn'>x</div>";
+				str += "</div>";
+				
+				uploadResult.append(str);
+		}
 	});
 </script>
 
@@ -99,6 +176,37 @@ const REVIEW_URL = '/api/store/review/';
 		});
 	</script>
 </c:if>
+
+<style type="text/css">
+	#result_card img{
+		max-width: 100%;
+	    height: auto;
+	    display: block;
+	    padding: 5px;
+	    margin-top: 10px;
+	    margin: auto;	
+	}
+	#result_card {
+		position: relative;
+	}
+	.imgDeleteBtn{
+	    position: absolute;
+	    top: 0;
+	    right: 5%;
+	    background-color: #ef7d7d;
+	    color: wheat;
+	    font-weight: 900;
+	    width: 30px;
+	    height: 30px;
+	    border-radius: 50%;
+	    line-height: 26px;
+	    text-align: center;
+	    border: none;
+	    display: block;
+	    cursor: pointer;	
+	}
+	
+</style>
 
 <style>
 .top-div {
@@ -218,32 +326,33 @@ const REVIEW_URL = '/api/store/review/';
 		<div class="modal-content"></div>
 	</div>
 </div>
-	<!--  리뷰 기능 구현 -->
-	<c:if test="${member.username != store.owner }">
-		<div class="container bg-light p-2 rounded my-5" id="review">
-			<div>${member.username == null ? '리뷰를 작성하려면 먼저 로그인하세요' : '리뷰 작성' }</div>
-			<div>
-				<span class="wrap-rating fs-18 cl11 pointer"> <i
-					class="item-rating pointer zmdi zmdi-star-outline"></i> <i
-					class="item-rating pointer zmdi zmdi-star-outline"></i> <i
-					class="item-rating pointer zmdi zmdi-star-outline"></i> <i
-					class="item-rating pointer zmdi zmdi-star-outline"></i> <i
-					class="item-rating pointer zmdi zmdi-star-outline"></i> <input
-					class="rating" type="hidden" name="rating">
-				</span>
+<!--  리뷰 기능 구현 -->
+<c:if test="${member.username != store.owner }">
+	<div class="bg-light p-2 rounded my-5 form_section">
+		<div>${member.username == null ? '리뷰를 작성하려면 먼저 로그인하세요' : '리뷰 작성' }</div>
+		<div class="form_section_content">
+			<span class="wrap-rating fs-18 cl11 pointer">
+				<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+				<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+				<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+				<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+				<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+				<input class="rating" type="hidden" name="rating">
+			</span>
 
-				<textarea class="form-control new-review-content" rows="3"
-					${member.username == null ? 'disabled' : '' }></textarea>
-
-				<div class="text-right">
-					<button class="btn btn-primary btn-sm my-2">
-						<i class="fa-regular fa-image"></i> 사진 업로드
-					</button>
-					<button class="btn btn-primary btn-sm my-2 review-add-btn"
-						${member.username == null ? 'disabled' : '' }>
-						<i class="fa-regular fa-comment"></i> 리뷰 등록
-					</button>
-				</div>
+			<textarea class="form-control new-review-content" rows="3"
+				${member.username == null ? 'disabled' : '' }></textarea>
+			<input type="file" id ="fileItem" name='uploadFile' style="height: 30px;">
+ 			<div id="uploadResult">	
+			</div>
+			<div class="text-right">
+				<button class="btn btn-primary btn-sm my-2">
+					<i class="fa-regular fa-image"></i> 사진 업로드
+				</button>
+				<button class="btn btn-primary btn-sm my-2 review-add-btn"
+					${member.username == null ? 'disabled' : '' }>
+					<i class="fa-regular fa-comment"></i> 리뷰 등록
+				</button>
 			</div>
 		</div>
 	</c:if>

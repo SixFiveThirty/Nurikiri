@@ -18,6 +18,8 @@ function showUpdateReview(e) {
 	const template = createReviewEditTemplate(review);
 	const el = $(template);
 	reviewEl.find('.review-body').append(el);
+	
+	
 };
 
 function createReviewTemplate(review, writer) {
@@ -149,3 +151,4 @@ async function loadReviews(sno, writer, REVIEW_URL) {
 		$('.review-list').append(reviewEl);
 	}
 }
+
