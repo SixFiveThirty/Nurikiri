@@ -1,4 +1,3 @@
-
 <%@page import="com.nurikiri.domain.MemberVO"%>
 <%@page import="com.nurikiri.domain.AuthVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -48,45 +47,79 @@ $(document).ready(async function() {
 <div class="container">
 
 	<h1 class="page-header">
-		<i class="fas fa-list"></i> 회원 목록
+		<i class="fas fa-list center"></i> 회원 목록
 	</h1>
 
-	<%@ include file="../../common/search_bar.jsp"%>
+	<!-- Shoping Cart -->
+	<form class="bg0 p-t-75 p-b-85">
+		<div class="row">
+			<div class="">	
+				<div class="m-l-25 m-r--38 m-lr-0-xl">
+					<div class="wrap-table-shopping-cart">
+						<table class="table-shopping-cart">
+							<tr class="table_head">
+								<th class="column-1">유저 ID</th>
+								<th class="column-2">이름</th>
+								<th class="column-3">유저 권한</th>
+								<th class="column-4">가입날짜</th>	
+								<th class="column-5">회원정보 삭제</th>
+							</tr>
 
+							<tr class="table_row">
+								<td class="column-1">
+									<div class="how-itemcart1">
+										<img src="images/item-cart-04.jpg" alt="IMG">
+									</div>
+								</td>
+								<td class="column-2">Fresh Strawberries</td>
+								<td class="column-3">$ 36.00</td>
+								<td class="column-4">
+									<div class="wrap-num-product flex-w m-l-auto m-r-0">
+										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+											<i class="fs-16 zmdi zmdi-minus"></i>
+										</div>
 
+										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
 
-	<table class="table table-striped table-hover">
-		<thead>
-			<tr>
-				<th style="width: 130px">유저 ID</th>
-				<th style="width: 130px">닉네임</th>
-				<th>유저권한</th>
-				<th style="width: 130px">가입날짜</th>
-				<th style="width: 130px">회원정보 삭제</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="member" items="${list}">
-				<c:if test="${member.isDeleted eq '0'}">
-					<tr>
-						<td>${member.username}</td>
-						<td>${member.name}</td>
-						<td><select class="changeAuth">
-								<option value="" selected disable hidden>${member.auth}</option>
-								<option value="RULE_USER" data-username="${member.username}">USER</option>
-								<option value="RULE_MANAGER" data-username="${member.username}">MANAGER</option>
-								<option value="RULE_ADMIN" data-username="${member.username}">ADMIN</option>
-						</select></td>
-						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.regDate}" /></td>
-						<td><button type="button" class="btn btn-danger remove" data-username="${member.username}">
-								<i class="fas fa-trash-alt"></i> 삭제
-							</button></td>
-					</tr>
-				</c:if>
-			</c:forEach>
-		</tbody>
-	</table>
+										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+											<i class="fs-16 zmdi zmdi-plus"></i>
+										</div>
+									</div>
+								</td>
+								<td class="column-5">$ 36.00</td>
+							</tr>
+
+							<tr class="table_row">
+								<td class="column-1">
+									<div class="how-itemcart1">
+										<img src="images/item-cart-05.jpg" alt="IMG">
+									</div>
+								</td>
+								<td class="column-2">Lightweight Jacket</td>
+								<td class="column-3">$ 16.00</td>
+								<td class="column-4">
+									<div class="wrap-num-product flex-w m-l-auto m-r-0">
+										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+											<i class="fs-16 zmdi zmdi-minus"></i>
+										</div>
+
+										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product2" value="1">
+
+										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+											<i class="fs-16 zmdi zmdi-plus"></i>
+										</div>
+									</div>
+								</td>
+								<td class="column-5">$ 16.00</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
 </div>
+
 
 <form action="remove" method="post" name="removeForm">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <input type="hidden" name="username" class="delete_userName" /> <input type="hidden" name="pageNum" value="${cri.pageNum}" /> <input type="hidden" name="amount" value="${cri.amount}" /> <input type="hidden" name="type" value="${cri.type}" /> <input type="hidden" name="keyword" value="${cri.keyword}" />
@@ -102,7 +135,3 @@ $(document).ready(async function() {
 <%@ include file="../../common/pagination.jsp"%>
 
 <%@ include file="../../layouts/footer.jsp"%>
-
-<%@ include file="list_test.jsp"%>
-
-

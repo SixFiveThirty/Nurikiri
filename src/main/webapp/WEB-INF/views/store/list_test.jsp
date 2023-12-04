@@ -82,28 +82,49 @@
 	</script>
 </c:if>
 <!-- Blog Start -->
-<div class="container-fluid py-5">
+<%-- <div class="container-fluid py-5 container">
 	<div class="container py-5">
 		<div class="text-center mb-5 wow fadeInUp" data-wow-delay=".3s">
 			<h5 class="mb-2 px-3 py-1 text-dark rounded-pill d-inline-block border border-2 border-primary">누리끼리한</h5>
 			<h1 class="display-5">가맹점 찾기</h1>
 		</div>
 		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb justify-content-center mb-0 animated slideInDown">
-				<li class="breadcrumb-item"><a href="#">즐겨찾기 순</a></li>
-				<li class="breadcrumb-item"><a href="#">별점 순</a></li>
-				<li class="breadcrumb-item"><a href="#">리뷰 많은 순</a></li>
-				<li class="breadcrumb-item text-white" aria-current="page">상호명 순</li>
+			<ol class="breadcrumb justify-content-center mb-20 animated slideInDown">
+				<li class="breadcrumb-item"><a href="/store/list?keyword=${cri.keyword}&sort=bookmarkCount">즐겨찾기 순</a></li>
+				<li class="breadcrumb-item"><a href="/store/list?keyword=${cri.keyword}&sort=starCount">별점 순</a></li>
+				<li class="breadcrumb-item"><a href="/store/list?keyword=${cri.keyword}&sort=reviewCount">리뷰 순</a></li>
+				<li class="breadcrumb-item"><a href="/store/list?keyword=${cri.keyword}&sort=titleCount">상호명 순</a></li>
 			</ol>
-		</nav>
-	</div>
+		</nav> --%>
+		
+		<div class="container">
+			<div class="flex-w flex-sb-m p-b-22">
+				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"onclick="location.href='/store/list?keyword=${cri.keyword}&sort=bookmarkCount'">
+						즐겨찾기 순
+					</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=starCount'">
+						별점 순
+					</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=reviewCount'">
+						리뷰 순
+					</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=titleCount'">
+						상호명 순
+					</button>
+				</div>
+			</div>
+	
 	<div class="row g-5">
 		<c:forEach var="store" items="${list}">
 			<div class="col-xxl-3 col-lg-6 col-md-6 col-sm-12">
 				
 				<div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay=".5s">
 					<div class="blog-item">
-						<a class="store-link" href="${cri.getLink('get')}&sno=${store.sno}"> <img src="/resources/img/blog-3.jpg" class="img-fluid w-100 rounded-top" alt="" /></a>
+						<a class="store-link" href="${cri.getLink('get')}&sno=${store.sno}"> <img src="/resources/img/blog-1.jpg" class="img-fluid w-100 rounded-top" alt="" /></a>
 						<div class="rounded-bottom bg-light">
 							<div class="d-flex justify-content-between p-4 pb-2">
 								<h4>${store.title}</h4>
@@ -114,7 +135,7 @@
 								</span>
 							</div>
 						</div>
-						<div class="p-4 py-2 d-flex justify-content-between bg-primary rounded-bottom blog-btn">
+						<div class="p-4 py-2 mb-5 d-flex justify-content-between bg-primary rounded-bottom blog-btn">
 							<a><i class="fa fa-comments me-2"></i>${store.storeReviews} Comments</a>
 						</div>
 					</div>
@@ -196,8 +217,8 @@
 
 <%@ include file="../layouts/footer.jsp"%>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../resources/lib/pestkit/wow/wow.min.js"></script>
 <script src="../resources/lib/pestkit/easing/easing.min.js"></script>
