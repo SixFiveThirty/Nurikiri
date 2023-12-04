@@ -126,7 +126,7 @@
 		order by store_bookmarks desc
 		</if>
 		<if test="sort == 'reviewCount'">
-		order by store_review desc
+		order by store_count desc
 		</if>
 	</sql>
 

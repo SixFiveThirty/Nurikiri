@@ -1,13 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ include file="../../layouts/header.jsp"%>
 
 <script src="/resources/js/rest.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"> </script>
 <script src="/resources/js/comment.js"></script>
 <script src="/resources/js/reply.js"></script>
 
@@ -37,11 +35,13 @@
 	text-align: center;
 	justify-content: center;
 }
+
 .top {
 	width: 300px;
 	height: 300px;
 	border-radius: 5px;
 }
+
 .thumbnail-card {
 	width: 300px;
 	height: 300px;
@@ -61,8 +61,7 @@
 			<p>주소 : ${editor.address}</p>
 			<p>취급품목 : ${editor.item}</p>
 			<p>연락처 : ${editor.phone}</p>
-			<button type="button" class="btn btn-light btn-details" onclick="location.href='${editor.link}'">가맹점
-				상세보기</button>
+			<button type="button" class="btn btn-light btn-details" onclick="location.href='${editor.link}'">가맹점 상세보기</button>
 		</div>
 	</div>
 	<div class="mid-div mt-5">
@@ -75,33 +74,26 @@
 	</div>
 	<div>
 		<a id="load" href="https://map.kakao.com/link/to/카카오판교오피스,37.402056,127.108212">
-			<button type="button" class="btn btn-light mt-3 mb-5" style="width: 200px; float:right; background-color:#FEC25E;">길찾기</button>
+			<button type="button" class="btn btn-light mt-3 mb-5" style="width: 200px; float: right; background-color: #FEC25E;">길찾기</button>
 		</a>
 	</div>
 	<div class="foot-div mt-5">
 		<sec:authorize access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')">
-		<a href="${cri.getLinkWithEno('modify', editor.eno)}">
-		<button
-				type="button" class="btn btn-light mr-5" style="width: 200px">수정</button></a>
+			<a href="${cri.getLinkWithEno('modify', editor.eno)}">
+				<button type="button" class="btn btn-light mr-5" style="width: 200px">수정</button>
+			</a>
 		</sec:authorize>
-		
-		<button type="button" class="btn btn-light mr-5" style="width: 200px"
-			onclick="location.href='/'">홈</button>
-			
+
+		<button type="button" class="btn btn-light mr-5" style="width: 200px" onclick="location.href='/'">홈</button>
+
 		<sec:authorize access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')">
-		<button type="button" class="btn btn-light" style="width: 200px"
-			onclick="location.href='list'">목록</button>
+			<button type="button" class="btn btn-light" style="width: 200px" onclick="location.href='list'">목록</button>
 		</sec:authorize>
 	</div>
 </div>
 
 <form action="remove" method="post" name="removeForm">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-	<input type="hidden" name="eno" value="${editor.eno}" />
-	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
-	<input type="hidden" name="amount" value="${cri.amount}" />
-	<input type="hidden" name="type" value="${cri.type}" />
-	<input type="hidden" name="keyword" value="${cri.keyword}" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <input type="hidden" name="eno" value="${editor.eno}" /> <input type="hidden" name="pageNum" value="${cri.pageNum}" /> <input type="hidden" name="amount" value="${cri.amount}" /> <input type="hidden" name="type" value="${cri.type}" /> <input type="hidden" name="keyword" value="${cri.keyword}" />
 </form>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47527c077dd44e34b71ffb876f21b3cc&libraries=services"></script>

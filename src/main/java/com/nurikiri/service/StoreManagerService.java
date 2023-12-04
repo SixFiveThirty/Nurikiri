@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.StoreManagerVO;
 
-
 @Service
 public interface StoreManagerService {
 

@@ -36,9 +36,8 @@
 
 	<script src="/resources/js/rest.js"></script>
 
-	<script>		
+	<script>	
 	$(document).ready(function() {
-				
 		let username = '${member.username}';
 		const BASE_URL = '/api/store/storeBookmark';
 	
@@ -81,40 +80,33 @@
 	});
 	</script>
 </c:if>
-<!-- Blog Start -->
-<div class="container-fluid py-5 container">
-	<div class="container py-5">
-		<div class="text-center mb-5 wow fadeInUp" data-wow-delay=".3s">
-			<h5 class="mb-2 px-3 py-1 text-dark rounded-pill d-inline-block border border-2 border-primary">누리끼리한</h5>
-			<h1 class="display-5">가맹점 찾기</h1>
+
+<div class="container">
+	<div class="flex-w flex-sb-m p-b-22" id="selectSorts">
+		<div class="menu-desktop">
+			<ul class="main-menu">
+				<li><a href="/store/list?keyword=${cri.keyword}&sort=bookmarkCount">즐겨찾기 순</a></li>
+				<li><a href="/store/list?keyword=${cri.keyword}&sort=starCount">별점 순</a></li>
+				<li><a href="/store/list?keyword=${cri.keyword}&sort=reviewCount">리뷰 순</a></li>
+			</ul>
 		</div>
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb justify-content-center mb-0 animated slideInDown">
-				<li class="breadcrumb-item"><a href="#">즐겨찾기 순</a></li>
-				<li class="breadcrumb-item"><a href="#">별점 순</a></li>
-				<li class="breadcrumb-item"><a href="#">리뷰 많은 순</a></li>
-				<li class="breadcrumb-item text-white" aria-current="page">상호명 순</li>
-			</ol>
-		</nav>
 	</div>
+
 	<div class="row g-5">
 		<c:forEach var="store" items="${list}">
 			<div class="col-xxl-3 col-lg-6 col-md-6 col-sm-12">
-				
+
 				<div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay=".5s">
 					<div class="blog-item">
 						<a class="store-link" href="${cri.getLink('get')}&sno=${store.sno}"> <img src="/store/image/thumbnail/${store.sno}" class="img-fluid w-100 rounded-top" alt="" /></a>
 						<div class="rounded-bottom bg-light">
 							<div class="d-flex justify-content-between p-4 pb-2">
 								<h4>${store.title}</h4>
-								<span class="storeBookmark">
-									<i class="${store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart text-danger"
-									data-sno="${store.sno}"></i>
-								<span class="storeBookmark-count">${store.storeBookmarks}</span>
+								<span class="storeBookmark"> <i class="${store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart text-danger" data-sno="${store.sno}"></i> <span class="storeBookmark-count">${store.storeBookmarks}</span>
 								</span>
 							</div>
 						</div>
-						<div class="p-4 py-2 d-flex justify-content-between bg-primary rounded-bottom blog-btn">
+						<div class="p-4 py-2 mb-5 d-flex justify-content-between bg-primary rounded-bottom blog-btn">
 							<a><i class="fa fa-comments me-2"></i>${store.storeReviews} Comments</a>
 						</div>
 					</div>

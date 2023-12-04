@@ -1,6 +1,7 @@
 package com.nurikiri.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -15,5 +16,8 @@ public class ReviewVO {
 	private Date updateDate;
 	
 	private int rate;
+	
+	private List<ReviewImageVO> imageList;
+	
 
 }
