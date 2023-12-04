@@ -21,9 +21,15 @@ public class StoreManagerServiceImpl implements StoreManagerService{
 	@Override
 	public List<StoreManagerVO> storeManagerList(Criteria cri) {
 		log.info("get List" + cri);
-		return mapper.getListWithPaging(cri);
+		List<StoreManagerVO> list = mapper.getListWithPaging(cri);
+		return list;
 	}
 	
+	@Override
+	public void update(Long sno, String isDeleted){
+		log.info("update");
+		 mapper.update(sno, isDeleted);
+	}
 }
 
 	

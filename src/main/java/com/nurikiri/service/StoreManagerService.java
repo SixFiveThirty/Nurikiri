@@ -15,7 +15,8 @@ public interface StoreManagerService {
 	//public StoreManagerVO get(Long sno);
 	
 	public List<StoreManagerVO> storeManagerList(Criteria cri);
-
+	
+	public void update(Long sno, String isDeleted);
 	
 
 }
