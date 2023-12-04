@@ -14,8 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,11 +43,9 @@ public class OcrServiceImpl implements OcrService {
 	private final String clovaOcrApiKey = "eGhka2R4bWRpYU9UelR1VG16dG5rYnh3S1FIekxRVVA=";
 	
 	@Override
-	public String extractTextFromImage(MultipartFile part, Principal principal, Long sno) throws Exception {
-		
+	public String extractTextFromImage(MultipartFile part, Principal principal, Long sno, HttpServletRequest request) throws DuplicateKeyException, Exception, IOException {
 		File imageFile = new File(THUMBNAIL_UPLOAD_DIR, part.getOriginalFilename());
 		part.transferTo(imageFile);
-		
 		try {
 			URL url = new URL(clovaOcrApiUrl);
 			HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -140,10 +141,21 @@ public class OcrServiceImpl implements OcrService {
 			
 			System.out.println("vo : " + vo);
 			
-			return "redirect:/store/get?sno=" + sno;
+			request.setAttribute("msg", "영수증 인증 완료되었습니다.");
+			request.setAttribute("url", "/store/get?sno=" + sno);
+            return "alert";
+		} catch(DuplicateKeyException e) {
+			request.setAttribute("msg", "이미 인증된 영수증입니다.");
+			request.setAttribute("url", "/store/get?sno=" + sno);
+            return "alert";
+		} catch(IOException e) {
+			request.setAttribute("msg", "영수증 분석에 실패했습니다.");
+			request.setAttribute("url", "/store/get?sno=" + sno);
+            return "alert";
 		} catch(Exception e) {
-			System.out.println("에러 : " + e);
-			return "redirect:/store/list";
+			request.setAttribute("msg", "영수증 인증에 실패했습니다.");
+			request.setAttribute("url", "/store/get?sno=" + sno);
+            return "alert";
 		}
 	}
 	

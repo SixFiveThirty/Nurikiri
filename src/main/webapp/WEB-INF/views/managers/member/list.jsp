@@ -74,9 +74,9 @@ $(document).ready(async function() {
 					<td>${member.name}</td>
 					<td><select class="changeAuth">
 							<option value="" selected disable hidden>${member.auth}</option>
-							<option value="RULE_USER" data-username="${member.username}">USER</option>
-							<option value="RULE_MANAGER" data-username="${member.username}">MANAGER</option>
-							<option value="RULE_ADMIN" data-username="${member.username}">ADMIN</option>
+							<option value="ROLE_USER" data-username="${member.username}">USER</option>
+							<option value="ROLE_MANAGER" data-username="${member.username}">MANAGER</option>
+							<option value="ROLE_ADMIN" data-username="${member.username}">ADMIN</option>
 					</select></td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd"
 							value="${member.regDate}" /></td>

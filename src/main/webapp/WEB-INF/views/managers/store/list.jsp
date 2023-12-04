@@ -20,22 +20,17 @@ button.button_1:hover {
   background: #FDB54D;
 }
 
-
-td {
-  vertical-align : middle;
-}
-
 </style>
 
-<div class="container">
+
 
 <br><br><h2 style ="text-align: center">가맹점 관리 페이지</h2><br><br>
 
-<%@include file="../../board/search_bar.jsp"%>
+<%@include file="../store/search_bar.jsp"%>
 
 
-
-	<div class="mx-5">
+<div class="container">
+	<div class="mx-3">
 	   <table class="table table-hover">
 	       <thead>
 	           <tr>
@@ -72,7 +67,6 @@ function changeBtnName(e)  {
 	  btnElement.innerHTML = html;
 	}
 </script>
-
 
 
 

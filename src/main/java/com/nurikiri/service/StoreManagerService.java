@@ -12,7 +12,7 @@ import com.nurikiri.domain.StoreManagerVO;
 public interface StoreManagerService {
 
 	 //가맹점 리스트
-	//public StoreAdminVO get(Long sno);
+	//public StoreManagerVO get(Long sno);
 	
 	public List<StoreManagerVO> storeManagerList(Criteria cri);
 

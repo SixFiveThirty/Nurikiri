@@ -10,17 +10,17 @@
 	}
 </style>
 
-<div class="container">
-	<h5 style="text-align:center">영수증 인증 팝업</h5>
+<div class="container my-5">
+	<h5 class="mb-5" style="text-align:center">영수증 인증 팝업</h5>
 	<form:form role="form" action="receipt_popup?_csrf=${_csrf.token}" enctype="multipart/form-data">
 		<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />
 		<input type="hidden" name="sno" value="${sno}"/>
-		<div class="form-group">
+		<div class="container form-group ml-5">
 			<div class="thumbnail_title">영수증 등록</div>
 			<input type="file" name="receipt" class="receipt" />
 		</div>
-		<div class="modal-btn">
+		<div class="modal-btn mt-5">
 			<button type="submit"
 				style="background-color: #dddddd; width: 100px;">확인</button>
 			<button type="button"

@@ -7,6 +7,7 @@ import java.security.Principal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -44,47 +45,47 @@ public class StoreController {
 
 	@Autowired
 	private StoreService service;
-	
+
 	@Autowired
 	private OcrService ocrService;
-	
+
 	@GetMapping("/receipt_popup")
 	public void receiptPopup(@RequestParam("sno") Long sno, HttpSession session) {
 		log.info("sno값은? : " + sno);
 		log.info("Popup Test");
 		session.setAttribute("sno", sno);
 	}
-	
+
 	@PostMapping("/receipt_popup")
-	public String receiptPopup(MultipartFile receipt, Principal principal, Long sno) throws Exception {
+	public String receiptPopup(MultipartFile receipt, Principal principal, Long sno, HttpServletRequest request) throws Exception {
 		log.info("받은 파일? : " + receipt);
 		try {
-            String extractedText = ocrService.extractTextFromImage(receipt, principal, sno);
-            
+			String extractedText = ocrService.extractTextFromImage(receipt, principal, sno, request);
+
             log.info("성공 : " + extractedText);
-            
+
             return extractedText;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "Error processing the file.";
-        }
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "Error processing the file.";
+		}
 	}
-	
+
 	@PostMapping("/uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
-		
+
 	}
-	
+
 	@GetMapping("/list")
-	public void list(@ModelAttribute("cri") Criteria cri,Principal principal, Model model) {
-		System.out.println("vo:"+cri);
+	public void list(@ModelAttribute("cri") Criteria cri, Principal principal, Model model) {
+		System.out.println("vo:" + cri);
 		log.info("list");
 		int total = service.getTotal(cri);
 
-		model.addAttribute("list", service.getList(cri,principal));
+		model.addAttribute("list", service.getList(cri, principal));
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
-		
+
 	@GetMapping("/register")
 	public void register(@ModelAttribute("store") StoreVO store) {
 	}
@@ -93,59 +94,48 @@ public class StoreController {
 	public String register(StoreVO store, MultipartFile thumbnail, Errors errors) throws Exception {
 
 		log.info("register: " + store);
-		if(errors.hasErrors()) {
+		if (errors.hasErrors()) {
 			log.error("에러남" + errors);
 			return "store/register";
 		}
-		
+
 		service.register(store, thumbnail);
 		return "redirect:/store/list";
 	}
 
 	@GetMapping({ "/get", "/modify" })
-	public void get(
-			@RequestParam("sno") Long sno,
-			@ModelAttribute("cri") Criteria cri,
-			Principal principal,
+	public void get(@RequestParam("sno") Long sno, @ModelAttribute("cri") Criteria cri, Principal principal,
 			Model model) {
 
 		log.info("/get or modify");
-		model.addAttribute("store", service.get(sno,principal));
+		model.addAttribute("store", service.get(sno, principal));
 	}
 
 	@PostMapping("/modify")
-	public String modify(
-			@Valid @ModelAttribute("store") StoreVO store,
-			@ModelAttribute("cri") Criteria cri,
-			MultipartFile thumbnail,
-			Errors errors) throws Exception {
+	public String modify(@Valid @ModelAttribute("store") StoreVO store, @ModelAttribute("cri") Criteria cri,
+			MultipartFile thumbnail, Errors errors) throws Exception {
 		log.info("modify: " + store);
-			
-		if(errors.hasErrors()) {
+
+		if (errors.hasErrors()) {
 			return "store/modify";
 		}
-		
+
 		service.modify(store, thumbnail);
 		return "redirect:" + cri.getLinkWithSno("/store/get", store.getSno());
-		//return "redirect:/store/get";
 	}
-	
+
 	@PostMapping("/remove")
-	public String remove(
-			@RequestParam("sno") Long sno, 
-			@ModelAttribute("cri") Criteria cri,
-			RedirectAttributes rttr) {
-	
+	public String remove(@RequestParam("sno") Long sno, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+
 		log.info("remove");
 		if (service.remove(sno)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		
+
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
-//		return "redirect:/store/list" + cri.getLink();
 		return "redirect:/store/list";
 
 	}
@@ -159,19 +149,20 @@ public class StoreController {
 
 		return map;
 	}
-	
+
 	@GetMapping("/image/{size}/{sno}")
 	@ResponseBody
-	public void thumbnail(@PathVariable("size") String size, @PathVariable("sno") Long sno, Principal principal, HttpServletResponse response) throws IOException {
-		StoreVO store = service.get(sno,principal);
-		
+	public void thumbnail(@PathVariable("size") String size, @PathVariable("sno") Long sno, Principal principal,
+			HttpServletResponse response) throws IOException {
+		StoreVO store = service.get(sno, principal);
+
 		File src = new File(store.getImgSrc());
-		if(!src.exists()) {
+		if (!src.exists()) {
 			src = new File(StoreServiceImpl.THUMBNAIL_UPLOAD_DIR, "image_prepare.png");
 		}
 		log.warn(src);
 		response.setHeader("Content-Type", "image/png");
-		if(size.equals("thumbnail")) {
+		if (size.equals("thumbnail")) {
 			Thumbnails.of(src).size(250, 250).toOutputStream(response.getOutputStream());
 		} else {
 			Thumbnails.of(src).size(300, 300).toOutputStream(response.getOutputStream());

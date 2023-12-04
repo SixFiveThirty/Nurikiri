@@ -10,11 +10,16 @@
 <script src="/resources/js/review.js"><</script>
 <script src="/resources/js/rest.js"><</script>
 
-<link rel="stylesheet" href="/resources/css/starrate.css">
-
 <script>
+function uploadReceipt(sno) {
+	console.log("값이 잘 받아지는지?", sno);
+	$('#receiptModal .modal-content').load("receipt_popup?sno="+sno);
+	$('#receiptModal').modal();
+}
+
+
 //댓글 기본 URL 상수 - 전역 상수
-const REVIEW_URL = '/api/store/${param.sno}/review/';
+const REVIEW_URL = '/api/store/review/';
 
 	$(document).ready(async function() {
 		$('.remove').click(function() {
@@ -27,10 +32,11 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 			document.forms.removeForm.submit();
 		});
 		
-		let sno = ${param.sno}; 	// 글번호
+		let sno = '${store.sno}'; 	// 글번호
 		let writer = '${member.username}'; // 작성자(로그인 유저)
-				
-		loadReviews(sno, writer); 	// 리뷰 목록 불러오기
+		let url = REVIEW_URL + '?sno=' + sno;
+		
+		loadReviews(sno, writer, url); 	// 리뷰 목록 불러오기
 		
 		// 리뷰 추가 버튼 처리
 		$('.review-add-btn').click(function(e) {
@@ -118,68 +124,56 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 				uploadResult.append(str);
 		}
 	});
-
-	
-	function uploadReceipt(sno) {
-		console.log("값이 잘 받아지는지?", sno);
-		$('#receiptModal .modal-content').load("receipt_popup?sno="+sno);
-		$('#receiptModal').modal();
-	}
-	
 </script>
 
 <c:if test="${not empty member.username}">
-
 	<style>
-.fa-heart {
-	cursor: pointer;
-}
-</style>
+		.fa-heart {
+			cursor: pointer;
+		}
+	</style>
 
 	<script src="/resources/js/rest.js"></script>
 
 	<script>
-	$(document).ready(function() {
-		let username = '${member.username}';
-		const BASE_URL = '/api/store/storeBookmark';
-	
-	//좋아요 추가
-	$('span.storeBookmark').on('click', '.fa-heart.fa-regular', async function(e){
-		let sno = parseInt($(this).data("sno"));
-		let storeBookmark = { sno, username };
-		console.log(storeBookmark);
+		$(document).ready(function() {
+			let username = '${member.username}';
+			const BASE_URL = '/api/store/storeBookmark';
 		
-		await rest_create(BASE_URL + "/add", storeBookmark);
+		//좋아요 추가
+		$('span.storeBookmark').on('click', '.fa-heart.fa-regular', async function(e){
+			let sno = parseInt($(this).data("sno"));
+			let storeBookmark = { sno, username };
+			console.log(storeBookmark);
+			
+			await rest_create(BASE_URL + "/add", storeBookmark);
+			
+			let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
+			console.log(storeBookmarkCount);
+			let count = parseInt(storeBookmarkCount.text());
+			storeBookmarkCount.text(count+1);
 		
-		let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
-		console.log(storeBookmarkCount);
-		let count = parseInt(storeBookmarkCount.text());
-		storeBookmarkCount.text(count+1);
-	
-	$(this)
-		.removeClass('fa-regular')
-		.addClass('fa-solid');
-	});
-	
-	//좋아요 제거
-	$('span.storeBookmark').on('click', '.fa-heart.fa-solid', async function(e){
-		let sno = parseInt($(this).data("sno"));
-		
-		await rest_delete(`\${BASE_URL}/delete?sno=\${sno}&username=\${username}`);
-
-		let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
-		console.log(storeBookmarkCount);
-		let count = parseInt(storeBookmarkCount.text());
-		storeBookmarkCount.text(count-1);
-	
 		$(this)
-			.removeClass('fa-solid')
-			.addClass('fa-regular');
+			.removeClass('fa-regular')
+			.addClass('fa-solid');
 		});
-	});
-
+		
+		//좋아요 제거
+		$('span.storeBookmark').on('click', '.fa-heart.fa-solid', async function(e){
+			let sno = parseInt($(this).data("sno"));
+			
+			await rest_delete(`\${BASE_URL}/delete?sno=\${sno}&username=\${username}`);
 	
-	
+			let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
+			console.log(storeBookmarkCount);
+			let count = parseInt(storeBookmarkCount.text());
+			storeBookmarkCount.text(count-1);
+		
+			$(this)
+				.removeClass('fa-solid')
+				.addClass('fa-regular');
+			});
+		});
 	</script>
 </c:if>
 
@@ -260,10 +254,17 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 .modal {
 	/* padding: 50%; */
 }
+
 .modal-dialog {
 	position: absolute;
-	top: 50%;
+	top: 25%;
 	left: 35%;
+}
+
+.review-btn {
+	width: 150px;
+	background-color: #FDB54D;
+	text-align: center;
 }
 </style>
 
@@ -308,26 +309,23 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 		</a>
 	</div>
 	<div class="foot-div mt-5">
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<button type="button" class="btn btn-light mr-5" style="width: 200px"
 			onclick="location.href='${cri.getLink('modify')}&sno=${store.sno}'">수정</button>
+		</sec:authorize>
 		<button type="button" class="btn btn-light" style="width: 200px"
 			onclick="location.href='${cri.getLink('list')}'">목록</button>
 	</div>
-
-<button type="button" class="btn btn-light mr-5" style="width: 200px"
-	onclick="uploadReceipt('${store.sno}')">리뷰
-	등록</button>
-
-
-<!-- 영수증 Modal 팝업창 -->
-<div class="modal fade" id="receiptModal" tabindex="-1" role="dialog"
+	<button type="button" class="btn btn-light mr-5" style="width: 200px"
+	onclick="uploadReceipt('${store.sno}')">리뷰 등록</button>
+	
+	<!-- 영수증 Modal 팝업창 -->
+	<div class="modal fade" id="receiptModal" tabindex="-1" role="dialog"
 	aria-labelledby="historyModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-xl" role="document">
 		<div class="modal-content"></div>
 	</div>
 </div>
-
-
 <!--  리뷰 기능 구현 -->
 <c:if test="${member.username != store.owner }">
 	<div class="bg-light p-2 rounded my-5 form_section">
@@ -357,18 +355,17 @@ const REVIEW_URL = '/api/store/${param.sno}/review/';
 				</button>
 			</div>
 		</div>
+	</c:if>
+
+	<div class="container my-5">
+		<h1 style="text-align: center;">
+			<i class="fa-regular fa-comments"></i>리뷰 목록
+		</h1>
+		<hr>
+		<div class="review-list"></div>
 	</div>
-</c:if>
 
-<div class="my-5">
-	<h1 style="text-align: center;">
-		<i class="fa-regular fa-comments"></i>리뷰 목록
-	</h1>
-	<hr>
-	<div class="review-list"></div>
-</div>
-
-<%-- <%@ include file="get_test.jsp"%> --%>
+	<%-- <%@ include file="get_test.jsp"%> --%>
 </div>
 
 <script type="text/javascript"

@@ -214,7 +214,8 @@ th, td {
 	display: inline-block;
 	text-align: center;
 	line-height: 46px;
-	color: #666;
+	color: white;
+	padding: 0px 15px;
 }
 
 .clips .item h4 {

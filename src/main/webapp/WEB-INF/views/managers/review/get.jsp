@@ -56,7 +56,7 @@
 		<img src="/security/avatar/sm/${review.writer}" class="avatar-sm" style="width: 100%; height: 80%"> ${review.writer}
 		<div class="rate">
 			<i class="fa-solid fa-star"></i> ${review.rate}
-			</div>
+		</div>
 	</div>
 	<div>
 		<i class="fas fa-clock"></i>
