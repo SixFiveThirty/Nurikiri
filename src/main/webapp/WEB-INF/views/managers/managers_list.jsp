@@ -37,13 +37,13 @@
 
 	<div class="top-div mt-5">
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
-			<div class="card">
-				<a href="member/list" class="btn btn-light"> <i
-					class="fa-solid fa-user"></i> 회원 관리
-				</a>
-			</div>
-		</sec:authorize>
+		<div class="card">
+			<a href="member/list" class="btn btn-light"> <i class="fa-solid fa-user"></i> 회원 관리
+			</a>
+		</div>
 		<br>
+		</sec:authorize>
+		
 		<div class="card">
 			<a href="store/list" class="btn btn-light"> <i
 				class="fa-solid fa-store"></i> 가맹점 관리

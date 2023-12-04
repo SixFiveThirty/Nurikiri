@@ -10,28 +10,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nurikiri.domain.ReviewVO;
 import com.nurikiri.mapper.ReviewMapper;
 
 @RestController
-@RequestMapping("/api/store/{sno}/review")
+@RequestMapping("/api/store/review")
 public class ReviewController {
 	@Autowired
 	ReviewMapper mapper;
 
-	@GetMapping("")
-	public List<ReviewVO> readReviews(@PathVariable Long sno) {
+	@GetMapping("/")
+	public List<ReviewVO> readReviews(@RequestParam("sno") Long sno) {
 		return mapper.readAll(sno);
 	}
 
 	@GetMapping("/{rno}")
-	public ReviewVO readReview(@PathVariable Long sno, @PathVariable Long rno) {
+	public ReviewVO readReview(@RequestParam("sno") Long sno, @PathVariable Long rno) {
 		return mapper.get(rno);
 	}
 
-	@PostMapping("")
+	@PostMapping("/")
 	public ReviewVO create(@RequestBody ReviewVO vo) {
 		mapper.create(vo);
 		return mapper.get(vo.getRno());

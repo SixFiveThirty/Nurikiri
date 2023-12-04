@@ -1,5 +1,5 @@
 const reviewUpdatable = `
-<button class="btn btn-light btn-sm review-delete-btn">
+<button class="btn btn-secondary btn-sm review-delete-btn" style="height: auto">
 	<i class="fa-solid fa-times"></i> 삭제
 </button> `;
 
@@ -23,23 +23,25 @@ function showUpdateReview(e) {
 function createReviewTemplate(review, writer) {
 	return `
 		<div class="review my-3" style="background: white; border-radius: 6px; border: 4px #CCCCCC solid" data-rno="${review.rno}" data-writer="${review.writer}">
-			<div class="review-title my-2 d-flex justify-content-between">
+			<div class="review-title mx-2 my-2 d-flex justify-content-between">
 				<div>
 					<strong class="writer">
-						<img src="/security/avatar/sm/admin" class="avatar-sm"> ${review.writer}
+						<img src="/security/avatar/sm/${review.writer}" class="avatar-sm"> ${review.writer}
 					</strong>
-					<div class="rate">
+					<div class="rate" style="color: #f9ba48">
 						<i class="fa-solid fa-star"></i> ${review.rate} 점
 					</div>
 					
 				</div>
-				<div class="btn-group">
+				<div>
 					<span class="text-muted mr-3 review-date"> 등록일: ${moment(review.regDate).format('YYYY-MM-DD hh:mm')} </span>
-					${writer && (writer == review.writer) ? reviewUpdatable : ''}
+					<div class="btn-group">
+						${writer && (writer == review.writer) ? reviewUpdatable : ''}
+					</div>
 				</div>
 			</div>
 			<div class="review-body mx-5 text-right">
-				<div class="review-content">${review.content}</div>
+				<a class="move review-content" href="review/get?rno=${review.rno}">${review.content}</a>
 			</div>
 			<div class="reply-list ml-5"></div>
 		</div>
@@ -136,7 +138,7 @@ async function deleteReview(e) {
 	review.remove();
 }
 
-async function loadReviews(sno, writer) {
+async function loadReviews(sno, writer, REVIEW_URL) {
    let reviews = [];
    
 	// API로 불러오기

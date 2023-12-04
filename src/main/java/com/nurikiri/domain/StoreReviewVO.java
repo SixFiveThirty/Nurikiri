@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class ReviewManagerVO {
+public class StoreReviewVO {
 	private Long rno;
 	private Long sno;
 		

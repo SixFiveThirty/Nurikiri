@@ -80,5 +80,7 @@ public class Criteria {
         return getLink(base, pageNum) + "&bno=" + bno;
     }
     
-
+    public String getLinkWithRno(String base, Long rno) {
+        return getLink(base, pageNum) + "&rno=" + rno;
+    }
 }
