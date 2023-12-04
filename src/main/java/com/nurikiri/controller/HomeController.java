@@ -46,7 +46,7 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		model.addAttribute("getEditorListThree", editorService.getListThree());
 		
-		return "home_test"; //원래는 home임. 지금 프론트엔드 작업때문에 임시로 바꾼거임.
+		return "home";
 		
 	}
 	

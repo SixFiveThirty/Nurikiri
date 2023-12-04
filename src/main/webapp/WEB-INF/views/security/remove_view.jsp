@@ -225,6 +225,5 @@ button.firstBtn:focus{
 		}
 	</script>
 </div>
->>>>>>> af572b50daf568b7b2de05ec276d8d271c80a715
 
 <%@ include file="../layouts/footer.jsp"%>

@@ -29,10 +29,7 @@ public class StoreManagerController {
 	@ModelAttribute("searchTypes")
 	public Map<String, String> searchTypes() {
 		Map<String, String> map = new LinkedHashMap<String, String>();
-		map.put("", "-- 검색대상선택 --");
 		map.put("T", "제목");
-		map.put("N", "번호");
-
 		return map;
 	}
 	
