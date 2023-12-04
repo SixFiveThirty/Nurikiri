@@ -13,6 +13,8 @@ public interface StoreManagerMapper {
 	
 	public StoreManagerVO update(Long sno);
 	
+	public StoreManagerVO update(String isDeleted);
+	
 	
 	
 	

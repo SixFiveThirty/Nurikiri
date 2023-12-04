@@ -16,7 +16,7 @@
 			e.preventDefault();
 			actionForm.append('<input type = "hidden" name="sno"/>');
 			actionForm.find('input[name="sno"]').val($(this).attr('href'));
-			actionForm.attr('action', 'managers/store/list');
+			actionForm.attr('action', 'managers/store/get');
 			actionForm.submit();
 		}); */
 
