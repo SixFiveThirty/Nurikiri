@@ -30,12 +30,10 @@
 		#{sno}
 	</select>
 	
-	
 	<update id="update">
 	 update is_deleted = #{isDeleted}
 	 from store
-	 where sno = #{sno}
-	
+	 where sno = #{sno}	
 	</update>
 
 </mapper>
