@@ -115,7 +115,9 @@
 <!-- // 		}); -->
 <%-- 	});
 	</script>
-</c:if> --%>
+<<<<<<< HEAD
+</c:if>
+ --%>
 
 <%-- <div class="container">
 	<div>
