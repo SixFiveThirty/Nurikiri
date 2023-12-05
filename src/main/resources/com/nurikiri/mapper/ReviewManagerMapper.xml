@@ -10,8 +10,8 @@
 			<foreach item="type" collection="typeArr">
 				<trim prefix="OR">
 					<choose>
-						<when test="type == 'S'.toString()">
-							sno like CONCAT('%',#{keyword},'%')
+						<when test="type == 'T'.toString()">
+							title like CONCAT('%',#{keyword},'%')
 						</when>
 						<when test="type == 'C'.toString()">
 							content like CONCAT('%',#{keyword},'%')

@@ -7,34 +7,7 @@
 <script src="/resources/js/rest.js"></script>
 <script src="/resources/js/review.js"></script>
 
-<!-- <script>
-//리뷰 기본 URL 상수 - 전역 상수
-/* const REVIEW_URL = '/api/managers/${param.rno}/review/'; */
 
-$(document).ready(async function() {
-	$('.remove').click(function() {
-		if (!confirm('정말 삭제할까요?'))
-			return;
-		document.forms.removeForm.submit();
-	});
-	
-	let rno = 0;
-	let table = document.getElementById('listTable');
-	let rowList = table.rows;
-	
-	for(i=1; i<rowList.length; i++) {	//thread 부분 제외.
-		let row = rowList[i];
-		let tdsNum = row.childElementCount; //자식요소 갯수 구하기
-		rno = row.cells[0].innerHTML;
-	}
-	
-	let writer = '${member.username}'; //작성자(로그인 유저)
-	
-	const REVIEW_URL = '/api/store/{sno}/review'; //전역상수(리뷰 기본 URL 상수임.)
-	
-	loadReviews(sno, writer);
-});
-</script> -->
 <style>
 .column-1 {
 	white-space: nowrap;

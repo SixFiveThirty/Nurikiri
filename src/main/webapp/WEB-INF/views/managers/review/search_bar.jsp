@@ -22,7 +22,7 @@
 
 <div class="d-flex justify-content-between align-items-center my-4">
 
-		<form id='searchform' action="/mypage/reviews" method='get' class="d-flex">
+		<form id='searchform' action="/manager/review/list" method='get' class="d-flex">
 			<select name='type' class="form-select">
 				<option value="T">가맹점 상호명</option>
 				<option value="C">리뷰 내용</option>
