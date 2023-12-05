@@ -46,9 +46,8 @@
 	</insert>
 
 	<select id="read" resultType="StoreVO">
-		select * from view_store where sno
-		=
-		#{sno}
+		select * from view_store_reviews_bookmarks
+		where sno =	#{sno}
 	</select>
 
 
@@ -112,21 +111,20 @@
 	</sql>
 
 	<sql id="sort">
-		<if test="sort == null">
+	<if test="sort == null">
 		order by sno desc
 		</if>
-		<if test="sort == 'titleCount'">
-		order by title desc
+		<if test="sort == 'default'">
+		order by sno desc
 		</if>
-
 		<if test="sort == 'starCount'">
-		order by starAvg desc
+		order by avg_rate desc
 		</if>
 		<if test="sort == 'bookmarkCount'">
 		order by store_bookmarks desc
 		</if>
 		<if test="sort == 'reviewCount'">
-		order by store_count desc
+		order by review_count desc
 		</if>
 	</sql>
 
@@ -136,5 +134,5 @@
 		order by sno DESC
 		limit #{cri.offset}, #{cri.amount}
 	</select>
-	
+		
 </mapper>

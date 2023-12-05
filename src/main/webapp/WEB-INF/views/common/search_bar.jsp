@@ -34,7 +34,7 @@
 	-moz-appearance: none;
 	appearance: none
 }
-
+  
 .form-select:focus {
 	border-color: #fef880;
 	outline: 0;

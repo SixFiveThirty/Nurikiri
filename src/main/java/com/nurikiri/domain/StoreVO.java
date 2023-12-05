@@ -45,6 +45,8 @@ public class StoreVO {
 
 	private Boolean myStoreBookmark; // 즐겨찾기 여부
 	
-	private String storeReviews; // 리뷰 수
+	private int storeReviews; // 리뷰 수
+	
+	private float avgRate; // 가맹점 평점
 	
 }
