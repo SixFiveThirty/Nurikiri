@@ -42,8 +42,8 @@ const REVIEW_URL = '/api/store/review/';
 
 		// 삭제 버튼 클릭
 		$('.review-list').on('click', '.review-delete-btn',
-				deleteReview);		
-		
+				deleteReview);
+				
 		/* 이미지 업로드 */
 		$("input[type='file']").on("change", function(e){
 			
@@ -307,10 +307,16 @@ const REVIEW_URL = '/api/store/review/';
 
 <div class="container">
 	<div class="d-flex justify-content-between">
-		<h3>${store.title}</h3>
-
-		<span class="storeBookmark"> <i class="${ store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart	text-danger" data-sno="${store.sno}"></i> <span class="storeBookmark-count">${store.storeBookmarks}</span>
-		</span>
+    <h3>${store.title}</h3>
+		<div>
+			<span class="storeAvgRate mr-3">
+				<i class="fa-solid fa-star" style="color: #f9ba48"></i> ${store.avgRate} 점
+			</span>
+			<span class="storeBookmark ml-3"> 
+				<i class="${ store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart	text-danger"
+				data-sno="${store.sno}"></i> <span class="storeBookmark-count">${store.storeBookmarks}</span>
+			</span>
+		</div>
 	</div>
 
 	<div class="top-div mt-5">

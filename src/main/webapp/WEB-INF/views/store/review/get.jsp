@@ -21,21 +21,13 @@ async function deleteReviews(rno) {
 	window.history.back();
 }
 
-/* async function loadRate(rate) {
-	for(let i=0; i<5; i++){
-		<i class="zmdi zmdi-star"></i>
-	}
-} */
-
-/* let rno = '${review.rno}';
-let url = REVIEW_URL + '${review.rno}'; */
 	$(document).ready(async function() {		
 		let writer = '${member.username}'; // 작성자(로그인 유저)
 		
 		// 삭제 버튼 클릭
 		$('.review-list').on('click', '.review-delete-btn',	deleteReview);
 		
-		
+		// 별점 불러오기
 		var rating = $('.loadRate');
 
 		rating.each(function(){
