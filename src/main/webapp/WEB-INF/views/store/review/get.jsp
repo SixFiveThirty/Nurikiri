@@ -73,7 +73,6 @@ async function deleteReviews(rno) {
 </style>
 
 <div class="container">
-	<h3>리뷰 ${review.rno}</h3>
 	<div class="card">
 		<div class="card-thumbnail">
 			<img src="..." class="card-img-top" alt="..." />

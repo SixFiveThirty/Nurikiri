@@ -23,9 +23,14 @@
 		<div class="modal-btn mt-5">
 			<button type="submit"
 				style="background-color: #dddddd; width: 100px;">확인</button>
+			<!-- <button type="button"
+				style="background-color: #dddddd; width: 100px;"
+				onclick="history.back()">취소
+			</button> -->
 			<button type="button"
 				style="background-color: #dddddd; width: 100px;"
-				onclick="history.back()">취소</button>
+				data-dismiss="modal" aria-label="Close">취소
+			</button>
 		</div>
 	</form:form>
 </div>
