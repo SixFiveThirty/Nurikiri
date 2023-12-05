@@ -85,6 +85,7 @@
 	<div class="flex-w flex-sb-m p-b-22" id="selectSorts">
 		<div class="menu-desktop">
 			<ul class="main-menu">
+				<li><a href="/store/list?keyword=${cri.keyword}&sort=default">기본 순</a></li>			
 				<li><a href="/store/list?keyword=${cri.keyword}&sort=bookmarkCount">즐겨찾기 순</a></li>
 				<li><a href="/store/list?keyword=${cri.keyword}&sort=starCount">별점 순</a></li>
 				<li><a href="/store/list?keyword=${cri.keyword}&sort=reviewCount">리뷰 순</a></li>
