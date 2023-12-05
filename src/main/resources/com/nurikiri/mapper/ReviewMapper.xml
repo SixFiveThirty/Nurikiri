@@ -14,22 +14,37 @@
 		<result property="rate" column="rate" />
 	</resultMap>
 
-	<select id="readAll" resultMap="ReviewMap">
+	<!-- <select id="readAll" resultMap="ReviewMap">
 		select
 		rno, sno, content, writer, reg_date, update_date, rate
 		from store_review
 		where sno = #{sno}
 		order by reg_date desc
+	</select> -->
+	
+	<select id="readAll" resultMap="ReviewMap">
+		select
+		rno, sno, content, writer, reg_date, update_date, rate, fileName, uploadPath, uuid
+		from view_reviews_images
+		where sno = #{sno}
+		order by reg_date desc
 	</select>
 	
-	<select id="get" resultMap="ReviewMap">
+	<!-- <select id="get" resultMap="ReviewMap">
 		select
 		rno, sno, content, writer, reg_date, update_date, rate
 		from store_review
 		where rno = #{rno}
+	</select> -->
+	
+	<select id="get" resultMap="ReviewMap">
+		select
+		rno, sno, content, writer, reg_date, update_date, rate, fileName, uploadPath, uuid
+		from view_reviews_images
+		where rno = #{rno}
 	</select>
 	
-	<insert id="create">
+ 	<insert id="create">
 	
 		<selectKey resultType="long" keyProperty="rno" order="AFTER" keyColumn="rno">	
   			SELECT LAST_INSERT_ID()
@@ -38,22 +53,34 @@
 		insert into store_review (sno, writer, content, rate)
 		values(#{sno},
 		#{writer}, #{content}, #{rate})
-<!-- 		<selectKey resultType="Long" keyProperty="rno" keyColumn="rno" -->
-<!-- 			order="AFTER"> -->
-<!-- 			SELECT LAST_INSERT_ID() -->
-<!-- 		</selectKey> -->
+		<selectKey resultType="Long" keyProperty="rno" keyColumn="rno"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
 	
- 	<delete id="delete">
+<!-- 	<insert id="create">
+		<selectKey resultType="long" keyProperty="rno" order="AFTER" keyColumn="rno">	
+  			SELECT LAST_INSERT_ID()
+  		</selectKey>
+	
+		insert into view_reviews_images (sno, writer, content, rate, fileName, uploadPath, uuid)
+		values(#{sno}, #{writer}, #{content}, #{rate}, #{fileName}, #{uploadPath}, #{uuid})
+	</insert> -->
+	
+ 	<!-- <delete id="delete">
 		delete from store_review
+		where rno = #{rno}
+ 	</delete> -->
+ 	
+ 	<delete id="delete">
+		delete from view_reviews_images
 		where rno = #{rno}
  	</delete>
  	
  	<!-- 이미지 등록 -->
 	<insert id="imageUpdate">
-	
 		insert into review_image(rno, fileName, uploadPath, uuid) values (#{rno}, #{fileName}, #{uploadPath}, #{uuid})
-	
 	</insert>
 	
 </mapper>

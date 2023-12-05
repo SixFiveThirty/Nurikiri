@@ -31,13 +31,16 @@ const REVIEW_URL = '/api/store/review/';
 		
 		let sno = '${store.sno}'; 	// 글번호
 		let writer = '${member.username}'; // 작성자(로그인 유저)
+		let fileCallPath = '';
+		
 		let url = REVIEW_URL + '?sno=' + sno;
 		
 		loadReviews(sno, writer, url); 	// 리뷰 목록 불러오기
 		
 		// 리뷰 추가 버튼 처리
 		$('.review-add-btn').click(function(e) {
-			createReview(sno, writer);
+			/* createReview(sno, writer); */
+			createReview(sno, writer, fileCallPath);
 		});
 
 		// 삭제 버튼 클릭
@@ -106,6 +109,18 @@ const REVIEW_URL = '/api/store/review/';
 				/* 전달받은 데이터 검증 */
 				console.log("showuploadimage작동");
 				console.log(uploadResultArr);
+				console.log("파일이름", uploadResultArr[0].fileName);
+				
+				/* const form = new FormData();
+				form.enctype = "multipart/form-data";
+				form.append("uploadFile", uploadResultArr, uploadResultArr[0].fileName);
+				
+				await fetch("/api/store/review/uploadAjaxAction", {
+					method: "POST",
+					headers: {},
+					body: form
+				}); */
+				
 				if(!uploadResultArr || uploadResultArr.length == 0){return}
 				console.log("showuploadimage작동 확인?");
 				let uploadResult = $("#uploadResult");
@@ -114,7 +129,11 @@ const REVIEW_URL = '/api/store/review/';
 				
 				let str = "";
 				
-				let fileCallPath = encodeURIComponent(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName);
+				/* let fileCallPath = encodeURIComponent(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName); */
+				
+				fileCallPath = encodeURIComponent(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName);
+				
+				console.log("fileCallPath", typeof fileCallPath);
 				
 				str += "<div id='result_card'>";
 				str += "<img src='/api/store/review/display?fileName=" + fileCallPath + "'>";

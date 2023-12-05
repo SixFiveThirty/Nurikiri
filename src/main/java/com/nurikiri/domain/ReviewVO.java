@@ -9,7 +9,6 @@ import lombok.Data;
 public class ReviewVO {
 	private Long rno;
 	private Long sno;
-	private String imgSrc;
 	private String writer;
 	private String content;
 	private Date regDate;
@@ -17,7 +16,9 @@ public class ReviewVO {
 	
 	private int rate;
 	
-	private List<ReviewImageVO> imageList;
+	private String fileName;
+	private String uploadPath;
+	private String uuid;
 	
-
+	private List<ReviewImageVO> imageList;
 }
