@@ -54,6 +54,6 @@ public class StoreReviewController {
 			rttr.addAttribute("keyword", cri.getKeyword());
 		}
 
-		return "redirect: " + cri.getLink("/managers/review/list");
+		return "redirect: " + cri.getLink("/store/review/list");
 	}
 }
