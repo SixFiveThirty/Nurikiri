@@ -6,7 +6,45 @@
 <script src="/resources/js/storeManagerSearch.js">
 </script>
 
+
+
 <style>
+#search-btn {
+	background-color: #FEC25E;
+}
+
+.form-select {
+	font-family: Poppins-Medium;
+	font-size: 14px;
+}
+.form-control {
+	font-family: Poppins-Medium;
+	font-size: 14px;
+}
+</style>
+
+<div class="d-flex justify-content-between align-items-center my-4">
+	<div>
+
+		<form:form id='searchForm' modelAttribute="cri" method='get' class="d-flex">
+			<form:hidden path="pageNum"/>
+			<form:hidden path="amount"/>
+			
+			<form:select path="type" class="form-select">
+				<option value="T">상호명</option>
+			</form:select> 
+			
+			<form:input type='text' path="keyword" class="form-control rounded-0" />
+			<button type="submit" class="btn rounded-0" id="search-btn">
+				<i class="fa-solid fa-magnifying-glass"></i>
+			</button>
+		</form:form>
+
+	</div>
+</div>
+
+
+<%-- <style>
 .container:focus {
  	outline: none;
 }
@@ -35,15 +73,7 @@
 		</form>
 	</div>
 </div>
-
-<script>
-function enterkey() {
-        if (window.event.keyCode == 13) {
-             document.getElementById("searchForm").submit();
-        }
-}
-</script>
-
+ --%>
 
 
 	<!-- 
@@ -64,12 +94,6 @@ function enterkey() {
 							</button>
 						</div>
 		</form:form>
-		
-		
-		
-		
-		
-		
 		
 		<div class="searchBar">
 			<i class="fa-solid fa-magnifying-glass"></i>

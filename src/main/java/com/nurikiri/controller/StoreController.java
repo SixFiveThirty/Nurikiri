@@ -103,10 +103,9 @@ public class StoreController {
 		return "redirect:/store/list";
 	}
 
-	@GetMapping({ "/get", "/modify" })
+	@GetMapping({ "/get", "/modify", "/get_test2" })
 	public void get(@RequestParam("sno") Long sno, @ModelAttribute("cri") Criteria cri, Principal principal,
-			Model model) {
-
+			Model model, @ModelAttribute("state") String state) {
 		log.info("/get or modify");
 		model.addAttribute("store", service.get(sno, principal));
 	}

@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -60,6 +61,7 @@ public class ReviewController {
 
 	@PostMapping("/")
 	public ReviewVO create(@RequestBody ReviewVO vo) {
+		log.info("=========>" + vo);
 		mapper.create(vo);
 		return mapper.get(vo.getRno());
 	}
@@ -123,13 +125,21 @@ public class ReviewController {
 			uploadPath.mkdirs();
 		}
 		
+		List<ReviewImageVO> list = new ArrayList();
+		
 		for(MultipartFile multipartFile : uploadFile) {
 			
+			/*이미지 정보 객체*/
+			ReviewImageVO vo = new ReviewImageVO();			
+			
 			/* 파일 이름 */
-			String uploadFileName = multipartFile.getOriginalFilename();			
+			String uploadFileName = multipartFile.getOriginalFilename();
+			vo.setFileName(uploadFileName);
+			vo.setUploadPath(datePath);
 			
 			/* uuid 적용 파일 이름 */
 			String uuid = UUID.randomUUID().toString();
+			vo.setUuid(uuid);
 			
 			uploadFileName = uuid + "_" + uploadFileName;
 			
@@ -140,15 +150,22 @@ public class ReviewController {
 			try {
 				multipartFile.transferTo(saveFile);
 				
+				/* 썸네일 생성(ImageIO)*/
 				File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
 				
 				BufferedImage bo_image = ImageIO.read(saveFile);
 				
-				BufferedImage bt_image = new BufferedImage(300, 200, BufferedImage.TYPE_3BYTE_BGR);
+					/* 비율 */
+					double ratio = 3;
+					/*넓이 높이*/
+					int width = (int) (bo_image.getWidth() / ratio);
+					int height = (int) (bo_image.getHeight() / ratio);
+				
+				BufferedImage bt_image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
 								
 				Graphics2D graphic = bt_image.createGraphics();
 				
-				graphic.drawImage(bo_image, 0, 0,300,200, null);
+				graphic.drawImage(bo_image, 0, 0,width, height, null);
 					
 				ImageIO.write(bt_image, "jpg", thumbnailFile);
 				
@@ -157,14 +174,12 @@ public class ReviewController {
 				e.printStackTrace();
 				
 			} 
-			
+			list.add(vo);
 		}
 		
-		List<ReviewImageVO> uploadResult = new ArrayList<>();
+		ResponseEntity<List<ReviewImageVO>> result = new ResponseEntity<List<ReviewImageVO>>(list, HttpStatus.OK);
 
-		log.info("제발");
-		return new ResponseEntity<>(uploadResult, HttpStatus.OK);
-		
+		return result;
 	}
 	
 	@GetMapping("/display")
@@ -190,5 +205,40 @@ public class ReviewController {
 		
 		return result;
 		
+	}
+	
+	/* 이미지 파일 삭제 */
+	@PostMapping("/deleteFile")
+	public ResponseEntity<String> deleteFile(String fileName){
+		
+		log.info("deleteFile........" + fileName);
+		
+		File file = null;
+		
+		try {
+			/* 썸네일 파일 삭제 */
+			file = new File("c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));
+			
+			file.delete();
+			
+			/* 원본 파일 삭제 */
+			String originFileName = file.getAbsolutePath().replace("s_", "");
+			
+			log.info("originFileName : " + originFileName);
+			
+			file = new File(originFileName);
+			
+			file.delete();
+			
+			
+		} catch(Exception e) {
+			
+			e.printStackTrace();
+			
+			return new ResponseEntity<String>("fail", HttpStatus.NOT_IMPLEMENTED);
+			
+		}
+		
+		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 }

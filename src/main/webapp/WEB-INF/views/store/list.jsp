@@ -113,7 +113,10 @@
 <!-- // 				.removeClass('fa-solid') -->
 <!-- // 				.addClass('fa-regular'); -->
 <!-- // 		}); -->
-
+<%-- 	});
+	</script>
+</c:if>
+ --%>
 
 <%-- <div class="container">
 	<div>

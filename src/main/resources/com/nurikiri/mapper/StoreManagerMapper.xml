@@ -21,6 +21,9 @@
         
     <select id="getListWithPaging" resultType="StoreManagerVO">
 		select title,sno,reg_date,is_deleted from store
+		<where>
+		<include refid = "criteria"></include> 
+		</where>
 		order by sno desc
 		limit #{offset}, #{amount}
 	</select>
@@ -30,12 +33,13 @@
 		#{sno}
 	</select>
 	
-	
 	<update id="update">
 	 update is_deleted = #{isDeleted}
 	 from store
-	 where sno = #{sno}
-	
+	 where sno = #{sno}	
 	</update>
+	
+	
+	
 
 </mapper>

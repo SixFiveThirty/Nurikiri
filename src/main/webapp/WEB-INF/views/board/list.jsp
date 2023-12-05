@@ -62,3 +62,5 @@ font-size:30px; color:#fff; text-shadow:rgba(0, 0, 0, 0.3) 1px 1px 2px, rgba(0, 
 
 <%@ include file="../common/pagination.jsp"%>
 <%@ include file="../layouts/footer.jsp"%>
+
+
