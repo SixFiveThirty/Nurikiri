@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -21,7 +20,7 @@
 <!-- <link href="../resources/lib/pestkit/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"> -->
 
 <!-- Customized Bootstrap Stylesheet -->
-<link href="../resources/css/pestkit/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="../resources/css/pestkit/bootstrap.min.css" rel="stylesheet"> -->
 
 <!-- Template Stylesheet -->
 <link href="../resources/css/pestkit/style.css" rel="stylesheet">
@@ -33,126 +32,70 @@
 .fa-heart {
 	cursor: pointer;
 }
-.title{
-	white-space : nowrap;
-	overflow : hidden;
-	text-overflow : ellipsis;
-}
-.limiter-menu-desktop {
-  height: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  align-items: center;
-  /* background-color: transparent; */
-  background-color: white;
-  /* background-color: yellow; */
-}
-.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
 </style>
 
 	<script src="/resources/js/rest.js"></script>
 
-	<script>		
-		$(document).ready(function() {
-					
-			let username = '${member.username}';
-			const BASE_URL = '/api/store/storeBookmark';
+	<script>	
+	$(document).ready(function() {
+		let username = '${member.username}';
+		const BASE_URL = '/api/store/storeBookmark';
+	
+		//즐겨찾기 추가
+		$('span.storeBookmark').on('click', '.fa-heart.fa-regular', async function(e){
+		console.log()
+		let sno = parseInt($(this).data("sno"));
+		let storeBookmark = { sno, username };
+		console.log(storeBookmark);
 		
-			//즐겨찾기 추가
-			$('span.storeBookmark').on('click', '.fa-heart.fa-regular', async function(e){
-			console.log()
+		await rest_create(BASE_URL + "/add", storeBookmark);
+		
+		let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
+		console.log(storeBookmarkCount);
+		let count = parseInt(storeBookmarkCount.text());
+		storeBookmarkCount.text(count+1);
+	
+		$(this)
+		.removeClass('fa-regular')
+		.addClass('fa-solid');
+		});
+	
+		//즐겨찾기 제거	
+		$('span.storeBookmark').on('click', '.fa-heart.fa-solid', async function(e){
+			
 			let sno = parseInt($(this).data("sno"));
-			let storeBookmark = { sno, username };
-			console.log(storeBookmark);
 			
-			await rest_create(BASE_URL + "/add", storeBookmark);
-			
+			await rest_delete(`\${BASE_URL}/delete?sno=\${sno}&username=\${username}`);
+	
 			let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
 			console.log(storeBookmarkCount);
 			let count = parseInt(storeBookmarkCount.text());
-			storeBookmarkCount.text(count+1);
+			storeBookmarkCount.text(count-1);
 		
 			$(this)
-			.removeClass('fa-regular')
-			.addClass('fa-solid');
-			});
-		
-			//즐겨찾기 제거	
-			$('span.storeBookmark').on('click', '.fa-heart.fa-solid', async function(e){
-				
-				let sno = parseInt($(this).data("sno"));
-				
-				await rest_delete(`\${BASE_URL}/delete?sno=\${sno}&username=\${username}`);
-		
-				let storeBookmarkCount = $(this).parent().find(".storeBookmark-count");
-				console.log(storeBookmarkCount);
-				let count = parseInt(storeBookmarkCount.text());
-				storeBookmarkCount.text(count-1);
-			
-				$(this)
-					.removeClass('fa-solid')
-					.addClass('fa-regular');
-			});
-			
-		
+				.removeClass('fa-solid')
+				.addClass('fa-regular');
 		});
-			
-		</script>
+		
+	});
+	</script>
 </c:if>
 
-
-
-<!-- Blog Start -->
-<%-- <div class="container-fluid py-5 container">
-			<div class="text-center mb-5 wow fadeInUp" data-wow-delay=".3s">
-				<h5 class="mb-2 px-3 py-1 text-dark rounded-pill d-inline-block border border-2 border-primary">누리끼리한</h5>
-				<h1 class="display-5">가맹점 찾기</h1>
-			</div>
-			<nav aria-label="breadcrumb">
-				<ol class="breadcrumb justify-content-center mb-20 animated slideInDown">
-					<li class="breadcrumb-item"><a href="/store/list?keyword=${cri.keyword}&sort=bookmarkCount">즐겨찾기 순</a></li>
-					<li class="breadcrumb-item"><a href="/store/list?keyword=${cri.keyword}&sort=starCount">별점 순</a></li>
-					<li class="breadcrumb-item"><a href="/store/list?keyword=${cri.keyword}&sort=reviewCount">리뷰 순</a></li>
-					<li class="breadcrumb-item"><a href="/store/list?keyword=${cri.keyword}&sort=titleCount">상호명 순</a></li>
-				</ol>
-			</nav> --%>
-
-
-
+<style>
+.btn-color {
+	background-color: #FDB54D;
+}
+</style>
 
 <div class="container">
-	<div class="flex-w flex-sb-m p-b-22">
-		<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-
-
-
-
-			<%-- 	<div calss="sortTab">
-				<ul class="main-menu">
-					<li class="sno"><a class="menuTitle" href="#" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=titleCount'">상호명 순</a></li>
-					<li class="review"><a class="menuTitle" href="#" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=reviewCount'">리뷰 순</a></li>
-					<li class="star"><a class="menuTitle" href="#" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=starCount'">별점 순</a></li>
-					<li class="bookmark"><a class="menuTitle" href="#" onclick="location.href='/store/list?keyword=${cri.keyword}&sort=bookmarkCount'">즐겨찾기 순</a></li>
-				</ul>
-			</div> --%>
-			<div class="menu-desktop">
-				<ul class="main-menu">
-					<li><a href="/store/list?keyword=${cri.keyword}&sort=bookmarkCount">즐겨찾기 순</a></li>
-					<li><a href="/store/list?keyword=${cri.keyword}&sort=starCount">별점 순</a></li>
-					<li><a href="/store/list?keyword=${cri.keyword}&sort=reviewCount">리뷰 순</a></li>
-					<li><a href="/store/list?keyword=${cri.keyword}&sort=titleCount">상호명 순</a></li>
-				</ul>
-			</div>
+	<div class="flex-w flex-sb-m p-b-22" id="selectSorts">
+		<div class="menu-desktop">
+			<ul class="main-menu">
+				<li><a href="/store/list?keyword=${cri.keyword}&sort=default">기본 순</a></li>			
+				<li><a href="/store/list?keyword=${cri.keyword}&sort=bookmarkCount">즐겨찾기 순</a></li>
+				<li><a href="/store/list?keyword=${cri.keyword}&sort=starCount">별점 순</a></li>
+				<li><a href="/store/list?keyword=${cri.keyword}&sort=reviewCount">리뷰 순</a></li>
+			</ul>
 		</div>
 	</div>
 
@@ -162,17 +105,24 @@
 
 				<div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay=".5s">
 					<div class="blog-item">
-						<a class="store-link" href="${cri.getLink('get')}&sno=${store.sno}">
-						<img src="/resources/img/blog-1.jpg" class="img-fluid w-100 rounded-top" alt="" /></a>
+						<a class="store-link" href="${cri.getLink('get')}&sno=${store.sno}"> <img src="/store/image/thumbnail/${store.sno}" class="img-fluid w-100 rounded-top" alt="" /></a>
 						<div class="rounded-bottom bg-light">
-							<div class="d-flex justify-content-between p-4 pb-2">
-								<h4 class="title">${store.title}</h4>
-								<span class="storeBookmark"> <i class="${store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart text-danger" data-sno="${store.sno}"></i> <span class="storeBookmark-count">${store.storeBookmarks}</span>
-								</span>
+							<div class="p-4 pb-2">
+								<h4>${store.title}</h4>
+								<div style="text-align: right">
+									<span class="storeAvgRate mr-3">
+										<i class="fa-solid fa-star" style="color: #f9ba48"></i> ${store.avgRate} 점
+									</span>
+									<span class="storeBookmark">
+										<i class="${store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart text-danger"
+										data-sno="${store.sno}"></i>
+									<span class="storeBookmark-count">${store.storeBookmarks}</span>
+									</span>
+								</div>
 							</div>
 						</div>
-						<div class="p-4 py-2 mb-5 d-flex justify-content-between bg-primary rounded-bottom blog-btn">
-							<a><i class="fa fa-comments me-2"></i>${store.reviewCount} Reviews</a>
+						<div class="p-4 py-2 mb-5 d-flex justify-content-between rounded-bottom blog-btn btn-color">
+							<a><i class="fa fa-comments me-2"></i> ${store.storeReviews} Comments</a>
 						</div>
 					</div>
 				</div>
@@ -184,8 +134,6 @@
 
 <%@ include file="../layouts/footer.jsp"%>
 
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../resources/lib/pestkit/wow/wow.min.js"></script>
 <script src="../resources/lib/pestkit/easing/easing.min.js"></script>
