@@ -194,14 +194,28 @@ th, td {
 	background-color: #D9D9D9;
 }
 
+/* .clips .item .thumb:hover { */
+/* 	position: relative; */
+/* 	border-radius: 23px; */
+/* 	margin-bottom: 15px; */
+/* 	border: 1px solid #FEC25E; */
+/* 	padding: 30px 0; */
+/* 	background-color: #FEC25E; */
+/*     transition-duration: 0.3s; */
+/* } /* hover시 배경 오렌지 */ 
+
 .clips .item .thumb:hover {
 	position: relative;
 	border-radius: 23px;
 	margin-bottom: 15px;
 	border: 1px solid #FEC25E;
 	padding: 30px 0;
-	background-color: #fff;
+	background-color: #ffffff;
     transition-duration: 0.3s;
+} /* hover시 배경 하얀색 */
+
+.clips .item .thumb:hover >a {
+	color: #FEC25E;
 }
 
 
@@ -216,6 +230,8 @@ th, td {
 	line-height: 46px;
 	color: white;
 	padding: 0px 15px;
+	overflow: hiddlen;
+  	white-space: nowrap;
 }
 
 .clips .item h4 {
@@ -264,11 +280,11 @@ Responsive Style
               <div class="main-profile ">
               <h2>프로필</h2>
                 <div class="row">
-                  <div class="col-lg-4">
-                    <img src="/security/avatar/lg/${member.username}" alt="" style="border-radius: 23px;">
+                  <div class="col-lg-4" style="text-align:center;">
+                    <img src="/security/avatar/lg/${member.username}" alt="" style="border-radius: 23px; object-fit:cover;" width="250" height="250">
                   </div>
                   <div class="col-lg-4 align-self-center">
-                    <div class="main-info header-text">
+                    <div class="main-info header-text" style="text-align:center;">
                       <span>안녕하세요!</span>
                       <h4>${member.name} 님</h4>
                     </div>
@@ -291,7 +307,7 @@ Responsive Style
                           <div class="heading-section">
                           </div>
                         </div>
-                        <div class="col-lg-4 col-sm-6">
+                        <div class="col-lg-4 col-sm-6" style="text-align:center;">
                           <div class="item">
                             <div class="thumb">
                               <img src="assets/images/clip-01.jpg" alt="" style="border-radius: 23px;">
@@ -299,7 +315,7 @@ Responsive Style
                             </div>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-sm-6">
+                        <div class="col-lg-4 col-sm-6" style="text-align:center;">
                           <div class="item">
                             <div class="thumb">
                               <img src="assets/images/clip-02.jpg" alt="" style="border-radius: 23px;">
@@ -307,7 +323,7 @@ Responsive Style
                             </div>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-sm-6">
+                        <div class="col-lg-4 col-sm-6" style="text-align:center;">
                           <div class="item">
                             <div class="thumb">
                               <img src="assets/images/clip-03.jpg" alt="" style="border-radius: 23px;">
