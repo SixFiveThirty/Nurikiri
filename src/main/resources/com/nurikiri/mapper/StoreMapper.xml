@@ -112,10 +112,10 @@
 
 	<sql id="sort">
 	<if test="sort == null">
-		order by sno asc
+		order by sno
 		</if>
 		<if test="sort == 'default'">
-		order by sno asc
+		order by sno
 		</if>
 		<if test="sort == 'starCount'">
 		order by avg_rate desc
@@ -129,7 +129,7 @@
 	</sql>
 
 	<select id="getBookMarksList" parameterType="map" resultType="StoreVO">
-		select * from view_bookmarks
+		select * from view_my_bookmarks_reviews
 		where username = #{username}
 		order by sno DESC
 		limit #{cri.offset}, #{cri.amount}
