@@ -206,7 +206,8 @@ const REVIEW_URL = '/api/store/review/';
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
+	</div>
 
 		<div class="bottom-div mt-5">
 			<div class="card" id="map">지도 서비스</div>

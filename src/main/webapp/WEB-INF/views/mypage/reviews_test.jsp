@@ -27,13 +27,14 @@
 
 	<h1 style="text-align: center">리뷰 목록</h1>
 	<!-- Shoping Cart -->
+	
+	
 	<form class="bg0 p-t-75 p-b-85">
-
+	
 		<!-- <div class="row"> -->
-
 		<div class="col-lg-12 col-xl-9 m-lr-auto m-b-50">
 			<div class="gi">
-				<%@ include file="search_bar.jsp"%>
+				<%@include file="search_bar.jsp"%>
 			</div>
 
 			<div>
@@ -42,6 +43,7 @@
 					<table class="table-shopping-cart">
 
 						<tr class="table_head">
+						
 							<th class="column-1">NO</th>
 							<th class="column-1">가맹점 상호명</th>
 							<th class="column-1">리뷰 내용</th>
