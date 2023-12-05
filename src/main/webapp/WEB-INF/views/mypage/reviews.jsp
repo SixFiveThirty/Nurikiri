@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -63,7 +63,7 @@ $(document).ready(async function() {
 						<td style="text-align: center; width: 150px;">${review.writer}</td>
 						<td style="text-align: center; width: 100px;"><fmt:formatDate
 								pattern="yyyy.MM.dd" value="${review.regDate}" /></td>
-						<%-- <td><button type="button" class="btn btn-danger remove" style="width: 100px" onclick="location.href='remove&sno=${review.sno}'">삭제</button> --%>
+						<td><button type="button" class="btn btn-danger remove" style="width: 100px" onclick="location.href='remove&sno=${review.sno}'">삭제</button>
 						<!-- <td><button type="button" class="btn btn-danger remove" style="width: 100px" onclick="delete()">삭제</button> -->
 					</tr>
 					</c:if>
@@ -72,14 +72,16 @@ $(document).ready(async function() {
 	</table>
 </div>
 
-<%-- <form action="remove" method="post" name="removeForm">
+<form action="remove" method="post" name="removeForm">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 	<input type="hidden" name="sno" value="${review.sno}" /> 
 	<input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
 	<input type="hidden" name="amount" value="${cri.amount}" /> 
 	<input type="hidden" name="type" value="${cri.type}" /> 
 	<input type="hidden" name="keyword" value="${cri.keyword}" />
-</form> --%>
+</form>
 
 <%@ include file="../common/pagination.jsp"%>
-<%@ include file="../layouts/footer.jsp"%>
+<%@ include file="../layouts/footer.jsp"%> --%>
+
+<%@ include file="reviews_test.jsp"%>

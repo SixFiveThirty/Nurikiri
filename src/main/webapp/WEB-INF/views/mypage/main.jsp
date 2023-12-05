@@ -22,10 +22,31 @@ $(document).ready(async function() {
 
 <style>
 .card {
-	border-color: #c3cad1;
 	width: 400px;
+	outline: none;
 	margin: 0 auto;
+	border : none;
 }
+
+
+.btn1 {
+  border: 0;
+  outline: none;
+  font-size: 15px;
+  margin: 10px;
+  background: #CCCCCC;
+  color: black;
+  cursor: pointer;
+  border-radius: 20px;
+  border : none;
+  text-align: center;
+  padding: 10px 30px;
+}
+
+
+.btn1:hover {
+	color: white;
+	background: #FDB54D;
 </style>
 
 
@@ -35,13 +56,13 @@ $(document).ready(async function() {
 	<div class="top-div mt-5">
 
 		<div class="card">
-			<a href="/mypage/reviews" class="btn btn-light"> <i
+			<a href="/mypage/reviews" class="btn1 btn-light"> <i
 				class="fa-solid fa-comment"></i> 리뷰 관리
 			</a>
 		</div>
 		<br> <br>
 		<div class="card">
-			<a type="submit" href="/mypage/bookmarks" class="btn btn-light getbook"><i
+			<a type="submit" href="/mypage/bookmarks" class="btn1 btn-light getbook"><i
 				class="fa-solid fa-star"></i> 즐겨찾기 </a>
 		</div>
 		<br>

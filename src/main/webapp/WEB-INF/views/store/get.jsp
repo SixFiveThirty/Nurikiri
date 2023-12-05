@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
@@ -31,13 +31,16 @@ const REVIEW_URL = '/api/store/review/';
 		
 		let sno = '${store.sno}'; 	// 글번호
 		let writer = '${member.username}'; // 작성자(로그인 유저)
+		let fileCallPath = '';
+		
 		let url = REVIEW_URL + '?sno=' + sno;
 		
 		loadReviews(sno, writer, url); 	// 리뷰 목록 불러오기
 		
 		// 리뷰 추가 버튼 처리
 		$('.review-add-btn').click(function(e) {
-			createReview(sno, writer);
+			/* createReview(sno, writer); */
+			createReview(sno, writer, fileCallPath);
 		});
 
 		// 삭제 버튼 클릭
@@ -106,6 +109,18 @@ const REVIEW_URL = '/api/store/review/';
 				/* 전달받은 데이터 검증 */
 				console.log("showuploadimage작동");
 				console.log(uploadResultArr);
+				console.log("파일이름", uploadResultArr[0].fileName);
+				
+				/* const form = new FormData();
+				form.enctype = "multipart/form-data";
+				form.append("uploadFile", uploadResultArr, uploadResultArr[0].fileName);
+				
+				await fetch("/api/store/review/uploadAjaxAction", {
+					method: "POST",
+					headers: {},
+					body: form
+				}); */
+				
 				if(!uploadResultArr || uploadResultArr.length == 0){return}
 				console.log("showuploadimage작동 확인?");
 				let uploadResult = $("#uploadResult");
@@ -114,7 +129,11 @@ const REVIEW_URL = '/api/store/review/';
 				
 				let str = "";
 				
-				let fileCallPath = encodeURIComponent(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName);
+				/* let fileCallPath = encodeURIComponent(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName); */
+				
+				fileCallPath = encodeURIComponent(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName);
+				
+				console.log("fileCallPath", typeof fileCallPath);
 				
 				str += "<div id='result_card'>";
 				str += "<img src='/api/store/review/display?fileName=" + fileCallPath + "'>";
@@ -387,7 +406,7 @@ const REVIEW_URL = '/api/store/review/';
 		<div class="review-list"></div>
 	</div>
 
-	<%-- <%@ include file="get_test.jsp"%> --%>
+	<%@ include file="get_test.jsp"%>
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47527c077dd44e34b71ffb876f21b3cc&libraries=services"></script>
@@ -441,4 +460,6 @@ geocoder.addressSearch(address, function(result, status) {
 });
 </script>
 
-<%@ include file="../layouts/footer.jsp"%>
+<%@ include file="../layouts/footer.jsp"%> --%>
+
+<%@ include file="get_test2.jsp"%>

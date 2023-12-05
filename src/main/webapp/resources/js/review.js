@@ -21,6 +21,7 @@ function showUpdateReview(e) {
 }
 
 function createReviewTemplate(review, writer, sno) {
+//function createReviewTemplate(review, writer, sno) {
   return `
 		<div class="review my-3" style="background: white; border-radius: 6px; border: 4px #CCCCCC solid" data-rno="${
       review.rno
@@ -32,8 +33,8 @@ function createReviewTemplate(review, writer, sno) {
     review.writer
   }
 					</strong>
-					<div class="rate" style="color: #f9ba48">
-						<i class="fa-solid fa-star"></i> ${review.rate} 점
+					<div class="rate" >
+						<i class="fa-solid fa-star" style="color: #f9ba48"></i> ${review.rate} 점
 					</div>
 					
 				</div>
@@ -47,9 +48,7 @@ function createReviewTemplate(review, writer, sno) {
 				</div>
 			</div>
 			<div class="review-body mx-5 text-right">
-				<a class="move review-content" href="review/get?rno=${review.rno}">${
-    review.content
-  }</a>
+				<a class="move review-content" href="review/get?rno=${review.rno}">${review.content}</a>
 			</div>
 			<div class="reply-list ml-5"></div>
 		</div>
@@ -72,10 +71,10 @@ function createReviewEditTemplate(review) {
 	`;
 }
 
-async function createReview(sno, writer) {
+//async function createReview(sno, writer) {
+async function createReview(sno, writer, fileCallPath) {
   const content = $('.new-review-content').val();
   const rate = $('.rating').val();
-  const file = $('#fileItem').val();
 
   if (!content) {
     alert('내용을 입력하세요.');
@@ -90,7 +89,7 @@ async function createReview(sno, writer) {
   }
 
   if (!confirm('리뷰를 추가할까요?')) return;
-  let review = { sno, writer, content, rate, file };
+  let review = { sno, writer, content, rate};
   console.log(review);
 
   // REST로 등록
@@ -98,6 +97,7 @@ async function createReview(sno, writer) {
 
   //등록 성공 후DOM처리
   const reviewEl = createReviewTemplate(review, writer, sno);
+  //const reviewEl = createReviewTemplate(review, writer, sno, fileCallPath);
   $('.review-list').prepend($(reviewEl));
   $('.new-review-content').val(''); //기존에 입력된 것 clear 시켜줌.
   $('.rating').val(0);
