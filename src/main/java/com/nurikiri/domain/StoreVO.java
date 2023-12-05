@@ -48,5 +48,4 @@ public class StoreVO {
 	private int storeReviews; // 리뷰 수
 	
 	private float avgRate; // 가맹점 평점
-	
 }

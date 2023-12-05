@@ -35,13 +35,13 @@ $(document).ready(async function() {
 	<div class="top-div mt-5">
 
 		<div class="card">
-			<a href="/mypage/review" class="btn btn-light"> <i
+			<a href="/mypage/reviews" class="btn btn-light"> <i
 				class="fa-solid fa-comment"></i> 리뷰 관리
 			</a>
 		</div>
 		<br> <br>
 		<div class="card">
-			<a type="submit" href="/mypage/favorit" class="btn btn-light getbook"><i
+			<a type="submit" href="/mypage/bookmarks" class="btn btn-light getbook"><i
 				class="fa-solid fa-star"></i> 즐겨찾기 </a>
 		</div>
 		<br>

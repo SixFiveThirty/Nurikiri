@@ -189,12 +189,13 @@ button.firstBtn:focus{
 				<div class="login-form">
 					<h2>비밀번호 재확인</h2>
 					<form:form modelAttribute="member" cssClass="form" method="post"
-						action="/security/remove" onsubmit="return confirmSubmit();">
+						action="/security/changeState" onsubmit="return confirmSubmit();">
 						<input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}" />
 						<div class="group-input">
 							<input type="hidden" name="username" value="${member.username}" />
 							<input type="hidden" name="password" value="${member.password}" />
+							<input type="hidden" name="isDeleted" class="${member.isDeleted }" />
 							<form:label path="confirmedPassword"></form:label>
 							<form:input path="confirmedPassword" cssClass="form-control"
 								type="password" />
@@ -216,14 +217,27 @@ button.firstBtn:focus{
 			</div>
 		</div>
 	</div>
-
+</div>
 	<script>
-		function confirmSubmit() {
+	function confirmSubmit() {
 			var confirmResult = confirm("정말 탈퇴하시겠습니까?");
-
+			$(member.isDeleted).val("1");
 			return confirmResult;
+			
+			
 		}
 	</script>
-</div>
+
+<form action="/security/changeState" method="post" name="changeStateForm">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="username" class="change_username" />
+	<input type="hidden" name="isDeleted" class="change_state" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
+</form>
+	
+
 
 <%@ include file="../layouts/footer.jsp"%>

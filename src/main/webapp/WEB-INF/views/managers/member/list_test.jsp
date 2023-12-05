@@ -41,81 +41,82 @@ $(document).ready(async function() {
 		
 	});
 });
-
-
 </script>
+
+<style>
+.modify {
+	width: 80px;
+	margin: auto;
+	display: block;
+}
+
+.changeState {
+	width: 80px;
+	margin: auto;
+	display: block;
+}
+.gi{
+	display: flex;
+}
+
+</style>
+
+
 <div class="container">
 
-	<h1 class="page-header">
+	<!-- <h1 class="page-header">
 		<i class="fas fa-list center"></i> 회원 목록
-	</h1>
+	</h1> -->
+	<h1 style="text-align: center">회원 목록</h1>
 
+<%@ include file="../../common/search_bar2.jsp"%>
 	<!-- Shoping Cart -->
 	<form class="bg0 p-t-75 p-b-85">
-		<div class="row">
-			<div class="">	
-				<div class="m-l-25 m-r--38 m-lr-0-xl">
+
+		<!-- <div class="row"> -->
+			
+			<div class="col-lg-12 col-xl-9 m-lr-auto m-b-50">
+			<div class="gi">
+			<%@ include file="../../common/search_bar2.jsp"%>
+			</div>
+				
+				<div>
 					<div class="wrap-table-shopping-cart">
+					
 						<table class="table-shopping-cart">
+							
 							<tr class="table_head">
 								<th class="column-1">유저 ID</th>
-								<th class="column-2">이름</th>
-								<th class="column-3">유저 권한</th>
-								<th class="column-4">가입날짜</th>	
-								<th class="column-5">회원정보 삭제</th>
+								<th class="column-1">이름</th>
+								<th class="column-1">유저 권한</th>
+								<th class="column-1">가입날짜</th>
+								<th class="column-1">회원정보 수정</th>
+								<th class="column-1">회원정보 삭제</th>
 							</tr>
 
-							<tr class="table_row">
-								<td class="column-1">
-									<div class="how-itemcart1">
-										<img src="images/item-cart-04.jpg" alt="IMG">
-									</div>
-								</td>
-								<td class="column-2">Fresh Strawberries</td>
-								<td class="column-3">$ 36.00</td>
-								<td class="column-4">
-									<div class="wrap-num-product flex-w m-l-auto m-r-0">
-										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-minus"></i>
-										</div>
+							<c:forEach var="member" items="${list}">
+								<c:if test="${member.isDeleted eq '0'}">
+									<tr class="table_row">
 
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
-
-										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-plus"></i>
-										</div>
-									</div>
-								</td>
-								<td class="column-5">$ 36.00</td>
-							</tr>
-
-							<tr class="table_row">
-								<td class="column-1">
-									<div class="how-itemcart1">
-										<img src="images/item-cart-05.jpg" alt="IMG">
-									</div>
-								</td>
-								<td class="column-2">Lightweight Jacket</td>
-								<td class="column-3">$ 16.00</td>
-								<td class="column-4">
-									<div class="wrap-num-product flex-w m-l-auto m-r-0">
-										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-minus"></i>
-										</div>
-
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product2" value="1">
-
-										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-plus"></i>
-										</div>
-									</div>
-								</td>
-								<td class="column-5">$ 16.00</td>
-							</tr>
+										<td class="column-1">${member.username}</td>
+										<td class="column-1">${member.name}</td>
+										<td class="column-1"><select class="changeAuth">
+												<option value="" selected disable hidden>${member.auth}</option>
+												<option value="ROLE_USER" data-username="${member.username}">USER</option>
+												<option value="ROLE_MANAGER" data-username="${member.username}">MANAGER</option>
+												<option value="ROLE_ADMIN" data-username="${member.username}">ADMIN</option>
+										</select></td>
+										<td class="column-1"><fmt:formatDate pattern="yyyy-MM-dd" value="${member.regDate}" /></td>
+										<td class="column-1"><button type="button" class="btn btn-light modify" data-username="${member.username}" onclick="location.href='/security/modify'">수정</button></td>
+										<td class="column-1"><button type="button" class="btn btn-danger changeState" data-username="${member.username}">
+												<i class="fas fa-trash-alt"></i>
+											</button></td>
+									</tr>
+								</c:if>
+							</c:forEach>
 						</table>
 					</div>
 				</div>
-			</div>
 		</div>
 	</form>
 </div>

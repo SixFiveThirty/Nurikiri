@@ -39,7 +39,7 @@ public class MypageController {
 		log.info("mypage_main page");
 	}
 	
-	@GetMapping("/review")
+	@GetMapping("/reviews")
 	public void review(@ModelAttribute("cri") Criteria cri, Principal principal, Model model) {
 		log.info("mypage_review page");
 		
@@ -49,7 +49,7 @@ public class MypageController {
 	}
 	
 	
-	@GetMapping("/favorit")
+	@GetMapping("/bookmarks")
 	public void favorit(@ModelAttribute("cri") Criteria cri,Principal principal, Model model) {
 		log.info("get : mypage_favorit page");
 		int total = storeService.getTotal(cri);

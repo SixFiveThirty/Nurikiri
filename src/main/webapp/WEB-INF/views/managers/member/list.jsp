@@ -1,4 +1,4 @@
-
+<%-- 
 <%@page import="com.nurikiri.domain.MemberVO"%>
 <%@page import="com.nurikiri.domain.AuthVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -85,10 +85,10 @@ $(document).ready(async function() {
 						<td><button type="button" class="btn btn-danger changeState" data-username="${member.username}">
 								<i class="fas fa-trash-alt"></i> 삭제
 							</button></td>
-						<%-- <td><button type="button" class="btn btn-danger remove"
+						<td><button type="button" class="btn btn-danger remove"
 							data-username="${member.username}">
 							<i class="fas fa-trash-alt"></i> 삭제
-						</button></td> --%>
+						</button></td>
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -96,20 +96,37 @@ $(document).ready(async function() {
 	</table>
 </div>
 <form action="remove" method="post" name="removeForm">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <input type="hidden" name="username" class="delete_userName" /> <input type="hidden" name="pageNum" value="${cri.pageNum}" /> <input type="hidden" name="amount" value="${cri.amount}" /> <input type="hidden" name="type" value="${cri.type}" /> <input type="hidden" name="keyword" value="${cri.keyword}" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="username" class="delete_userName" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
 </form>
 
 <form action="changeAuth" method="post" name="changeAuthForm">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <input type="hidden" name="username" class="change_username" /> <input type="hidden" name="auth" class="change_auth" /> <input type="hidden" name="pageNum" value="${cri.pageNum}" /> <input type="hidden" name="amount" value="${cri.amount}" /> <input type="hidden" name="type" value="${cri.type}" /> <input type="hidden" name="keyword" value="${cri.keyword}" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="username" class="change_username" />
+	<input type="hidden" name="auth" class="change_auth" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
 </form>
 
 <form action="changeState" method="post" name="changeStateForm">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <input type="hidden" name="username" class="change_username" /> <input type="hidden" name="isDeleted" class="change_state" /> <input type="hidden" name="pageNum" value="${cri.pageNum}" /> <input type="hidden" name="amount" value="${cri.amount}" /> <input type="hidden" name="type" value="${cri.type}" /> <input type="hidden" name="keyword" value="${cri.keyword}" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="username" class="change_username" />
+	<input type="hidden" name="isDeleted" class="change_state" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
 </form>
 <%@ include file="../../common/pagination.jsp"%>
 
 <%@ include file="../../layouts/footer.jsp"%>
-
+  --%>
 <%@ include file="list_test.jsp"%>
 
 

@@ -2004,7 +2004,7 @@ input.num-product::-webkit-inner-spin-button {
 
 .table-shopping-cart .column-1 {
   width: 133px;
-  padding-left: 50px;
+  text-align: center;
 }
 
 .table-shopping-cart .column-2 {
@@ -2030,7 +2030,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .table-shopping-cart .table_row {
-  height: 185px;
+  height: 88px;
 }
 
 .table-shopping-cart .table_row td {
@@ -2038,7 +2038,8 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .table-shopping-cart .table_row td.column-1 {
-  padding-bottom: 30px;
+  padding-bottom: 0px;
+  text-align: center;
 }
 
 .table-shopping-cart .table_head th {
@@ -3177,8 +3178,8 @@ input.num-product::-webkit-inner-spin-button {
 
 /*---------------------------------------------*/
 .hov-btn3:hover {
-  border-color: #717fe0;
-  background-color: #717fe0;
+  border-color: #fff;
+  background-color: #fff;
   color: #fff;
 }
 
