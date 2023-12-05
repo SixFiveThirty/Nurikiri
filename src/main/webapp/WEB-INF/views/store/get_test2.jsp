@@ -238,7 +238,7 @@ const REVIEW_URL = '/api/store/review/';
 					<span class="wrap-rating fs-18 cl11 pointer"> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <input class="rating" type="hidden" name="rating">
 					</span>
 
-					<textarea class="form-control new-review-content" rows="3" ${member.username == null ? 'disabled' : '' }></textarea>
+					<textarea class="form-control new-review-content" rows="3" ${member.username != null and param.state == 'success' ? '' : 'disabled'}></textarea>
 
 					<div class="text-right">
 						<button class="btn btn-primary btn-sm my-2">
