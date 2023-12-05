@@ -1856,7 +1856,7 @@ progress {
 	color: #6c757d
 }
 
-.form-control {
+/* .form-control {
 	display: block;
 	width: 100%;
 	padding: .375rem .75rem;
@@ -1872,7 +1872,7 @@ progress {
 	appearance: none;
 	border-radius: 10px;
 	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
-}
+} */
 
 @media ( prefers-reduced-motion : reduce) {
 	.form-control {
@@ -1892,13 +1892,13 @@ progress {
 	cursor: pointer
 }
 
-.form-control:focus {
+/* .form-control:focus {
 	color: #555;
 	background-color: #fff;
 	border-color: #fef880;
 	outline: 0;
 	box-shadow: 0 0 0 .25rem rgba(253, 240, 1, .25)
-}
+} */
 
 .form-control::-webkit-date-and-time-value {
 	height: 1.5em
@@ -2084,7 +2084,7 @@ textarea.form-control-lg {
 	height: 1.5em;
 	border-radius: 10px
 }
-
+/* 
 .form-select {
 	display: block;
 	width: 100%;
@@ -2104,14 +2104,14 @@ textarea.form-control-lg {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none
-}
+} */
 
-.form-select:focus {
+/* .form-select:focus {
 	border-color: #fef880;
 	outline: 0;
 	box-shadow: 0 0 0 .25rem rgba(253, 240, 1, .25)
 }
-
+ */
 .form-select[multiple], .form-select[size]:not([size="1"]) {
 	padding-right: .75rem;
 	background-image: none
@@ -2762,10 +2762,10 @@ textarea.form-control-lg {
 	color: #555
 }
 
-.btn-check:focus+.btn, .btn:focus {
+/* .btn-check:focus+.btn, .btn:focus {
 	outline: 0;
 	box-shadow: 0 0 0 .25rem rgba(253, 240, 1, .25)
-}
+} */
 
 .btn:disabled, .btn.disabled, fieldset:disabled .btn {
 	pointer-events: none;

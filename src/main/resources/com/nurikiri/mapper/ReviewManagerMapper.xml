@@ -26,6 +26,10 @@
 
 	<select id="getList" resultType="ReviewManagerVO">
 		select * from view_store_review_username
+		<where>
+			<include refid="criteria"></include>
+		</where>
+		limit #{offset} , #{amount}
 	</select>
 
 	<insert id="insert">
