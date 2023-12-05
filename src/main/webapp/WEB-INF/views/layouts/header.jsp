@@ -141,6 +141,7 @@
 	</script>
 <script defer src="/resources/js/main.js"></script>
 <script src="/resources/js/number.js"></script>
+<!-- Template Stylesheet -->
 
 <script>
 	$(document).ready(function() {
@@ -167,7 +168,6 @@
 .desktop-header {
 	float: right;
 	display: flex;
-	justify-content: center;
 }
 
 .user-space {

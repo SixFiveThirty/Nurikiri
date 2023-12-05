@@ -365,15 +365,11 @@ const REVIEW_URL = '/api/store/review/';
 				<input type="file" id="fileItem" name='uploadFile' style="height: 30px;">
 				<div id="uploadResult"></div>
 				<div class="text-right">
-					<button class="btn btn-primary btn-sm my-2">
-						<i class="fa-regular fa-image"></i> 사진 업로드
-					</button>
 					<button class="btn btn-primary btn-sm my-2 review-add-btn" ${member.username == null ? 'disabled' : '' }>
 						<i class="fa-regular fa-comment"></i> 리뷰 등록
 					</button>
 				</div>
 			</div>
-		</div>
 		</div>
 	</c:if>
 
