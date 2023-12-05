@@ -8,15 +8,24 @@
 <style>
 #search-btn {
 	background-color: #FEC25E;
+	border-radius: 0 10px 10px 0;
 }
-.form-control {
+.search-keyword {
 	font-family: Poppins-Medium;
 	/* font-size: 14px; */
+	border-color: #fdc24d;
+	
+}
+
+.search-keyword:focus {
+	border-color: #fdc24d;
+	outline: 0;
+	box-shadow: 0 0 0 .15rem rgba(253, 194, 77, .25)
 }
 
 .form-select {
 	display: block;
-	width: 100%;
+	/* width: 100%; */
 	padding: .375rem 2.25rem .375rem .75rem;
 	font-size: 1rem;
 	font-weight: 400;
@@ -28,17 +37,19 @@
 	background-repeat: no-repeat;
 	background-position: right .75rem center;
 	background-size: 16px 12px;
-	border: 1px solid #ced4da;
-	border-radius: 10px;
+	border: 1px solid #fdc24d;
+	/* border-radius: 10px; */
+	border-bottom-left-radius: 10px;
+	border-top-left-radius: 10px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none
 }
   
 .form-select:focus {
-	border-color: #fef880;
+	border-color: #fdc24d;
 	outline: 0;
-	box-shadow: 0 0 0 .25rem rgba(253, 240, 1, .25)
+	box-shadow: 0 0 0 .15rem rgba(253, 194, 77, .25)
 }
 
 .form-select[multiple], .form-select[size]:not([size="1"]) {
@@ -74,12 +85,12 @@
 	<div>
 
 		<form id='searchform' action="/store/list" method='get' class="d-flex">
-			<select name='type' class="form-select">
+			<select name='type' class="form-select rounded-start">
 				<option value="T">상호명</option>
 				<option value="M">시장명</option>
 				<option value="A">지역명</option>
-			</select> <input type='text' name='keyword' class="form-control rounded-0" />
-			<button type="submit" class="btn rounded-0" id="search-btn">
+			</select> <input type='text' name='keyword' class="search-keyword form-control rounded-0" />
+			<button type="submit" class="btn rounded-end" id="search-btn">
 				<i class="fa-solid fa-magnifying-glass"></i>
 			</button>
 		</form>
