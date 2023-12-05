@@ -112,10 +112,10 @@
 
 	<sql id="sort">
 	<if test="sort == null">
-		order by sno desc
+		order by sno 
 		</if>
 		<if test="sort == 'default'">
-		order by sno desc
+		order by sno 
 		</if>
 		<if test="sort == 'starCount'">
 		order by avg_rate desc

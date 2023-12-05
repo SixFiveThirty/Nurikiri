@@ -32,8 +32,8 @@ function createReviewTemplate(review, writer, sno) {
     review.writer
   }
 					</strong>
-					<div class="rate" style="color: #f9ba48">
-						<i class="fa-solid fa-star"></i> ${review.rate} 점
+					<div class="rate" >
+						<i class="fa-solid fa-star" style="color: #f9ba48"></i> ${review.rate} 점
 					</div>
 					
 				</div>
@@ -47,9 +47,7 @@ function createReviewTemplate(review, writer, sno) {
 				</div>
 			</div>
 			<div class="review-body mx-5 text-right">
-				<a class="move review-content" href="review/get?rno=${review.rno}">${
-    review.content
-  }</a>
+				<a class="move review-content" href="review/get?rno=${review.rno}">${review.content}</a>
 			</div>
 			<div class="reply-list ml-5"></div>
 		</div>

@@ -99,12 +99,7 @@ public class SecurityController {
 		log.warn(src);
 		response.setHeader("Content-Type", "image/png");
 
-		if (size.equals("sm")) {
-			Thumbnails.of(src).size(24, 24).toOutputStream(response.getOutputStream());
-
-		} else {
-			Thumbnails.of(src).size(250, 250).toOutputStream(response.getOutputStream());
-		} // 파일 크기 수정
+		Thumbnails.of(src).size(250, 250).toOutputStream(response.getOutputStream());
 	}
 
 	@GetMapping("/profile")
