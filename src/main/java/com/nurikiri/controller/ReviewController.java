@@ -108,7 +108,8 @@ public class ReviewController {
 			}
 			
 		}// for
-		String uploadFolder = "C:\\upload";
+//		String uploadFolder = "C:\\upload";
+		String uploadFolder = "/Users/jeonhayoon/upload";
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
@@ -187,7 +188,8 @@ public class ReviewController {
 		
 		log.info("getImage()......." + fileName);
 		
-		File file = new File("c:\\upload\\" + fileName);
+//		File file = new File("c:\\upload\\" + fileName);
+		File file = new File("/Users/jeonhayoon/upload/" + fileName);
 		
 		ResponseEntity<byte[]> result = null;
 		
@@ -217,7 +219,8 @@ public class ReviewController {
 		
 		try {
 			/* 썸네일 파일 삭제 */
-			file = new File("c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));
+//			file = new File("c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));
+			file = new File("/Users/jeonhayoon/upload/" + URLDecoder.decode(fileName, "UTF-8"));
 			
 			file.delete();
 			

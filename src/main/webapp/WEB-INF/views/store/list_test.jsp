@@ -20,7 +20,7 @@
 <!-- <link href="../resources/lib/pestkit/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"> -->
 
 <!-- Customized Bootstrap Stylesheet -->
-<link href="../resources/css/pestkit/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="../resources/css/pestkit/bootstrap.min.css" rel="stylesheet"> -->
 
 <!-- Template Stylesheet -->
 <link href="../resources/css/pestkit/style.css" rel="stylesheet">
@@ -81,6 +81,12 @@
 	</script>
 </c:if>
 
+<style>
+.btn-color {
+	background-color: #FDB54D;
+}
+</style>
+
 <div class="container">
 	<div class="flex-w flex-sb-m p-b-22" id="selectSorts">
 		<div class="menu-desktop">
@@ -115,7 +121,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="p-4 py-2 mb-5 d-flex justify-content-between bg-primary rounded-bottom blog-btn">
+						<div class="p-4 py-2 mb-5 d-flex justify-content-between rounded-bottom blog-btn btn-color">
 							<a><i class="fa fa-comments me-2"></i>${store.storeReviews} Comments</a>
 						</div>
 					</div>
