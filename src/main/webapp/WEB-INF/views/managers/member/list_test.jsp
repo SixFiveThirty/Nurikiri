@@ -55,68 +55,63 @@ $(document).ready(async function() {
 	margin: auto;
 	display: block;
 }
-.gi{
+
+.gi {
 	display: flex;
 }
-
 </style>
 
 
 <div class="container">
 
-	<!-- <h1 class="page-header">
-		<i class="fas fa-list center"></i> 회원 목록
-	</h1> -->
 	<h1 style="text-align: center">회원 목록</h1>
-
-<%@ include file="../../common/search_bar2.jsp"%>
 	<!-- Shoping Cart -->
 	<form class="bg0 p-t-75 p-b-85">
 
 		<!-- <div class="row"> -->
-			
-			<div class="col-lg-12 col-xl-9 m-lr-auto m-b-50">
+
+		<div class="col-lg-12 col-xl-9 m-lr-auto m-b-50">
 			<div class="gi">
-			<%@ include file="../../common/search_bar2.jsp"%>
+				<%@ include file="search_bar.jsp"%>
 			</div>
-				
-				<div>
-					<div class="wrap-table-shopping-cart">
-					
-						<table class="table-shopping-cart">
-							
-							<tr class="table_head">
-								<th class="column-1">유저 ID</th>
-								<th class="column-1">이름</th>
-								<th class="column-1">유저 권한</th>
-								<th class="column-1">가입날짜</th>
-								<th class="column-1">회원정보 수정</th>
-								<th class="column-1">회원정보 삭제</th>
-							</tr>
 
-							<c:forEach var="member" items="${list}">
-								<c:if test="${member.isDeleted eq '0'}">
-									<tr class="table_row">
+			<div>
+				<div class="wrap-table-shopping-cart">
 
-										<td class="column-1">${member.username}</td>
-										<td class="column-1">${member.name}</td>
-										<td class="column-1"><select class="changeAuth">
-												<option value="" selected disable hidden>${member.auth}</option>
-												<option value="ROLE_USER" data-username="${member.username}">USER</option>
-												<option value="ROLE_MANAGER" data-username="${member.username}">MANAGER</option>
-												<option value="ROLE_ADMIN" data-username="${member.username}">ADMIN</option>
-										</select></td>
-										<td class="column-1"><fmt:formatDate pattern="yyyy-MM-dd" value="${member.regDate}" /></td>
-										<td class="column-1"><button type="button" class="btn btn-light modify" data-username="${member.username}" onclick="location.href='/security/modify'">수정</button></td>
-										<td class="column-1"><button type="button" class="btn btn-danger changeState" data-username="${member.username}">
-												<i class="fas fa-trash-alt"></i>
-											</button></td>
-									</tr>
-								</c:if>
-							</c:forEach>
-						</table>
-					</div>
+					<table class="table-shopping-cart">
+
+						<tr class="table_head">
+							<th class="column-1">유저 ID</th>
+							<th class="column-1">이름</th>
+							<th class="column-1">유저 권한</th>
+							<th class="column-1">가입날짜</th>
+							<th class="column-1">회원정보 수정</th>
+							<th class="column-1">회원정보 삭제</th>
+						</tr>
+
+						<c:forEach var="member" items="${list}">
+							<c:if test="${member.isDeleted eq '0'}">
+								<tr class="table_row">
+
+									<td class="column-1">${member.username}</td>
+									<td class="column-1">${member.name}</td>
+									<td class="column-1"><select class="changeAuth">
+											<option value="" selected disable hidden>${member.auth}</option>
+											<option value="ROLE_USER" data-username="${member.username}">USER</option>
+											<option value="ROLE_MANAGER" data-username="${member.username}">MANAGER</option>
+											<option value="ROLE_ADMIN" data-username="${member.username}">ADMIN</option>
+									</select></td>
+									<td class="column-1"><fmt:formatDate pattern="yyyy-MM-dd" value="${member.regDate}" /></td>
+									<td class="column-1"><button type="button" class="btn btn-light modify" data-username="${member.username}" onclick="location.href='/security/modify'">수정</button></td>
+									<td class="column-1"><button type="button" class="btn btn-danger changeState" data-username="${member.username}">
+											<i class="fas fa-trash-alt"></i>
+										</button></td>
+								</tr>
+							</c:if>
+						</c:forEach>
+					</table>
 				</div>
+			</div>
 		</div>
 	</form>
 </div>

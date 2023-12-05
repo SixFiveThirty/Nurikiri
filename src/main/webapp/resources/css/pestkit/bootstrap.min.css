@@ -36,9 +36,9 @@
 		rgba(255, 255, 255, 0))
 }
 
-*, *::before, *::after {
+/* *, *::before, *::after {
 	box-sizing: border-box
-}
+} */
 
 @media ( prefers-reduced-motion : no-preference) {
 	:root {
@@ -147,7 +147,7 @@ address {
 }
 
 ol, ul {
-	padding-left: 2rem
+	/* padding-left: 2rem */
 }
 
 ol, ul, dl {
@@ -586,32 +586,32 @@ progress {
 
 @media ( min-width : 576px) {
 	.container-sm, .container {
-		max-width: 540px
+		/* max-width: 540px */
 	}
 }
 
 @media ( min-width : 768px) {
 	.container-md, .container-sm, .container {
-		max-width: 720px
+		/* max-width: 720px */
 	}
 }
 
 @media ( min-width : 992px) {
 	.container-lg, .container-md, .container-sm, .container {
-		max-width: 960px
+		/* max-width: 960px */
 	}
 }
 
 @media ( min-width : 1200px) {
 	.container-xl, .container-lg, .container-md, .container-sm, .container {
-		max-width: 1140px
+		/* max-width: 1140px */
 	}
 }
 
 @media ( min-width : 1400px) {
 	.container-xxl, .container-xl, .container-lg, .container-md,
 		.container-sm, .container {
-		max-width: 1320px
+		/* max-width: 1320px */
 	}
 }
 

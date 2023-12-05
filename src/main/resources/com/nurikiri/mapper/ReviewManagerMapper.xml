@@ -25,7 +25,7 @@
 	</sql>
 
 	<select id="getList" resultType="ReviewManagerVO">
-		select * from store_review
+		select * from view_store_review_username
 	</select>
 
 	<insert id="insert">
@@ -53,7 +53,7 @@
 	</delete>
 
 	<select id="getListWithPaging" resultType="ReviewManagerVO">
-		select * from store_review
+		select * from view_store_review_username
 		<where>
 			<include refid="criteria"></include>
 		</where>

@@ -173,12 +173,6 @@ const REVIEW_URL = '/api/store/review/';
 								<div class="item-slick3" data-thumb="/resources/images/product-detail-01.jpg">
 									<div class="wrap-pic-w pos-relative">
 										<img src="/resources/images/product-detail-01.jpg" alt="IMG-PRODUCT">
-							
-										<span class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 storeBookmark">
-										<i class="${ store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart	text-danger"
-											data-sno="${store.sno}"></i>
-										</span>
-										
 									</div>
 								</div>
 
@@ -190,6 +184,14 @@ const REVIEW_URL = '/api/store/review/';
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14">${store.title}</h4>
+
+						<span class="mtext-106 cl2">
+						<span class="storeAvgRate mr-3">별점 <i class="fa-solid fa-star" style="color: #f9ba48"></i> ${store.avgRate}</span>
+						<span class="storeBookmark ml-3"> 즐겨찾기
+							<i class="${ store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart	text-danger" data-sno="${store.sno}"></i>
+							<span class="storeBookmark-count">${store.storeBookmarks}</span>
+						</span>
+						</span>
 
 						<p class="stext-102 cl3 p-t-23">소속 시장: ${store.market }</p>
 						<p class="stext-102 cl3 p-t-23">주소: ${store.address }</p>
@@ -211,71 +213,55 @@ const REVIEW_URL = '/api/store/review/';
 		</div>
 		<div>
 			<a id="load" href="https://map.kakao.com/link/to/카카오판교오피스,37.402056,127.108212">
-				<button type="button" class="btn btn-light mt-3 mb-5" style="width: 200px; float: right; background-color: #FEC25E;">
-				길찾기</button>
+				<button type="button" class="btn btn-light mt-3 mb-5" style="width: 200px; float: right; background-color: #FEC25E;">길찾기</button>
 			</a>
 		</div>
-<div class="foot-div mt-5">
-		<sec:authorize access="hasRole('ROLE_ADMIN')">
-		<button type="button" class="btn btn-light mr-5" style="width: 200px"
-			onclick="location.href='${cri.getLink('modify')}&sno=${store.sno}'">수정</button>
-		</sec:authorize>
-		<button type="button" class="btn btn-light" style="width: 200px"
-			onclick="location.href='${cri.getLink('list')}'">목록</button>
-	</div>
-	<button type="button" class="btn btn-light mr-5" style="width: 200px"
-	onclick="uploadReceipt('${store.sno}')">리뷰 등록</button>
-	
-	<!-- 영수증 Modal 팝업창 -->
-	<div class="modal fade" id="receiptModal" tabindex="-1" role="dialog"
-	aria-labelledby="historyModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-xl" role="document">
-		<div class="modal-content"></div>
-	</div>
-</div>
-	<!--  리뷰 기능 구현 -->
-	<c:if test="${member.username != store.owner }">
-		<div class="container bg-light p-2 rounded my-5" id="review">
-			<div>${member.username == null ? '리뷰를 작성하려면 먼저 로그인하세요' : '리뷰 작성' }</div>
-			<div>
-				<span class="wrap-rating fs-18 cl11 pointer"> <i
-					class="item-rating pointer zmdi zmdi-star-outline"></i> <i
-					class="item-rating pointer zmdi zmdi-star-outline"></i> <i
-					class="item-rating pointer zmdi zmdi-star-outline"></i> <i
-					class="item-rating pointer zmdi zmdi-star-outline"></i> <i
-					class="item-rating pointer zmdi zmdi-star-outline"></i> <input
-					class="rating" type="hidden" name="rating">
-				</span>
+		<div class="foot-div mt-5">
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<button type="button" class="btn btn-light mr-5" style="width: 200px" onclick="location.href='${cri.getLink('modify')}&sno=${store.sno}'">수정</button>
+			</sec:authorize>
+			<button type="button" class="btn btn-light" style="width: 200px" onclick="location.href='${cri.getLink('list')}'">목록</button>
+		</div>
+		<button type="button" class="btn btn-light mr-5" style="width: 200px" onclick="uploadReceipt('${store.sno}')">리뷰 등록</button>
 
-				<textarea class="form-control new-review-content" rows="3"
-					${member.username == null ? 'disabled' : '' }></textarea>
-
-				<div class="text-right">
-					<button class="btn btn-primary btn-sm my-2">
-						<i class="fa-regular fa-image"></i> 사진 업로드
-					</button>
-					<button class="btn btn-primary btn-sm my-2 review-add-btn"
-						${member.username == null ? 'disabled' : '' }>
-						<i class="fa-regular fa-comment"></i> 리뷰 등록
-					</button>
-				</div>
+		<!-- 영수증 Modal 팝업창 -->
+		<div class="modal fade" id="receiptModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-xl" role="document">
+				<div class="modal-content"></div>
 			</div>
 		</div>
-	</c:if>
+		<!--  리뷰 기능 구현 -->
+		<c:if test="${member.username != store.owner }">
+			<div class="container bg-light p-2 rounded my-5" id="review">
+				<div>${member.username == null ? '리뷰를 작성하려면 먼저 로그인하세요' : '리뷰 작성' }</div>
+				<div>
+					<span class="wrap-rating fs-18 cl11 pointer"> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <input class="rating" type="hidden" name="rating">
+					</span>
 
-	<div class="container my-5">
-		<h1 style="text-align: center;">
-			<i class="fa-regular fa-comments"></i>리뷰 목록
-		</h1>
-		<hr>
-		<div class="review-list"></div>
-	</div>
+					<textarea class="form-control new-review-content" rows="3" ${member.username == null ? 'disabled' : '' }></textarea>
 
-	<%@ include file="get_test.jsp"%>
+					<div class="text-right">
+						<button class="btn btn-primary btn-sm my-2">
+							<i class="fa-regular fa-image"></i> 사진 업로드
+						</button>
+						<button class="btn btn-primary btn-sm my-2 review-add-btn" ${member.username == null ? 'disabled' : '' }>
+							<i class="fa-regular fa-comment"></i> 리뷰 등록
+						</button>
+					</div>
+				</div>
+			</div>
+		</c:if>
+
+		<div class="container my-5">
+			<h1 style="text-align: center;">
+				<i class="fa-regular fa-comments"></i>리뷰 목록
+			</h1>
+			<hr>
+			<div class="review-list"></div>
+		</div>
 </div>
 
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47527c077dd44e34b71ffb876f21b3cc&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47527c077dd44e34b71ffb876f21b3cc&libraries=services"></script>
 <script>
 let geocoder = new kakao.maps.services.Geocoder();
 

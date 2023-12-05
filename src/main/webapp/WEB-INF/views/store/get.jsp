@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
@@ -387,7 +387,7 @@ const REVIEW_URL = '/api/store/review/';
 		<div class="review-list"></div>
 	</div>
 
-	<%-- <%@ include file="get_test.jsp"%> --%>
+	<%@ include file="get_test.jsp"%>
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47527c077dd44e34b71ffb876f21b3cc&libraries=services"></script>
@@ -441,4 +441,6 @@ geocoder.addressSearch(address, function(result, status) {
 });
 </script>
 
-<%@ include file="../layouts/footer.jsp"%>
+<%@ include file="../layouts/footer.jsp"%> --%>
+
+<%@ include file="get_test2.jsp"%>
