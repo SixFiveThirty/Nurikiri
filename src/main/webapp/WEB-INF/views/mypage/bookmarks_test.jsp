@@ -38,26 +38,6 @@
 	overflow : hidden;
 	text-overflow : ellipsis;
 }
-.limiter-menu-desktop {
-  height: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  align-items: center;
-  /* background-color: transparent; */
-  background-color: white;
-  /* background-color: yellow; */
-}
-.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
 </style>
 
 	<script src="/resources/js/rest.js"></script>

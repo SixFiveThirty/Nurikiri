@@ -6,7 +6,7 @@
 
 <mapper namespace="com.nurikiri.mapper.StoreMapper">
 
-	<select id="getTotalCount" resultType="int">
+	<select id="getTotalCount" resultType="int">	
 		select count(*) from view_store
 		<where>
 			<include refid="criteria"></include>
@@ -113,7 +113,7 @@
 
 	<sql id="sort">
 		<if test="sort == null">
-		order by sno desc
+		order by sno
 		</if>
 		<if test="sort == 'titleCount'">
 		order by title desc
@@ -131,7 +131,7 @@
 	</sql>
 
 	<select id="getBookMarksList" parameterType="map" resultType="StoreVO">
-		select * from view_bookmarks
+		select * from view_my_bookmarks_reviews
 		where username = #{username}
 		order by sno DESC
 		limit #{cri.offset}, #{cri.amount}

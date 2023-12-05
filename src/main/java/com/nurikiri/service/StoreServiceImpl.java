@@ -62,8 +62,17 @@ public class StoreServiceImpl implements StoreService {
 		log.info("getBookMarks");
 		String username = principal.getName();
 		long amount = cri.getAmount();
+		
+		List<StoreVO> list = mapper.getBookMarksList(username, cri);
+		
+		if (principal != null) {
+			List<Long> storeBookmarks = mapper.getStoreBookmarksList(principal.getName());
+			for (StoreVO store : list) {
+				store.setMyStoreBookmark(storeBookmarks.contains(store.getSno()));
+			}
+		}
 
-		return mapper.getBookMarksList(username, cri);
+		return list;
 	}
 
 	@Override

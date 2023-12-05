@@ -1,12 +1,10 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ include file="../layouts/header.jsp"%>
 
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="/resources/js/review.js"><</script>
 <script src="/resources/js/rest.js"><</script>
 
@@ -51,10 +49,10 @@ const REVIEW_URL = '/api/store/review/';
 
 <c:if test="${not empty member.username}">
 	<style>
-		.fa-heart {
-			cursor: pointer;
-		}
-	</style>
+.fa-heart {
+	cursor: pointer;
+}
+</style>
 
 	<script src="/resources/js/rest.js"></script>
 
@@ -145,6 +143,7 @@ const REVIEW_URL = '/api/store/review/';
 
 .modal {
 	/* padding: 50%; */
+	
 }
 
 .modal-dialog {
@@ -161,46 +160,62 @@ const REVIEW_URL = '/api/store/review/';
 </style>
 
 <div class="container">
-	<div class="d-flex justify-content-between">
-		<h3>${store.title}</h3>
+	<!-- Product Detail -->
+	<section class="sec-product-detail bg0 p-t-65 p-b-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-lg-7 p-b-30">
+					<div class="p-l-25 p-r-30 p-lr-0-lg">
+						<div class="wrap-slick3 flex-sb flex-w">
+							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
-		<span class="storeBookmark"> <i
-			class="${ store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart	text-danger"
-			data-sno="${store.sno}"></i> <span class="storeBookmark-count">${store.storeBookmarks}</span>
-		</span>
-	</div>
+							<div class="slick3 gallery-lb">
+								<div class="item-slick3" data-thumb="/resources/images/product-detail-01.jpg">
+									<div class="wrap-pic-w pos-relative">
+										<img src="/resources/images/product-detail-01.jpg" alt="IMG-PRODUCT">
+							
+										<span class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 storeBookmark">
+										<i class="${ store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart	text-danger"
+											data-sno="${store.sno}"></i>
+										</span>
+										
+									</div>
+								</div>
 
-	<div class="top-div mt-5">
-		<div class="thumbnail-card">
-			<img src="/store/image/fullsize/${store.sno}" class="top"
-				alt="사진 서비스 조금만 기다려주세요..." />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6 col-lg-5 p-b-30">
+					<div class="p-r-50 p-t-5 p-lr-0-lg">
+						<h4 class="mtext-105 cl2 js-name-detail p-b-14">${store.title}</h4>
+
+						<p class="stext-102 cl3 p-t-23">소속 시장: ${store.market }</p>
+						<p class="stext-102 cl3 p-t-23">주소: ${store.address }</p>
+						<p class="stext-102 cl3 p-t-23">취급 품목: ${store.item }</p>
+						<p class="stext-102 cl3 p-t-23">충전식 카드 여부: ${store.useRechargeCard}</p>
+						<p class="stext-102 cl3 p-t-23">지류 취급여부: ${store.useBill }</p>
+						<p class="stext-102 cl3 p-t-23">모바일 취금 여부: ${store.useMobile }</p>
+						<p class="stext-102 cl3 p-t-23">
+							등록년도:
+							<fmt:formatDate value="${store.regDate}" pattern="yyyy년" />
+						</p>
+					</div>
+				</div>
+			</div>
 		</div>
 
-		<div class="card ml-5 p-5">
-			<p>상호명: ${store.title}</p>
-			<p>소속 시장: ${store.market}</p>
-			<p>주소: ${store.address}</p>
-			<p>취급품목: ${store.item}</p>
-			<p>충전식 카드 여부: ${store.useRechargeCard}</p>
-			<p>지류 취급여부: ${store.useBill}</p>
-			<p>모바일 취급여부: ${store.useMobile}</p>
-			<p>
-				등록년도:
-				<fmt:formatDate value="${store.regDate}" pattern="yyyy년" />
-			</p>
+		<div class="bottom-div mt-5">
+			<div class="card" id="map">지도 서비스</div>
 		</div>
-	</div>
-	<div class="bottom-div mt-5">
-		<div class="card" id="map">지도 서비스 조금만 기다려주세요...</div>
-	</div>
-	<div>
-		<a id="load"
-			href="https://map.kakao.com/link/to/카카오판교오피스,37.402056,127.108212">
-			<button type="button" class="btn btn-light mt-3 mb-5"
-				style="width: 200px; float: right; background-color: #FEC25E;">길찾기</button>
-		</a>
-	</div>
-	<div class="foot-div mt-5">
+		<div>
+			<a id="load" href="https://map.kakao.com/link/to/카카오판교오피스,37.402056,127.108212">
+				<button type="button" class="btn btn-light mt-3 mb-5" style="width: 200px; float: right; background-color: #FEC25E;">
+				길찾기</button>
+			</a>
+		</div>
+<div class="foot-div mt-5">
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<button type="button" class="btn btn-light mr-5" style="width: 200px"
 			onclick="location.href='${cri.getLink('modify')}&sno=${store.sno}'">수정</button>
@@ -312,5 +327,4 @@ geocoder.addressSearch(address, function(result, status) {
 </script>
 
 <%@ include file="../layouts/footer.jsp"%>
---%>
-<%@ include file="get_test2.jsp"%>   
+
