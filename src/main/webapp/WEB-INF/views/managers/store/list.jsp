@@ -4,33 +4,38 @@
 <%@ include file="../../layouts/header.jsp"%>
 
 <style>
-button.button_1 {
+button.btn1 {
   border: 0;
   outline: none;
   font-size: 15px;
-  margin: 15px;
+  margin: 20px;
   background: #646970;
   color: white;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 20px;
 }
 
-button.button_1:hover {
+button.btn1:hover {
   color: white;
   background: #FDB54D;
 }
 
+
+td {
+  vertical-align : middle;
+}
+
 </style>
 
+<div class="container">
 
-
-<br><br><h2 style ="text-align: center">가맹점 관리 페이지</h2><br><br>
+<br><br><h1 style ="text-align: center">가맹점 관리 페이지</h1><br><br>
 
 <%@include file="../store/search_bar.jsp"%>
 
 
-<div class="container">
-	<div class="mx-3">
+
+	<div class="mx-5">
 	   <table class="table table-hover">
 	       <thead>
 	           <tr>
@@ -47,26 +52,49 @@ button.button_1:hover {
 	               <td style="text-align : center; vertical-align : middle; width: 60px;">${store.sno} </td>
 	               <td style="text-align: center ; vertical-align : middle;"><a href="/store/get?sno=${store.sno}">${store.title}</a></td>
 	               <td style="text-align: center; vertical-align : middle; width: 100px;"><fmt:formatDate pattern="yyyy" value="${store.regDate}"/></td>
-	               <td style="text-align: center; vertical-align : middle;"><button class="button_1" onclick="location.href='/store/modify?sno=${store.sno}'">수정</button></td>
-	               <td style="text-align: center; vertical-align : middle; width: 150px;"><button class="button_1" onclick="changeBtnName()">Y</button></td>
+	               <td style="text-align: center; vertical-align : middle;"><button class="btn1" onclick="location.href='/store/modify?sno=${store.sno}'">&nbsp;수정&nbsp;</button></td>
+	               <td style="text-align: center; vertical-align : middle; width: 150px;">
+	               <button id="btn1" onclick="change()">&nbsp;&nbsp;Y&nbsp;&nbsp;</button></td>
 	           </tr>
 	          </c:forEach>
 	        </tbody>
 	    </table>
 	</div>
 </div>
-<script>
+
+
+<%-- <span class="isDeleted"> 
+							<button class="${ store.is_deleted ? 'Y' : 'N' } btn1"
+							data-sno="${store.sno}"></button><span class="isDeleted-count">${store.is_deleted}</span>
+						</span>
+ --%>
+ 
+ <script>
+function change() {
+const subs = document.getElementById("btn1")
+
+subs.addEventListener("click", function() {
+    if(subs.innerText === 'Y') {
+        subs.innerText = 'N';
+    } else subs.innerText ='Y';
+});
+</script>
+
+
+<!-- 
+ <script>
 function changeBtnName(e)  {
 			console.log(e);
 	  const btnElement = $(e.target);
-//	    = document.getElementById('btn');
+	    = document.getElementById('btn');
 	  
 	  const html 
 	    = '<div style="color:red"> N </div>';
 	  
 	  btnElement.innerHTML = html;
 	}
-</script>
+</script> -->
+
 
 
 

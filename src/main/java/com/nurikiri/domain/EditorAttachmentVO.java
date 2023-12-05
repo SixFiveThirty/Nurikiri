@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EditorAttachmentVO {
-	public static final String UPLOAD_PATH = "/Users/jeonhayoon/upload/editor";
+	public static final String UPLOAD_PATH = "C:\nuriphoto\store";
 	
 	private Long no;
 	private String filename;

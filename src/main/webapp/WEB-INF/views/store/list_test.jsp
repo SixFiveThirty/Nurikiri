@@ -122,7 +122,7 @@
 							</div>
 						</div>
 						<div class="p-4 py-2 mb-5 d-flex justify-content-between rounded-bottom blog-btn btn-color">
-							<a><i class="fa fa-comments me-2"></i> ${store.storeReviews} Comments</a>
+							<a><i class="fa fa-comments me-2"></i>${store.storeReviews} Comments</a>
 						</div>
 					</div>
 				</div>

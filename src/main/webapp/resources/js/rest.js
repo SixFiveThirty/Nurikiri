@@ -36,6 +36,7 @@ async function rest_auth_num_post(url, data) {
 
 async function rest_create(url, data) {
   try {
+  
     let res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -46,6 +47,7 @@ async function rest_create(url, data) {
     console.log(e);
   }
 }
+
 
 async function rest_modify(url, data) {
   try {

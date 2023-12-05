@@ -49,7 +49,6 @@ public class BoardController {
 		return map;
 	}
 	
-	
 	/*게시판 목록 페이지 접속*/ 
 	@GetMapping("/list")
 	public void list(@ModelAttribute("cri") Criteria cri, Model model) {

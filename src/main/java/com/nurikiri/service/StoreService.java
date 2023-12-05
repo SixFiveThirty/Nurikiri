@@ -3,6 +3,8 @@ package com.nurikiri.service;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.nurikiri.domain.Criteria;

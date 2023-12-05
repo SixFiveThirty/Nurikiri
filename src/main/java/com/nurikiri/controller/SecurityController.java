@@ -104,7 +104,7 @@ public class SecurityController {
 
 		} else {
 			Thumbnails.of(src).size(250, 250).toOutputStream(response.getOutputStream());
-		}
+		} // 파일 크기 수정
 	}
 
 	@GetMapping("/profile")

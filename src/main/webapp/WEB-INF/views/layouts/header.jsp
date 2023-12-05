@@ -141,6 +141,7 @@
 	</script>
 <script defer src="/resources/js/main.js"></script>
 <script src="/resources/js/number.js"></script>
+<!-- Template Stylesheet -->
 
 <script>
 	$(document).ready(function() {
@@ -167,7 +168,6 @@
 .desktop-header {
 	float: right;
 	display: flex;
-	justify-content: center;
 }
 
 .user-space {
@@ -324,6 +324,13 @@
 				<li><a href="/introduction/get">서비스소개</a></li>
 				<li><a href="/managers/managers_list">관리자</a></li>
 			</ul>
+		</div>
+		
+		<!-- Back to top -->
+		<div class="btn-back-to-top" id="myBtn">
+			<span class="symbol-btn-back-to-top">
+				<i class="zmdi zmdi-chevron-up"></i>
+			</span>
 		</div>
 	</header>
 
