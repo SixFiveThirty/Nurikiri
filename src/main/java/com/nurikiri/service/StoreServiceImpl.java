@@ -37,8 +37,6 @@ import retrofit2.Response;
 @AllArgsConstructor
 public class StoreServiceImpl implements StoreService {
 	public static final String THUMBNAIL_UPLOAD_DIR = "/resources/images/store";
-
-
 	private StoreMapper mapper;
 	private ReviewMapper reviewmapper;
 
