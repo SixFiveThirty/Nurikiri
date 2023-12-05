@@ -46,9 +46,8 @@
 	</insert>
 
 	<select id="read" resultType="StoreVO">
-		select * from view_store where sno
-		=
-		#{sno}
+		select * from view_store_reviews_bookmarks
+		where sno =	#{sno}
 	</select>
 
 
@@ -136,5 +135,5 @@
 		order by sno DESC
 		limit #{cri.offset}, #{cri.amount}
 	</select>
-	
+		
 </mapper>

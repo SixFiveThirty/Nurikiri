@@ -57,7 +57,7 @@
 		</div>
 		<br>
 		<div class="card">
-			<a href="review/list" class="btn btn-light"> <i
+			<a href="../store/review/list" class="btn btn-light"> <i
 				class="fa-solid fa-comment"></i> 리뷰 관리
 			</a>
 		</div>

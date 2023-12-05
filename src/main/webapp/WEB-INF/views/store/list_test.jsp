@@ -125,13 +125,18 @@
 					<div class="blog-item">
 						<a class="store-link" href="${cri.getLink('get')}&sno=${store.sno}"> <img src="/resources/img/blog-1.jpg" class="img-fluid w-100 rounded-top" alt="" /></a>
 						<div class="rounded-bottom bg-light">
-							<div class="d-flex justify-content-between p-4 pb-2">
+							<div class="p-4 pb-2">
 								<h4>${store.title}</h4>
-								<span class="storeBookmark">
-									<i class="${store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart text-danger"
-									data-sno="${store.sno}"></i>
-								<span class="storeBookmark-count">${store.storeBookmarks}</span>
-								</span>
+								<div style="text-align: right">
+									<span class="storeAvgRate mr-3">
+										<i class="fa-solid fa-star" style="color: #f9ba48"></i> ${store.avgRate} 점
+									</span>
+									<span class="storeBookmark">
+										<i class="${store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart text-danger"
+										data-sno="${store.sno}"></i>
+									<span class="storeBookmark-count">${store.storeBookmarks}</span>
+									</span>
+								</div>
 							</div>
 						</div>
 						<div class="p-4 py-2 mb-5 d-flex justify-content-between bg-primary rounded-bottom blog-btn">

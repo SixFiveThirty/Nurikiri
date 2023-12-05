@@ -325,6 +325,13 @@
 				<li><a href="/managers/managers_list">관리자</a></li>
 			</ul>
 		</div>
+		
+		<!-- Back to top -->
+		<div class="btn-back-to-top" id="myBtn">
+			<span class="symbol-btn-back-to-top">
+				<i class="zmdi zmdi-chevron-up"></i>
+			</span>
+		</div>
 	</header>
 
 	<form id="logoutForm" action="/security/logout" method="post">
