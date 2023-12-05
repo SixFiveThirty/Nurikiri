@@ -22,4 +22,6 @@ public class ReviewManagerVO {
 	private Date updateDate;
 	
 	private int rate;
+	
+	private String title;
 }

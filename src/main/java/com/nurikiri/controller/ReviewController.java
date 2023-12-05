@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,9 +33,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.nurikiri.domain.EditorVO;
 import com.nurikiri.domain.ReviewImageVO;
 import com.nurikiri.domain.ReviewVO;
 import com.nurikiri.mapper.ReviewMapper;
+import com.nurikiri.service.ReviewService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -43,6 +47,9 @@ import lombok.extern.log4j.Log4j;
 public class ReviewController {
 	@Autowired
 	ReviewMapper mapper;
+	
+	@Autowired
+	ReviewService service;
 
 	@GetMapping("/")
 	public List<ReviewVO> readReviews(@RequestParam("sno") Long sno) {
@@ -65,6 +72,17 @@ public class ReviewController {
 		mapper.create(vo);
 		return mapper.get(vo.getRno());
 	}
+	
+//	@PostMapping("/uploadImage")
+//	public String uploadImage(@Valid @ModelAttribute("image") ReviewImageVO vo, @RequestParam("file") MultipartFile file) {
+////		String fileName = service.fileUpload(vo, file);
+////		
+////		String fileDownloadUri
+//		File filename = 
+//		vo.setFileName(null)
+//		
+//		return service.fileUpload(vo, file);
+//	}
 
 	@PutMapping("/{rno}")
 	public ReviewVO update(@PathVariable Long rno, @RequestBody ReviewVO vo) {
@@ -109,7 +127,7 @@ public class ReviewController {
 			
 		}// for
 //		String uploadFolder = "C:\\upload";
-		String uploadFolder = "/Users/jeonhayoon/upload";
+		String uploadFolder = "/Users/jeonhayoon/upload/review";
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
@@ -139,10 +157,10 @@ public class ReviewController {
 			vo.setUploadPath(datePath);
 			
 			/* uuid 적용 파일 이름 */
-			String uuid = UUID.randomUUID().toString();
+			String uuid = UUID.randomUUID().toString();//랜덤 변수 값 설정
 			vo.setUuid(uuid);
 			
-			uploadFileName = uuid + "_" + uploadFileName;
+			uploadFileName = uuid + "_" + uploadFileName; //파일 이름 생성
 			
 			/* 파일 위치, 파일 이름을 합친 File 객체 */
 			File saveFile = new File(uploadPath, uploadFileName);
@@ -189,7 +207,7 @@ public class ReviewController {
 		log.info("getImage()......." + fileName);
 		
 //		File file = new File("c:\\upload\\" + fileName);
-		File file = new File("/Users/jeonhayoon/upload/" + fileName);
+		File file = new File("/Users/jeonhayoon/upload/reveiw/" + fileName);
 		
 		ResponseEntity<byte[]> result = null;
 		

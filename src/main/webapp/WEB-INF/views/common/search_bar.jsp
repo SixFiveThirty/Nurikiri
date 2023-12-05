@@ -82,8 +82,6 @@
 </style>
 
 <div class="d-flex justify-content-between align-items-center my-4">
-	<div>
-
 		<form id='searchform' action="/store/list" method='get' class="d-flex">
 			<select name='type' class="form-select rounded-start">
 				<option value="T">상호명</option>
@@ -94,6 +92,4 @@
 				<i class="fa-solid fa-magnifying-glass"></i>
 			</button>
 		</form>
-
-	</div>
 </div>

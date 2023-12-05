@@ -21,6 +21,7 @@ function showUpdateReview(e) {
 }
 
 function createReviewTemplate(review, writer, sno) {
+//function createReviewTemplate(review, writer, sno) {
   return `
 		<div class="review my-3" style="background: white; border-radius: 6px; border: 4px #CCCCCC solid" data-rno="${
       review.rno
@@ -70,10 +71,10 @@ function createReviewEditTemplate(review) {
 	`;
 }
 
-async function createReview(sno, writer) {
+//async function createReview(sno, writer) {
+async function createReview(sno, writer, fileCallPath) {
   const content = $('.new-review-content').val();
   const rate = $('.rating').val();
-  const file = $('#fileItem').val();
 
   if (!content) {
     alert('내용을 입력하세요.');
@@ -88,7 +89,7 @@ async function createReview(sno, writer) {
   }
 
   if (!confirm('리뷰를 추가할까요?')) return;
-  let review = { sno, writer, content, rate, file };
+  let review = { sno, writer, content, rate};
   console.log(review);
 
   // REST로 등록
@@ -96,6 +97,7 @@ async function createReview(sno, writer) {
 
   //등록 성공 후DOM처리
   const reviewEl = createReviewTemplate(review, writer, sno);
+  //const reviewEl = createReviewTemplate(review, writer, sno, fileCallPath);
   $('.review-list').prepend($(reviewEl));
   $('.new-review-content').val(''); //기존에 입력된 것 clear 시켜줌.
   $('.rating').val(0);
