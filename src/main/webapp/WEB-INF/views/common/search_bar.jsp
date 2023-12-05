@@ -16,7 +16,7 @@
 }
 .form-control {
 	font-family: Poppins-Medium;
-	font-size: 14px;
+	/* font-size: 14px; */
 }
 </style>
 
