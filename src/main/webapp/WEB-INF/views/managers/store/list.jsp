@@ -70,6 +70,12 @@ td {
  --%>
  
  <script>
+
+ /* function confirmSubmit() {
+		var confirmResult = confirm("가맹점 운영여부를 바꾸시겠습니까?");
+		$(store.isDeleted).val("N");
+		return confirmResult; */
+		
 function change() {
 const subs = document.getElementById("btn1")
 
@@ -78,7 +84,17 @@ subs.addEventListener("click", function() {
         subs.innerText = 'N';
     } else subs.innerText ='Y';
 });
+
+
+
+
+
+
 </script>
+
+
+
+
 
 
 <!-- 

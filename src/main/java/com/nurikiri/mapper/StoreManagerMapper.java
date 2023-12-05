@@ -13,7 +13,7 @@ public interface StoreManagerMapper {
 	
 	public List<StoreManagerVO> getListWithPaging(Criteria cri);
 	
-	public StoreManagerVO update(Long sno, String isDeleted);
+	public void update(@Param("sno") Long sno, @Param("isDeleted") String isDeleted);
 	
 	//public void isDeleted(@Param("sno") Long sno, @Param("isDeleted") String isDeleted);
 	

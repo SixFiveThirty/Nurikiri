@@ -5,9 +5,16 @@
 <%@ include file="../layouts/header.jsp"%>
 
 <style>
-#top a {      
+/* .#top a {      
 position:fixed; bottom:5px; right:15px; z-index:5;     
-font-size:30px; color:#fff; text-shadow:rgba(0, 0, 0, 0.3) 1px 1px 2px, rgba(0, 0, 0, 0.3) 0 0 10px;"}   
+font-size:30px; color:#fff; text-shadow:rgba(0, 0, 0, 0.3) 1px 1px 2px, rgba(0, 0, 0, 0.3) 0 0 10px;"}   */ 
+
+/* .btn {
+background-color : #FDB54D;
+
+} */
+
+
 </style>
 <br>
 <center><h2 class="title">공지사항</h2></center><br>
@@ -43,7 +50,7 @@ font-size:30px; color:#fff; text-shadow:rgba(0, 0, 0, 0.3) 1px 1px 2px, rgba(0, 
 	
 	<sec:authorize access="hasRole('MANAGER')">
 	<div class="text-right mr-3">
-		<a href="register" class="btn btn-primary"> <i class="far fa-edit"></i>글쓰기
+		<a href="register" class="btn btn primary"> <i class="far fa-edit"></i>글쓰기
 		</a>
 	</div>
 	</sec:authorize>
