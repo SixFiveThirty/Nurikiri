@@ -2,14 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<%@ include file="../../layouts/header.jsp"%>
+<%-- <%@ include file="../../layouts/header.jsp"%> --%>
 
-<script src="/resources/js/review.js"></script>
-<script src="/resources/js/rest.js"></script>
-
+<!-- <script src="/resources/js/review.js"></script>
+<script src="/resources/js/rest.js"></script> -->
+<br>
 <script>
 //댓글 기본 URL 상수 - 전역 상수
-const REVIEW_URL = '/api/store/review/';
+/* const REVIEW_URL = '/api/store/review/'; */
 
 //리뷰 삭제
 async function deleteReviews(rno) {
@@ -72,13 +72,13 @@ async function deleteReviews(rno) {
 }
 </style>
 
-<div class="container">
+<div class="container" style="width: 600px">
 	<div class="card">
 		<div class="card-thumbnail">
 			<img src="..." class="card-img-top" alt="..." />
 		</div>
 	</div>
-	
+	<br>
 	<div class="d-flex justify-content-between">
 		<div class="flex-w flex-t pb-30">
 			<div class="wrap-pic-s size-109 bor0 of-hidden m-r-10 m-t-12">
@@ -118,12 +118,12 @@ async function deleteReviews(rno) {
 		</div>
 	</div>
 		
-	<sec:authorize access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')">
+	<%-- <sec:authorize access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')">
 		<div class="foot-div mt-5">
 			<button type="button" class="btn btn-light" style="width: 200px" onclick="location.href='list'">목록</button>
 			<button type="button" class="btn btn-light review-delete-btn" style="width: 200px" onclick="deleteReviews('${review.rno}')">삭제</button>
 		</div>		
-	</sec:authorize>
+	</sec:authorize> --%>
 	
 </div>
 

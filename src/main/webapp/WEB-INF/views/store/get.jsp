@@ -15,6 +15,12 @@ function uploadReceipt(sno) {
 	$('#receiptModal').modal();
 }
 
+function uploadReview(rno) {
+	console.log("값이 잘 받아지는지?", rno);
+	$('#reviewModal .modal-content').load("../store/review/get?rno="+rno);
+	$('#reviewModal').modal();
+}
+
 //댓글 기본 URL 상수 - 전역 상수
 const REVIEW_URL = '/api/store/review/';
 
@@ -308,7 +314,6 @@ const REVIEW_URL = '/api/store/review/';
 
 .modal {
 	/* padding: 50%; */
-	
 }
 
 .modal-dialog {
@@ -350,7 +355,7 @@ const REVIEW_URL = '/api/store/review/';
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14">${store.title}</h4>
 
-						<span class="mtext-106 cl2"> <span class="storeAvgRate mr-3">별점 <i class="fa-solid fa-star" style="color: #f9ba48"></i> ${store.avgRate}
+						<span class="mtext-106 cl2"> <span class="storeAvgRate mr-3">평점 <i class="fa-solid fa-star" style="color: #f9ba48"></i> ${store.avgRate}
 						</span> <span class="storeBookmark ml-3"> 즐겨찾기 <i class="${ store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart	text-danger" data-sno="${store.sno}"></i> <span class="storeBookmark-count">${store.storeBookmarks}</span>
 						</span>
 						</span>
@@ -368,6 +373,7 @@ const REVIEW_URL = '/api/store/review/';
 					</div>
 				</div>
 			</div>
+		</div>
 	</section>
 
 	<div class="bottom-div mt-5">
@@ -375,7 +381,7 @@ const REVIEW_URL = '/api/store/review/';
 	</div>
 	<div>
 		<a id="load" href="https://map.kakao.com/link/to/카카오판교오피스,37.402056,127.108212">
-			<button type="button" class="btn btn-light mt-3 mb-5" style="width: 200px; float: right; background-color: #FEC25E;">길찾기</button>
+			<button type="button" class="btn btn-light mt-3 mb-5" style="width: 200px; float: right; color: white; background-color: #fdb54d;">길찾기</button>
 		</a>
 	</div>
 	<div class="foot-div mt-5">
@@ -384,7 +390,6 @@ const REVIEW_URL = '/api/store/review/';
 		</sec:authorize>
 		<button type="button" class="btn btn-light" style="width: 200px" onclick="location.href='${cri.getLink('list')}'">목록</button>
 	</div>
-
 	<c:if test="${member.username != null }">
 		<button type="button" class="btn btn-light mr-5" style="width: 200px" onclick="uploadReceipt('${store.sno}')">영수증 인증</button>
 
@@ -404,24 +409,30 @@ const REVIEW_URL = '/api/store/review/';
 				<input type="file" id="fileItem" name='uploadFile' style="height: 30px;">
 				<div id="uploadResult"></div>
 				<div class="text-right">
-					<button class="btn btn-primary btn-sm my-2 review-add-btn" ${member.username == null ? 'disabled' : '' }>
+					<button class="btn btn-sm my-2 review-add-btn" style="color: white; background-color: #fdb54d"${member.username == null ? 'disabled' : '' }>
 						<i class="fa-regular fa-comment"></i> 리뷰 등록
 					</button>
 				</div>
 			</div>
 		</div>
+<<<<<<< HEAD
 	</c:if>
 
+=======
+		<hr>
+	</c:if>	
+>>>>>>> e2b17a4fffb2ca61d6c1453a40073141f2828570
 </div>
 
-<div class="container my-5">
-	<h1 style="text-align: center;">
-		<i class="fa-regular fa-comments"></i>리뷰 목록
-	</h1>
-	<hr>
+<h1 style="text-align: center;">
+	<i class="fa-regular fa-comments"></i>리뷰 목록
+</h1>
+
+
+<div class="container my-5" style="width: 900px">
 	<div class="review-list"></div>
 </div>
-</div>
+
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47527c077dd44e34b71ffb876f21b3cc&libraries=services"></script>
 <script>

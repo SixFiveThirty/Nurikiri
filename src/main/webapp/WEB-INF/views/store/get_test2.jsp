@@ -186,7 +186,7 @@ const REVIEW_URL = '/api/store/review/';
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14">${store.title}</h4>
 
 						<span class="mtext-106 cl2">
-						<span class="storeAvgRate mr-3">별점 <i class="fa-solid fa-star" style="color: #f9ba48"></i> ${store.avgRate}</span>
+						<span class="storeAvgRate mr-3">평점 <i class="fa-solid fa-star" style="color: #f9ba48"></i> ${store.avgRate}</span>
 						<span class="storeBookmark ml-3"> 즐겨찾기
 							<i class="${ store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart	text-danger" data-sno="${store.sno}"></i>
 							<span class="storeBookmark-count">${store.storeBookmarks}</span>
@@ -239,7 +239,7 @@ const REVIEW_URL = '/api/store/review/';
 					<span class="wrap-rating fs-18 cl11 pointer"> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <input class="rating" type="hidden" name="rating">
 					</span>
 
-					<textarea class="form-control new-review-content" rows="3" ${member.username == null ? 'disabled' : '' }></textarea>
+					<textarea class="form-control new-review-content" rows="3" ${member.username != null and param.state == 'success' ? '' : 'disabled'}></textarea>
 
 					<div class="text-right">
 						<button class="btn btn-primary btn-sm my-2">
