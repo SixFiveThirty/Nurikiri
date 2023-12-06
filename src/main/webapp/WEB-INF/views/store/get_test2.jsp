@@ -186,7 +186,7 @@ const REVIEW_URL = '/api/store/review/';
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14">${store.title}</h4>
 
 						<span class="mtext-106 cl2">
-						<span class="storeAvgRate mr-3">별점 <i class="fa-solid fa-star" style="color: #f9ba48"></i> ${store.avgRate}</span>
+						<span class="storeAvgRate mr-3">평점 <i class="fa-solid fa-star" style="color: #f9ba48"></i> ${store.avgRate}</span>
 						<span class="storeBookmark ml-3"> 즐겨찾기
 							<i class="${ store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart	text-danger" data-sno="${store.sno}"></i>
 							<span class="storeBookmark-count">${store.storeBookmarks}</span>
