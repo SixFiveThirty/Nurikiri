@@ -103,4 +103,11 @@ public static final String THUMBNAIL_UPLOAD_DIR = "C:\\backend_workspace\\Nuriki
 		log.info("Get List 3 Recent Posts : ");
 		return mapper.getListThree();
 	}
+	
+	@Override
+	public int getTotal(Criteria cri) {
+		log.info("get total count");
+
+		return mapper.getTotalCount(cri);
+	}
 }

@@ -419,7 +419,7 @@ const REVIEW_URL = '/api/store/review/';
 	</c:if>	
 </div>
 
-<h1 style="text-align: center;">
+<h1 class="mt-5" style="text-align: center;">
 	<i class="fa-regular fa-comments"></i>리뷰 목록
 </h1>
 

@@ -25,7 +25,7 @@ function createReviewTemplate(review, writer, sno) {
   return `
 		<div class="review my-3" style="background: white; border-radius: 6px; border: 4px #CCCCCC solid" data-rno="${
       review.rno
-    }" data-writer="${review.writer}" onclick="uploadReview('${review.rno}')">
+    }" data-writer="${review.writer}">
 			<div class="review-title mx-2 my-2 d-flex justify-content-between">
 				<div>
 					<strong class="writer">
@@ -48,7 +48,7 @@ function createReviewTemplate(review, writer, sno) {
 				</div>
 			</div>
 			<div class="review-body mx-5 text-right">
-				<div class="review-content">${review.content}</div>
+				<div class="review-content" onclick="uploadReview('${review.rno}')">${review.content}</div>
 			</div>
 			
 				<!-- 리뷰 Modal 팝업창 -->
