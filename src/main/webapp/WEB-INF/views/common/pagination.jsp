@@ -4,6 +4,20 @@
 
 <!-- 한번에 묶어서 스타일을 바꿔보자  -->
 
+<style>
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: white;
+    background-color: #FEC25E;
+    border-color: #FEC25E;
+}
+.page-link {
+    color: #FEC25E;
+}
+
+</style>
+
 <ul class="pagination justify-content-center">
 	<c:if test="${pageMaker.cri.pageNum > 1}">
 	  <li class="page-item">
