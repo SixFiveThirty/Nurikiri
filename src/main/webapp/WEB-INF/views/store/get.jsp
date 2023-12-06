@@ -384,16 +384,17 @@ const REVIEW_URL = '/api/store/review/';
 		</sec:authorize>
 		<button type="button" class="btn btn-light" style="width: 200px" onclick="location.href='${cri.getLink('list')}'">목록</button>
 	</div>
-	<button type="button" class="btn btn-light mr-5" style="width: 200px" onclick="uploadReceipt('${store.sno}')">리뷰 등록</button>
 
-	<!-- 영수증 Modal 팝업창 -->
-	<div class="modal fade" id="receiptModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-xl" role="document">
-			<div class="modal-content"></div>
+	<c:if test="${member.username != null }">
+		<button type="button" class="btn btn-light mr-5" style="width: 200px" onclick="uploadReceipt('${store.sno}')">영수증 인증</button>
+
+		<!-- 영수증 Modal 팝업창 -->
+		<div class="modal fade" id="receiptModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-xl" role="document">
+				<div class="modal-content"></div>
+			</div>
 		</div>
-	</div>
-	<!--  리뷰 기능 구현 -->
-	<c:if test="${member.username != store.owner }">
+		<!--  리뷰 기능 구현 -->
 		<div class="bg-light p-2 rounded my-5 form_section">
 			<div>${member.username == null ? '리뷰를 작성하려면 먼저 로그인하세요' : '리뷰 작성' }</div>
 			<div class="form_section_content">
@@ -410,6 +411,7 @@ const REVIEW_URL = '/api/store/review/';
 			</div>
 		</div>
 	</c:if>
+
 </div>
 
 <div class="container my-5">
