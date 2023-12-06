@@ -47,10 +47,17 @@ function createReviewTemplate(review, writer, sno) {
 					</div>
 				</div>
 			</div>
-			<div class="review-body mx-5 text-right">
-				<a class="move review-content" href="review/get?rno=${review.rno}">${review.content}</a>
+			<div class="review-body my-3 mx-5 text-right">
+				<div class="review-content" onclick="uploadReview('${review.rno}')">${review.content}</div>
 			</div>
-			<div class="reply-list ml-5"></div>
+			
+				<!-- 리뷰 Modal 팝업창 -->
+			<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+					<div class="modal-content"></div>
+				</div>
+			</div>
+	
 		</div>
 	`;
 }

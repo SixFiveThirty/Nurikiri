@@ -59,8 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/security/review", 
 						"/security/favorites",
 						/* "/security/avatar/**", */
-						"/store/popup_test",
-						"/store/review/**"
+						/*"/store/review/**",*/
+						"/store/popup_test"
 						).authenticated() // 프로필 화면 로그인시에만 입장 가능
 				.antMatchers(
 						"/managers/managers_list",

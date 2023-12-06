@@ -105,9 +105,6 @@ th, td {
 	width: 100%;
 }
 
-.profilecon{
-	padding-top: 72px;
-}
 
 .main-profile {
 	padding: 30px;
@@ -228,7 +225,7 @@ th, td {
 	display: inline-block;
 	text-align: center;
 	line-height: 46px;
-	color: white;
+	color: black;
 	padding: 0px 15px;
 	overflow: hiddlen;
   	white-space: nowrap;

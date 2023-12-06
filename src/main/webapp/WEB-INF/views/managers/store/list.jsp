@@ -31,11 +31,8 @@ td {
 
 <br><br><h1 style ="text-align: center">가맹점 관리 페이지</h1><br><br>
 
-<%@include file="../store/search_bar.jsp"%>
-
-
-
 	<div class="mx-5">
+	<%@include file="../store/search_bar.jsp"%>
 	   <table class="table table-hover">
 	       <thead>
 	           <tr>
@@ -54,7 +51,7 @@ td {
 	               <td style="text-align: center; vertical-align : middle; width: 100px;"><fmt:formatDate pattern="yyyy" value="${store.regDate}"/></td>
 	               <td style="text-align: center; vertical-align : middle;"><button class="btn1" onclick="location.href='/store/modify?sno=${store.sno}'">&nbsp;수정&nbsp;</button></td>
 	               <td style="text-align: center; vertical-align : middle; width: 150px;">
-	               <button id="btn1" onclick="change()">&nbsp;&nbsp;Y&nbsp;&nbsp;</button></td>
+	               <button class="btn1" id="btn3" onclick="change()">&nbsp;&nbsp;Y&nbsp;&nbsp;</button></td>
 	           </tr>
 	          </c:forEach>
 	        </tbody>
@@ -69,15 +66,9 @@ td {
 						</span>
  --%>
  
- <script>
-
- /* function confirmSubmit() {
-		var confirmResult = confirm("가맹점 운영여부를 바꾸시겠습니까?");
-		$(store.isDeleted).val("N");
-		return confirmResult; */
-		
+<script>
 function change() {
-const subs = document.getElementById("btn1")
+const subs = document.getElementById("btn3")
 
 subs.addEventListener("click", function() {
     if(subs.innerText === 'Y') {
@@ -85,31 +76,26 @@ subs.addEventListener("click", function() {
     } else subs.innerText ='Y';
 });
 
+</script> 
 
-
-
-
-
-</script>
 
 
 
 
 
 
-<!-- 
- <script>
+<!-- <script>
 function changeBtnName(e)  {
 			console.log(e);
 	  const btnElement = $(e.target);
-	    = document.getElementById('btn');
+	    = document.getElementById('btn1');
 	  
 	  const html 
-	    = '<div style="color:red"> N </div>';
+	    = '<div> N </div>';
 	  
 	  btnElement.innerHTML = html;
 	}
-</script> -->
+</script>  -->
 
 
 

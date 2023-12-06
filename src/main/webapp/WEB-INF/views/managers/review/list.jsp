@@ -36,35 +36,108 @@ $(document).ready(async function() {
 	loadReviews(sno, writer);
 });
 </script> -->
-<h1 style="text-align: center">리뷰 관리</h1>
+<<<<<<< HEAD
+=======
+<<<<<<<< HEAD:src/main/webapp/WEB-INF/views/store/review/list_test.jsp
+>>>>>>> 2390e88bb2a189b42a6d89f68b492e6b06ba812b
+<style>
+.column-1 {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.gi {
+	display: flex;
+}
+</style>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.member" var="member" />
+</sec:authorize>
 
 <div class="container">
-	<table class="table table-striped table-hover" id="listTable">
-		<thead>
-			<tr>
-				<th style="text-align: center; width: 60px;">No</th>
-				<th style="text-align: center; width: 150px;">가맹점 번호</th>
-				<th style="text-align: center;">리뷰 내용</th>
-				<th style="text-align: center; width: 100px;">작성자</th>
-				<th style="text-align: center; width: 150px;">작성일자</th>
-				<!-- <th style="text-align: center; width: 100px;">리뷰 삭제</th> -->
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="review" items="${list}">
+
+	<h1 style="text-align: center">리뷰 관리</h1>
+	<!-- Shoping Cart -->
+	<form class="bg0 p-t-75 p-b-85">
+
+		<!-- <div class="row"> -->
+
+		<div class="col-lg-12 col-xl-9 m-lr-auto m-b-50">
+			<div class="gi">
+				<%@ include file="search_bar.jsp"%>
+			</div>
+
+			<div>
+				<div class="wrap-table-shopping-cart">
+
+					<table class="table-shopping-cart">
+
+						<tr class="table_head">
+							<th class="column-1">NO</th>
+							<th class="column-1">가맹점 번호</th>
+							<th class="column-1">가맹점 상호명</th>
+							<th class="column-1">리뷰 내용</th>
+							<th class="column-1">작성자</th>
+							<th class="column-1">작성일자</th>
+						</tr>
+
+						<c:forEach var="review" items="${list}">
+								<tr class="table_row">
+									<td class="column-1">${review.rno}</td>
+									<td class="column-1">${review.sno}</td>
+									<td class="column-1">${review.title}</td>
+									<td class="column-1">${review.content}</td>
+									<td class="column-1">${review.writer}</td>
+									<td class="column-1"><fmt:formatDate pattern="yyyy-MM-dd" value="${review.regDate}" /></td>
+								</tr>
+						</c:forEach>
+					</table>
+				</div>
+			</div>
+		</div>
+	</form>
+<<<<<<< HEAD
+=======
+========
+
+
+
+
+<div class="container">
+	<h1 class="my-5" style="text-align: center">리뷰 관리</h1><br><br>
+		<div class="mx-5">
+		<%@include file="../review/search_bar.jsp"%>
+		
+		<table class="table table-striped table-hover" id="listTable">
+			<thead>
 				<tr>
-					<td style="text-align: center; width: 60px;">${review.rno}</td>
-					<td style="text-align: center; width: 150px;">${review.sno}</td>
-					<td style="text-align: center;"><a href="get?rno=${review.rno}"> ${review.content} </a></td>
-					<td style="text-align: center; width: 150px;">${review.writer}</td>
-					<td style="text-align: center; width: 100px;"><fmt:formatDate
-							pattern="yyyy.MM.dd" value="${review.regDate}" /></td>
-					<%-- <td><button type="button" class="btn btn-danger remove" style="width: 100px" onclick="location.href='remove&sno=${review.sno}'">삭제</button> --%>
-					<!-- <td><button type="button" class="btn btn-danger remove" style="width: 100px" onclick="delete()">삭제</button> -->
+					<th style="text-align: center; width: 60px;">No</th>
+					<th style="text-align: center; width: 150px;">가맹점 번호</th>
+					<th style="text-align: center;">리뷰 내용</th>
+					<th style="text-align: center; width: 100px;">작성자</th>
+					<th style="text-align: center; width: 150px;">작성일자</th>
+					<!-- <th style="text-align: center; width: 100px;">리뷰 삭제</th> -->
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<c:forEach var="review" items="${list}">
+					<tr>
+						<td style="text-align: center; width: 60px;">${review.rno}</td>
+						<td style="text-align: center; width: 150px;">${review.sno}</td>
+						<td style="text-align: center;"><a href="get?rno=${review.rno}"> ${review.content} </a></td>
+						<td style="text-align: center; width: 150px;">${review.writer}</td>
+						<td style="text-align: center; width: 100px;"><fmt:formatDate
+								pattern="yyyy.MM.dd" value="${review.regDate}" /></td>
+						<%-- <td><button type="button" class="btn btn-danger remove" style="width: 100px" onclick="location.href='remove&sno=${review.sno}'">삭제</button> --%>
+						<!-- <td><button type="button" class="btn btn-danger remove" style="width: 100px" onclick="delete()">삭제</button> -->
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+>>>>>>>> 2390e88bb2a189b42a6d89f68b492e6b06ba812b:src/main/webapp/WEB-INF/views/managers/review/list.jsp
+>>>>>>> 2390e88bb2a189b42a6d89f68b492e6b06ba812b
 </div>
 
 <%-- <form action="remove" method="post" name="removeForm">

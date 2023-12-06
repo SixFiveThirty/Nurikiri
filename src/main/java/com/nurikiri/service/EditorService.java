@@ -19,4 +19,6 @@ public interface EditorService {
 	public List<EditorVO> getList(Criteria cri);
 	
 	public List<EditorVO> getListThree();
+	
+	public int getTotal(Criteria cri);
 }

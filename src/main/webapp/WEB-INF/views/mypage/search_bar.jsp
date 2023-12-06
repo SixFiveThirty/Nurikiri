@@ -83,7 +83,11 @@
 
 <div class="d-flex justify-content-between align-items-center my-4">
 
+<<<<<<< HEAD
 		<form id='searchform' method='get' class="d-flex">
+=======
+		<form id='searchform' modelAttribute="cri" method='get' class="d-flex">
+>>>>>>> 2390e88bb2a189b42a6d89f68b492e6b06ba812b
 			<select name='type' class="form-select rounded-start">
 				<option value="T">상호명</option>
 				<option value="C">리뷰내용</option>
