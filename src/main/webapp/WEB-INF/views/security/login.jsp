@@ -195,13 +195,6 @@
 </style>
 
 
-<c:if test="${param.error == 'true' }">
-	<div class="error">사용자 ID 또는 비밀번호가 일치하지 않습니다.</div>
-</c:if>
-<c:if test="${param.error == 'login_required' }">
-	<div class="error">로그인이 필요합니다.</div>
-</c:if>
-
 <!-- Register Section Begin -->
 <div class="register-login-section spad">
 	<div class="container">
@@ -226,6 +219,12 @@
 									name="remember-me" class="form-check-input" />로그인 상태 유지 
 								</label>
 							</div>
+							<c:if test="${param.error == 'true' }">
+								<div class="error">사용자 ID 또는 비밀번호가 일치하지 않습니다.</div>
+							</c:if>
+							<c:if test="${param.error == 'login_required' }">
+								<div class="error">로그인이 필요합니다.</div>
+							</c:if>
 						</div>
 						<button type="submit" class="btn btn-block site-btn">로그인</button>
 					</form>

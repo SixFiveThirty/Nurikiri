@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.nurikiri.mapper.StoreManagerMapper">
-     
-     <sql id="criteria">
+
+	<sql id="criteria">
 		<trim prefixOverrides="OR">
 			<foreach item="type" collection="typeArr">
 				<trim prefix="OR">
@@ -17,29 +17,34 @@
 			</foreach>
 		</trim>
 	</sql>
-     
-        
-    <select id="getListWithPaging" resultType="StoreManagerVO">
+
+
+	<select id="getListWithPaging" resultType="StoreManagerVO">
 		select title,sno,reg_date,is_deleted from store
 		<where>
-		<include refid = "criteria"></include> 
+			<include refid="criteria"></include>
 		</where>
 		order by sno desc
 		limit #{offset}, #{amount}
 	</select>
-	
+
 	<select id="read" resultType="StoreManagerVO">
 		select * from store where sno =
 		#{sno}
 	</select>
-	
+
 	<update id="update">
-	 update is_deleted = #{isDeleted}
-	 from store
-	 where sno = #{sno}	
+		update is_deleted = #{isDeleted}
+		from store
+		where sno = #{sno}
 	</update>
-	
-	
-	
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from store
+		<where>
+			<include refid="criteria"></include>
+		</where>
+	</select>
+
 
 </mapper>

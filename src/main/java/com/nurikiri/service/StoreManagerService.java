@@ -17,5 +17,5 @@ public interface StoreManagerService {
 	
 	public void update(Long sno, String isDeleted);
 	
-
+	public int getTotal(Criteria cri);
 }

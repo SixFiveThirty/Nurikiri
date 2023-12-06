@@ -30,4 +30,6 @@ public interface EditorMapper {
 	public EditorAttachmentVO getAttachment(Long no);
 	
 	public int removeAttachment(Long no);
+	
+	public int getTotalCount(Criteria cri);
 }

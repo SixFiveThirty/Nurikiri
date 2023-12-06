@@ -17,8 +17,6 @@ public interface StoreManagerMapper {
 	
 	//public void isDeleted(@Param("sno") Long sno, @Param("isDeleted") String isDeleted);
 	
-	
-	
-	
+	public int getTotalCount(Criteria cri);
 
 }
