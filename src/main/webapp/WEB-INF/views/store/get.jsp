@@ -415,13 +415,8 @@ const REVIEW_URL = '/api/store/review/';
 				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
-	</c:if>
-
-=======
 		<hr>
 	</c:if>	
->>>>>>> e2b17a4fffb2ca61d6c1453a40073141f2828570
 </div>
 
 <h1 style="text-align: center;">
