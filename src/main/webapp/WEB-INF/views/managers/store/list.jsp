@@ -5,14 +5,15 @@
 
 <style>
 button.btn1 {
+	padding: 5px;
   border: 0;
   outline: none;
   font-size: 15px;
   margin: 20px;
-  background: #646970;
-  color: white;
+  background: #CCCCCC;
+  color: dark;
   cursor: pointer;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 
 button.btn1:hover {
@@ -51,13 +52,29 @@ td {
 	               <td style="text-align: center; vertical-align : middle; width: 100px;"><fmt:formatDate pattern="yyyy" value="${store.regDate}"/></td>
 	               <td style="text-align: center; vertical-align : middle;"><button class="btn1" onclick="location.href='/store/modify?sno=${store.sno}'">&nbsp;수정&nbsp;</button></td>
 	               <td style="text-align: center; vertical-align : middle; width: 150px;">
-	               <button class="btn1" id="btn3" onclick="change()">&nbsp;&nbsp;Y&nbsp;&nbsp;</button></td>
+	               <button class="btn1" id='btn3' onclick='changeBtnName()'>&nbsp;&nbsp;Y&nbsp;&nbsp;</button></td>
 	           </tr>
 	          </c:forEach>
 	        </tbody>
 	    </table>
 	</div>
 </div>
+
+<script>
+function changeBtnName()  {
+  const btnElement 
+    = document.getElementById('btn3');
+  
+  const html 
+    = '<div style="color:dark">&nbsp;&nbsp;N&nbsp;&nbsp; </div>';
+  
+  btnElement.innerHTML = html;
+}
+</script>
+
+
+
+
 
 
 <%-- <span class="isDeleted"> 
@@ -66,17 +83,17 @@ td {
 						</span>
  --%>
  
-<script>
+<!-- <script>
 function change() {
 const subs = document.getElementById("btn3")
 
 subs.addEventListener("click", function() {
     if(subs.innerText === 'Y') {
         subs.innerText = 'N';
-    } else subs.innerText ='Y';
+    }
 });
 
-</script> 
+</script>  -->
 
 
 
