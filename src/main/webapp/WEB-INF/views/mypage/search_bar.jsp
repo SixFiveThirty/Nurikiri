@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
@@ -10,11 +9,11 @@
 	background-color: #FEC25E;
 	border-radius: 0 10px 10px 0;
 }
+
 .search-keyword {
 	font-family: Poppins-Medium;
 	/* font-size: 14px; */
 	border-color: #fdc24d;
-	
 }
 
 .search-keyword:focus {
@@ -45,7 +44,7 @@
 	-moz-appearance: none;
 	appearance: none
 }
-  
+
 .form-select:focus {
 	border-color: #fdc24d;
 	outline: 0;
@@ -82,19 +81,14 @@
 </style>
 
 <div class="d-flex justify-content-between align-items-center my-4">
-
-<<<<<<< HEAD
-		<form id='searchform' method='get' class="d-flex">
-=======
-		<form id='searchform' modelAttribute="cri" method='get' class="d-flex">
->>>>>>> 2390e88bb2a189b42a6d89f68b492e6b06ba812b
-			<select name='type' class="form-select rounded-start">
-				<option value="T">상호명</option>
-				<option value="C">리뷰내용</option>
-			</select> <input type='text' name='keyword' class="search-keyword form-control rounded-0" />
-			<button type="submit" class="btn rounded-end" id="search-btn">
-				<i class="fa-solid fa-magnifying-glass"></i>
-			</button>
-		</form>
+	<form id='searchform' modelAttribute="cri" method='get' class="d-flex">
+		<select name='type' class="form-select rounded-start">
+			<option value="T">상호명</option>
+			<option value="C">리뷰내용</option>
+		</select> <input type='text' name='keyword' class="search-keyword form-control rounded-0" />
+		<button type="submit" class="btn rounded-end" id="search-btn">
+			<i class="fa-solid fa-magnifying-glass"></i>
+		</button>
+	</form>
 
 </div>
