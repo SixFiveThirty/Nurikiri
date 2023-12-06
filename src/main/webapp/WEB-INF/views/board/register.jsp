@@ -5,6 +5,15 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <%@ include file="../layouts/header.jsp"%>
+<style>
+.register-container {
+ max-width : 1000px;
+}
+
+</style>
+
+
+
 
 <script>
 $(document).ready(function(){
@@ -32,7 +41,7 @@ $(document).ready(function(){
 </script>
 
 <br>
-<div class = "container">
+<div class = "register-container container">
 	<div class="mx-5">
 		<br><h2 class="page-header"><i class="far fa-edit"></i> 공지사항 등록</h2>
 		<br>
@@ -67,13 +76,13 @@ $(document).ready(function(){
 				</div>
 			
 		 	
-		 	<button type="submit" class="btn btn-primary">
+		 	<button type="submit" class="btn btn-dark">
 		 	<i class="fas fa-check"></i>확인</button>
 		 	
-		 	<button type="reset" class="btn btn-primary">
+		 	<button type="reset" class="btn btn-dark">
 		 	<i class="fas fa-undo"></i>취소</button>
 		 	
-		 	<a href="javascript:history.back()" class="btn btn-primary">
+		 	<a href="javascript:history.back()" class="btn btn-dark">
 		 	<i class="fas fa-list"></i>목록</a>
 		 	
 		 	
