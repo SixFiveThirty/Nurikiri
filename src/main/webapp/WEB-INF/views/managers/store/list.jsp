@@ -31,11 +31,8 @@ td {
 
 <br><br><h1 style ="text-align: center">가맹점 관리 페이지</h1><br><br>
 
-<%@include file="../store/search_bar.jsp"%>
-
-
-
 	<div class="mx-5">
+	<%@include file="../store/search_bar.jsp"%>
 	   <table class="table table-hover">
 	       <thead>
 	           <tr>

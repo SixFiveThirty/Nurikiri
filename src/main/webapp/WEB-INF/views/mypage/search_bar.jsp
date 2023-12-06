@@ -83,7 +83,7 @@
 
 <div class="d-flex justify-content-between align-items-center my-4">
 
-		<form id='searchform' action="/store/list" method='get' class="d-flex">
+		<form id='searchform' modelAttribute="cri" method='get' class="d-flex">
 			<select name='type' class="form-select rounded-start">
 				<option value="T">상호명</option>
 				<option value="M">시장명</option>

@@ -47,7 +47,7 @@ function createReviewTemplate(review, writer, sno) {
 					</div>
 				</div>
 			</div>
-			<div class="review-body mx-5 text-right">
+			<div class="review-body my-3 mx-5 text-right">
 				<div class="review-content" onclick="uploadReview('${review.rno}')">${review.content}</div>
 			</div>
 			

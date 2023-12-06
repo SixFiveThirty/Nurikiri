@@ -327,6 +327,25 @@ const REVIEW_URL = '/api/store/review/';
 	background-color: #FDB54D;
 	text-align: center;
 }
+
+.review-content{
+	cursor:pointer;
+	
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.review-content:hover{
+	color:#FDB54D;
+}
+
+.review-container {max-width: 900px;
+	margin: 0 auto;}
+
+@media (max-width: 1600px) {
+  .review-container {max-width: 700px;}
+}
 </style>
 
 <div class="container">
@@ -386,12 +405,16 @@ const REVIEW_URL = '/api/store/review/';
 	</div>
 	<div class="foot-div mt-5">
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
-			<button type="button" class="btn btn-light mr-5" style="width: 200px" onclick="location.href='${cri.getLink('modify')}&sno=${store.sno}'">수정</button>
+			<button type="button" class="btn mr-5" style="width: 150px; color: white; background-color: #fdb54d" onclick="location.href='${cri.getLink('modify')}&sno=${store.sno}'">수정</button>
 		</sec:authorize>
-		<button type="button" class="btn btn-light" style="width: 200px" onclick="location.href='${cri.getLink('list')}'">목록</button>
+		<button type="button" class="btn" style="width: 150px; color: white; background-color: #fdb54d" onclick="location.href='${cri.getLink('list')}'">목록</button>
 	</div>
+	
+	<br>
+	<hr>
+	
 	<c:if test="${member.username != null }">
-		<button type="button" class="btn btn-light mr-5" style="width: 200px" onclick="uploadReceipt('${store.sno}')">영수증 인증</button>
+		<button type="button" class="btn mr-5" style="width: 160px; color: white; background-color: #fdb54d" onclick="uploadReceipt('${store.sno}')">영수증 인증</button>
 
 		<!-- 영수증 Modal 팝업창 -->
 		<div class="modal fade" id="receiptModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
@@ -409,7 +432,7 @@ const REVIEW_URL = '/api/store/review/';
 				<input type="file" id="fileItem" name='uploadFile' style="height: 30px;">
 				<div id="uploadResult"></div>
 				<div class="text-right">
-					<button class="btn btn-sm my-2 review-add-btn" style="color: white; background-color: #fdb54d"${member.username == null ? 'disabled' : '' }>
+					<button class="btn btn-sm my-2 review-add-btn" style="color: white; background-color: #fdb54d" ${member.username == null ? 'disabled' : '' }>
 						<i class="fa-regular fa-comment"></i> 리뷰 등록
 					</button>
 				</div>
@@ -424,7 +447,7 @@ const REVIEW_URL = '/api/store/review/';
 </h1>
 
 
-<div class="container my-5" style="width: 900px">
+<div class="review-container my-5">
 	<div class="review-list"></div>
 </div>
 
