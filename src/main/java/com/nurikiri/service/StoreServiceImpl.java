@@ -57,24 +57,7 @@ public class StoreServiceImpl implements StoreService {
 		//return mapper.getListWithPaging(cri);
 	}
 	
-	@Override
-	public List<StoreVO> getBookMarks(Criteria cri,Principal principal) {
-
-		log.info("getBookMarks");
-		String username = principal.getName();
-		long amount = cri.getAmount();
-		
-		List<StoreVO> list = mapper.getBookMarksList(username, cri);
-		
-		if (principal != null) {
-			List<Long> storeBookmarks = mapper.getStoreBookmarksList(principal.getName());
-			for (StoreVO store : list) {
-				store.setMyStoreBookmark(storeBookmarks.contains(store.getSno()));
-			}
-		}
-
-		return list;
-	}
+	
 
 	@Override
 	public void register(StoreVO store, MultipartFile thumbnail) throws Exception {
@@ -149,4 +132,32 @@ public class StoreServiceImpl implements StoreService {
 
 		return mapper.getTotalCount(cri);
 	}
+	
+	@Override
+	public List<StoreVO> getBookMarks(Criteria cri,Principal principal) {
+
+		log.info("getBookMarks");
+		String username = principal.getName();
+		int amount = cri.getAmount();
+		
+		List<StoreVO> list = mapper.getBookMarksList(username, cri);
+		
+		if (principal != null) {
+			List<Long> storeBookmarks = mapper.getStoreBookmarksList(principal.getName());
+			for (StoreVO store : list) {
+				store.setMyStoreBookmark(storeBookmarks.contains(store.getSno()));
+			}
+		}
+
+		return list;
+	}
+
+	@Override
+	public int bookmarkTotal(Criteria cri, Principal principal) {
+		log.info("get bookmarkTotal count");
+		String username = principal.getName();
+
+		return mapper.bookmarkTotalCount(username, cri);
+	}
+	
 }

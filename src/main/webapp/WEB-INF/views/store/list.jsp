@@ -1,4 +1,4 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
@@ -20,7 +20,8 @@
 <!-- <link href="../resources/lib/pestkit/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"> -->
 
 <!-- Customized Bootstrap Stylesheet -->
-<!-- <link href="../resources/css/pestkit/bootstrap.min.css" rel="stylesheet"> -->
+<!-- 문제가 일으키는 스타일 코드가 있는 곳  -->
+<link href="../resources/css/pestkit/bootstrap.min.css" rel="stylesheet">
 
 <!-- Template Stylesheet -->
 <link href="../resources/css/pestkit/style.css" rel="stylesheet">
@@ -31,6 +32,11 @@
 	<style>
 .fa-heart {
 	cursor: pointer;
+}
+.title{
+	white-space : nowrap;
+	overflow : hidden;
+	text-overflow : ellipsis;
 }
 </style>
 
@@ -105,14 +111,13 @@
 
 				<div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay=".5s">
 					<div class="blog-item">
-						<a class="store-link" href="${cri.getLink('get')}&sno=${store.sno}"> <img src="/store/image/thumbnail/${store.sno}"
-						class="img-fluid w-100 rounded-top" alt="" /></a>
+						<a class="store-link" href="${cri.getLink('get')}&sno=${store.sno}"> <img src="/store/image/thumbnail/${store.sno}" class="img-fluid w-100 rounded-top" alt="" /></a>
 						<div class="rounded-bottom bg-light">
 							<div class="p-4 pb-2">
-								<h4>${store.title}</h4>
+								<h4 class="title">${store.title}</h4>
 								<div style="text-align: right">
 									<span class="storeAvgRate mr-3">
-										<i class="fa-solid fa-star" style="color: #f9ba48"></i> ${store.avgRate} 점
+										<i class="fa-solid fa-star" style="color: #f9ba48"></i> ${store.avgRate}
 									</span>
 									<span class="storeBookmark">
 										<i class="${store.myStoreBookmark ? 'fa-solid' : 'fa-regular' } fa-heart text-danger"
@@ -123,7 +128,7 @@
 							</div>
 						</div>
 						<div class="p-4 py-2 mb-5 d-flex justify-content-between rounded-bottom blog-btn btn-color">
-							<a><i class="fa fa-comments me-2"></i> ${store.reviewCount} Comments</a>
+							<a><i class="fa fa-comments me-2"></i>${store.reviewCount} Reviews</a>
 						</div>
 					</div>
 				</div>
@@ -135,10 +140,8 @@
 
 <%@ include file="../layouts/footer.jsp"%>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script> -->
 <script src="../resources/lib/pestkit/wow/wow.min.js"></script>
 <script src="../resources/lib/pestkit/easing/easing.min.js"></script>
 <script src="../resources/lib/pestkit/waypoints/waypoints.min.js"></script>
 <script src="/resources/js/main.js"></script>
- --%>
-<%@ include file="list_test.jsp"%>

@@ -18,11 +18,42 @@
 	font-family: Poppins-Medium;
 	font-size: 14px;
 }
+
+.page-item {
+  &:first-child {
+    .page-link {
+      margin-left: 0;
+      @include border-left-radius($border-radius);
+    }
+  }
+  &:last-child {
+    .page-link {
+      @include border-right-radius($border-radius);
+    }
+  }
+
+  &.active .page-link {
+    z-index: 3;
+    color: $pagination-active-color;
+    background-color: #FDB54D;
+    border-color: #FDB54D;
+  }
+  .page-link {
+  position: relative;
+  display: block;
+  padding: $pagination-padding-y $pagination-padding-x;
+  margin-left: -$pagination-border-width;
+  line-height: $pagination-line-height;
+  color: #FDB54D;
+  text-decoration: if($link-decoration == none, null, none);
+  background-color: $pagination-bg;
+  border: $pagination-border-width solid $pagination-border-color;
+  }
 </style>
 
 <div class="d-flex justify-content-between align-items-center my-4">
 
-		<form id='searchform' action="/store/list" method='get' class="d-flex">
+		<form id='searchform' method='get' class="d-flex">
 			<select name='type' class="form-select">
 				<option value="I">유저ID</option>
 				<option value="N">유저이름</option>

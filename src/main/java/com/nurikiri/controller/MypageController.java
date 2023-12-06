@@ -43,19 +43,27 @@ public class MypageController {
 	public void review(@ModelAttribute("cri") Criteria cri, Principal principal, Model model) {
 		log.info("mypage_review page");
 		
-		int total = reviewservice.getTotal(cri);
-		model.addAttribute("list", reviewservice.getList(cri, principal));
+		int total = reviewservice.reviewTotal(cri, principal);
+		model.addAttribute("list", reviewservice.myReviewList(cri, principal));
 		model.addAttribute("pageMaker", new PageDTO(cri, total)); // 나중에 123 -> total로 수정한다고 하심.
+	}
+	
+	@GetMapping({ "/reviews/get" })
+	public void get(@RequestParam("rno") Long rno, @ModelAttribute("cri") Criteria cri, Model model) {
+		log.info("get");
+		model.addAttribute("review", reviewservice.get(rno));		
 	}
 	
 	
 	@GetMapping("/bookmarks")
 	public void favorit(@ModelAttribute("cri") Criteria cri,Principal principal, Model model) {
-		log.info("get : mypage_favorit page");
-		int total = storeService.getTotal(cri);
-		
+		int total = storeService.bookmarkTotal(cri,principal); 
+		log.info("get : my_bookmarks page " + total);
 		model.addAttribute("list", storeService.getBookMarks(cri, principal));
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
+	
+	
+
 
 }

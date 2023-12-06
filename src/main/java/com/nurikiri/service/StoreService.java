@@ -27,4 +27,6 @@ public interface StoreService {
 	
 	public List<StoreVO> getBookMarks(Criteria cri, Principal principal);
 	
+	public int bookmarkTotal(Criteria cri,Principal principal);
+	
 }

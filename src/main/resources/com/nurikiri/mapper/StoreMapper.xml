@@ -131,8 +131,13 @@
 	<select id="getBookMarksList" parameterType="map" resultType="StoreVO">
 		select * from view_my_bookmarks_reviews
 		where username = #{username}
-		order by sno DESC
+		order by sno
 		limit #{cri.offset}, #{cri.amount}
+	</select>
+	
+	<select id="bookmarkTotalCount" resultType="int">
+		select count(*) from view_my_bookmarks_reviews
+		where username = #{username}
 	</select>
 		
 </mapper>

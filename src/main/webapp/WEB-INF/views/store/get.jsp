@@ -359,9 +359,9 @@ const REVIEW_URL = '/api/store/review/';
 							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 							<div class="slick3 gallery-lb">
-								<div class="item-slick3" data-thumb="/resources/images/product-detail-01.jpg">
+								<div class="item-slick3">
 									<div class="wrap-pic-w pos-relative">
-										<img src="/resources/images/product-detail-01.jpg" alt="IMG-PRODUCT">
+										<img src="/store/image/thumbnail/${store.sno}" class="img-fluid w-100 rounded-top" alt="" /></a>
 									</div>
 								</div>
 
