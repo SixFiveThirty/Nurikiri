@@ -46,76 +46,76 @@
 	margin-bottom: 16px;
 }
 </style>
-
+<div class="container">
 <br>
-<h1 class="page-header">
-	<i class="far fa-edit"></i> Editor Register
-</h1>
-
-<div class="panel panel-default">
-	<div class="panel-body">
-		<form:form modelAttribute="editor" role="form"
-			action="?_csrf=${_csrf.token}" enctype="multipart/form-data">
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-
-			<!-- method가 default로 post -->
-			<form:hidden path="writer" value="${member.username}" />
-
-			<div class="form-group">
-				<form:label path="title">제목</form:label>
-				<form:input path="title" cssClass="form-control" />
-				<form:errors path="title" cssClass="error" />
-			</div>
-			<div class="form-group">
-				<div class="thumbnail_title">가맹점 사진 등록</div>
-				<input type="file" name="thumbnail" class="thumbnail" />
-			</div>
-			<div class="form-group">
-				<form:label path="content">내용</form:label>
-				<form:textarea path="content" cssClass="form-control"></form:textarea>
-				<form:errors path="content" cssClass="error" />
-			</div>
-			<div class="form-group">
-				<form:label path="storeName">가맹점 이름</form:label>
-				<form:input path="storeName" cssClass="form-control" />
-				<form:errors path="storeName" cssClass="error" />
-			</div>
-			<div class="form-group">
-				<form:label path="market">소속 시장</form:label>
-				<form:input path="market" cssClass="form-control" />
-				<form:errors path="market" cssClass="error" />
-			</div>
-			<div class="form-group">
-				<form:label path="address">주소</form:label>
-				<form:input path="address" cssClass="form-control" />
-				<form:errors path="address" cssClass="error" />
-			</div>
-			<div class="form-group">
-				<form:label path="item">취급품목</form:label>
-				<form:input path="item" cssClass="form-control" />
-				<form:errors path="item" cssClass="error" />
-			</div>
-			<div class="form-group">
-				<form:label path="link">상세페이지</form:label>
-				<form:input path="link" cssClass="form-control" />
-				<form:errors path="link" cssClass="error" />
-			</div>
-			<div class="form-group">
-				<form:label path="phone">연락처</form:label>
-				<form:input path="phone" cssClass="form-control" />
-			</div>
-			<button type="submit" class="btn btn-primary">
-				<i class="fas fa-check"></i> 확인
-			</button>
-			<button type="reset" class="btn btn-primary">
-				<i class="fas fa-undo"></i> 취소
-			</button>
-			<a href="javascript:history.back()" class="btn btn-primary"> <i
-				class="fas fa-list"></i> 목록
-			</a>
-		</form:form>
+	<h1 class="page-header">
+		<i class="far fa-edit"></i> Editor Register
+	</h1>
+<br>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<form:form modelAttribute="editor" role="form"
+				action="?_csrf=${_csrf.token}" enctype="multipart/form-data">
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+	
+				<!-- method가 default로 post -->
+				<form:hidden path="writer" value="${member.username}" />
+	
+				<div class="form-group">
+					<form:label path="title">제목</form:label>
+					<form:input path="title" cssClass="form-control" />
+					<form:errors path="title" cssClass="error" />
+				</div>
+				<div class="form-group">
+					<div class="thumbnail_title">가맹점 사진 등록</div>
+					<input type="file" name="thumbnail" class="thumbnail" />
+				</div>
+				<div class="form-group">
+					<form:label path="content">내용</form:label>
+					<form:textarea path="content" cssClass="form-control"></form:textarea>
+					<form:errors path="content" cssClass="error" />
+				</div>
+				<div class="form-group">
+					<form:label path="storeName">가맹점 이름</form:label>
+					<form:input path="storeName" cssClass="form-control" />
+					<form:errors path="storeName" cssClass="error" />
+				</div>
+				<div class="form-group">
+					<form:label path="market">소속 시장</form:label>
+					<form:input path="market" cssClass="form-control" />
+					<form:errors path="market" cssClass="error" />
+				</div>
+				<div class="form-group">
+					<form:label path="address">주소</form:label>
+					<form:input path="address" cssClass="form-control" />
+					<form:errors path="address" cssClass="error" />
+				</div>
+				<div class="form-group">
+					<form:label path="item">취급품목</form:label>
+					<form:input path="item" cssClass="form-control" />
+					<form:errors path="item" cssClass="error" />
+				</div>
+				<div class="form-group">
+					<form:label path="link">상세페이지</form:label>
+					<form:input path="link" cssClass="form-control" />
+					<form:errors path="link" cssClass="error" />
+				</div>
+				<div class="form-group">
+					<form:label path="phone">연락처</form:label>
+					<form:input path="phone" cssClass="form-control" />
+				</div>
+				<button type="submit" class="btn btn-primary">
+					<i class="fas fa-check"></i> 확인
+				</button>
+				<button type="reset" class="btn btn-primary">
+					<i class="fas fa-undo"></i> 취소
+				</button>
+				<a href="javascript:history.back()" class="btn btn-primary"> <i
+					class="fas fa-list"></i> 목록
+				</a>
+			</form:form>
+		</div>
 	</div>
 </div>
-
 <%@ include file="../../layouts/footer.jsp"%>

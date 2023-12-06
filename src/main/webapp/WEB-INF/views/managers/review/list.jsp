@@ -36,35 +36,42 @@ $(document).ready(async function() {
 	loadReviews(sno, writer);
 });
 </script> -->
-<h1 style="text-align: center">리뷰 관리</h1>
+
+
+
 
 <div class="container">
-	<table class="table table-striped table-hover" id="listTable">
-		<thead>
-			<tr>
-				<th style="text-align: center; width: 60px;">No</th>
-				<th style="text-align: center; width: 150px;">가맹점 번호</th>
-				<th style="text-align: center;">리뷰 내용</th>
-				<th style="text-align: center; width: 100px;">작성자</th>
-				<th style="text-align: center; width: 150px;">작성일자</th>
-				<!-- <th style="text-align: center; width: 100px;">리뷰 삭제</th> -->
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="review" items="${list}">
+	<h1 class="my-5" style="text-align: center">리뷰 관리</h1><br><br>
+		<div class="mx-5">
+		<%@include file="../review/search_bar.jsp"%>
+		
+		<table class="table table-striped table-hover" id="listTable">
+			<thead>
 				<tr>
-					<td style="text-align: center; width: 60px;">${review.rno}</td>
-					<td style="text-align: center; width: 150px;">${review.sno}</td>
-					<td style="text-align: center;"><a href="get?rno=${review.rno}"> ${review.content} </a></td>
-					<td style="text-align: center; width: 150px;">${review.writer}</td>
-					<td style="text-align: center; width: 100px;"><fmt:formatDate
-							pattern="yyyy.MM.dd" value="${review.regDate}" /></td>
-					<%-- <td><button type="button" class="btn btn-danger remove" style="width: 100px" onclick="location.href='remove&sno=${review.sno}'">삭제</button> --%>
-					<!-- <td><button type="button" class="btn btn-danger remove" style="width: 100px" onclick="delete()">삭제</button> -->
+					<th style="text-align: center; width: 60px;">No</th>
+					<th style="text-align: center; width: 150px;">가맹점 번호</th>
+					<th style="text-align: center;">리뷰 내용</th>
+					<th style="text-align: center; width: 100px;">작성자</th>
+					<th style="text-align: center; width: 150px;">작성일자</th>
+					<!-- <th style="text-align: center; width: 100px;">리뷰 삭제</th> -->
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<c:forEach var="review" items="${list}">
+					<tr>
+						<td style="text-align: center; width: 60px;">${review.rno}</td>
+						<td style="text-align: center; width: 150px;">${review.sno}</td>
+						<td style="text-align: center;"><a href="get?rno=${review.rno}"> ${review.content} </a></td>
+						<td style="text-align: center; width: 150px;">${review.writer}</td>
+						<td style="text-align: center; width: 100px;"><fmt:formatDate
+								pattern="yyyy.MM.dd" value="${review.regDate}" /></td>
+						<%-- <td><button type="button" class="btn btn-danger remove" style="width: 100px" onclick="location.href='remove&sno=${review.sno}'">삭제</button> --%>
+						<!-- <td><button type="button" class="btn btn-danger remove" style="width: 100px" onclick="delete()">삭제</button> -->
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 </div>
 
 <%-- <form action="remove" method="post" name="removeForm">
