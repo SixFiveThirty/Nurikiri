@@ -17,20 +17,23 @@ a.page-link {
 	color: #FEC25E;
 }
 
+.board-container {
+ max-width : 1000px;
+ 
+
+}
+
 </style>
 
-<div class = "container">
+<div class = "board-container container">
 <br>
 	<center><h2 class="title">공지사항</h2></center><br>
 	<center><div class="desc">
 	<p class="txt">누리끼리의 소식을 안내해 드립니다.</p>
 	</div></center>
 			
-
-<%@include file="../board/search_bar.jsp"%>
-
-
 	<div class="mx-5">
+	<%@include file="../board/search_bar.jsp"%>
 		<table class="table table-striped table-hover">
 			<thead>
 				<tr>
