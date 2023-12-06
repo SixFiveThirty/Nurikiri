@@ -82,6 +82,7 @@ async function deleteReviews(rno) {
 	<div class="d-flex justify-content-between">
 		<div class="flex-w flex-t pb-30">
 			<div class="wrap-pic-s size-109 bor0 of-hidden m-r-10 m-t-12">
+				<%-- <img src="/security/avatar/sm/${review.writer}"> --%>
 				<img src="/security/avatar/sm/${review.writer}">
 			</div>
 			<div class="size-207">
@@ -112,11 +113,7 @@ async function deleteReviews(rno) {
 		</div>
 	</div>
 	
-	<div class="card mt-5">
-		<div class="card-content">
-			<p>${review.content}</p>
-		</div>
-	</div>
+	<p>${review.content}</p>
 		
 	<%-- <sec:authorize access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')">
 		<div class="foot-div mt-5">
