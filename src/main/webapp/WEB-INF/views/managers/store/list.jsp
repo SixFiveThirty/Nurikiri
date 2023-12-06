@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <%@ include file="../../layouts/header.jsp"%>
 
 <style>
@@ -33,6 +34,7 @@ td {
 
 	<div class="mx-5">
 	<%@include file="../store/search_bar.jsp"%>
+	
 	   <table class="table table-hover">
 	       <thead>
 	           <tr>
@@ -44,17 +46,17 @@ td {
 	           </tr>
 	       </thead>
 	       <tbody>
-	       <c:forEach items="${list}" var="store">
-	           <tr>
-	               <td style="text-align : center; vertical-align : middle; width: 60px;">${store.sno} </td>
-	               <td style="text-align: center ; vertical-align : middle;"><a href="/store/get?sno=${store.sno}">${store.title}</a></td>
-	               <td style="text-align: center; vertical-align : middle; width: 100px;"><fmt:formatDate pattern="yyyy" value="${store.regDate}"/></td>
-	               <td style="text-align: center; vertical-align : middle;"><button class="btn1" onclick="location.href='/store/modify?sno=${store.sno}'">&nbsp;수정&nbsp;</button></td>
-	               <td style="text-align: center; vertical-align : middle; width: 150px;">
-	               <button class="btn1" id="btn3" onclick="change()">&nbsp;&nbsp;Y&nbsp;&nbsp;</button></td>
-	           </tr>
-	          </c:forEach>
-	        </tbody>
+		       <c:forEach items="${list}" var="store">
+		           <tr>
+		               <td style="text-align : center; vertical-align : middle; width: 60px;">${store.sno} </td>
+		               <td style="text-align: center ; vertical-align : middle;"><a href="/store/get?sno=${store.sno}">${store.title}</a></td>
+		               <td style="text-align: center; vertical-align : middle; width: 100px;"><fmt:formatDate pattern="yyyy" value="${store.regDate}"/></td>
+		               <td style="text-align: center; vertical-align : middle;"><button class="btn1" onclick="location.href='/store/modify?sno=${store.sno}'">&nbsp;수정&nbsp;</button></td>
+		               <td style="text-align: center; vertical-align : middle; width: 150px;">
+		               <button class="btn1" id="btn3" onclick="change()">&nbsp;&nbsp;Y&nbsp;&nbsp;</button></td>
+		           </tr>
+		    	</c:forEach>
+	    	</tbody>
 	    </table>
 	</div>
 </div>

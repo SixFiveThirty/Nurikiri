@@ -219,7 +219,7 @@
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li><a href="/board/list">공지사항</a></li>
-							<li class="label1" data-label1="hot"><a href="/store/list">가맹점찾기</a></li>
+							<li><a href="/store/list">가맹점찾기</a></li>
 							<li><a href="/introduction/get">서비스소개</a></li>
 							<sec:authorize access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')">
 								<li><a href="/managers/managers_list">관리자</a></li>
@@ -320,7 +320,7 @@
 			</ul> --%>
 			<ul class="main-menu-m">
 				<li><a href="/board/list">공지사항</a></li>
-				<li class="label1" data-label1="hot"><a href="/store/list">가맹점찾기</a></li>
+				<li><a href="/store/list">가맹점찾기</a></li>
 				<li><a href="/introduction/get">서비스소개</a></li>
 				<sec:authorize access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')">
 				<li><a href="/managers/managers_list">관리자</a></li>

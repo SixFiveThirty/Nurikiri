@@ -90,5 +90,6 @@
 			<i class="fa-solid fa-magnifying-glass"></i>
 		</button>
 	</form>
-
+	
+	<div class="mx-5">전체 ${pageMaker.total} 건</div>
 </div>
