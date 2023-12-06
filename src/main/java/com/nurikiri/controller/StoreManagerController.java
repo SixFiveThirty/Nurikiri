@@ -38,8 +38,10 @@ public class StoreManagerController {
 	@GetMapping("/list")
 	public void list(@ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("list: " + cri);
+		int total = service.getTotal(cri);
+		
 		model.addAttribute("list", service.storeManagerList(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri, 123)); //나중에 123 -> total로 수정한다고 하심.
+		model.addAttribute("pageMaker", new PageDTO(cri, total)); //나중에 123 -> total로 수정한다고 하심.
 	
 	}
 }

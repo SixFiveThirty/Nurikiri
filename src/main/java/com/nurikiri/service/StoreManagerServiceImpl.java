@@ -30,6 +30,13 @@ public class StoreManagerServiceImpl implements StoreManagerService{
 		log.info("update");
 		 mapper.update(sno, isDeleted);
 	}
+	
+	@Override
+	public int getTotal(Criteria cri) {
+		log.info("get total count");
+
+		return mapper.getTotalCount(cri);
+	}
 }
 
 	
