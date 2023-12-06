@@ -16,7 +16,7 @@ import lombok.extern.log4j.Log4j;
 @Service
 @AllArgsConstructor
 public class StoreReviewServiceImpl implements StoreReviewService {
-
+	public static final String THUMBNAIL_UPLOAD_DIR = "/Users/hayoon/nurikiri_image/store_review";
 
 	private StoreReviewMapper mapper;
 
