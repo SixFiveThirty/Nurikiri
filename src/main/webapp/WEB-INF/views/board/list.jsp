@@ -17,9 +17,15 @@ a.page-link {
 	color: #FEC25E;
 }
 
+.board-container {
+ max-width : 1000px;
+ 
+
+}
+
 </style>
 
-<div class = "container">
+<div class = "board-container container">
 <br>
 	<center><h2 class="title">공지사항</h2></center><br>
 	<center><div class="desc">

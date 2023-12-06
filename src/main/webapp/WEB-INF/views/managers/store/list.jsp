@@ -26,9 +26,15 @@ td {
   vertical-align : middle;
 }
 
+.store-container {
+ max-width : 1000px;
+ 
+
+}
+
 </style>
 
-<div class="container">
+<div class="store-container container">
 
 <br><br><h1 style ="text-align: center">가맹점 관리 페이지</h1><br><br>
 
