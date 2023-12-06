@@ -9,11 +9,15 @@
 .page-item.active .page-link {
     z-index: 3;
     color: white;
-    background-color: #FEC25E;
-    border-color: #FEC25E;
+    background-color: #FDB54D;
+    border-color: #FDB54D;
 }
 .page-link {
-    color: #FEC25E;
+    color: #FDB54D;
+}
+
+.page-link:hover {
+    color: #FDB54D;
 }
 
 </style>
