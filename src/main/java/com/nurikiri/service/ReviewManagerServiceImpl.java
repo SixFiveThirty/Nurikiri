@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.mysql.cj.callback.UsernameCallback;
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.ReviewManagerVO;
 import com.nurikiri.domain.ReviewVO;
@@ -47,5 +48,22 @@ public class ReviewManagerServiceImpl implements ReviewManagerService {
 
 		return mapper.getTotalCount(cri);
 	}
+
+	@Override
+	public List<ReviewManagerVO> myReviewList(Criteria cri, Principal principal) {
+		log.info("myReviewList with citeria: " + cri);
+		String username = principal.getName();
+		cri.setAmount(8);
+		return mapper.getListWithMypagePaging(username, cri);
+	}
+
+	@Override
+	public int reviewTotal(Criteria cri, Principal principal) {
+		log.info("get bookmarkTotal count");
+		String username = principal.getName();
+
+		return mapper.myReviewTotalCount(username, cri);
+	}
+	
 
 }

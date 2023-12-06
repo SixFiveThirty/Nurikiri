@@ -1,4 +1,3 @@
-<%-- 
 <%@page import="com.nurikiri.domain.MemberVO"%>
 <%@page import="com.nurikiri.domain.AuthVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -42,91 +41,104 @@ $(document).ready(async function() {
 		
 	});
 });
-
-
 </script>
+
+<style>
+.modify {
+	width: 80px;
+	margin: auto;
+	display: block;
+}
+
+.changeState {
+	width: 80px;
+	margin: auto;
+	display: block;
+}
+
+.gi {
+	display: flex;
+}
+.page-link {
+  position: relative;
+  display: block;
+  padding: $pagination-padding-y $pagination-padding-x;
+  margin-left: -$pagination-border-width;
+  line-height: $pagination-line-height;
+  color: $pagination-color;
+  text-decoration: if($link-decoration == none, null, none);
+  background-color: $pagination-bg;
+  border: $pagination-border-width solid $pagination-border-color;
+
+</style>
+
+
 <div class="container">
 
-	<h1 class="page-header">
-		<i class="fas fa-list"></i> 회원 목록
-	</h1>
+	<h1 style="text-align: center">회원 목록</h1>
+	<!-- Shoping Cart -->
+	<form class="bg0 p-t-75 p-b-85">
 
-	<%@ include file="../../common/search_bar.jsp"%>
+		<!-- <div class="row"> -->
 
+		<div class="col-lg-12 col-xl-9 m-lr-auto m-b-50">
+			<div class="gi">
+				<%@ include file="search_bar.jsp"%>
+			</div>
 
+			<div>
+				<div class="wrap-table-shopping-cart">
 
-	<table class="table table-striped table-hover">
-		<thead>
-			<tr>
-				<th style="width: 130px">유저 ID</th>
-				<th style="width: 130px">유저 닉네임</th>
-				<th>유저권한</th>
-				<th style="width: 130px">가입날짜</th>
-				<th style="width: 130px">회원정보 수정</th>
-				<th style="width: 130px">회원정보 삭제</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="member" items="${list}">
-				<c:if test="${member.isDeleted eq '0'}">
-					<tr>
-						<td>${member.username}</td>
-						<td>${member.name}</td>
-						<td><select class="changeAuth">
-								<option value="" selected disable hidden>${member.auth}</option>
-								<option value="ROLE_USER" data-username="${member.username}">USER</option>
-								<option value="ROLE_MANAGER" data-username="${member.username}">MANAGER</option>
-								<option value="ROLE_ADMIN" data-username="${member.username}">ADMIN</option>
-						</select></td>
-						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.regDate}" /></td>
-						<td>
-							<button type="button" class="btn btn-light mr-5" data-username="${member.username}" style="width: 200px" onclick="location.href='/security/modify'">수정</button>
-						</td>
-						<td><button type="button" class="btn btn-danger changeState" data-username="${member.username}">
-								<i class="fas fa-trash-alt"></i> 삭제
-							</button></td>
-						<td><button type="button" class="btn btn-danger remove"
-							data-username="${member.username}">
-							<i class="fas fa-trash-alt"></i> 삭제
-						</button></td>
-					</tr>
-				</c:if>
-			</c:forEach>
-		</tbody>
-	</table>
+					<table class="table-shopping-cart">
+
+						<tr class="table_head">
+							<th class="column-1">유저 ID</th>
+							<th class="column-1">이름</th>
+							<th class="column-1">유저 권한</th>
+							<th class="column-1">가입날짜</th>
+							<th class="column-1">회원정보 수정</th>
+							<th class="column-1">회원정보 삭제</th>
+						</tr>
+
+						<c:forEach var="member" items="${list}">
+							<c:if test="${member.isDeleted eq '0'}">
+								<tr class="table_row">
+
+									<td class="column-1">${member.username}</td>
+									<td class="column-1">${member.name}</td>
+									<td class="column-1"><select class="changeAuth">
+											<option value="" selected disable hidden>${member.auth}</option>
+											<option value="ROLE_USER" data-username="${member.username}">USER</option>
+											<option value="ROLE_MANAGER" data-username="${member.username}">MANAGER</option>
+											<option value="ROLE_ADMIN" data-username="${member.username}">ADMIN</option>
+									</select></td>
+									<td class="column-1"><fmt:formatDate pattern="yyyy-MM-dd" value="${member.regDate}" /></td>
+									<td class="column-1"><button type="button" class="btn btn-light modify" data-username="${member.username}" onclick="location.href='/security/modify'">수정</button></td>
+									<td class="column-1"><button type="button" class="btn btn-danger changeState" data-username="${member.username}">
+											<i class="fas fa-trash-alt"></i>
+										</button></td>
+								</tr>
+							</c:if>
+						</c:forEach>
+					</table>
+				</div>
+			</div>
+		</div>
+	</form>
 </div>
+
+
 <form action="remove" method="post" name="removeForm">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-	<input type="hidden" name="username" class="delete_userName" />
-	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
-	<input type="hidden" name="amount" value="${cri.amount}" />
-	<input type="hidden" name="type" value="${cri.type}" />
-	<input type="hidden" name="keyword" value="${cri.keyword}" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <input type="hidden" name="username" class="delete_userName" /> <input type="hidden" name="pageNum" value="${cri.pageNum}" /> <input type="hidden" name="amount" value="${cri.amount}" /> <input type="hidden" name="type" value="${cri.type}" /> <input type="hidden" name="keyword" value="${cri.keyword}" />
 </form>
 
 <form action="changeAuth" method="post" name="changeAuthForm">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-	<input type="hidden" name="username" class="change_username" />
-	<input type="hidden" name="auth" class="change_auth" />
-	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
-	<input type="hidden" name="amount" value="${cri.amount}" />
-	<input type="hidden" name="type" value="${cri.type}" />
-	<input type="hidden" name="keyword" value="${cri.keyword}" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <input type="hidden" name="username" class="change_username" /> <input type="hidden" name="auth" class="change_auth" /> <input type="hidden" name="pageNum" value="${cri.pageNum}" /> <input type="hidden" name="amount" value="${cri.amount}" /> <input type="hidden" name="type" value="${cri.type}" /> <input type="hidden" name="keyword" value="${cri.keyword}" />
 </form>
 
 <form action="changeState" method="post" name="changeStateForm">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-	<input type="hidden" name="username" class="change_username" />
-	<input type="hidden" name="isDeleted" class="change_state" />
-	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
-	<input type="hidden" name="amount" value="${cri.amount}" />
-	<input type="hidden" name="type" value="${cri.type}" />
-	<input type="hidden" name="keyword" value="${cri.keyword}" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <input type="hidden" name="username" class="change_username" /> <input type="hidden" name="isDeleted" class="change_state" /> <input type="hidden" name="pageNum" value="${cri.pageNum}" /> <input type="hidden" name="amount" value="${cri.amount}" /> <input type="hidden" name="type" value="${cri.type}" /> <input type="hidden" name="keyword" value="${cri.keyword}" />
 </form>
 <%@ include file="../../common/pagination.jsp"%>
 
 <%@ include file="../../layouts/footer.jsp"%>
-  --%>
-<%@ include file="list_test.jsp"%>
-
-

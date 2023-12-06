@@ -63,6 +63,7 @@
 
 	<select id="getList" resultType="MemberVO">
 		select * from member
+		where is_deleted = 0
 		<where>
 			<include refid="criteria"></include>
 		</where>
@@ -85,10 +86,11 @@
 	<select id="getListWithPaging" resultType="MemberVO">
 		select * from view_member
 		<where>
+			is_deleted = 0
 			<include refid="criteria"></include>
 		</where>
 		order by username
-		limit #{offset} , #{amount}
+		limit #{offset} , 8
 	</select>
 	
 	<select id="changeAuth">
@@ -111,9 +113,9 @@
 				<trim prefix="OR">
 					<choose>
 						<when test="type == 'I'.toString()">
-							username like CONCAT('%', #{keyword}, '%') </when>
+							and username like CONCAT('%', #{keyword}, '%') </when>
 						<when test="type == 'N'.toString()">
-							name like CONCAT('%', #{keyword}, '%') </when>
+							and name like CONCAT('%', #{keyword}, '%') </when>
 					</choose>
 				</trim>
 			</foreach>

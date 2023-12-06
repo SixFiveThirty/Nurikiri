@@ -22,4 +22,7 @@ public interface ReviewManagerService {
 	
 	public int getTotal(Criteria cri);
 	
+	public List<ReviewManagerVO> myReviewList(Criteria cri, Principal principal);
+	
+	public int reviewTotal(Criteria cri, Principal principal);
 }

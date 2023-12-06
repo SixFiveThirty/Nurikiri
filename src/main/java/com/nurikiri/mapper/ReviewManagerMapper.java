@@ -2,6 +2,8 @@ package com.nurikiri.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.nurikiri.domain.Criteria;
 import com.nurikiri.domain.ReviewManagerVO;
 
@@ -22,6 +24,7 @@ public interface ReviewManagerMapper {
 	
 	public int update(ReviewManagerVO review);
 	
-	public List<ReviewManagerVO> getListWithMypagePaging(Criteria cri);
+	public List<ReviewManagerVO> getListWithMypagePaging(@Param("username") String username, @Param("cri") Criteria cri);
 	
+	public int myReviewTotalCount(@Param("username") String username, @Param("cri") Criteria cri);
 }

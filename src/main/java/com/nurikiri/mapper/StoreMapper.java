@@ -33,4 +33,6 @@ public interface StoreMapper {
 	public int addStoreBookmark(StoreBookmarkVO storeBookmark);
 
 	public int deleteStoreBookmark(StoreBookmarkVO storeBookmark);
+	
+	public int bookmarkTotalCount(@Param("username") String username, @Param("cri") Criteria cri);
 }

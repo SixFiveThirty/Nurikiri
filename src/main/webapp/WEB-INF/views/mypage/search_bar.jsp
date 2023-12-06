@@ -83,11 +83,10 @@
 
 <div class="d-flex justify-content-between align-items-center my-4">
 
-		<form id='searchform' action="/store/list" method='get' class="d-flex">
+		<form id='searchform' method='get' class="d-flex">
 			<select name='type' class="form-select rounded-start">
 				<option value="T">상호명</option>
-				<option value="M">시장명</option>
-				<option value="A">지역명</option>
+				<option value="C">리뷰내용</option>
 			</select> <input type='text' name='keyword' class="search-keyword form-control rounded-0" />
 			<button type="submit" class="btn rounded-end" id="search-btn">
 				<i class="fa-solid fa-magnifying-glass"></i>
