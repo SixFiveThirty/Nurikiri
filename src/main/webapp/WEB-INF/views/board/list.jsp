@@ -5,67 +5,64 @@
 <%@ include file="../layouts/header.jsp"%>
 
 <style>
-/* .#top a {      
-position:fixed; bottom:5px; right:15px; z-index:5;     
-font-size:30px; color:#fff; text-shadow:rgba(0, 0, 0, 0.3) 1px 1px 2px, rgba(0, 0, 0, 0.3) 0 0 10px;"}   */ 
 
-/* .btn {
-background-color : #FDB54D;
+.page-item.active .page-link {
+    z-index: 3;
+    color: white;
+    background-color: #FEC25E;
+    border-color: #FEC25E;
+}
 
-} */
-
+a.page-link {
+	color: #FEC25E;
+}
 
 </style>
+
+<div class = "container">
 <br>
-<center><h2 class="title">공지사항</h2></center><br>
-<center><div class="desc">
-<p class="txt">누리끼리의 소식을 안내해 드립니다.</p>
-</div></center>
+	<center><h2 class="title">공지사항</h2></center><br>
+	<center><div class="desc">
+	<p class="txt">누리끼리의 소식을 안내해 드립니다.</p>
+	</div></center>
 			
 
 <%@include file="../board/search_bar.jsp"%>
 
-<div class = "container">
-	<table class="table table-striped table-hover">
-		<thead>
-			<tr>
-				<th style="width: 60px">No</th>
-				<th>제목</th>
-				<th style="width: 120px">등록일</th>
-				<th style="width: 110px">작성자</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="board" items="${list}">
+
+	<div class="mx-5">
+		<table class="table table-striped table-hover">
+			<thead>
 				<tr>
-					<td>${board.bno}</td>
-					<td><a class="move" href="${cri.getLinkWithBno('get', board.bno)}">${board.title}</a></td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd"
-							value="${board.regDate}" /></td>
-					<td>${board.writer}</td>
+					<th style="width: 60px">No</th>
+					<th>제목</th>
+					<th style="width: 120px">등록일</th>
+					<th style="width: 110px">작성자</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	
-	<sec:authorize access="hasRole('MANAGER')">
-	<div class="text-right mr-3">
-		<a href="register" class="btn btn primary"> <i class="far fa-edit"></i>글쓰기
-		</a>
+			</thead>
+			<tbody>
+				<c:forEach var="board" items="${list}">
+					<tr>
+						<td>${board.bno}</td>
+						<td><a class="move" href="${cri.getLinkWithBno('get', board.bno)}">${board.title}</a></td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regDate}" /></td>
+						<td>${board.writer}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		
+		<sec:authorize access="hasRole('MANAGER')">
+		<div class="text-right mr-3">
+			<a href="register" class="btn btn-dark" > <i class="far fa-edit"></i>글쓰기
+			</a> 
+		</div>
+		</sec:authorize>
 	</div>
-	</sec:authorize>
 </div>
 
-<!-- 위로 가는 버튼 -->
-<div id="top"><a href="#"><i class="fa fa-arrow-up"></i></a></div>
-<script>   
- $('#top').click(function(){$('html, body').animate({scrollTop:0}, 'slow');});
-</script>
-<!-- // 위로 가는 버튼 --> 
 
 
-
-	                                            
 
 <%@ include file="../common/pagination.jsp"%>
 <%@ include file="../layouts/footer.jsp"%>
