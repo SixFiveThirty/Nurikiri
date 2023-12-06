@@ -86,9 +86,6 @@
 </style>
 
 <div class="d-flex justify-content-between align-items-center my-4">
-	<div class="mx-5">
-		<div margin-left="auto" style="float:right">
-		전체 ${pageMaker.total} 건 </div>
 		<form id='searchform' modelAttribute="cri" method='get' class="d-flex">
 			<select name='type' class="form-select1 rounded-start">
 				<option value="T">제목</option>
@@ -98,7 +95,7 @@
 			<span style="color:white"><i class="fa-solid fa-magnifying-glass"></i></span>
 			</button>
 		</form>
-	</div>
+	<div class="mx-5">전체 ${pageMaker.total} 건 </div>
 </div>
 
 

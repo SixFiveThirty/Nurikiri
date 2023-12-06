@@ -26,11 +26,8 @@ a.page-link {
 	<p class="txt">누리끼리의 소식을 안내해 드립니다.</p>
 	</div></center>
 			
-
-<%@include file="../board/search_bar.jsp"%>
-
-
 	<div class="mx-5">
+	<%@include file="../board/search_bar.jsp"%>
 		<table class="table table-striped table-hover">
 			<thead>
 				<tr>
