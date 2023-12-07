@@ -115,7 +115,7 @@ async function deleteReviews(rno) {
 		
 	<<c:if test="${ member.username == review.writer }">
 		<div class="foot-div mt-5">
-			<button type="button" class="btn btn-light" style="width: 200px" onclick="location.href='/mypage/reviews'">목록</button>
+			<button type="button" class="btn btn-light" style="width: 200px" onclick="history.back()">목록</button>
 			<button type="button" class="btn btn-light review-delete-btn" style="width: 200px" onclick="deleteReviews('${review.rno}')">삭제</button>
 		</div>		
 	</c:if>

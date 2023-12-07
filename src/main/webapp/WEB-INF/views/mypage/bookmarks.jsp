@@ -105,16 +105,15 @@
 				<li><a href="/store/list?keyword=${cri.keyword}&sort=reviewCount">리뷰 순</a></li>
 			</ul>
 		</div>
-	<%-- 	<%@ include file="../common/search_bar.jsp" %> --%>
 	</div>
-
+		<%@ include file="search_bar_bookmark.jsp" %>
 	<div class="row g-5">
 		<c:forEach var="store" items="${list}">
 			<div class="col-xxl-3 col-lg-6 col-md-6 col-sm-12">
 
 				<div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay=".5s">
 					<div class="blog-item">
-						<a class="store-link" href="${cri.getLink('get')}&sno=${store.sno}"> <img src="/store/image/thumbnail/${store.sno}" class="img-fluid w-100 rounded-top" alt="" /></a>
+						<a class="store-link" href="/store/get&sno=${store.sno}"> <img src="/store/image/thumbnail/${store.sno}" class="img-fluid w-100 rounded-top" alt="" /></a>
 						<div class="rounded-bottom bg-light">
 							<div class="p-4 pb-2">
 								<h4 class="title">${store.title}</h4>

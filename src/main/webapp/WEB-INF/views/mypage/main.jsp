@@ -50,7 +50,7 @@ $(document).ready(async function() {
 </style>
 
 
-<h1 style="text-align: center">${member.username}마이 페이지</h1>
+<h1 style="text-align: center">마이 페이지</h1>
 <div class="container">
 
 	<div class="top-div mt-5">

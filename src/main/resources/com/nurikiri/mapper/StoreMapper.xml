@@ -109,6 +109,23 @@
 			</foreach>
 		</trim>
 	</sql>
+	
+	<sql id="criteriab">
+		<trim prefixOverrides="OR">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like CONCAT('%', #{keyword}, '%') </when>
+						<when test="type == 'M'.toString()">
+							market like CONCAT('%', #{keyword}, '%') </when>
+						<when test="type == 'A'.toString()">
+							address like CONCAT('%', #{keyword}, '%') </when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
 
 	<sql id="sort">
 	<if test="sort == null">
