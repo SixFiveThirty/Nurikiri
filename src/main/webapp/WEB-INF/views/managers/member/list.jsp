@@ -101,7 +101,7 @@ td {
 
 
 <div class="member-container container">
-	<h1 style="text-align: center">회원 관리 페이지</h1>
+	<h1 style="text-align: center">회원 관리</h1>
 
 	<div class="mx-5 member">
 		<%@include file="search_bar.jsp"%>
