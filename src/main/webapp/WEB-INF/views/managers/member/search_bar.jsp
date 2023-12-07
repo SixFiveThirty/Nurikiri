@@ -8,57 +8,87 @@
 <style>
 #search-btn {
 	background-color: #FEC25E;
+	border-radius: 0 10px 10px 0;
+}
+.search-keyword {
+	font-family: Poppins-Medium;
+	/* font-size: 14px; */
+	border-color: #fdc24d;
+	
+}
+
+.search-keyword:focus {
+	border-color: #fdc24d;
+	outline: 0;
+	box-shadow: 0 0 0 .15rem rgba(253, 194, 77, .25)
 }
 
 .form-select {
-	font-family: Poppins-Medium;
-	font-size: 14px;
+	display: block;
+	/* width: 100%; */
+	padding: .375rem 2.25rem .375rem .75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #555;
+	background-color: #fff;
+	background-image:
+		url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+	background-repeat: no-repeat;
+	background-position: right .75rem center;
+	background-size: 16px 12px;
+	border: 1px solid #fdc24d;
+	/* border-radius: 10px; */
+	border-bottom-left-radius: 10px;
+	border-top-left-radius: 10px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none
 }
-.form-control {
-	font-family: Poppins-Medium;
-	font-size: 14px;
+  
+.form-select:focus {
+	border-color: #fdc24d;
+	outline: 0;
+	box-shadow: 0 0 0 .15rem rgba(253, 194, 77, .25)
 }
 
-.page-item {
-  &:first-child {
-    .page-link {
-      margin-left: 0;
-      @include border-left-radius($border-radius);
-    }
-  }
-  &:last-child {
-    .page-link {
-      @include border-right-radius($border-radius);
-    }
-  }
+.form-select[multiple], .form-select[size]:not([size="1"]) {
+	padding-right: .75rem;
+	background-image: none
+}
 
-  &.active .page-link {
-    z-index: 3;
-    color: $pagination-active-color;
-    background-color: #FDB54D;
-    border-color: #FDB54D;
-  }
-  .page-link {
-  position: relative;
-  display: block;
-  padding: $pagination-padding-y $pagination-padding-x;
-  margin-left: -$pagination-border-width;
-  line-height: $pagination-line-height;
-  color: #FDB54D;
-  text-decoration: if($link-decoration == none, null, none);
-  background-color: $pagination-bg;
-  border: $pagination-border-width solid $pagination-border-color;
-  }
+.form-select:disabled {
+	background-color: #e9ecef
+}
+
+.form-select:-moz-focusring {
+	color: rgba(0, 0, 0, 0);
+	text-shadow: 0 0 0 #555
+}
+
+.form-select-sm {
+	padding-top: .25rem;
+	padding-bottom: .25rem;
+	padding-left: .5rem;
+	font-size: 0.875rem
+}
+
+.form-select-lg {
+	padding-top: .5rem;
+	padding-bottom: .5rem;
+	padding-left: 1rem;
+	font-size: 1.25rem
+}
 </style>
 
 <div class="d-flex justify-content-between align-items-center my-4">
 
 		<form id='searchform' method='get' class="d-flex">
-			<select name='type' class="form-select">
+			<select name='type' class="form-select rounded-start">
 				<option value="I">유저ID</option>
 				<option value="N">유저이름</option>
-			</select> <input type='text' name='keyword' class="form-control rounded-0" />
-			<button type="submit" class="btn rounded-0" id="search-btn">
+			</select> <input type='text' name='keyword' class="search-keyword form-control rounded-0" />
+			<button type="submit" class="btn rounded-end" id="search-btn">
 				<i class="fa-solid fa-magnifying-glass"></i>
 			</button>
 		</form>

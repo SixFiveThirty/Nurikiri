@@ -25,7 +25,7 @@ $(document).ready(async function() {
 		console.log(auth);
 		$(".change_username").val(userName);
 		$(".change_auth").val(auth);
-		document.forms.changeAuthForm.submit();
+		document.forms.modifyForm.submit();
 		
 		//$(".change_userName").val(userName);
 		//$(".change_auth").val()
@@ -39,6 +39,15 @@ $(document).ready(async function() {
 		console.log(userName);
 		document.forms.changeStateForm.submit();
 		
+	});
+		
+		$('.modify').click(function(){
+			if(!confirm('정말 수정할까요?')) return;
+			const userName = $(this).data("username");
+			$(".modify_username").val(userName);
+			console.log(userName);
+			document.forms.modifyStateForm.submit();
+			
 	});
 });
 </script>
@@ -120,7 +129,7 @@ td {
 									<option value="ROLE_ADMIN" data-username="${member.username}">ADMIN</option>
 							</select></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.regDate}" /></td>
-							<td><button type="button" class="btn btn-light modify" data-username="${member.username}" onclick="location.href='/security/modify'">수정</button></td>
+							<td><button type="button" class="btn btn-light modify" data-username="${member}" onclick="location.href='/security/modify'">수정</button></td>
 							<td class="column-1"><button type="button" class="btn btn-danger changeState" data-username="${member.username}">
 									<i class="fas fa-trash-alt"></i>
 								</button></td>
@@ -131,6 +140,46 @@ td {
 		</table>
 	</div>
 </div>
+
+<%-- <form action="modify" method="get" name="modifyForm">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="username" class="modify_userName" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
+</form> --%>
+
+
+<form action="remove" method="post" name="removeForm">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="username" class="delete_userName" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
+</form>
+
+<form action="changeAuth" method="post" name="changeAuthForm">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="username" class="change_username" />
+	<input type="hidden" name="auth" class="change_auth" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
+</form>
+
+<form action="changeState" method="post" name="changeStateForm">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="username" class="change_username" />
+	<input type="hidden" name="isDeleted" class="change_state" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
+</form>
+
 
 <%@ include file="../../common/pagination.jsp"%>
 
