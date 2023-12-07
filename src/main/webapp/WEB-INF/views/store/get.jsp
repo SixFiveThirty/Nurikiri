@@ -15,11 +15,11 @@ function uploadReceipt(sno) {
 	$('#receiptModal').modal();
 }
 
-function uploadReview(rno) {
+/* function uploadReview(rno) {
 	console.log("값이 잘 받아지는지?", rno);
 	$('#reviewModal .modal-content').load("../store/review/get?rno="+rno);
 	$('#reviewModal').modal();
-}
+} */
 
 //댓글 기본 URL 상수 - 전역 상수
 const REVIEW_URL = '/api/store/review/';
@@ -422,6 +422,7 @@ const REVIEW_URL = '/api/store/review/';
 				<div class="modal-content"></div>
 			</div>
 		</div>
+		
 		<!--  리뷰 기능 구현 -->
 		<div class="bg-light p-2 rounded my-5 form_section">
 			<div>${member.username == null ? '리뷰를 작성하려면 먼저 로그인하세요' : '리뷰 작성' }</div>
@@ -429,8 +430,8 @@ const REVIEW_URL = '/api/store/review/';
 				<span class="wrap-rating fs-18 cl11 pointer"> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <i class="item-rating pointer zmdi zmdi-star-outline"></i> <input class="rating" type="hidden" name="rating">
 				</span>
 				<textarea class="form-control new-review-content" rows="3" ${member.username != null and param.state == 'success' ? '' : 'disabled' }></textarea>
-				<input type="file" id="fileItem" name='uploadFile' style="height: 30px;">
-				<div id="uploadResult"></div>
+<!-- 				<input type="file" id="fileItem" name='uploadFile' style="height: 30px;">
+				<div id="uploadResult"></div> -->
 				<div class="text-right">
 					<button class="btn btn-sm my-2 review-add-btn" style="color: white; background-color: #fdb54d" ${member.username == null ? 'disabled' : '' }>
 						<i class="fa-regular fa-comment"></i> 리뷰 등록
@@ -504,5 +505,3 @@ geocoder.addressSearch(address, function(result, status) {
 </script>
 
 <%@ include file="../layouts/footer.jsp"%>
-
-<%-- <%@ include file="get_test2.jsp"%> --%>

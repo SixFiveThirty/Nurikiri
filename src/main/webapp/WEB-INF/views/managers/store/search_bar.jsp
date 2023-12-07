@@ -85,14 +85,14 @@
 
 
 <div class="d-flex justify-content-between align-items-center my-4">
-		<form id='searchForm' modelAttribute="cri" method='get' class="d-flex">
-			<select name='type' class="form-select rounded-start">
-				<option value="T">상호명</option>
-			</select> <input type='text' name='keyword' class="search-keyword form-control rounded-0" />
-			<button type="submit" class="btn rounded-end" id="search-btn">
-				<i class="fa-solid fa-magnifying-glass"></i>
-			</button>
-		</form>
-		
-		<div class="mx-5">전체 ${pageMaker.total} 건</div>
+	<form id='searchForm' modelAttribute="cri" method='get' class="d-flex">
+		<select name='type' class="form-select rounded-start">
+			<option value="T">상호명</option>
+		</select> <input type='text' name='keyword' class="search-keyword form-control rounded-0" />
+		<button type="submit" class="btn rounded-end" id="search-btn">
+			<i class="fa-solid fa-magnifying-glass"></i>
+		</button>
+	</form>
+	
+	<div class="mx-5">전체 ${pageMaker.total} 건</div>
 </div>

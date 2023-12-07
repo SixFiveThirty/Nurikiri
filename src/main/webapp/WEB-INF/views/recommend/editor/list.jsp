@@ -5,13 +5,42 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ include file="../../layouts/header.jsp"%>
 
-<div class="container">
+<style>
+button.btn1 {
+  border: 0;
+  outline: none;
+  font-size: 15px;
+  margin: 20px;
+  background: #646970;
+  color: white;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+button.btn1:hover {
+  color: white;
+  background: #FDB54D;
+}
+
+
+td {
+  vertical-align : middle;
+}
+
+.editor-container {
+max-width: 1000px;
+}
+
+</style>
+
+<div class="container editor-container">
+
 	<h1 class="my-5" style="text-align: center">추천페이지 관리</h1><br><br>
 	
 	<div class="mx-5">
 		<%@include file="../editor/search_bar.jsp"%>
 	
-		<table class="table table-striped table-hover">
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th style="text-align: center; width: 60px;">No</th>
@@ -43,6 +72,6 @@
 		</sec:authorize>
 	</div>	
 </div>
-
+<br>
 <%@ include file="../../common/pagination.jsp"%>
 <%@ include file="../../layouts/footer.jsp"%>

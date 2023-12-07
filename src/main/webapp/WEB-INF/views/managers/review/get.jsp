@@ -70,9 +70,14 @@ async function deleteReviews(rno) {
 .loadRate i{
 	color:#ebebeb;
 }
+
+.review-container {max-width:700px;
+	margin: 0 auto;
+}
+
 </style>
 
-<div class="container" style="width: 800px">
+<div class="review-container">
 	<div class="card">
 		<div class="card-thumbnail">
 			<img src="..." class="card-img-top" alt="..." />
@@ -102,13 +107,7 @@ async function deleteReviews(rno) {
 		</div>
 		<div>
 			<i class="fas fa-clock"></i>
-			<fmt:formatDate pattern="yyyy-MM-dd" value="${review.regDate}" />
-			
-			<c:if test="${ member.username == review.writer }">
-				<div class="foot-div mt-5">
-					<button type="button" class="btn btn-light review-delete-btn" style="width: 60px" onclick="deleteReviews('${review.rno}')">삭제</button>
-				</div>		
-			</c:if>
+			<fmt:formatDate pattern="yyyy-MM-dd" value="${review.regDate}" />			
 		</div>
 	</div>
 	
@@ -120,7 +119,7 @@ async function deleteReviews(rno) {
 		
 	<sec:authorize access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')">
 		<div class="foot-div mt-5">
-			<button type="button" class="btn btn-light mr-2" style="width: 200px" onclick="location.href='list'">목록</button>
+			<button type="button" class="btn btn-light mr-3" style="width: 200px" onclick="location.href='list'">목록</button>
 			<button type="button" class="btn btn-light review-delete-btn" style="width: 200px" onclick="deleteReviews('${review.rno}')">삭제</button>
 		</div>		
 	</sec:authorize>

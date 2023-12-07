@@ -135,7 +135,7 @@ public class BoardController {
 		attach.download(response);
 	}
 	
-	@DeleteMapping("/remove/attach/{}no")
+	@DeleteMapping("/remove/attach/{no}")
 	@ResponseBody
 	public String removeAttach(@PathVariable("no") Long no) throws Exception{
 		service.removeAttachment(no);

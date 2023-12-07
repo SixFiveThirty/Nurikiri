@@ -16,6 +16,9 @@
 						<when test="type == 'C'.toString()">
 							content like CONCAT('%',#{keyword},'%')
 						</when>
+						<when test="type == 'R'.toString()">
+							writer like CONCAT('%',#{keyword},'%')
+						</when>
 					</choose>
 				</trim>
 			</foreach>
