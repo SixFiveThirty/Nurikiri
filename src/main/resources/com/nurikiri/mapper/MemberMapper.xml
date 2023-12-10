@@ -90,7 +90,7 @@
 			<include refid="criteria"></include>
 		</where>
 		order by username
-		limit #{offset} , 8
+		limit #{offset} , #{amount}
 	</select>
 	
 	<select id="changeAuth">

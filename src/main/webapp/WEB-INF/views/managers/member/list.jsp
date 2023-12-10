@@ -132,6 +132,33 @@ td {
 	</div>
 </div>
 
+<form action="remove" method="get" name="removeForm">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="username" class="delete_userName" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
+</form>
+<form action="changeAuth" method="post" name="changeAuthForm">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="username" class="change_username" />
+	<input type="hidden" name="auth" class="change_auth" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
+</form>
+<form action="changeState" method="post" name="changeStateForm">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" name="username" class="change_username" />
+	<input type="hidden" name="isDeleted" class="change_state" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
+</form>
+
 <%@ include file="../../common/pagination.jsp"%>
 
 <%@ include file="../../layouts/footer.jsp"%>
