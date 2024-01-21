@@ -1,5 +1,5 @@
 # 프로젝트 시연 영상
-<img width="1379" alt="스크린샷 2024-01-21 오후 3 12 23" src="https://github.com/SixFiveThirty/Nurikiri/assets/77964989/fe855058-52e8-4962-a6f6-071811052082">
+[![Video Label](https://github.com/SixFiveThirty/Nurikiri/assets/77964989/fe855058-52e8-4962-a6f6-071811052082)](https://youtu.be/Q5EVLSl936E?si=hmdE1wJRQAFBHFQ-)
 
 # 프로젝트 기획 계기
 - 기존의 온누리상품권 가맹점 정보 제공 사이트의 관리미흡 및 접근성이 떨어지는 점을 개선하여 가맹점에 대한 정보를 좀 더 간편하고 한 눈에 알아 볼 수 있게 사이트를 개발함.
